@@ -1,11 +1,12 @@
 ﻿using IdentityModel;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using TTRPG_Project.Web.Models.Database;
+using TTRPG_Project.DAL.Entities.Database;
 
 namespace TTRPG_Project.Web.Services
 {
@@ -23,7 +24,7 @@ namespace TTRPG_Project.Web.Services
             var authClaims = new List<Claim>
                 {
                     new Claim(JwtClaimTypes.Name, user.UserName),
-                    new Claim("userId", user.Id),
+                    new Claim(JwtClaimTypes.Id, user.Id.ToString()),
                     new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 

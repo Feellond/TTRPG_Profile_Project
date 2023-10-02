@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RankingApp.Security
+namespace TTRPG_Project.Web.Security
 {
-    [Route("")]
+    [Route("api/security")]
     [ApiController]
     public class AuthController : Controller
     {

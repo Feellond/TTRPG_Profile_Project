@@ -5,6 +5,10 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTRPG_Project.Web", "TTRPG_Profile_Project\TTRPG_Project.Web.csproj", "{86BF83CD-C89E-4C04-A847-823E91095766}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTRPG_Project.DAL", "TTRPG_Project.DAL\TTRPG_Project.DAL.csproj", "{B0918995-0EBC-450F-BA2B-F3AD5168B22A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTRPG_Project.BL", "TTRPG_Project.BL\TTRPG_Project.BL.csproj", "{C6DF6F95-EA8F-4D8A-B651-EDE5045C7FC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{86BF83CD-C89E-4C04-A847-823E91095766}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BF83CD-C89E-4C04-A847-823E91095766}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86BF83CD-C89E-4C04-A847-823E91095766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0918995-0EBC-450F-BA2B-F3AD5168B22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0918995-0EBC-450F-BA2B-F3AD5168B22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0918995-0EBC-450F-BA2B-F3AD5168B22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0918995-0EBC-450F-BA2B-F3AD5168B22A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6DF6F95-EA8F-4D8A-B651-EDE5045C7FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DF6F95-EA8F-4D8A-B651-EDE5045C7FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DF6F95-EA8F-4D8A-B651-EDE5045C7FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DF6F95-EA8F-4D8A-B651-EDE5045C7FC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
