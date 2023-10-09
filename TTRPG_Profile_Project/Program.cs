@@ -1,22 +1,44 @@
-using IdentityModel;
+﻿using IdentityModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Data;
 using System.Diagnostics;
+using System.Reflection;
 using System.Text;
+using TTRPG_Project.BL.Extensions;
+using TTRPG_Project.DAL.Entities.Database;
 using TTRPG_Project.DAL;
+using TTRPG_Project.Web.Middlewares;
+using TTRPG_Project.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddServiceConfig(builder.Configuration)
+    .Configure<FormOptions>(x =>
+    {
+        x.ValueLengthLimit = int.MaxValue;
+        x.MultipartBodyLengthLimit = int.MaxValue;
+
+    });
+
 builder.Services.AddControllersWithViews();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddIdentity<User, Role>(options =>
 {
-    options.UseNpgsql(connectionString);
-});
+    options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789 !@#$%^&*()\\-=\\[\\]{};':\"\\\\|,.<>/?§¥`";
+    options.Lockout.AllowedForNewUsers = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 6;
+    options.ClaimsIdentity.UserNameClaimType = JwtClaimTypes.Name;
+    //options.ClaimsIdentity.RoleClaimType = JwtClaimTypes.Role;
+}).AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services
     .AddAuthentication(option =>
@@ -42,13 +64,69 @@ builder.Services
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { 
+        Title = "ToDo API", 
+        Version = "v1", 
+        Description = "An ASP.NET Core Web API for managing ToDo items",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "Example Contact",
+            Url = new Uri("https://example.com/contact")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Example License",
+            Url = new Uri("https://example.com/license")
+        }
+    });
+    options.AddSecurityDefinition("CustomAuthScheme", new OpenApiSecurityScheme
+    {
+        Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+{
+    {
+        new OpenApiSecurityScheme
+        {
+            Name = "Bearer",
+            In = ParameterLocation.Header,
+            Reference = new OpenApiReference
+            {
+                Id = "Bearer",
+                Type = ReferenceType.SecurityScheme
+            }
+        },
+        new List<string>()
+    }
+});
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
+
+});
+
+
 var app = builder.Build();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
@@ -57,6 +135,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<ExceptionHandling>();
 
 app.MapControllerRoute(
     name: "default",

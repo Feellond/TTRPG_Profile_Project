@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTRPG_Project.Web", "TTRPG_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTRPG_Project.DAL", "TTRPG_Project.DAL\TTRPG_Project.DAL.csproj", "{B0918995-0EBC-450F-BA2B-F3AD5168B22A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TTRPG_Project.BL", "TTRPG_Project.BL\TTRPG_Project.BL.csproj", "{C6DF6F95-EA8F-4D8A-B651-EDE5045C7FC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TTRPG_Project.BL", "TTRPG_Project.BL\TTRPG_Project.BL.csproj", "{C6DF6F95-EA8F-4D8A-B651-EDE5045C7FC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

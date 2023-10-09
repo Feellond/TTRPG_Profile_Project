@@ -21,12 +21,12 @@ namespace TTRPG_Project.DAL.Repositories
 
         public IQueryable<T> Get<T>() where T : class, IEntityBase<T>
         {
-            return _context.Set<T>().Where(x => x.IsActive).AsQueryable();
+            return _context.Set<T>().Where(x => x.Enabled).AsQueryable();
         }
 
         public IQueryable<T> Get<T>(Expression<Func<T, bool>> selector) where T : class, IEntityBase<T>
         {
-            return _context.Set<T>().Where(selector).Where(x => x.IsActive).AsQueryable();
+            return _context.Set<T>().Where(selector).Where(x => x.Enabled).AsQueryable();
         }
 
         public async Task<T> Add<T>(T newEntity) where T : class, IEntityBase<T>
@@ -43,7 +43,7 @@ namespace TTRPG_Project.DAL.Repositories
         public async Task Delete<T>(T id) where T : class, IEntityBase<T>
         {
             var activeEntity = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
-            activeEntity.IsActive = false;
+            activeEntity.Enabled = false;
             await Task.Run(() => _context.Update(activeEntity));
         }
 

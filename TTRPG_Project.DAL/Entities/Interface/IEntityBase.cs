@@ -2,21 +2,21 @@
 
 namespace TTRPG_Project.DAL.Entities.Interface
 {
-    public interface IEntityBase<T>
+    public interface IEntityBase<TId>
     {
         /// <summary>
         /// Идентификатор сущности
         /// </summary>
         [Key]
-        public T Id { get; set; }
-        public bool IsActive { get; set; }
+        public TId Id { get; set; }
+        public bool Enabled { get; set; }
         /// <summary>
         /// Дата создания сущности
         /// </summary>
-        public DateTime DateCreated { get; set; }
+        public DateTime CreateDate { get; set; }
         /// <summary>
         /// Дата обновления сущности
         /// </summary>
-        public DateTime DateUpdated { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }
