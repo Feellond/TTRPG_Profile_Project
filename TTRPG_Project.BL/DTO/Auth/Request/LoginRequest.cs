@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TTRPG_Project.BL.DTO.Login.Request
+namespace TTRPG_Project.BL.DTO.Auth.Request
 {
     public class LoginRequest
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TTRPG_Project.BL.DTO.Login.Responce
+namespace TTRPG_Project.BL.DTO.Auth.Responce
 {
     public class LoginResponse
     {

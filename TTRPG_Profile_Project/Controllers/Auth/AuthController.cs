@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using TTRPG_Project.BL.DTO;
-using TTRPG_Project.BL.DTO.Login.Request;
-using TTRPG_Project.BL.DTO.Login.Responce;
+using TTRPG_Project.BL.DTO.Auth.Request;
+using TTRPG_Project.BL.DTO.Auth.Responce;
 using TTRPG_Project.BL.Services.Interface;
 using TTRPG_Project.DAL.Entities.Database;
 using TTRPG_Project.Web.Services;
@@ -51,12 +51,12 @@ namespace TTRPG_Project.Web.Controllers.Security
 
                     var jwtService = new JwtService(_config);
                     var claims = await jwtService.GetClaimByUser(user, _userService.UserManager);
-                    var userRoles = await _userService.GetRolesAsync(user);
+                    //var userRoles = await _userService.GetRolesAsync(user);
 
                     var token = jwtService.CreateToken(claims);
                     var refreshToken = jwtService.GenerateRefreshToken();
 
-                    int refreshTokenValidityInDays = 0;
+                    int refreshTokenValidityInDays;
 
                     _ = userLogin.IsRemember ?
                         int.TryParse(_config["JWT:RefreshTokenValidityInDaysIsRemebmer"], out refreshTokenValidityInDays) :
@@ -65,6 +65,7 @@ namespace TTRPG_Project.Web.Controllers.Security
                     user.RefreshToken = refreshToken;
                     user.IsRemember = userLogin.IsRemember;
                     user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+                    user.LastActivity = DateTime.Now;
 
                     await _userService.UpdateAsync(user);
 
@@ -76,6 +77,50 @@ namespace TTRPG_Project.Web.Controllers.Security
                 }
             }
             return BadRequest();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userExists = await _userService.GetUserByNameAsync(model.Username);
+                if (userExists != null)
+                    return BadRequest(new ErrorResponse { Message = "Пользователь уже существует"});
+
+                var userMapped = _mapper.Map<User>(model);
+
+
+                IdentityResult result = await _userService.CreateUserViaManagerAsync(userMapped, model.Password);
+                if (!result.Succeeded)
+                    return BadRequest(new ErrorResponse {Message = "Ошибка при создании пользователя. Проверьте правильность данных"});
+
+                var user = await _userService.GetUserByNameAsync(userMapped.UserName);
+
+                var jwtService = new JwtService(_config);
+                var claims = await jwtService.GetClaimByUser(user, _userService.UserManager);
+                //var userRoles = await _userService.GetRolesAsync(user);
+
+                var token = jwtService.CreateToken(claims);
+                var refreshToken = jwtService.GenerateRefreshToken();
+
+                int.TryParse(_config["JWT:RefreshTokenValidityInDaysNotRemeber"], out int refreshTokenValidityInDays);
+
+                user.RefreshToken = refreshToken;
+                user.IsRemember = false;
+                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+
+                await _userService.UpdateAsync(user);
+
+                return Ok(new LoginResponse
+                {
+                    AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
+                    RefreshToken = refreshToken
+                });
+            }
+            else
+                return BadRequest(new ErrorResponse { Message = "Не правильно заполнена форма регистрации" });
         }
     }
 }
