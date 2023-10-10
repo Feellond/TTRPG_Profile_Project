@@ -45,7 +45,7 @@ namespace TTRPG_Project.DAL.Data
             return base.Set<T>().Where(selector).Where(x => x.Enabled).AsQueryable();
         }
 
-        public async Task<T> Add<T>(T newEntity) where T : class, IEntityBase<T>
+        async Task<T> IDbRepository.Add<T>(T newEntity)
         {
             var entity = await base.Set<T>().AddAsync(newEntity);
             return entity.Entity.Id;
@@ -66,7 +66,7 @@ namespace TTRPG_Project.DAL.Data
             }
         }
 
-        public async Task Remove<T>(T entity) where T : class, IEntityBase<T>
+        async Task IDbRepository.Remove<T>(T entity)
         {
             await Task.Run(() => base.Set<T>().Remove(entity));
         }
@@ -76,7 +76,7 @@ namespace TTRPG_Project.DAL.Data
             await Task.Run(() => base.Set<T>().RemoveRange(entities));
         }
 
-        public async Task Update<T>(T entity) where T : class, IEntityBase<T>
+        async Task IDbRepository.Update<T>(T entity)
         {
             await Task.Run(() => base.Set<T>().Update(entity));
         }

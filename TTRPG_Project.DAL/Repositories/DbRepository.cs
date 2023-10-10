@@ -39,7 +39,7 @@ namespace TTRPG_Project.DAL.Repositories
         {
             var activeEntity = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
             activeEntity.Enabled = false;
-            await Task.Run(() => _context.Update(activeEntity));
+            await Task.Run(() => ((IDbRepository)_context).Update(activeEntity));
         }
 
         public async Task Remove<T>(T entity) where T : class, IEntityBase<T>

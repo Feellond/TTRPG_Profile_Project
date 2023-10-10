@@ -45,6 +45,7 @@ namespace TTRPG_Project.BL.Services.Base
 
         public virtual async Task<bool> UpdateAsync(TEntity entity)
         {
+            _dbContext.Entry(entity).State = EntityState.Modified;
             var saved = _dbContext.Update(entity);
             return await Save();
         }
