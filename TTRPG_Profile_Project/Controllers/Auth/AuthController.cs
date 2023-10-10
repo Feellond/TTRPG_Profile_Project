@@ -8,7 +8,7 @@ using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.DTO.Auth.Request;
 using TTRPG_Project.BL.DTO.Auth.Responce;
 using TTRPG_Project.BL.Services.Interface;
-using TTRPG_Project.DAL.Entities.Database;
+using TTRPG_Project.DAL.Entities.Database.Users;
 using TTRPG_Project.Web.Services;
 
 namespace TTRPG_Project.Web.Controllers.Security

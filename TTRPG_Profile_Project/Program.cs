@@ -8,10 +8,10 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using TTRPG_Project.BL.Extensions;
-using TTRPG_Project.DAL.Entities.Database;
 using TTRPG_Project.Web.Middlewares;
 using TTRPG_Project.Web.Services;
 using TTRPG_Project.DAL.Data;
+using TTRPG_Project.DAL.Entities.Database.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 

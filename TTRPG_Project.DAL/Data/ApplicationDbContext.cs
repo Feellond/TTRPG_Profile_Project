@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using TTRPG_Project.DAL.Entities.Database;
+using TTRPG_Project.DAL.Entities.Database.Users;
 using TTRPG_Project.DAL.Entities.Interface;
 using TTRPG_Project.DAL.Repositories;
 
@@ -10,8 +11,8 @@ namespace TTRPG_Project.DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, string>, IDbRepository
     {
-        public DbSet<User> Users { get; set; }
         public DbSet<ServiceLog> ServiceLogs { get; set; }
+        public DbSet<Headline> Headlines { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

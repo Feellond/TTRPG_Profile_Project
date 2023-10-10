@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using TTRPG_Project.BL.DTO.UserDTO.Responce;
-using TTRPG_Project.DAL.Entities.Database;
+using TTRPG_Project.DAL.Entities.Database.User;
 
 namespace Partners.BL.Mappings
 {

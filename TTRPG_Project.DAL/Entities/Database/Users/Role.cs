@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using TTRPG_Project.DAL.Entities.Interface;
 
-namespace TTRPG_Project.DAL.Entities.Database
+namespace TTRPG_Project.DAL.Entities.Database.Users
 {
+    /// <summary>
+    /// Таблица ролей
+    /// </summary>
     public class Role : IdentityRole, IEntityBase<string>
     {
         public bool Enabled { get; set; } = true;

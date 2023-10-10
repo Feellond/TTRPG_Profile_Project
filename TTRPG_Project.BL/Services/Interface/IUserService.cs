@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TTRPG_Project.BL.Services.Base;
-using TTRPG_Project.DAL.Entities.Database;
+using TTRPG_Project.DAL.Entities.Database.Users;
 
 namespace TTRPG_Project.BL.Services.Interface
 {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using TTRPG_Project.BL.Const;
-using TTRPG_Project.DAL.Entities.Database;
+using TTRPG_Project.DAL.Entities.Database.Users;
 
 namespace TTRPG_Project.DAL.Data
 {

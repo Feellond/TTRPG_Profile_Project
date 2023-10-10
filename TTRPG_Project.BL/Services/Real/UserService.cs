@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.BL.Services.Interface;
 using TTRPG_Project.DAL.Data;
-using TTRPG_Project.DAL.Entities.Database;
+using TTRPG_Project.DAL.Entities.Database.Users;
 
 namespace TTRPG_Project.BL.Services.Real
 {

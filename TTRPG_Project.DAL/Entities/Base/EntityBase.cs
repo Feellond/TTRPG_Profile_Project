@@ -1,6 +1,6 @@
 ﻿using TTRPG_Project.DAL.Entities.Interface;
 
-namespace TTRPG_Project.DAL.Entities.Database.Base
+namespace TTRPG_Project.DAL.Entities.Base
 {
     public class EntityBase : IEntityBase<int>
     {
