@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TTRPG_Project.BL.DTO.Filters;
-using TTRPG_Project.DAL;
+using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Interface;
 
 namespace TTRPG_Project.BL.Services.Base

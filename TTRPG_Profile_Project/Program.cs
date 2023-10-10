@@ -9,9 +9,9 @@ using System.Reflection;
 using System.Text;
 using TTRPG_Project.BL.Extensions;
 using TTRPG_Project.DAL.Entities.Database;
-using TTRPG_Project.DAL;
 using TTRPG_Project.Web.Middlewares;
 using TTRPG_Project.Web.Services;
+using TTRPG_Project.DAL.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +55,8 @@ builder.Services
             RequireExpirationTime = true,
             ValidateIssuerSigningKey = true,
             ValidateLifetime = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"])),
             ClockSkew = Debugger.IsAttached ? TimeSpan.Zero : TimeSpan.FromMinutes(5),
             NameClaimType = JwtClaimTypes.Name,
@@ -82,7 +84,7 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://example.com/license")
         }
     });
-    options.AddSecurityDefinition("CustomAuthScheme", new OpenApiSecurityScheme
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
                       Enter 'Bearer' [space] and then your token in the text input below.
@@ -90,11 +92,11 @@ builder.Services.AddSwaggerGen(options =>
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
+        BearerFormat = "JWT",
         Scheme = "Bearer"
     });
 
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-{
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement{
     {
         new OpenApiSecurityScheme
         {
@@ -107,8 +109,7 @@ builder.Services.AddSwaggerGen(options =>
             }
         },
         new List<string>()
-    }
-});
+    }});
 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);

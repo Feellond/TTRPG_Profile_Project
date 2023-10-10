@@ -71,11 +71,7 @@ namespace TTRPG_Project.Web.Services
             return token;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateRefreshToken()
+        public static string GenerateRefreshToken()
         {
             var randomNumber = new byte[64];
             using var rng = RandomNumberGenerator.Create();

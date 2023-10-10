@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using TTRPG_Project.DAL;
 using Partners.BL.Mappings;
 using Microsoft.EntityFrameworkCore;
 using TTRPG_Project.BL.Services.Interface;
 using TTRPG_Project.BL.Services.Real;
 using TTRPG_Project.DAL.Entities.Database;
+using TTRPG_Project.DAL.Data;
 
 namespace TTRPG_Project.BL.Extensions
 {

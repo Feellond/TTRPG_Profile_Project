@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TTRPG_Project.BL.DTO.Logs;
 using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.BL.Services.Interface;
-using TTRPG_Project.DAL;
+using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database;
 using static System.Net.Mime.MediaTypeNames;
 

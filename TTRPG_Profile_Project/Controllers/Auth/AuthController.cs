@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
+using TTRPG_Project.BL.Const;
 using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.DTO.Auth.Request;
 using TTRPG_Project.BL.DTO.Auth.Responce;
@@ -13,28 +14,32 @@ using TTRPG_Project.Web.Services;
 namespace TTRPG_Project.Web.Controllers.Security
 {
     [AllowAnonymous]
-    [Route("api/security")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
-
+        private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
+        private readonly RoleManager<Role> _roleManager;
 
         public AuthController(
            UserManager<User> userManager,
            SignInManager<User> signInManager,
+           RoleManager<Role> roleManager,
            IConfiguration config,
            IMapper mapper,
            IUserService userService
            )
         {
+            _userManager = userManager;
             _config = config;
             _signInManager = signInManager;
             _mapper = mapper;
             _userService = userService;
+            _roleManager = roleManager;
         }
 
         [AllowAnonymous]
@@ -54,7 +59,7 @@ namespace TTRPG_Project.Web.Controllers.Security
                     //var userRoles = await _userService.GetRolesAsync(user);
 
                     var token = jwtService.CreateToken(claims);
-                    var refreshToken = jwtService.GenerateRefreshToken();
+                    var refreshToken = JwtService.GenerateRefreshToken();
 
                     int refreshTokenValidityInDays;
 
@@ -96,6 +101,11 @@ namespace TTRPG_Project.Web.Controllers.Security
                 if (!result.Succeeded)
                     return BadRequest(new ErrorResponse {Message = "Ошибка при создании пользователя. Проверьте правильность данных"});
 
+                await _userManager.AddToRolesAsync(userMapped, new List<string>
+                {
+                    Roles.USER,
+                });
+
                 var user = await _userService.GetUserByNameAsync(userMapped.UserName);
 
                 var jwtService = new JwtService(_config);
@@ -103,7 +113,7 @@ namespace TTRPG_Project.Web.Controllers.Security
                 //var userRoles = await _userService.GetRolesAsync(user);
 
                 var token = jwtService.CreateToken(claims);
-                var refreshToken = jwtService.GenerateRefreshToken();
+                var refreshToken = JwtService.GenerateRefreshToken();
 
                 int.TryParse(_config["JWT:RefreshTokenValidityInDaysNotRemeber"], out int refreshTokenValidityInDays);
 
