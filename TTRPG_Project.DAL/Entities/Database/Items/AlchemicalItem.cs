@@ -3,9 +3,9 @@ using TTRPG_Project.DAL.Entities.Base;
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
-    [Table("Items")]
-    public class Item : ItemBase
+    [Table("AlchemicalItems")]
+    public class AlchemicalItem : ItemBase
     {
-        public int StealthType { get; set; }
+        //public int ItemBaseEffectListId { get; set; }
     }
 }

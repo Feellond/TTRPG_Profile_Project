@@ -1,11 +1,13 @@
-﻿using TTRPG_Project.DAL.Entities.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TTRPG_Project.DAL.Entities.Base;
 
 namespace TTRPG_Project.DAL.Entities.Database.Creature
 {
     /// <summary>
     /// Таблица существ
     /// </summary>
-    public class Bestiary : EntityDescriptionBase
+    [Table("Creatures")]
+    public class Creature : EntityDescriptionBase
     {
         public int RaceId { get; set; }
         public Race Race { get; set; }
@@ -15,7 +17,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creature
         public int MonsterLoreSkill { get; set; } = 10;
         public string MonsterLoreInformation { get; set; } = string.Empty;
         public int Complexity { get; set; } = 1;
-        public int MoneyReward { get; set; } = 0;
+        public int MoneyReward { get; set; } = 0; 
         public int Armor { get; set; } = 0;
         public int Regeneration { get; set; } = 0;
         public int StatsId { get; set; }

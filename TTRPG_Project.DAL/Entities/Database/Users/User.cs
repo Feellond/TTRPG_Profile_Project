@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 using TTRPG_Project.DAL.Entities.Interface;
 
 namespace TTRPG_Project.DAL.Entities.Database.Users
@@ -6,6 +7,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Users
     /// <summary>
     /// Таблица пользователей
     /// </summary>
+    [Table("Users")]
     public class User : IdentityUser, IEntityBase<string>
     {
         public string? FullName { get; set; }

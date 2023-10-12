@@ -7,6 +7,6 @@ namespace TTRPG_Project.DAL.Entities.Base
         public int Id { get; set; }
         public bool Enabled { get; set; } = true;
         public DateTime CreateDate { get; set; } = DateTime.Now;
-        public DateTime UpdateDate { get; set; }
+        public DateTime UpdateDate { get; set; } = DateTime.Now;
     }
 }

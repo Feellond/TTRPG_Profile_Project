@@ -120,15 +120,7 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//app.Environment.EnvironmentName = "Production"; // меняем имя окружения
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -137,6 +129,20 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<ExceptionHandling>();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+if (!app.Environment.IsDevelopment())
+{
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+    //app.UseExceptionHandler("/Error");
+}
 
 app.MapControllerRoute(
     name: "default",

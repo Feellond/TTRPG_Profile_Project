@@ -1,8 +1,19 @@
-﻿using TTRPG_Project.DAL.Entities.Base;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using TTRPG_Project.DAL.Entities.Base;
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
-    public class Weapon : EntityDescriptionBase
+    [Table("Weapons")]
+    public class Weapon : ItemBase
     {
+        public int Accuracy { get; set; }
+        public int Damage { get; set; }
+        public int Reliability { get; set; }
+        public int Grip { get; set; }
+        public int Distance { get; set; }
+        public int StealthType { get; set; }
+        public int AmountOfEnhancements { get; set; }
+        public bool IsAmmunition { get; set; }
+        public int SkillId { get; set; }
     }
 }
