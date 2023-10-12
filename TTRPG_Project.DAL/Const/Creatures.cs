@@ -16,9 +16,9 @@ namespace TTRPG_Project.DAL.Const
 
     public enum AttackType
     {
-        Stabbing = 1,
-        Cutting = 2,
-        Crushing = 3,
+        Piercing = 1,
+        Slashing = 2,
+		Bludgeoning = 3,
     }
 
     public enum StatusType
@@ -30,15 +30,15 @@ namespace TTRPG_Project.DAL.Const
 
     public enum Complexity
     {
-        EasyEasy = 1,
+        EasySimple = 1,
         EasyComplex = 2,
-        EasyHard = 3,
-        MediumEasy = 4,
+        EasyDifficult = 3,
+        MediumSimple = 4,
         MediumComplex = 5,
-        MediumHard = 6,
-        HardEasy = 7,
+        MediumDifficult = 6,
+        HardSimple = 7,
         HardComplex = 8,
-        HardHard = 9,
-        Unique = 10,
+        HardDifficult = 9,
+        Exceptional = 10,
     }
 }
