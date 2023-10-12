@@ -2,18 +2,19 @@
 {
     public enum SpellLevel
     {
-        Newbie = 1,
-        Apprentice = 2,
-        Masters = 3,
-        HighPriest = 4, //Legendary
+		Novice = 1,
+		Journeyman = 2,
+        Master = 3,
+		ArchPriest = 4, // Arch Priest или Hierophant/Flaminika Druid
     }
 
     public enum SpellType
     {
-        Invocation = 1,
-        Signs = 2,
-        Rituals = 3,
-        Spoilage = 4,
+        Spell = 1,
+        Invocation = 2,
+        Sign = 3,
+        Ritual = 4,
+        Hex = 5,
     }
 
     public enum SpellSource
@@ -23,5 +24,14 @@
         Fire = 3,
         Air = 4,
         Water = 5,
+    }
+
+    public enum SpellCategory
+    {
+        Magic = 1,
+        Necromancy = 2,
+        Goethia = 3,
+        PriestInvocation = 4,
+        DruidInvocation = 5,
     }
 }

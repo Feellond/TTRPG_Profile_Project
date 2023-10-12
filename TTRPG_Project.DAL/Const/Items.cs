@@ -14,17 +14,26 @@
 
     public enum ItemAvailabilityType
     {
-        Common = 1,
-        Uncommon = 2,
-        Rare = 3,
-        Unique = 4,
+        Everywhere = 1,
+        Common = 2,
+        Poor = 3,
+        Rare = 4,
     }
 
-    //TODO: дополнить список
+    public enum ItemOriginType
+    {
+        Human = 1,
+        ElderFolk = 2,
+        WitcherGear = 3,
+        Relic = 4,
+    }
+
     public enum ItemStealthType
     {
         CantHide = 1,
-
+        Large = 2,
+        Small = 3,
+        Tiny = 4,
     }
 
     public enum ArmourType
@@ -36,14 +45,14 @@
 
     public enum SubstanceType
     {
-        Aer = 1,
-        Hydrogen = 2,
-        Quebec = 3,
-        Cinnabar = 4,
-        Vitriol = 5,
-        Rebis = 6,
-        Sun = 7,
-        Fulgor = 8,
-        Ether = 9,
+		Aer = 1, // Аер
+        Hydragenium = 2, // Гидроген
+        Quebrith = 3, // Квебрит
+        Vermilion = 4, // Киноварь
+        Vitriol = 5, // Купорос
+        Rebis = 6, // Ребис
+        Sol = 7, // Солнце
+        Fulgur = 8, // Фульгор
+        Aether = 9, // Эфир
     }
 }
