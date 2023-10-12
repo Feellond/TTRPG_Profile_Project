@@ -27,6 +27,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creature
         public int EvasionBase { get; set; }
         public int AthleticsBase { get; set; }
         public int BlockBase { get; set; }
+        public int SpellResistBase { get; set; }
         public int Height { get; set; }
         public float Weight { get; set; }
         public string HabitatPlace { get; set; } = string.Empty;

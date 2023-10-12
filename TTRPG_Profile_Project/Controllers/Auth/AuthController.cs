@@ -39,7 +39,7 @@ namespace TTRPG_Project.Web.Controllers.Security
                 if (!await _userService.CheckPasswordAsync(user, userLogin.Password))
                     BadRequest(new ErrorResponse { Message = "Пароли не совпадают!" });
 
-                if (user.LockoutEnabled)
+                if (!user.Enabled)
                     BadRequest(new ErrorResponse { Message = "Пользователь удален!" });
 
                 var responce = await _userService.LoginAsync(user, userLogin.IsRemember);

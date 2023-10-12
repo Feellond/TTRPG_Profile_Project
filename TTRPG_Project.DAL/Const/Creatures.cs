@@ -11,6 +11,7 @@ namespace TTRPG_Project.DAL.Const
         FullAction = 1,
         Action = 2,
         Passive = 3,
+        Special = 4,
     }
 
     public enum AttackType
