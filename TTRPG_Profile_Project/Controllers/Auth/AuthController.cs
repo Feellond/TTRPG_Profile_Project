@@ -2,14 +2,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using TTRPG_Project.BL.Const;
 using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.DTO.Auth.Request;
 using TTRPG_Project.BL.DTO.Auth.Responce;
-using TTRPG_Project.BL.Services.Interface;
+using TTRPG_Project.BL.DTO.Exceptions;
+using TTRPG_Project.BL.Services.Users;
 using TTRPG_Project.DAL.Entities.Database.Users;
-using TTRPG_Project.Web.Services;
 
 namespace TTRPG_Project.Web.Controllers.Security
 {
@@ -18,28 +19,11 @@ namespace TTRPG_Project.Web.Controllers.Security
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly IConfiguration _config;
-        private readonly IMapper _mapper;
-        private readonly IUserService _userService;
-        private readonly RoleManager<Role> _roleManager;
+        private readonly UserService _userService;
 
-        public AuthController(
-           UserManager<User> userManager,
-           SignInManager<User> signInManager,
-           RoleManager<Role> roleManager,
-           IConfiguration config,
-           IMapper mapper,
-           IUserService userService
-           )
+        public AuthController( UserService userService )
         {
-            _userManager = userManager;
-            _config = config;
-            _signInManager = signInManager;
-            _mapper = mapper;
             _userService = userService;
-            _roleManager = roleManager;
         }
 
         [AllowAnonymous]
@@ -49,39 +33,19 @@ namespace TTRPG_Project.Web.Controllers.Security
             if (ModelState.IsValid)
             {
                 var user = await _userService.GetUserByNameAsync(userLogin.Login);
-                if (user != null && await _userService.CheckPasswordAsync(user, userLogin.Password))
-                {
-                    if (user.LockoutEnabled)
-                        return BadRequest(new ErrorResponse {Message = "Пользователь заблокирован" });
+                if (user is null)
+                    BadRequest(new ErrorResponse { Message = "Пользователь не найден!" });
 
-                    var jwtService = new JwtService(_config);
-                    var claims = await jwtService.GetClaimByUser(user, _userService.UserManager);
-                    //var userRoles = await _userService.GetRolesAsync(user);
+                if (!await _userService.CheckPasswordAsync(user, userLogin.Password))
+                    BadRequest(new ErrorResponse { Message = "Пароли не совпадают!" });
 
-                    var token = jwtService.CreateToken(claims);
-                    var refreshToken = JwtService.GenerateRefreshToken();
+                if (user.LockoutEnabled)
+                    BadRequest(new ErrorResponse { Message = "Пользователь удален!" });
 
-                    int refreshTokenValidityInDays;
-
-                    _ = userLogin.IsRemember ?
-                        int.TryParse(_config["JWT:RefreshTokenValidityInDaysIsRemebmer"], out refreshTokenValidityInDays) :
-                        int.TryParse(_config["JWT:RefreshTokenValidityInDaysNotRemeber"], out refreshTokenValidityInDays);
-
-                    user.RefreshToken = refreshToken;
-                    user.IsRemember = userLogin.IsRemember;
-                    user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
-                    user.LastActivity = DateTime.Now;
-
-                    await _userService.UpdateAsync(user);
-
-                    return Ok(new LoginResponse
-                    {
-                        AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                        RefreshToken = refreshToken
-                    });
-                }
+                var responce = await _userService.LoginAsync(user, userLogin.IsRemember);
+                return Ok(responce);
             }
-            return BadRequest();
+            return BadRequest(new ErrorResponse { Message = "Не правильно заполнена форма авторизации!" });
         }
 
         [AllowAnonymous]
@@ -92,42 +56,10 @@ namespace TTRPG_Project.Web.Controllers.Security
             {
                 var userExists = await _userService.GetUserByNameAsync(model.Username);
                 if (userExists != null)
-                    return BadRequest(new ErrorResponse { Message = "Пользователь уже существует"});
+                    BadRequest(new ErrorResponse { Message = "Пользователь уже существует!" });
 
-                var userMapped = _mapper.Map<User>(model);
-
-
-                IdentityResult result = await _userService.CreateUserViaManagerAsync(userMapped, model.Password);
-                if (!result.Succeeded)
-                    return BadRequest(new ErrorResponse {Message = "Ошибка при создании пользователя. Проверьте правильность данных"});
-
-                await _userManager.AddToRolesAsync(userMapped, new List<string>
-                {
-                    Roles.USER,
-                });
-
-                var user = await _userService.GetUserByNameAsync(userMapped.UserName);
-
-                var jwtService = new JwtService(_config);
-                var claims = await jwtService.GetClaimByUser(user, _userService.UserManager);
-                //var userRoles = await _userService.GetRolesAsync(user);
-
-                var token = jwtService.CreateToken(claims);
-                var refreshToken = JwtService.GenerateRefreshToken();
-
-                int.TryParse(_config["JWT:RefreshTokenValidityInDaysNotRemeber"], out int refreshTokenValidityInDays);
-
-                user.RefreshToken = refreshToken;
-                user.IsRemember = false;
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
-
-                await _userService.UpdateAsync(user);
-
-                return Ok(new LoginResponse
-                {
-                    AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                    RefreshToken = refreshToken
-                });
+                var responce = await _userService.RegisterAsync(model);
+                return Ok(responce);
             }
             else
                 return BadRequest(new ErrorResponse { Message = "Не правильно заполнена форма регистрации" });

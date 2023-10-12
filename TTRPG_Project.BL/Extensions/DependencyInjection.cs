@@ -2,10 +2,10 @@
 using Microsoft.Extensions.Configuration;
 using Partners.BL.Mappings;
 using Microsoft.EntityFrameworkCore;
-using TTRPG_Project.BL.Services.Interface;
-using TTRPG_Project.BL.Services.Real;
 using TTRPG_Project.DAL.Entities.Database;
 using TTRPG_Project.DAL.Data;
+using TTRPG_Project.BL.Services;
+using TTRPG_Project.BL.Services.Users;
 
 namespace TTRPG_Project.BL.Extensions
 {
@@ -23,8 +23,8 @@ namespace TTRPG_Project.BL.Extensions
             services.AddAutoMapper(typeof(MappingProfile));
 
             //services.AddScoped<LoginService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ILogService, LogService>();
+            services.AddScoped<UserService>();
+            services.AddScoped<LogService>();
 
             return services;
         }

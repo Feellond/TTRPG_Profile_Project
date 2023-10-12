@@ -20,8 +20,8 @@ namespace TTRPG_Project.DAL.Data
             var serviceProvider = app.ApplicationServices;
             using (var scope = app.ApplicationServices.CreateScope())
             {
-                var userManager = (UserManager<User>)scope.ServiceProvider.GetService(typeof(UserManager<User>));
-                var roleManager = (RoleManager<Role>)scope.ServiceProvider.GetService(typeof(RoleManager<Role>));
+                var userManager = (UserManager<User>?)scope.ServiceProvider.GetService(typeof(UserManager<User>));
+                var roleManager = (RoleManager<Role>?)scope.ServiceProvider.GetService(typeof(RoleManager<Role>));
                 var roles = new List<string>() { 
                     Roles.ADMINISTRATOR,
                     Roles.MODERATOR,

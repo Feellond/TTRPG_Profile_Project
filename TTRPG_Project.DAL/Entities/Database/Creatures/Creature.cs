@@ -10,7 +10,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Creature
     public class Creature : EntityDescriptionBase
     {
         public int RaceId { get; set; }
-        public Race Race { get; set; }
         public string AdditionalInformation { get; set; } = string.Empty;
         public int EducationSkill { get; set; } = 10;
         public string SuperstitionsInformation { get; set; } = string.Empty;
@@ -21,9 +20,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creature
         public int Armor { get; set; } = 0;
         public int Regeneration { get; set; } = 0;
         public int StatsId { get; set; }
-        public Stat Stats { get; set; }
         public int SkillsId { get; set; }
-        public Skill Skills { get; set; }
         //public int ResistancesListId { get; set; }
         //public int ImmunitiesListId { get; set; }
         //public int VulnerabilitiesListId { get; set; }

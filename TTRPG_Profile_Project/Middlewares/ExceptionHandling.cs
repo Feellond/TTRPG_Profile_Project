@@ -1,6 +1,6 @@
 ﻿using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.DTO.Exceptions;
-using TTRPG_Project.BL.Services.Real;
+using TTRPG_Project.BL.Services;
 
 namespace TTRPG_Project.Web.Middlewares
 {

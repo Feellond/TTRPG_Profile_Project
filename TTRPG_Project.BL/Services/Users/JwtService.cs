@@ -8,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using TTRPG_Project.DAL.Entities.Database.Users;
 
-namespace TTRPG_Project.Web.Services
+namespace TTRPG_Project.BL.Services.Users
 {
     public class JwtService
     {
@@ -25,7 +25,7 @@ namespace TTRPG_Project.Web.Services
                 {
                     new Claim(JwtClaimTypes.Name, user.UserName),
                     new Claim(JwtClaimTypes.Id, user.Id.ToString()),
-                    new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
             foreach (var userRole in userRoles)

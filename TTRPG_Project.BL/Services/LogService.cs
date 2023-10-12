@@ -2,14 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using TTRPG_Project.BL.DTO.Logs;
 using TTRPG_Project.BL.Services.Base;
-using TTRPG_Project.BL.Services.Interface;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace TTRPG_Project.BL.Services.Real
+namespace TTRPG_Project.BL.Services
 {
-    public class LogService : BaseService<ServiceLog, int>, ILogService
+    public class LogService : BaseService<ServiceLog, int>
     {
         public LogService(ApplicationDbContext dbContext) : base(dbContext)
         {
@@ -42,7 +41,7 @@ namespace TTRPG_Project.BL.Services.Real
                                             .Take(pageSize)
                                             .ToListAsync();
 
-            var totalPages = ((await _dbContext.ServiceLogs.CountAsync(it => it.EntityId == entityId)) / pageSize) + 1;
+            var totalPages = await _dbContext.ServiceLogs.CountAsync(it => it.EntityId == entityId) / pageSize + 1;
 
 
             return new LogResponse { Logs = logs, TotalPages = totalPages };
