@@ -7,10 +7,10 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     public class AttackEffectList
     {
         public int Id { get; set; }
-        public int AttackId { get; set; }
-        public Attack Attack { get; set; }
-        public int EffectId { get; set; }
-        public Effect Effect { get; set; }
+        public int? AttackId { get; set; }
+        public Attack? Attack { get; set; }
+        public int? EffectId { get; set; }
+        public Effect? Effect { get; set; }
         public int Damage { get; set; }
         public int ChancePercent { get; set; }
         public bool IsDealDamage { get; set; } = false;

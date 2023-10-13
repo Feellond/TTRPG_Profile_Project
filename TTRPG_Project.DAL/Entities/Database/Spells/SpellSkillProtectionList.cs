@@ -8,9 +8,9 @@ namespace TTRPG_Project.DAL.Entities.Database.Spells
     public class SpellSkillProtectionList
     {
         public int Id { get; set; }
-        public int SpellId { get; set; }
-        public Spell Spell { get; set; }
-        public int EffectId { get; set; }
-        public Effect Effect { get; set; }
+        public int? SpellId { get; set; }
+        public Spell? Spell { get; set; }
+        public int? EffectId { get; set; }
+        public Effect? Effect { get; set; }
     }
 }

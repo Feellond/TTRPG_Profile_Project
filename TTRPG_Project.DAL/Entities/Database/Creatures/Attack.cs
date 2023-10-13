@@ -6,8 +6,8 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     [Table("Attacks")]
     public class Attack : EntityDescriptionBase
     {
-        public int CreatureId { get; set; }
-        public Creature Creature { get; set; }
+        public int? CreatureId { get; set; }
+        public Creature? Creature { get; set; }
         public int BaseAttack { get; set; }
         public List<int> AttackType { get; set; } = new List<int>();
         public int Damage { get; set; }

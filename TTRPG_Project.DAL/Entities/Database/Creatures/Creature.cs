@@ -19,10 +19,10 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public int MoneyReward { get; set; } = 0; 
         public int Armor { get; set; } = 0;
         public int Regeneration { get; set; } = 0;
-        public int StatsListId { get; set; }
-        public StatsList StatsList { get; set; }
-        public int SkillsListId { get; set; }
-        public SkillsList SkillsList { get; set; }
+        public int? StatsListId { get; set; }
+        public StatsList? StatsList { get; set; }
+        public int? SkillsListId { get; set; }
+        public SkillsList? SkillsList { get; set; }
         public List<CreatureEffectList> CreatureEffectLists { get; set; } = new();
         public int EvasionBase { get; set; }
         public int AthleticsBase { get; set; }

@@ -15,7 +15,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public int StealthType { get; set; }
         public int AmountOfEnhancements { get; set; }
         public bool IsAmmunition { get; set; }
-        public int SkillId { get; set; }
-        public Skill Skill { get; set; }
+        public int? SkillId { get; set; }
+        public Skill? Skill { get; set; }
     }
 }
