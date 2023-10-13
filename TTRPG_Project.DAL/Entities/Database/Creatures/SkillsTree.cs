@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TTRPG_Project.DAL.Entities.Base;
 
-namespace TTRPG_Project.DAL.Entities.Database.Creature
+namespace TTRPG_Project.DAL.Entities.Database.Creatures
 {
     [Table("SkillsTree")]
     public class SkillsTree : EntityDescriptionBase
     {
         public int ClassId { get; set; }
+        public Class Class { get; set; }
 
         public int MainSkillId { get; set; }
         public int MainSkillValue { get; set; }

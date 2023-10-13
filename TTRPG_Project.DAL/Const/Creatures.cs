@@ -21,7 +21,7 @@ namespace TTRPG_Project.DAL.Const
 		Bludgeoning = 3,
     }
 
-    public enum StatusType
+    public enum CreatureEffectType
     {
         Resistance = 1,
         Immunity = 2,

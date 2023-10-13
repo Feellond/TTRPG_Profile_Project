@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TTRPG_Project.DAL.Entities.Base;
+using TTRPG_Project.DAL.Entities.Database.Creatures;
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
@@ -15,5 +16,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public int AmountOfEnhancements { get; set; }
         public bool IsAmmunition { get; set; }
         public int SkillId { get; set; }
+        public Skill Skill { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public int Complexity { get; set; }
         public float TimeSpend { get; set; }
         public int AdditionalPayment { get; set; }
+        public List<BlueprintComponentList> BlueprintComponentLists { get; set; } = new();
     }
 }

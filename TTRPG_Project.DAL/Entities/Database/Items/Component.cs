@@ -11,5 +11,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public int Complexity { get; set; }
         public bool IsAlchemical { get; set; }
         public int SubstanceType { get; set; }
+        public List<FormulaComponentList> FormulaComponentLists { get; set; } = new();
+        public List<BlueprintComponentList> BlueprintComponentLists { get; set; } = new();
     }
 }

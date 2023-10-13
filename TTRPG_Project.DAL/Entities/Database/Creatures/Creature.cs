@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TTRPG_Project.DAL.Entities.Base;
 
-namespace TTRPG_Project.DAL.Entities.Database.Creature
+namespace TTRPG_Project.DAL.Entities.Database.Creatures
 {
     /// <summary>
     /// Таблица существ
@@ -19,11 +19,11 @@ namespace TTRPG_Project.DAL.Entities.Database.Creature
         public int MoneyReward { get; set; } = 0; 
         public int Armor { get; set; } = 0;
         public int Regeneration { get; set; } = 0;
-        public int StatsId { get; set; }
-        public int SkillsId { get; set; }
-        //public int ResistancesListId { get; set; }
-        //public int ImmunitiesListId { get; set; }
-        //public int VulnerabilitiesListId { get; set; }
+        public int StatsListId { get; set; }
+        public StatsList StatsList { get; set; }
+        public int SkillsListId { get; set; }
+        public SkillsList SkillsList { get; set; }
+        public List<CreatureEffectList> CreatureEffectLists { get; set; } = new();
         public int EvasionBase { get; set; }
         public int AthleticsBase { get; set; }
         public int BlockBase { get; set; }
@@ -33,8 +33,8 @@ namespace TTRPG_Project.DAL.Entities.Database.Creature
         public string HabitatPlace { get; set; } = string.Empty;
         public string Intellect { get; set; } = string.Empty;
         public string GroupSize { get; set; } = string.Empty; 
-        //public int RewardListId { get; set; }
-        //public int AttackListId { get; set; }
-        //public int AbilitiesListId { get; set; }
+        public List<Attack> Attacks { get; set; } = new();
+        public List<Abilitiy> Abilities { get; set; } = new();
+        public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
     }
 }

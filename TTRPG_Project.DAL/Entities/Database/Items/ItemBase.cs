@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TTRPG_Project.DAL.Entities.Base;
+using TTRPG_Project.DAL.Entities.Database.Creatures;
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
@@ -12,6 +13,8 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public int AvailabilityType { get; set; }
         public float Weight { get; set; }
         public int Price { get; set; }
+        public List<ItemBaseEffectList> ItemBaseEffectLists { get; set; } = new();
+        public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
 
         /*/// <summary>
         /// Тип таблицы, к которой необходимо обратиться. Реализована через хардкод
