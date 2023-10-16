@@ -42,7 +42,7 @@ namespace TTRPG_Project.BL.Services.Base
         }
         public virtual async Task<bool> DeleteAsync(TEntity entity)
         {
-            _dbContext.Remove<TEntity>(entity);
+            _dbContext.Remove(entity);
             return await SaveAsync();
         }             
 
