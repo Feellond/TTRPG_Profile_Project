@@ -37,7 +37,7 @@ namespace TTRPG_Project.BL.Services.Users
             return result;
         }
 
-        public override async Task<ICollection<User>> GetAllAsync()
+        public new async Task<ICollection<User>> GetAllAsync()
         {
             return await _dbContext.Users.ToListAsync();
         }
@@ -62,7 +62,7 @@ namespace TTRPG_Project.BL.Services.Users
             return await _userManager.UpdateAsync(user);
         }
 
-        public override async Task<User?> GetByIdAsync(string id)
+        public new async Task<User?> GetByIdAsync(string id)
         {
             return await _userManager.FindByIdAsync(id);
         }

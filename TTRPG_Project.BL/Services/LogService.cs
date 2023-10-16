@@ -62,15 +62,5 @@ namespace TTRPG_Project.BL.Services
             await _dbContext.SaveChangesAsync();
             return log;
         }
-
-        public override async Task<ICollection<ServiceLog>> GetAllAsync()
-        {
-            return await _dbContext.ServiceLogs.ToListAsync();
-        }
-
-        public async override Task<ServiceLog?> GetByIdAsync(int id)
-        {
-            return await _dbContext.ServiceLogs.SingleOrDefaultAsync();
-        }
     }
 }

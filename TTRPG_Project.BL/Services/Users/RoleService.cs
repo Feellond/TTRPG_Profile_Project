@@ -16,14 +16,14 @@ namespace TTRPG_Project.BL.Services.Users
         {
         }
 
-        public override async Task<Role?> GetByIdAsync(string id)
-        {
-            return await _dbContext.Roles.Where(x => x.Id == id).SingleOrDefaultAsync();
-        }
+        //public override async Task<Role?> GetByIdAsync(string id)
+        //{
+        //    return await _dbContext.Roles.Where(x => x.Id == id).SingleOrDefaultAsync();
+        //}
 
-        public override async Task<ICollection<Role>> GetAllAsync()
-        {
-            return await _dbContext.Roles.ToListAsync();
-        }
+        //public override async Task<ICollection<Role>> GetAllAsync()
+        //{
+        //    return await _dbContext.Roles.ToListAsync();
+        //}
     }
 }

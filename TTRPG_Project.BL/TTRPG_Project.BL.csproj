@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DTO\Items\Request\" />
     <Folder Include="DTO\UserDTO\Request\" />
   </ItemGroup>
 

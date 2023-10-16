@@ -5,7 +5,7 @@ namespace TTRPG_Project.BL.Services.Base
 {
     public interface IBaseService<TEntity, TId> where TEntity: class, IEntityBase<TId>
     {
-        Task<bool> Save();
+        Task<bool> SaveAsync();
         Task<bool> CreateAsync(TEntity entity);
         Task<ICollection<TEntity>> GetAllAsync();
         Task<bool> EntityExistsAsync(TId id);

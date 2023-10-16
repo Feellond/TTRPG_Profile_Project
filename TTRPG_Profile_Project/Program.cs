@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Data;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 using TTRPG_Project.BL.Extensions;
 using TTRPG_Project.Web.Middlewares;
-using TTRPG_Project.Web.Services;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Users;
 

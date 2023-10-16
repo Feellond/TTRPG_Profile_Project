@@ -6,6 +6,7 @@ using TTRPG_Project.DAL.Entities.Database;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.BL.Services;
 using TTRPG_Project.BL.Services.Users;
+using TTRPG_Project.BL.Services.Items;
 
 namespace TTRPG_Project.BL.Extensions
 {
@@ -25,6 +26,7 @@ namespace TTRPG_Project.BL.Extensions
             //services.AddScoped<LoginService>();
             services.AddScoped<UserService>();
             services.AddScoped<LogService>();
+            services.AddScoped<ItemBaseService>();
 
             return services;
         }

@@ -17,8 +17,17 @@ namespace TTRPG_Project.BL.Services.Base
 
         // У этих методов нет реализации, так как у дочернего класса будет 
         // своя реализация в зависимости от связей с которыми нужно получить сущность (Include)
-        public abstract Task<ICollection<TEntity>> GetAllAsync();
-        public abstract Task<TEntity?> GetByIdAsync(TId id);       
+        public async Task<ICollection<TEntity>> GetAllAsync()
+        {
+            var list = await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
+            return list;
+        }
+
+        public async Task<TEntity?> GetByIdAsync(TId id)
+        {
+            var foundEntity = await _dbContext.FindAsync<TEntity>(id);
+            return foundEntity;
+        }   
 
         public async Task<bool> EntityExistsAsync(TId id)
         {
@@ -29,15 +38,15 @@ namespace TTRPG_Project.BL.Services.Base
         public virtual async Task<bool> CreateAsync(TEntity entity)
         {
             await _dbContext.AddAsync(entity);
-            return await Save();
+            return await SaveAsync();
         }
         public virtual async Task<bool> DeleteAsync(TEntity entity)
         {
-            await _dbContext.AddAsync(entity);
-            return await Save();
+            _dbContext.Remove<TEntity>(entity);
+            return await SaveAsync();
         }             
 
-        public async Task<bool> Save()
+        public async Task<bool> SaveAsync()
         {
             var saved = await _dbContext.SaveChangesAsync();
             return saved > 0 ? true : false;
@@ -47,7 +56,7 @@ namespace TTRPG_Project.BL.Services.Base
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             var saved = _dbContext.Update(entity);
-            return await Save();
+            return await SaveAsync();
         }
 
         public IQueryable<TEntity> GetQuery(BaseFilter<TId, TEntity> filter)

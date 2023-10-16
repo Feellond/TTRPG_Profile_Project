@@ -9,11 +9,10 @@ using TTRPG_Project.DAL.Entities.Database.Items;
 using TTRPG_Project.DAL.Entities.Database.Spells;
 using TTRPG_Project.DAL.Entities.Database.Users;
 using TTRPG_Project.DAL.Entities.Interface;
-using TTRPG_Project.DAL.Repositories;
 
 namespace TTRPG_Project.DAL.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User, Role, string>, IDbRepository
+    public class ApplicationDbContext : IdentityDbContext<User, Role, string>
     {
         public DbSet<Effect> Effects { get; set; }
         public DbSet<ServicePrice> ServicePrices { get; set; }
@@ -68,62 +67,6 @@ namespace TTRPG_Project.DAL.Data
         {
             UpdateDate();
             return await base.SaveChangesAsync(cancellationToken);
-        }
-
-        public IQueryable<T> Get<T>() where T : class, IEntityBase<T>
-        {
-            return base.Set<T>().Where(x => x.Enabled).AsQueryable();
-        }
-
-        public IQueryable<T> Get<T>(Expression<Func<T, bool>> selector) where T : class, IEntityBase<T>
-        {
-            return base.Set<T>().Where(selector).Where(x => x.Enabled).AsQueryable();
-        }
-
-        async Task<T> IDbRepository.Add<T>(T newEntity)
-        {
-            var entity = await base.Set<T>().AddAsync(newEntity);
-            return entity.Entity.Id;
-        }
-
-        public async Task AddRange<T>(IEnumerable<T> newEntities) where T : class, IEntityBase<T>
-        {
-            await base.Set<T>().AddRangeAsync(newEntities);
-        }
-
-        public async Task Delete<T>(T id) where T : class, IEntityBase<T>
-        {
-            var activeEntity = await base.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
-            if (activeEntity != null)
-            {
-                activeEntity.Enabled = false;
-                await Task.Run(() => base.Update(activeEntity));
-            }
-        }
-
-        async Task IDbRepository.Remove<T>(T entity)
-        {
-            await Task.Run(() => base.Set<T>().Remove(entity));
-        }
-
-        public async Task RemoveRange<T>(IEnumerable<T> entities) where T : class, IEntityBase<T>
-        {
-            await Task.Run(() => base.Set<T>().RemoveRange(entities));
-        }
-
-        async Task IDbRepository.Update<T>(T entity)
-        {
-            await Task.Run(() => base.Set<T>().Update(entity));
-        }
-
-        public async Task UpdateRange<T>(IEnumerable<T> entities) where T : class, IEntityBase<T>
-        {
-            await Task.Run(() => base.Set<T>().UpdateRange(entities));
-        }        
-
-        public IQueryable<T> GetAll<T>() where T : class, IEntityBase<T>
-        {
-            return base.Set<T>().AsQueryable();
         }
 
         public void UpdateDate()

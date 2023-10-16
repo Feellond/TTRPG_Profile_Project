@@ -15,6 +15,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public int Price { get; set; }
         public List<ItemBaseEffectList> ItemBaseEffectLists { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
+        //public string? Discriminator { get; set; }
 
         /*/// <summary>
         /// Тип таблицы, к которой необходимо обратиться. Реализована через хардкод
