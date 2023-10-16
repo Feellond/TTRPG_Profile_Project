@@ -6,8 +6,7 @@ using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.Web.Controllers
 {
-    //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
-    [Authorize]
+    [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
     [Route("api/items")]
     public class ItemController : ControllerBase
@@ -48,6 +47,7 @@ namespace TTRPG_Project.Web.Controllers
         #endregion
 
         #region Алхимия (зельки и предметы)
+        [AllowAnonymous]
         [HttpGet("alchemicalitem")]
         public async Task<IActionResult> GetAlchemicalItems()
         {
@@ -55,6 +55,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("alchemicalitem/{id}")]
         public async Task<IActionResult> GetAlchemicalItem([FromRoute] int id)
         {
@@ -85,6 +86,7 @@ namespace TTRPG_Project.Web.Controllers
         }
         #endregion
 
+        [AllowAnonymous]
         [HttpGet("armor")]
         public async Task<IActionResult> GetArmors()
         {
@@ -92,6 +94,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("blueprint")]
         public async Task<IActionResult> GetBlueprints()
         {
@@ -99,6 +102,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("component")]
         public async Task<IActionResult> GetComponents()
         {
@@ -106,6 +110,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("formula")]
         public async Task<IActionResult> GetFormulas()
         {
@@ -113,6 +118,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("base")]
         public async Task<IActionResult> GetBaseItems()
         {
@@ -120,6 +126,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("item")]
         public async Task<IActionResult> GetItems()
         {
@@ -127,6 +134,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("tool")]
         public async Task<IActionResult> GetTools()
         {
@@ -134,6 +142,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("weapon")]
         public async Task<IActionResult> GetWeapons()
         {

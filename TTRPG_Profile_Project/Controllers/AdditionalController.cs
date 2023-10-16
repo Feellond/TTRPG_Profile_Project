@@ -7,8 +7,8 @@ namespace TTRPG_Project.Web.Controllers
 {
     [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
-    [Route("api/spells")]
-    public class SpellController : ControllerBase
+    [Route("api/additionals")]
+    public class AdditionalController : ControllerBase
     {
         
     }

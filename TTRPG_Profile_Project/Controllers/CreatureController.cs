@@ -5,8 +5,7 @@ using TTRPG_Project.BL.Services.Items;
 
 namespace TTRPG_Project.Web.Controllers
 {
-    //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
-    [Authorize]
+    [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
     [Route("api/creatures")]
     public class CreatureController : ControllerBase
