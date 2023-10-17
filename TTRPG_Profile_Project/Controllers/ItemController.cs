@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TTRPG_Project.BL.Const;
 using TTRPG_Project.BL.DTO;
+using TTRPG_Project.BL.DTO.Items.Request;
 using TTRPG_Project.BL.Services.Items;
 using TTRPG_Project.DAL.Entities.Database.Items;
 
@@ -10,6 +12,8 @@ namespace TTRPG_Project.Web.Controllers
     [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
     [Route("api/items")]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     public class ItemController : ControllerBase
     {
         #region Инициализация контроллера
@@ -22,6 +26,7 @@ namespace TTRPG_Project.Web.Controllers
         private readonly ItemService _itemService;
         private readonly ToolService _toolService;
         private readonly WeaponService _weaponService;
+        private readonly IMapper _mapper;
 
         public ItemController(
             AlchemicalItemService alchemicalItemService,
@@ -32,7 +37,8 @@ namespace TTRPG_Project.Web.Controllers
             ItemBaseService itemBaseService,
             ItemService itemService, 
             ToolService toolService, 
-            WeaponService weaponService
+            WeaponService weaponService,
+            IMapper mapper
             )
         {
             _alchemicalItemService = alchemicalItemService;
@@ -44,6 +50,7 @@ namespace TTRPG_Project.Web.Controllers
             _itemService = itemService;
             _toolService = toolService;
             _weaponService = weaponService;
+            _mapper = mapper;
         }
         #endregion
 
@@ -66,46 +73,87 @@ namespace TTRPG_Project.Web.Controllers
         /// <param name="id">Id в БД</param>
         /// <returns></returns>
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("alchemicalitem/{id}")]
         public async Task<IActionResult> GetAlchemicalItem([FromRoute] int id)
         {
             var result = await _alchemicalItemService.GetByIdAsync(id);
             if (result is null)
-                BadRequest(new ErrorResponse { Message = "Сущность не найдена!" });
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
 
             return Ok(result);
         }
 
+        /// <summary>
+        /// Создание алхимического предмета, элексира
+        /// </summary>
+        /// <param name="alchemicalItem"></param>
+        /// <remarks>
+        /// Пример входных данных:
+        /// 
+        /// POST api/items/alchemicalitem
+        /// {
+        ///  "name": "Зелье скоростного умерщвления",
+        ///  "availabilityType": 1,
+        ///  "weight": 0.5,
+        ///  "price": 100,
+        ///  "itemBaseEffectLists": [
+        ///    {
+        ///      "effectId": 1,
+        ///      "damage": "1d6+2",
+        ///      "chancePercent": 10,
+        ///      "isDealDamage": true
+        ///    }
+        ///  ],
+        ///   "creatureRewardLists": [
+        ///  {
+        ///    "creatureId": 1,
+        ///    "itemBaseId": 2,
+        ///    "amount": "1d6/2"
+        ///  }
+        /// ]
+        ///}
+        /// </remarks>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("alchemicalitem")]
-        public async Task<IActionResult> CreateAlchemicalItem(AlchemicalItem alchemicalItem)
+        public async Task<IActionResult> CreateAlchemicalItem([FromBody] AlchemicalItemRequest alchemicalItem)
         {
             if (ModelState.IsValid)
             {
-                var result = await _alchemicalItemService.CreateAsync(alchemicalItem);
+                var newAlcItem = _mapper.Map<AlchemicalItem>(alchemicalItem);
+                var result = await _alchemicalItemService.CreateAsync(newAlcItem);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("alchemicalitem")]
-        public async Task<IActionResult> UpdateAlchemicalItem(AlchemicalItem alchemicalItem)
+        public async Task<IActionResult> UpdateAlchemicalItem([FromBody] AlchemicalItemRequest alchemicalItem)
         {
             if (ModelState.IsValid)
             {
-                var result = await _alchemicalItemService.UpdateAsync(alchemicalItem);
+                var AlcItem = _mapper.Map<AlchemicalItem>(alchemicalItem);
+                var result = await _alchemicalItemService.UpdateAsync(AlcItem);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("alchemicalitem")]
         public async Task<IActionResult> DeleteAlchemicalItem(int alchemicalItemId)
         {
             var item = await _alchemicalItemService.GetByIdAsync(alchemicalItemId);
             if (item is null)
-                BadRequest(new ErrorResponse { Message = "Сущность не найдена!" });
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
 
-            var result = await _alchemicalItemService.DeleteAsync(item);
+            var result = await _alchemicalItemService.DeleteAsync(item!);
             return Ok(result);
         }
         #endregion

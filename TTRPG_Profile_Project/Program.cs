@@ -142,6 +142,7 @@ if (!app.Environment.IsDevelopment())
     //app.UseExceptionHandler("/Error");
 }
 
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
