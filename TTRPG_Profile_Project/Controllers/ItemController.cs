@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TTRPG_Project.BL.Const;
+using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.Services.Items;
 using TTRPG_Project.DAL.Entities.Database.Items;
 
@@ -46,7 +47,11 @@ namespace TTRPG_Project.Web.Controllers
         }
         #endregion
 
-        #region Алхимия (зельки и предметы)
+        #region *AlchemicalItem* Алхимия (зельки и предметы)
+        /// <summary>
+        /// Получение всех алхимических предметов, элексиров
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("alchemicalitem")]
         public async Task<IActionResult> GetAlchemicalItems()
@@ -55,32 +60,51 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Получение алхимического предмета, элексира по его Id
+        /// </summary>
+        /// <param name="id">Id в БД</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("alchemicalitem/{id}")]
         public async Task<IActionResult> GetAlchemicalItem([FromRoute] int id)
         {
             var result = await _alchemicalItemService.GetByIdAsync(id);
+            if (result is null)
+                BadRequest(new ErrorResponse { Message = "Сущность не найдена!" });
+
             return Ok(result);
         }
 
         [HttpPost("alchemicalitem")]
         public async Task<IActionResult> CreateAlchemicalItem(AlchemicalItem alchemicalItem)
         {
-            var result = await _alchemicalItemService.CreateAsync(alchemicalItem);
-            return Ok(result);
+            if (ModelState.IsValid)
+            {
+                var result = await _alchemicalItemService.CreateAsync(alchemicalItem);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
         [HttpPut("alchemicalitem")]
         public async Task<IActionResult> UpdateAlchemicalItem(AlchemicalItem alchemicalItem)
         {
-            var result = await _alchemicalItemService.UpdateAsync(alchemicalItem);
-            return Ok(result);
+            if (ModelState.IsValid)
+            {
+                var result = await _alchemicalItemService.UpdateAsync(alchemicalItem);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
         [HttpDelete("alchemicalitem")]
         public async Task<IActionResult> DeleteAlchemicalItem(int alchemicalItemId)
         {
             var item = await _alchemicalItemService.GetByIdAsync(alchemicalItemId);
+            if (item is null)
+                BadRequest(new ErrorResponse { Message = "Сущность не найдена!" });
+
             var result = await _alchemicalItemService.DeleteAsync(item);
             return Ok(result);
         }
