@@ -12,6 +12,7 @@ using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Users;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Environment.EnvironmentName = Environments.Development;
 
 // Add services to the container.
 

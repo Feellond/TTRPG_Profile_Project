@@ -10,7 +10,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public Creature? Creature { get; set; }
         public int BaseAttack { get; set; }
         public List<int> AttackType { get; set; } = new List<int>();
-        public int Damage { get; set; }
+        public string Damage { get; set; } = string.Empty;
         public int Reliability { get; set; }
         public int Distance { get; set; }
         public int AttackSpeed { get; set; }

@@ -8,7 +8,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
     public class Weapon : ItemBase
     {
         public int Accuracy { get; set; }
-        public int Damage { get; set; }
+        public string Damage { get; set; } = string.Empty;
         public int Reliability { get; set; }
         public int Grip { get; set; }
         public int Distance { get; set; }
