@@ -30,6 +30,7 @@ namespace TTRPG_Project.Web.Controllers
         }
         #endregion
 
+        #region *Effect* Эффекты, состояния
         [HttpGet("effect")]
         public async Task<IActionResult> GetEffects()
         {
@@ -83,5 +84,11 @@ namespace TTRPG_Project.Web.Controllers
             var result = await _effectService.DeleteAsync(item!);
             return Ok(result);
         }
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////////
+
+        #region *ServicePrice* Платные сервисы
+        #endregion
     }
 }

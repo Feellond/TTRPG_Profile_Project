@@ -7,5 +7,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
     public class Item : ItemBase
     {
         public int StealthType { get; set; }
+        public int Type { get; set; }
     }
 }
