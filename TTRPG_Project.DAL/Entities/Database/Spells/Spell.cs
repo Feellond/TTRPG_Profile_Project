@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TTRPG_Project.DAL.Entities.Base;
+using TTRPG_Project.DAL.Entities.Database.Creatures;
 
 namespace TTRPG_Project.DAL.Entities.Database.Spells
 {
@@ -24,5 +25,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Spells
         public string SourceTypeDescription { get; set; } = string.Empty;
         public bool IsPriestSpell { get; set; } = false;
         public bool IsDruidSpell { get; set; } = false;
+        public List<Creature> Creatures { get; set; } = new();
     }
 }

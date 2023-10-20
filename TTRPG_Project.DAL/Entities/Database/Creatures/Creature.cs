@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using TTRPG_Project.DAL.Entities.Base;
+using TTRPG_Project.DAL.Entities.Database.Spells;
 
 namespace TTRPG_Project.DAL.Entities.Database.Creatures
 {
@@ -36,5 +37,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public List<Attack> Attacks { get; set; } = new();
         public List<Abilitiy> Abilities { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
+        public List<Spell> Spells { get; set; } = new();
     }
 }

@@ -23,6 +23,7 @@ namespace TTRPG_Project.DAL.Data
         public DbSet<Creature> Creatures { get; set; }
         public DbSet<CreatureEffectList> CreatureEffectList { get; set; }
         public DbSet<CreatureRewardList> CreatureRewardList { get; set; }
+        public DbSet<CreatureSpellsList> CreatureSpellsList { get; set; }
         public DbSet<Race> Races { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<SkillsList> SkillsList { get; set; }

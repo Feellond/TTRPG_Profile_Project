@@ -7,6 +7,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     public class Class : EntityDescriptionBase
     {
         public int Energy { get; set; }
-        public List<string> MagicAbilities { get; set; } = new List<string>();
+        public List<string> DefaultMagicAbilities { get; set; } = new List<string>();
     }
 }

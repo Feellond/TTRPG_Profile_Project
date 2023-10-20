@@ -2,7 +2,6 @@
 using TTRPG_Project.BL.DTO.Additional.Request;
 using TTRPG_Project.BL.DTO.Additional.Responce;
 using TTRPG_Project.BL.DTO.Creatures.Request;
-using TTRPG_Project.BL.DTO.Creatures.Responce;
 using TTRPG_Project.BL.DTO.Items.Request;
 using TTRPG_Project.BL.DTO.UserDTO.Responce;
 using TTRPG_Project.DAL.Entities.Database.Additional;
@@ -31,8 +30,16 @@ namespace Partners.BL.Mappings
             CreateMap<WeaponRequest, Weapon>().ReverseMap();
             //Вопрос в целесообразности. Либо всю мешанину в ItemResponce, либо создавать на каждый как: AlchemicalItemResponce, ...Responce, ...
 
+            CreateMap<AbilitiyRequest, Abilitiy>().ReverseMap();
+            CreateMap<AttackRequest, Attack>().ReverseMap();
+            CreateMap<ClassRequest, Class>().ReverseMap();
+            CreateMap<CreatureRequest, Creature>().ReverseMap();
+            CreateMap<RaceRequest, Race>().ReverseMap();
             CreateMap<SkillRequest, Skill>().ReverseMap();
-            CreateMap<SkillRequest, SkillResponce>().ReverseMap();
+            CreateMap<SkillsListRequest, SkillsList>().ReverseMap();
+            CreateMap<SkillsTreeRequest, SkillsTree>().ReverseMap();
+            CreateMap<StatRequest, Stat>().ReverseMap();
+            CreateMap<StatsListRequest, StatsList>().ReverseMap();
 
             CreateMap<User, UserResponse>().ReverseMap();
         }
