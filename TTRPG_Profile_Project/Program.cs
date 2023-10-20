@@ -138,7 +138,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<ExceptionHandling>();
-app.UseIpRateLimiting();
+app.UseMiddleware<MyIpRateLimitMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
