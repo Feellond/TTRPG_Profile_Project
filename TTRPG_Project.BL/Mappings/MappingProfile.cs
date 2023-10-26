@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using TTRPG_Project.BL.DTO.Additional.Request;
-using TTRPG_Project.BL.DTO.Additional.Responce;
 using TTRPG_Project.BL.DTO.Creatures.Request;
+using TTRPG_Project.BL.DTO.Entities.Additional.Responce;
+using TTRPG_Project.BL.DTO.Entities.Spells.Request;
+using TTRPG_Project.BL.DTO.Entities.UserDTO.Responce;
 using TTRPG_Project.BL.DTO.Items.Request;
-using TTRPG_Project.BL.DTO.UserDTO.Responce;
 using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
 using TTRPG_Project.DAL.Entities.Database.Items;
+using TTRPG_Project.DAL.Entities.Database.Spells;
 using TTRPG_Project.DAL.Entities.Database.Users;
 
 namespace Partners.BL.Mappings
@@ -40,6 +42,8 @@ namespace Partners.BL.Mappings
             CreateMap<SkillsTreeRequest, SkillsTree>().ReverseMap();
             CreateMap<StatRequest, Stat>().ReverseMap();
             CreateMap<StatsListRequest, StatsList>().ReverseMap();
+
+            CreateMap<SpellRequest, Spell>().ReverseMap();
 
             CreateMap<User, UserResponse>().ReverseMap();
         }

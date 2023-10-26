@@ -10,7 +10,7 @@ namespace TTRPG_Project.BL.DTO.Auth.Responce
     public class LoginResponse
     {
         //public string? Token { get; set; } = null;
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
+        public string AccessToken { get; set; } = string.Empty;
+        public string RefreshToken { get; set; } = string.Empty;
     }
 }
