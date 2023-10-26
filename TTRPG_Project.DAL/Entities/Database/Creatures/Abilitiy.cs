@@ -3,7 +3,7 @@ using TTRPG_Project.DAL.Entities.Base;
 
 namespace TTRPG_Project.DAL.Entities.Database.Creatures
 {
-    [Table("Abilitiies")]
+    [Table("Abilities")]
     public class Abilitiy : EntityDescriptionBase
     {
         public int? CreatureId { get; set; }

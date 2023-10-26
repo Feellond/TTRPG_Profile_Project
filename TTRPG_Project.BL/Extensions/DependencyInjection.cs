@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Partners.BL.Mappings;
-using Microsoft.EntityFrameworkCore;
 using TTRPG_Project.DAL.Entities.Database;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.BL.Services;
@@ -17,9 +17,13 @@ namespace TTRPG_Project.BL.Extensions
 
             var connectionString = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseNpgsql(connectionString, b => b.MigrationsAssembly("Partners.DAL"));
-            });
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("TTRPG_Project.DAL"))
+            );
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //{
+            //    options.UseNpgsql(connectionString, b => b.MigrationsAssembly("TTRPG_Project.DAL"));
+            //});
 
             //services.AddDbContext<ApplicationDbContext>(options =>
             //    options.UseMySql(config.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(8, 0, 34)), b => b.MigrationsAssembly("Partners.DAL"))
