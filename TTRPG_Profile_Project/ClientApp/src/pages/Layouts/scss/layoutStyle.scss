@@ -1,0 +1,65 @@
+@import "../../../scss/ui-colors.scss";
+
+
+.layout-header {
+    background: var(--NewColor1, #4c4c4d);
+    box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.50);
+}
+
+.layout-header__text,
+.layoutSecurity-header__text {
+    color: white;
+}
+
+.layout-content {
+    order: 0;
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding: 0 8px;
+}
+
+.aside {
+    padding: 8px 4px;
+    flex: 0 0 238px;
+    width: 238px;
+    position: relative;
+    z-index: 3;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.layout__left-menu {
+    color: $color-link-2;
+    fill: $color-link-2;
+    line-height: 1;
+}
+
+.layout__left-menu__item {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.layout__left-menu__item-link {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    border: 1px solid $color-border-1;
+    border-radius: 2px;
+    background-color: $color-bg-4;
+    position: relative;
+    z-index: 2;
+}
+
+.layout__left-menu__item-text {
+    flex: 1 1 auto;
+}

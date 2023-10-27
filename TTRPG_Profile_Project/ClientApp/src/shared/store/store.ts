@@ -4,7 +4,7 @@ import { MutableRefObject } from 'react';
 
 export default class Store {
     isAuth = false;
-    isLoading = true;
+    isLoading = false;
     isJustRegistered = false;
     globalToast : any = null;
 
