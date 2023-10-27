@@ -24,7 +24,7 @@ const LayoutCommon = () => {
         </div>
       </div>
       <div className="layout-content">
-        <aside className="aside">
+        <aside className="layout__left">
           <nav>
             <ul className="layout__left-menu">
               <li className="layout__left-menu__item">
