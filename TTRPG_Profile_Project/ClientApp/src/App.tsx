@@ -19,8 +19,8 @@ export const App = () => {
   const { store } = useContext(Context);
 
   const contextProps: IContextProps = {
-    globalToast: undefined,
-    store: undefined
+    globalToast: null,
+    store: null
   };
   const toastRef = useRef<Toast>(null);
 

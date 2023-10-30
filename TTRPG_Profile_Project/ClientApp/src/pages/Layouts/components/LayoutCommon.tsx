@@ -28,32 +28,32 @@ const LayoutCommon = () => {
           <nav>
             <ul className="layout__left-menu">
               <li className="layout__left-menu__item">
-                <a href="#" className="layout__left-menu__item-link">
+                <a href="/" className="layout__left-menu__item-link">
                   <span className="layout__left-menu__item-text">Главная</span>
                 </a>
               </li>
               <li className="layout__left-menu__item">
-                <a href="#" className="layout__left-menu__item-link">
+                <a href="bestiary" className="layout__left-menu__item-link">
                   <span className="layout__left-menu__item-text">Бестиарий</span>
                 </a>
               </li>
               <li className="layout__left-menu__item">
-                <a href="#" className="layout__left-menu__item-link">
+                <a href="spells" className="layout__left-menu__item-link">
                   <span className="layout__left-menu__item-text">Заклинания</span>
                 </a>
               </li>
               <li className="layout__left-menu__item">
-                <a href="#" className="layout__left-menu__item-link">
+                <a href="listitem" className="layout__left-menu__item-link">
                   <span className="layout__left-menu__item-text">Предметы</span>
                 </a>
               </li>
               <li className="layout__left-menu__item">
-                <a href="#" className="layout__left-menu__item-link">
+                <a href="races" className="layout__left-menu__item-link">
                   <span className="layout__left-menu__item-text">Расы</span>
                 </a>
               </li>
               <li className="layout__left-menu__item">
-                <a href="#" className="layout__left-menu__item-link">
+                <a href="classes" className="layout__left-menu__item-link">
                   <span className="layout__left-menu__item-text">Классы</span>
                 </a>
               </li>
