@@ -1,15 +1,14 @@
+import { Card } from "primereact/card";
 import React from "react";
+import { useParams } from "react-router-dom";
 
-interface ItemEntityProps {
-    itemId: number | null
-}
-
-const ItemEntityPage = ({itemId} : ItemEntityProps) => {
+const ItemEntityPage = () => {
+    const { id } = useParams();
 
     return (
-        <div>
-            
-        </div>
+        <Card style={{minHeight: '500px', width: '1500px', margin: '0 auto' }} >
+            Конкретный элемент
+        </Card>
     )
 }
 

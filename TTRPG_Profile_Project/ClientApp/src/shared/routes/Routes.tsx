@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
-import { ItemsListPage } from 'pages/Items'
+import { ItemEntityPage, ItemsListPage } from 'pages/Items'
 import Home from 'pages/Home/Home'
 import { LayoutCommon } from 'pages/Layouts'
 import RouteAnonymous from 'app/hoc/routeAnonymous'
@@ -11,6 +11,7 @@ export const router = createBrowserRouter(createRoutesFromElements(
     <>
         <Route path='/' element={<RouteAnonymous jsx={<LayoutCommon />} />}>
             <Route path='listitem' element={<RouteAnonymous jsx={<ItemsListPage/>} />} />
+            <Route path='listitem/:id' element={<RouteAnonymous jsx={<ItemEntityPage/>} />} />
             <Route path='bestiary' element={<RouteAnonymous jsx={<BestiaryListPage/>} />} />
             <Route path='spells' element={<RouteAnonymous jsx={<SpellEntityPage/>} />} />
             <Route path='races' element={<RouteAnonymous jsx={<RacesPage/>} />} />

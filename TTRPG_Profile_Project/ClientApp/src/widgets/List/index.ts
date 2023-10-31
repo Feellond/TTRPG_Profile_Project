@@ -1,3 +1,4 @@
-import { EntityList } from "./components/EntityList";
+import { ItemList } from "./components/ItemList";
+import { ItemDTO, ItemShortDTO, CreatureReward, ItemBaseEffect, BlueprintComponentList, FormulaComponentList } from "./models/ItemsDTO";
 
-export {EntityList}
+export {ItemList, ItemDTO, ItemShortDTO, CreatureReward, ItemBaseEffect, BlueprintComponentList, FormulaComponentList}
