@@ -7,6 +7,7 @@ export interface ItemShortDTO {
   price: number | null;
   itemBaseEffectLists: ItemBaseEffect[] | null;
   creatureRewardLists: CreatureReward[] | null;
+  itemType: number;
 }
 
 export interface ItemDTO extends ItemShortDTO {

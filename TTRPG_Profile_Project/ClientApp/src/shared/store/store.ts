@@ -1,4 +1,5 @@
-import { makeAutoObservable } from 'mobx'
+
+import { makeAutoObservable } from 'mobx';
 import { Toast } from 'primereact/toast';
 import { MutableRefObject } from 'react';
 

@@ -1,6 +1,5 @@
 @import "../../../scss/ui-colors.scss";
 
-
 .layout-header {
     background: var(--NewColor1, #4c4c4d);
     box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.50);
@@ -8,7 +7,64 @@
 
 .layout-header__text,
 .layoutSecurity-header__text {
-    color: white;
+    color: var(--gray-50);
+}
+
+.layout-header__text a {
+    color: var(--gray-50);
+}
+
+.layout-header__hamburger {
+    display: none;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    top: calc(50% - 16px);
+    right: 8px;
+    cursor: pointer;
+}
+
+.layout-header__hamburger span {
+    position: absolute;
+    left: 4px;
+    width: 24px;
+    height: 3px;
+    background-color: var(--color-link-1);
+    border-radius: 2px;
+    transition: transform .15s 0s,top .15s .3s,opacity 0s .15s,background-color .15s;
+}
+
+.layout-header__hamburger {
+    & span:nth-child(1){
+        top: 7px;
+    }
+    & span:nth-child(2){
+        top: 15px;
+    }
+    & span:nth-child(3){
+        top: 23px;
+    }
+
+    &.active span {
+        transition: top .15s 0s,transform .15s .3s,opacity 0s .15s;
+    }
+    &.active span:nth-child(1){
+        top: 15px;
+        transform: rotate(45deg);
+    }
+    &.active span:nth-child(2){
+        opacity: 0;
+    }
+    &.active span:nth-child(3){
+        top: 15px;
+    transform: rotate(-45deg);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .layout-header__hamburger {
+        display: block;
+    }
 }
 
 .layout-content {
@@ -35,8 +91,6 @@
     user-select: none;
 
     &-menu {
-        color: $color-link-2;
-        fill: $color-link-2;
         line-height: 1;
 
         &__item {
@@ -50,16 +104,50 @@
                 display: flex;
                 align-items: center;
                 padding: 4px 8px;
-                border: 1px solid $color-border-1;
+                border: 1px solid var(--gray-700);
                 border-radius: 2px;
-                background-color: $color-bg-4;
+                background-color: var(--gray-800);
                 position: relative;
                 z-index: 2;
+                color: var(--gray-50);
+            }
+
+            &-link:hover {
+                background-color: var(--gray-700);
+                color: var(--blue-50);
             }
 
             &-text {
                 flex: 1 1 auto;
             }
+        }
+    }
+    @media (max-width: 1000px) {
+        &-menu {
+            max-width: 320px;
+            margin: 0 auto;
+        }       
+    }
+
+    @media screen and (max-width: 1000px) {
+        & {
+            background-color: var(--color-bg-1);
+            display: block;
+            position: fixed;
+            z-index: 98;
+            top: 47px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 40px);
+            overflow-y: scroll;
+            transform: translateX(100%);
+            transition: transform .3s;
+        }
+    }
+    
+    @media screen and (max-width: 1000px) {
+        &.active {
+            transform: translateX(0);
         }
     }
 }

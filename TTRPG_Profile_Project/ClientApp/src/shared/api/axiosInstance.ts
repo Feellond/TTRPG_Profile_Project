@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_REFRESH_TOKEN, BASE_URL } from "./const";
+import { API_REFRESH_TOKEN, BASE_URL } from "./api_const";
 import tokenService, { ACCESS_TOKEN_ITEM, REFREST_TOKEN_ITEM } from "shared/services/token.service";
 
 const $api = axios.create({

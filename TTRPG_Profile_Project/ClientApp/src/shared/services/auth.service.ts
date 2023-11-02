@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import $api from "../api/axiosInstance";
 import {
   BASE_URL,
-} from "../api/const";
+} from "../api/api_const";
 import tokenService from "./token.service";
 
 export class AuthService {

@@ -1,30 +1,35 @@
-import { Context } from "index";
-import React, { useContext } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import React, {useState } from "react";
+import { Outlet } from "react-router-dom";
 import "../scss/layoutStyle.scss";
 
 const LayoutCommon = () => {
-  const { store } = useContext(Context);
-  const navigate = useNavigate();
+  const [isActive, setActive] = useState(false);
 
-  let location = useLocation();
-
+  const handleClick = () => {
+    setActive(!isActive);
+  }
+  
   return (
     <div>
-      <div className="flex flex-row layout-header p-2 z-5 relative align-items-center justify-content-between">
+      <header className="flex flex-row layout-header p-1 z-5 relative align-items-center justify-content-between">
         <div
           className="flex flex-row align-items-center"
           style={{ height: "100%" }}
         >
           <div className="flex flex-row">
-            <div className="layout-header__text mx-4">
-              <h3>witcher.su</h3>
-            </div>
+            <h3 className="layout-header__text mx-4">
+              <a href="/">witcher.su</a>
+            </h3>
           </div>
         </div>
-      </div>
+        <div className={isActive ? 'layout-header__hamburger active' : 'layout-header__hamburger'} onClick={handleClick}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </header>
       <div className="layout-content">
-        <aside className="layout__left">
+        <aside className={isActive ? 'layout__left active' : 'layout__left'} onClick={handleClick}>
           <nav>
             <ul className="layout__left-menu">
               <li className="layout__left-menu__item">
@@ -60,7 +65,7 @@ const LayoutCommon = () => {
             </ul>
           </nav>
         </aside>
-        <div className="center">
+        <div className="center w-full">
           <Outlet />
         </div>
       </div>

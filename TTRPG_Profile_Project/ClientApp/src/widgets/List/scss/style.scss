@@ -1,0 +1,22 @@
+.params li {
+    padding-top: 4px;
+}
+
+.stat {
+    display: grid;
+    margin: 4px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat div:first-of-type{
+    font-weight: 600;
+}
+
+
+.stat:nth-child(odd) {
+    background-color: var(--bluegray-100);
+}
