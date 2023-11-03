@@ -61,7 +61,7 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media (max-width: 1000px) {
     .layout-header__hamburger {
         display: block;
     }
@@ -129,7 +129,7 @@
         }       
     }
 
-    @media screen and (max-width: 1000px) {
+    @media (max-width: 1000px) {
         & {
             background-color: var(--color-bg-1);
             display: block;
@@ -145,7 +145,7 @@
         }
     }
     
-    @media screen and (max-width: 1000px) {
+    @media (max-width: 1000px) {
         &.active {
             transform: translateX(0);
         }
