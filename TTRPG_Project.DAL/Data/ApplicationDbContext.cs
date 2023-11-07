@@ -110,7 +110,7 @@ namespace TTRPG_Project.DAL.Data
             base.OnModelCreating(builder);
         }
 
-        public void CreateDefaultData(ModelBuilder builder)
+        public static void CreateDefaultData(ModelBuilder builder)
         {
             //TODO: Добавить описания к каждому элементу при создании дефолтных записей в БД
             builder.Entity<Stat>().HasData(new Stat[] { 
