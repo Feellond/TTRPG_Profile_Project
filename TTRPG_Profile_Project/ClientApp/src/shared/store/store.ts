@@ -60,28 +60,28 @@ export default class Store {
     //     }
     // }
 
-    // async logout() {
-    //     try {
-    //         const responce = await authService.logout();
-    //         console.log(responce);
-    //         tokenService.clearTokens();
-    //         this.setAuth(false);
-    //     }
-    //     catch (ex) {
-    //         console.log(ex.responce?.data?.message);
-    //     }
-    // }
+    async logout() {
+        try {
+            const responce = await authService.logout();
+            console.log(responce);
+            tokenService.clearTokens();
+            this.setAuth(false);
+        }
+        catch (ex) {
+            console.log(ex.responce?.data?.message);
+        }
+    }
 
-    // async checkAuth() {
-    //     this.setLoading(true);
-    //     try {
-    //         this.setAuth(await authService.checkAuth());
-    //     }
-    //     catch (ex) {
-    //         console.log(ex.responce?.data?.message);
-    //     }
-    //     finally {
-    //         this.setLoading(false);
-    //     }
-    // }
+    async checkAuth() {
+        this.setLoading(true);
+        try {
+            this.setAuth(await authService.checkAuth());
+        }
+        catch (ex) {
+            console.log(ex.responce?.data?.message);
+        }
+        finally {
+            this.setLoading(false);
+        }
+    }
 }

@@ -17,9 +17,6 @@ const AuthorizationForm = ({store} : AuthorizationFormProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
-    register,
-    setValue,
-    getValues,
     control,
     formState: { errors },
     handleSubmit,
