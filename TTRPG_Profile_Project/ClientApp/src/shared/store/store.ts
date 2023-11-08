@@ -2,6 +2,9 @@
 import { makeAutoObservable } from 'mobx';
 import { Toast } from 'primereact/toast';
 import { MutableRefObject } from 'react';
+import { ILoginDTO } from 'shared/models';
+import authService from 'shared/services/auth.service';
+import tokenService from 'shared/services/token.service';
 
 export default class Store {
     isAuth = false;
@@ -29,13 +32,13 @@ export default class Store {
         this.globalToast = toast
     }
 
-    // async login({ userName, password, isRemember }: ILoginDTO) {
-    //     const responce = await authService.login({ userName, password, isRemember });
-    //     console.log(responce);
-    //     tokenService.setAccessToken(responce.data.accessToken);
-    //     tokenService.setRefreshToken(responce.data.refreshToken);
-    //     this.setAuth(true);
-    // }
+    async login({ userName, password}: ILoginDTO) {
+        const responce = await authService.login({ userName, password });
+        console.log(responce);
+        tokenService.setAccessToken(responce.data.accessToken);
+        tokenService.setRefreshToken(responce.data.refreshToken);
+        this.setAuth(true);
+    }
 
     // async registration({ userName, password, passwordReply, firstName, middleName, lastName, companyName, birthDate,
     //     gender, studyGroup, educations, placeWorks, positionPracticeId, phone, email }: IRegisterDTO) {

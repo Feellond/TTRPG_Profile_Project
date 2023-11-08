@@ -71,7 +71,7 @@ namespace TTRPG_Project.BL.Services.Users
             return token;
         }
 
-        public static string GenerateRefreshToken()
+        public string GenerateRefreshToken()
         {
             var randomNumber = new byte[64];
             using var rng = RandomNumberGenerator.Create();

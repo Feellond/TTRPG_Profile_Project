@@ -9,10 +9,8 @@ namespace TTRPG_Project.DAL.Data
     public static class InitSettings
     {
         public const string ADMIN_USERNAME = "Admin";
-        public const string SYSTEM_USERNAME = "System";
 
-        private static readonly string defaultPassword = "1qaz@WSX";
-        private static readonly string systemPassword = "oyzt6NN1J4gXJr8wsMc0";
+        private static readonly string defaultPassword = "1qaz@WSX4593";
 
         public static async System.Threading.Tasks.Task IdentityInicializer(IApplicationBuilder app)
         {
@@ -41,7 +39,6 @@ namespace TTRPG_Project.DAL.Data
             }
 
             await CreateIfNotExistUser(userManager, ADMIN_USERNAME, "Администратор системы", defaultPassword, "email@mail.ru");
-            await CreateIfNotExistUser(userManager, SYSTEM_USERNAME, "Система", systemPassword, "email@mail.ru");
         }
 
         public static async Task CreateIfNotExistUser(

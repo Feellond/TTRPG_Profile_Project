@@ -74,7 +74,7 @@ namespace TTRPG_Project.BL.Services.Users
             //var userRoles = await GetRolesAsync(user);
 
             var token = jwtService.CreateToken(claims);
-            var refreshToken = JwtService.GenerateRefreshToken();
+            var refreshToken = jwtService.GenerateRefreshToken();
 
             int refreshTokenValidityInDays;
 
@@ -116,7 +116,7 @@ namespace TTRPG_Project.BL.Services.Users
             //var userRoles = await GetRolesAsync(user);
 
             var token = jwtService.CreateToken(claims);
-            var refreshToken = JwtService.GenerateRefreshToken();
+            var refreshToken = jwtService.GenerateRefreshToken();
 
             int.TryParse(_config["JWT:RefreshTokenValidityInDaysNotRemeber"], out int refreshTokenValidityInDays);
 
