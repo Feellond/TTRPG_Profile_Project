@@ -7,6 +7,7 @@ export interface ItemShortDTO {
   price: number | null;
   itemBaseEffectLists: ItemBaseEffect[] | null;
   creatureRewardLists: CreatureReward[] | null;
+  sourceId: number;
   itemType: number;
 }
 
@@ -25,7 +26,7 @@ export interface ItemDTO extends ItemShortDTO {
   //tool
 
   //item
-  itemType: number | null;
+  type: number | null;
 
   //formula
   complexity: number | null;

@@ -1,4 +1,5 @@
-﻿using TTRPG_Project.DAL.Entities.Interface;
+﻿using TTRPG_Project.DAL.Entities.Database.Additional;
+using TTRPG_Project.DAL.Entities.Interface;
 
 namespace TTRPG_Project.DAL.Entities.Base
 {
@@ -6,6 +7,7 @@ namespace TTRPG_Project.DAL.Entities.Base
     {
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        public string Source { get; set; } = string.Empty;
+        public int? SourceId { get; set; }
+        public Source? Source { get; set; }
     }
 }

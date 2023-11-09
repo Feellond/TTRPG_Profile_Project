@@ -12,7 +12,7 @@ const ItemTypeLoad = ({ setItems }: ItemTypeLoadParams) => {
     value: ItemType[key],
   }));
   setItems(ITOptions);
-  //console.log(ITOptions);
+  console.log(ITOptions);
 };
 
 export {ItemTypeLoad}
