@@ -11,8 +11,8 @@ import {
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
 import { AvailabilityTypeLoad, ItemTypeLoad } from "entities/itemOptions";
-import { ItemDTO } from "widgets/List";
 import { ItemTypeSelect } from "./ItemTypeSelect";
+import { ItemDTO } from "shared/models";
 
 interface EditItemShortDialogProps {
   data: ItemDTO;
@@ -242,6 +242,7 @@ const EditItemShortDialog = ({
             </span>
           </div>
           <ItemTypeSelect
+            data={data}
             visible={itemTypeSelectVisible}
             itemType={getValues("itemType")}
             control={control}

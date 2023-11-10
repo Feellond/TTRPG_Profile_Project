@@ -1,0 +1,36 @@
+import { ItemDTO } from "../../../shared/models/Item/DTO/ItemsDTO";
+
+const emptyItem: ItemDTO = {
+  id: 0,
+  name: null,
+  description: null,
+  availabilityType: null,
+  weight: null,
+  price: null,
+  itemBaseEffectLists: null,
+  creatureRewardLists: null,
+  sourceId: 0,
+  itemType: 0,
+  accuracy: null,
+  damage: null,
+  reliability: null,
+  grip: null,
+  distance: null,
+  stealthType: null,
+  amountOfEnhancements: null,
+  isAmmunition: null,
+  skillId: null,
+  type: null,
+  complexity: null,
+  timeSpend: null,
+  additionalPayment: null,
+  formulaComponentLists: null,
+  blueprintComponentLists: null,
+  whereToFind: null,
+  amount: 0,
+  isAlchemical: false,
+  substanceType: 0,
+  stiffness: null,
+};
+
+export { emptyItem };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { SelectItem } from "primereact/selectitem";
-import { ItemDTO } from "widgets/List/models/ItemsDTO";
+import { ItemDTO } from "shared/models/Item/DTO/ItemsDTO";
 import { ListInput } from "features/inputs/listInput";
 import { ItemType } from "shared/enums/ItemEnums";
 import { Button } from 'primereact/button';

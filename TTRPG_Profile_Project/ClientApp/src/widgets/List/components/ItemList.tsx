@@ -1,14 +1,43 @@
 import { ItemFilter } from "widgets/Filters";
-import React, { useEffect } from "react";
-import "../scss/style.scss"
+import React, { useEffect, useRef, useState } from "react";
+import "../scss/style.scss";
+import { Button } from "primereact/button";
+import { EditItemShortDialog } from "widgets/Dialog";
+import { emptyItem } from "../models/EmptyItem";
+import itemService from "shared/services/item.service";
+import { Toast } from "primereact/toast";
+import { ItemDTO } from "shared/models";
 
 const ItemList = () => {
+  const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
+  const [editDialogHeader, setEditDialogHeader] = useState<string>("");
 
+  const [itemList, setItemList] = useState<ItemDTO[]>([]);
+  const [item, setItem] = useState<ItemDTO>(emptyItem);
 
+  const toast = useRef<Toast>(null);
 
-  useEffect(() => {
+  const showEditDialog = () => {
+    setEditDialogVisible(true);
+  };
 
-  }, [])
+  const showCreateDialog = () => {
+    setEditDialogVisible(true);
+  };
+
+  const hideDialog = () => {
+    setEditDialogVisible(false);
+    setItem(emptyItem);
+  }
+
+  const saveItem = async () => {
+    if (item.id !== 0) return// await itemService.edit(item);
+    else await itemService.createItem({item, toast});
+
+    hideDialog();
+  };
+
+  useEffect(() => {}, []);
 
   //onClick={(e) => handleClick(1, e)}
   const handleClick = (id, e) => {
@@ -17,20 +46,31 @@ const ItemList = () => {
     const url = `listitem/${id}`;
     window.open(url, "_blank");
   };
-  
+
   return (
-    <div className="w-full" style={{marginTop: "-20px"}}>
+    <div className="w-full" style={{ marginTop: "-20px" }}>
+      <EditItemShortDialog
+        data={item}
+        header={editDialogHeader}
+        visible={editDialogVisible}
+        onHide={hideDialog}
+        onSave={saveItem}
+      />
+      <div>
+        <Button label="Создать предмет" onClick={(e) => showCreateDialog()} />
+      </div>
       <ItemFilter></ItemFilter>
       <div className="mb-4">
         <div className="card block bg-bluegray-50">
           <div className="flex flex-column text-0">
-            <div className="p-2 text-2xl font-semibold cursor-pointer" style={{marginBottom: "-10px"}}>
-              <a href="listitem/1" >
-                Элемент под наименованием 1 item.Name
-              </a>
+            <div
+              className="p-2 text-2xl font-semibold cursor-pointer"
+              style={{ marginBottom: "-10px" }}
+            >
+              <a href="listitem/1">Элемент под наименованием 1 item.Name</a>
             </div>
             <ul className="p-2 params">
-              <li style={{float: "right"}}>Изображение</li>
+              <li style={{ float: "right" }}>Изображение</li>
               <li>
                 <i>Оружие, Редкий</i>
               </li>
@@ -39,7 +79,8 @@ const ItemList = () => {
                 <strong> Вес:</strong> 0,5кг
               </li>
               <li>
-                <strong>Требуемый навык:</strong><a> Владение мечом</a>
+                <strong>Требуемый навык:</strong>
+                <a> Владение мечом</a>
               </li>
               <li className="stats flex flex-row py-2">
                 <div className="stat" title="Точность">
@@ -81,12 +122,17 @@ const ItemList = () => {
               </li>
               <li className="my-2">
                 <div>
-                  Дополнительная информация о предмете и возможно наиболее полная
+                  Дополнительная информация о предмете и возможно наиболее
+                  полная
                 </div>
               </li>
             </ul>
             <div>
               Footer
+              <Button
+                label="Редактировать предмет"
+                onClick={(e) => showEditDialog()}
+              />
             </div>
           </div>
         </div>

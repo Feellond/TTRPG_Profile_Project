@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using TTRPG_Project.BL.Const;
 using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -119,11 +120,11 @@ namespace TTRPG_Project.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("alchemicalitem")]
-        public async Task<IActionResult> CreateAlchemicalItem([FromBody] AlchemicalItemRequest alchemicalItem)
+        public async Task<IActionResult> CreateAlchemicalItem([FromBody] AlchemicalItemRequest request)
         {
             if (ModelState.IsValid)
             {
-                var newAlcItem = _mapper.Map<AlchemicalItem>(alchemicalItem);
+                var newAlcItem = _mapper.Map<AlchemicalItem>(request);
                 var result = await _alchemicalItemService.CreateAsync(newAlcItem);
                 return Ok(result);
             }
@@ -133,11 +134,11 @@ namespace TTRPG_Project.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("alchemicalitem")]
-        public async Task<IActionResult> UpdateAlchemicalItem([FromBody] AlchemicalItemRequest alchemicalItem)
+        public async Task<IActionResult> UpdateAlchemicalItem([FromBody] AlchemicalItemRequest request)
         {
             if (ModelState.IsValid)
             {
-                var AlcItem = _mapper.Map<AlchemicalItem>(alchemicalItem);
+                var AlcItem = _mapper.Map<AlchemicalItem>(request);
                 var result = await _alchemicalItemService.UpdateAsync(AlcItem);
                 return Ok(result);
             }
@@ -172,7 +173,7 @@ namespace TTRPG_Project.Web.Controllers
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("alchemicalitem/{id}")]
+        [HttpGet("armor/{id}")]
         public async Task<IActionResult> GetArmor([FromRoute] int id)
         {
             var result = await _armorService.GetByIdAsync(id);
@@ -184,12 +185,12 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPost("alchemicalitem")]
-        public async Task<IActionResult> CreateArmor([FromBody] AlchemicalItemRequest alchemicalItem)
+        [HttpPost("armor")]
+        public async Task<IActionResult> CreateArmor([FromBody] AlchemicalItemRequest request)
         {
             if (ModelState.IsValid)
             {
-                var newArmor = _mapper.Map<Armor>(alchemicalItem);
+                var newArmor = _mapper.Map<Armor>(request);
                 var result = await _armorService.CreateAsync(newArmor);
                 return Ok(result);
             }
@@ -198,12 +199,12 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPut("alchemicalitem")]
-        public async Task<IActionResult> UpdateArmor([FromBody] AlchemicalItemRequest alchemicalItem)
+        [HttpPut("armor")]
+        public async Task<IActionResult> UpdateArmor([FromBody] AlchemicalItemRequest request)
         {
             if (ModelState.IsValid)
             {
-                var armor = _mapper.Map<Armor>(alchemicalItem);
+                var armor = _mapper.Map<Armor>(request);
                 var result = await _armorService.UpdateAsync(armor);
                 return Ok(result);
             }
@@ -212,7 +213,7 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("alchemicalitem")]
+        [HttpDelete("armor")]
         public async Task<IActionResult> DeleteArmor(int alchemicalItemId)
         {
             var item = await _armorService.GetByIdAsync(alchemicalItemId);
@@ -234,6 +235,60 @@ namespace TTRPG_Project.Web.Controllers
             var result = await _blueprintService.GetAllAsync();
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("blueprint/{id}")]
+        public async Task<IActionResult> GetBlueprint([FromRoute] int id)
+        {
+            var result = await _blueprintService.GetByIdAsync(id);
+            if (result is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("blueprint")]
+        public async Task<IActionResult> CreateBlueprint([FromBody] BlueprintRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var newBlueprint = _mapper.Map<Blueprint>(request);
+                var result = await _blueprintService.CreateAsync(newBlueprint);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("blueprint")]
+        public async Task<IActionResult> UpdateBlueprint([FromBody] BlueprintRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var blueprint = _mapper.Map<Blueprint>(request);
+                var result = await _blueprintService.UpdateAsync(blueprint);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("blueprint")]
+        public async Task<IActionResult> DeleteBlueprint(int blueprintId)
+        {
+            var item = await _blueprintService.GetByIdAsync(blueprintId);
+            if (item is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            var result = await _blueprintService.DeleteAsync(item!);
+            return Ok(result);
+        }
         #endregion
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -246,6 +301,60 @@ namespace TTRPG_Project.Web.Controllers
             var result = await _componentService.GetAllAsync();
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("component/{id}")]
+        public async Task<IActionResult> GetComponent([FromRoute] int id)
+        {
+            var result = await _blueprintService.GetByIdAsync(id);
+            if (result is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("component")]
+        public async Task<IActionResult> CreateComponent([FromBody] ComponentRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var newComponent = _mapper.Map<DAL.Entities.Database.Items.Component>(request);
+                var result = await _componentService.CreateAsync(newComponent);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("component")]
+        public async Task<IActionResult> UpdateComponent([FromBody] ComponentRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var component = _mapper.Map<DAL.Entities.Database.Items.Component>(request);
+                var result = await _componentService.UpdateAsync(component);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("component")]
+        public async Task<IActionResult> DeleteComponent(int componentId)
+        {
+            var item = await _componentService.GetByIdAsync(componentId);
+            if (item is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            var result = await _componentService.DeleteAsync(item!);
+            return Ok(result);
+        }
         #endregion
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -256,6 +365,60 @@ namespace TTRPG_Project.Web.Controllers
         public async Task<IActionResult> GetFormulas()
         {
             var result = await _formulaService.GetAllAsync();
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("formula/{id}")]
+        public async Task<IActionResult> GetFormula([FromRoute] int id)
+        {
+            var result = await _formulaService.GetByIdAsync(id);
+            if (result is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("formula")]
+        public async Task<IActionResult> CreateFormula([FromBody] FormulaRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var newFormula = _mapper.Map<Formula>(request);
+                var result = await _formulaService.CreateAsync(newFormula);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("formula")]
+        public async Task<IActionResult> UpdateFormula([FromBody] FormulaRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var formula = _mapper.Map<Formula>(request);
+                var result = await _formulaService.UpdateAsync(formula);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("formula")]
+        public async Task<IActionResult> DeleteFormula(int formulaId)
+        {
+            var item = await _formulaService.GetByIdAsync(formulaId);
+            if (item is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            var result = await _formulaService.DeleteAsync(item!);
             return Ok(result);
         }
         #endregion
@@ -282,6 +445,60 @@ namespace TTRPG_Project.Web.Controllers
             var result = await _itemService.GetAllAsync();
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("item/{id}")]
+        public async Task<IActionResult> GetItem([FromRoute] int id)
+        {
+            var result = await _itemService.GetByIdAsync(id);
+            if (result is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("item")]
+        public async Task<IActionResult> CreateItem([FromBody] ItemRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var newItem = _mapper.Map<Item>(request);
+                var result = await _itemService.CreateAsync(newItem);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("item")]
+        public async Task<IActionResult> UpdateItem([FromBody] ItemRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = _mapper.Map<Item>(request);
+                var result = await _itemService.UpdateAsync(item);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("item")]
+        public async Task<IActionResult> DeleteItem(int itemId)
+        {
+            var item = await _itemService.GetByIdAsync(itemId);
+            if (item is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            var result = await _itemService.DeleteAsync(item!);
+            return Ok(result);
+        }
         #endregion
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -294,6 +511,60 @@ namespace TTRPG_Project.Web.Controllers
             var result = await _toolService.GetAllAsync();
             return Ok(result);
         }
+
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("tool/{id}")]
+        public async Task<IActionResult> GetTool([FromRoute] int id)
+        {
+            var result = await _toolService.GetByIdAsync(id);
+            if (result is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("tool")]
+        public async Task<IActionResult> CreateTool([FromBody] ToolRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var newItem = _mapper.Map<Tool>(request);
+                var result = await _toolService.CreateAsync(newItem);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("tool")]
+        public async Task<IActionResult> UpdateTool([FromBody] ToolRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = _mapper.Map<Tool>(request);
+                var result = await _toolService.UpdateAsync(item);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("tool")]
+        public async Task<IActionResult> DeleteTool(int toolId)
+        {
+            var item = await _toolService.GetByIdAsync(toolId);
+            if (item is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            var result = await _toolService.DeleteAsync(item!);
+            return Ok(result);
+        }
         #endregion
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -304,6 +575,60 @@ namespace TTRPG_Project.Web.Controllers
         public async Task<IActionResult> GetWeapons()
         {
             var result = await _weaponService.GetAllAsync();
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("weapon/{id}")]
+        public async Task<IActionResult> GetWeapon([FromRoute] int id)
+        {
+            var result = await _weaponService.GetByIdAsync(id);
+            if (result is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost("weapon")]
+        public async Task<IActionResult> CreateWeapon([FromBody] WeaponRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var newItem = _mapper.Map<Weapon>(request);
+                var result = await _weaponService.CreateAsync(newItem);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPut("weapon")]
+        public async Task<IActionResult> UpdateWeapon([FromBody] WeaponRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var item = _mapper.Map<Weapon>(request);
+                var result = await _weaponService.UpdateAsync(item);
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpDelete("weapon")]
+        public async Task<IActionResult> DeleteWeapon(int toolId)
+        {
+            var item = await _weaponService.GetByIdAsync(toolId);
+            if (item is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            var result = await _weaponService.DeleteAsync(item!);
             return Ok(result);
         }
         #endregion
