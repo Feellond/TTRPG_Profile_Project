@@ -36,6 +36,7 @@ const ItemTypeSelect = ({
             inputId="ingredient1"
             onChange={(e) => setIsAmmunitionChecked(e.checked)}
             checked={isAmmunitionChecked}
+            {...register("isAmmunition")}
           />
           <label className="ml-2">Боеприпас?</label>
         </div>
@@ -45,6 +46,7 @@ const ItemTypeSelect = ({
             mask="+99"
             placeholder="+99"
             value={String(data.accuracy)}
+            {...register("accuracy")}
           />
           <label>Точность</label>
         </span>
@@ -54,6 +56,7 @@ const ItemTypeSelect = ({
             mask="9к9+9"
             placeholder="2к4+2"
             value={data.damage}
+            {...register("damage")}
           />
           <label>Урон</label>
         </span>
@@ -63,11 +66,22 @@ const ItemTypeSelect = ({
             value={data.reliability}
             min={0}
             max={999}
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("reliability", { value: e.target.value });
+            }}
           />
           <label>Надежность</label>
         </span>
         <span className="p-float-label">
-          <InputNumber id="number-input" value={data.grip} min={0} max={4} />
+          <InputNumber
+            id="number-input"
+            value={data.grip}
+            min={0}
+            max={4}
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("grip", { value: e.target.value });
+            }}
+          />
           <label>Хват</label>
         </span>
         <span className="p-float-label">

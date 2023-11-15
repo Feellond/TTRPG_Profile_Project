@@ -3,9 +3,8 @@ import { InputText } from "primereact/inputtext";
 import { SelectItem } from "primereact/selectitem";
 import { ItemDTO } from "shared/models/Item/DTO/ItemsDTO";
 import { ListInput } from "features/inputs/listInput";
-import { ItemType } from "shared/enums/ItemEnums";
 import { Button } from 'primereact/button';
-import { ItemTypeLoad } from "entities/ItemType";
+import { ItemTypeLoad } from "entities/ItemFunc";
 
 const ItemFilter = () => {
   const [filter, setFilter] = useState<ItemDTO>({} as ItemDTO);

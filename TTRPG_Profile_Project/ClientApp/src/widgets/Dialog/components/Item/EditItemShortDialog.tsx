@@ -10,9 +10,9 @@ import {
   InputNumber,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
-import { AvailabilityTypeLoad, ItemTypeLoad } from "entities/itemOptions";
 import { ItemTypeSelect } from "./ItemTypeSelect";
 import { ItemDTO } from "shared/models";
+import { AvailabilityTypeLoad, ItemTypeLoad } from "entities/ItemFunc";
 
 interface EditItemShortDialogProps {
   data: ItemDTO;
@@ -49,6 +49,27 @@ const EditItemShortDialog = ({
     data.itemBaseEffectLists = dialogData.itemBaseEffectLists;
     data.sourceId = dialogData.sourceId;
     data.itemType = dialogData.itemType;
+    data.accuracy = dialogData.accuracy;
+    data.damage = dialogData.damage;
+    data.reliability = dialogData.reliability;
+    data.grip = dialogData.grip;
+    data.distance = dialogData.distance;
+    data.stealthType = dialogData.stealthType;
+    data.amountOfEnhancements = dialogData.amountOfEnhancements;
+    data.isAmmunition = dialogData.isAmmunition;
+    data.skillId = dialogData.skillId;
+    data.type = dialogData.type;
+    data.complexity = dialogData.complexity;
+    data.timeSpend = dialogData.timeSpend;
+    data.additionalPayment = dialogData.additionalPayment;
+    data.formulaComponentLists = dialogData.formulaComponentLists;
+    data.blueprintComponentLists = dialogData.blueprintComponentLists;
+    data.whereToFind = dialogData.whereToFind;
+    data.amount = dialogData.amount;
+    data.isAlchemical = dialogData.isAlchemical;
+    data.substanceType = dialogData.substanceType;
+    data.stiffness = dialogData.stiffness;
+    console.log(data);
     //onSave();
   };
 
@@ -230,8 +251,7 @@ const EditItemShortDialog = ({
                         field.onChange(e.value);
                         if (getValues("itemType") !== null)
                           setItemTypeSelectVisible(true);
-                        else 
-                          setItemTypeSelectVisible(false);
+                        else setItemTypeSelectVisible(false);
                       }}
                       optionLabel="label"
                       options={itemTypeOptions}

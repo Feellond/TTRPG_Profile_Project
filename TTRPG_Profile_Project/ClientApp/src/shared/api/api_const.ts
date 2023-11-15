@@ -16,3 +16,6 @@ export const API_BASEITEM                   = "api/items/base";
 export const API_ITEM                       = "api/items/item";
 export const API_TOOL                       = "api/items/tool";
 export const API_WEAPON                     = "api/items/weapon";
+
+export const API_SOURCE                     = "api/additionals/source"
+export const API_EFFECT                     = "api/additionals/effect"

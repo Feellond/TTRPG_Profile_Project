@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using TTRPG_Project.BL.Const;
 using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.DTO.Additional.Request;
+using TTRPG_Project.BL.DTO.Entities.Additional.Request;
 using TTRPG_Project.BL.Services.Additional;
 using TTRPG_Project.BL.Services.Items;
 using TTRPG_Project.DAL.Entities.Database.Additional;
@@ -19,12 +20,14 @@ namespace TTRPG_Project.Web.Controllers
     {
         #region Инициализация контроллера
         private readonly EffectService _effectService;
+        private readonly SourceService _sourceService;
         private readonly ServicePriceService _servicePriceService;
         private readonly IMapper _mapper;
 
-        public AdditionalController(EffectService effectService, ServicePriceService servicePriceService, IMapper mapper)
+        public AdditionalController(EffectService effectService, SourceService sourceService, ServicePriceService servicePriceService, IMapper mapper)
         {
             _effectService = effectService;
+            _sourceService = sourceService;
             _servicePriceService = servicePriceService;
             _mapper = mapper;
         }
@@ -82,6 +85,64 @@ namespace TTRPG_Project.Web.Controllers
                 return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
 
             var result = await _effectService.DeleteAsync(item!);
+            return Ok(result);
+        }
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////////        
+
+        #region *Effect* Эффекты, состояния
+        [HttpGet("source")]
+        public async Task<IActionResult> GetSources()
+        {
+            var result = await _sourceService.GetAllAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("source/{id}")]
+        public async Task<IActionResult> GetSource([FromRoute] int id)
+        {
+            var result = await _sourceService.GetByIdAsync(id);
+            if (result is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            return Ok(result);
+        }
+
+        [HttpPost("source")]
+        public async Task<IActionResult> CreateSource([FromBody] SourceRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var newSource = _mapper.Map<Source>(request);
+                var result = await _sourceService.CreateAsync(newSource);
+
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [HttpPut("source")]
+        public async Task<IActionResult> EditSource([FromBody] SourceRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                var source = _mapper.Map<Source>(request);
+                var result = await _sourceService.UpdateAsync(source);
+
+                return Ok(result);
+            }
+            else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        }
+
+        [HttpDelete("source/{id}")]
+        public async Task<IActionResult> DeleteSource(int id)
+        {
+            var item = await _sourceService.GetByIdAsync(id);
+            if (item is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
+            var result = await _sourceService.DeleteAsync(item!);
             return Ok(result);
         }
         #endregion

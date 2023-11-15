@@ -3,8 +3,11 @@ import { ItemDTO } from "../DTO/ItemsDTO"
 import { Toast } from "primereact/toast"
 
 interface ItemRequestDTO {
-    item: ItemDTO,
-    toast: MutableRefObject<Toast>
+    id?: number | string,
+    item?: ItemDTO,
+    itemType?: number,
+    toast?: MutableRefObject<Toast>,
+    command?: string,
 }
 
 interface ItemRequest {

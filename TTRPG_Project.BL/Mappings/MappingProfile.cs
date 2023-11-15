@@ -18,7 +18,7 @@ namespace Partners.BL.Mappings
         public MappingProfile()
         {
             CreateMap<EffectRequest, Effect>().ReverseMap();
-            CreateMap<Effect, EffectResponce>();
+            //CreateMap<Effect, EffectResponce>();
 
 
             CreateMap<AlchemicalItemRequest, AlchemicalItem>().ReverseMap();

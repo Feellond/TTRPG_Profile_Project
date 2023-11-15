@@ -48,4 +48,19 @@ enum SubstanceType {
   Aether = 9,
 }
 
-export {ItemType, ItemAvailabilityType, ItemOriginType, ItemStealthType, ArmorType, SubstanceType}
+enum WhereToFindEnum {
+  Caves = "Пещеры",
+  Cities = "Города",
+  ImpTerritory = "Территория бесов или бесы",
+  Fields = "Поля",
+  Forests = "Леса",
+  Mountains = "Горы",
+  Underground = "Под землей",
+  BlueMountains = "Синие горы",
+  EndriagNests = "Гнезда эндриаг",
+  OceanFloor = "Дно океана",
+  Coastline = "Побережье",
+  Swamps = "Болота",
+}
+
+export {ItemType, ItemAvailabilityType, ItemOriginType, ItemStealthType, ArmorType, SubstanceType, WhereToFindEnum}

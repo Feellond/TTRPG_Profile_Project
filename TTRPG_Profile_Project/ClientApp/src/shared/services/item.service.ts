@@ -1,32 +1,88 @@
+import {
+  API_ALCHEMICALITEM,
+  API_ARMOR,
+  API_BASEITEM,
+  API_BLUEPRINT,
+  API_COMPONENT,
+  API_FORMULA,
+  API_TOOL,
+  API_WEAPON,
+} from "shared/api/api_const";
 import $api from "shared/api/axiosInstance";
+import { CommandEnum } from "shared/enums/GeneralEnums";
 import { ItemRequestDTO } from "shared/models";
 
 export class ItemService {
-  async createItem({ item, toast }: ItemRequestDTO): Promise<boolean> {
-    switch (item.itemType) {
+  async getItems({ itemType, toast }: ItemRequestDTO) {
+    await this.execute({
+      itemType: itemType,
+      toast: toast,
+      command: CommandEnum.GetList,
+    });
+  }
+
+  async getItem({ itemType, toast }: ItemRequestDTO) {
+    await this.execute({
+      itemType: itemType,
+      toast: toast,
+      command: CommandEnum.Get,
+    });
+  }
+
+  async createItem({ item, itemType, toast }: ItemRequestDTO) {
+    await this.execute({
+      item: item,
+      itemType: itemType,
+      toast: toast,
+      command: CommandEnum.Create,
+    });
+  }
+
+  async updateItem({ item, itemType, toast }: ItemRequestDTO) {
+    await this.execute({
+      item: item,
+      itemType: itemType,
+      toast: toast,
+      command: CommandEnum.Update,
+    });
+  }
+
+  async deleteItem({ id, itemType, toast }: ItemRequestDTO) {
+    await this.execute({
+      itemType: itemType,
+      toast: toast,
+      id: id,
+      command: CommandEnum.Delete,
+    });
+  }
+
+  async execute({ item, itemType, toast, id, command }: ItemRequestDTO) {
+    let apiString = "";
+
+    switch (itemType) {
       case 1:
-        //content = BaseItem();
+        apiString = API_BASEITEM;
         break;
       case 2:
-        //content = ToolItem();
+        apiString = API_TOOL;
         break;
       case 3:
-        //content = AlchemicalItem();
+        apiString = API_ALCHEMICALITEM;
         break;
       case 4:
-        //content = ArmorItem();
+        apiString = API_ARMOR;
         break;
       case 5:
-        //content = WeaponItem();
+        apiString = API_WEAPON;
         break;
       case 6:
-        //content = FormulaItem();
+        apiString = API_FORMULA;
         break;
       case 7:
-        //content = BlueprintItem();
+        apiString = API_BLUEPRINT;
         break;
       case 8:
-        //content = ComponentItem();
+        apiString = API_COMPONENT;
         break;
       default:
         toast.current.show({
@@ -36,6 +92,29 @@ export class ItemService {
         }); // Отображаем сообщение об ошибке в Toast
         return false;
     }
+
+    if (command === CommandEnum.GetList) {
+      return await $api.get(apiString);
+    } else if (command === CommandEnum.Get) {
+      return await $api.get(apiString + "/" + String(id));
+    } else if (command === CommandEnum.Create) {
+      return await $api.post(apiString, {
+        weaponRequest: item,
+      });
+    } else if (command === CommandEnum.Update) {
+      return await $api.put(apiString, {
+        weaponRequest: item,
+      });
+    } else if (command === CommandEnum.Delete) {
+      return await $api.delete(apiString + "/" + String(id));
+    }
+
+    toast.current.show({
+      severity: "error",
+      summary: "Произошла ошибка",
+      detail: "Запрос не выполнен",
+    }); // Отображаем сообщение об ошибке в Toast
+    return false;
   }
 }
 

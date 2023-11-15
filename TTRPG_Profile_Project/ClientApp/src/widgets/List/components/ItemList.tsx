@@ -7,6 +7,7 @@ import { emptyItem } from "../models/EmptyItem";
 import itemService from "shared/services/item.service";
 import { Toast } from "primereact/toast";
 import { ItemDTO } from "shared/models";
+import { FindIndexById } from "entities/GeneralFunc";
 
 const ItemList = () => {
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
@@ -17,11 +18,16 @@ const ItemList = () => {
 
   const toast = useRef<Toast>(null);
 
-  const showEditDialog = () => {
-    setEditDialogVisible(true);
+  const showEditDialog = (id: number) => {
+    const index = FindIndexById(id, itemList);
+    if (index !== -1) {
+      setItem(itemList[index]);
+      setEditDialogVisible(true);
+    }
   };
 
   const showCreateDialog = () => {
+    setItem(emptyItem);
     setEditDialogVisible(true);
   };
 
@@ -131,7 +137,7 @@ const ItemList = () => {
               Footer
               <Button
                 label="Редактировать предмет"
-                onClick={(e) => showEditDialog()}
+                onClick={(e) => showEditDialog(1)}
               />
             </div>
           </div>
