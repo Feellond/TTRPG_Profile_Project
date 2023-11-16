@@ -8,6 +8,7 @@ import itemService from "shared/services/item.service";
 import { Toast } from "primereact/toast";
 import { ItemDTO } from "shared/models";
 import { FindIndexById } from "entities/GeneralFunc";
+import { ItemType } from "shared/enums/ItemEnums";
 
 const ItemList = () => {
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
@@ -37,13 +38,16 @@ const ItemList = () => {
   }
 
   const saveItem = async () => {
-    if (item.id !== 0) return// await itemService.edit(item);
+    if (item.id !== 0) return await itemService.updateItem({item: item, toast: toast});
     else await itemService.createItem({item, toast});
 
     hideDialog();
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    let result = itemService.getItems({itemType: ItemType.BaseItem, toast: toast});
+    console.log(result);
+  }, []);
 
   //onClick={(e) => handleClick(1, e)}
   const handleClick = (id, e) => {

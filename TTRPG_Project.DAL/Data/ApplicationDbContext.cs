@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Reflection.Emit;
+using TTRPG_Project.DAL.Const;
 using TTRPG_Project.DAL.Entities.Database;
 using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
@@ -106,8 +108,21 @@ namespace TTRPG_Project.DAL.Data
             .Property(e => e.Gender)
             .HasConversion<byte>();*/
 
+            builder.Entity<User>().UseTphMappingStrategy();  // TPH
+
             CreateDefaultData(builder);
             base.OnModelCreating(builder);
+
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                if (entityType.ClrType.IsSubclassOf(typeof(ItemBase)))
+                {
+                    builder.Entity(entityType.ClrType).Property<ItemType>("ItemType")
+                        .HasConversion(
+                            v => (int)v,
+                            v => (ItemType)v);
+                }
+            }
         }
 
         public static void CreateDefaultData(ModelBuilder builder)
@@ -265,6 +280,53 @@ namespace TTRPG_Project.DAL.Data
                 new Effect{Id = 47, Name = "Тошнота", Description = "", SourceId = 1},
                 new Effect{Id = 48, Name = "Удушье", Description = "", SourceId = 1},
                 new Effect{Id = 49, Name = "Слепота", Description = "", SourceId = 1},
+            });
+
+            //ВСЕ НИЖЕ ДЛЯ ТЕСТА, ПОСЛЕ НАДО БД ПЕРЕСОБРАТЬ!!!
+            builder.Entity<AlchemicalItem>().HasData(new AlchemicalItem[]
+            {
+                new AlchemicalItem{Id = 1, Name = "testAlchemicaItem", SourceId = 1, Weight = 1, Description = "testAlchemicaItem"}
+            });
+
+            builder.Entity<Armor>().HasData(new Armor[]
+            {
+                new Armor{Id = 2, Name = "testArmor", SourceId = 1, Weight = 1, Description = "testArmor"}
+            });
+
+            builder.Entity<ItemBaseEffectList>().HasData(new ItemBaseEffectList[]
+            {
+                new ItemBaseEffectList{Id = 1, EffectId = 2, ItemBaseId = 2, IsDealDamage = false, ChancePercent = 75},
+                new ItemBaseEffectList{Id = 2, EffectId = 2, ItemBaseId = 1, IsDealDamage = true, Damage = "2к6+2"},
+            });
+
+            builder.Entity<Blueprint>().HasData(new Blueprint[]
+            {
+                new Blueprint{Id = 3, AdditionalPayment = 1, AvailabilityType = 1, Complexity = 1, Name = "testBlueprint", SourceId = 1, Weight = 1, Description = "testBlueprint"}
+            });
+
+            builder.Entity<Component>().HasData(new Component[]
+            {
+                new Component{Id = 4, Name = "testComponent", SourceId = 1, Weight = 1, Description = "testComponent"}
+            });
+
+            builder.Entity<Formula>().HasData(new Formula[]
+            {
+                new Formula{Id = 5, AdditionalPayment = 1, AvailabilityType = 1, Complexity = 1, Name = "testFormula", SourceId = 1, Weight = 1, Description = "testFormula"}
+            });
+
+            builder.Entity<Item>().HasData(new Item[]
+            {
+                new Item{Id = 6, Name = "testItem", SourceId = 1, Weight = 1, Description = "testItem"}
+            });
+
+            builder.Entity<Tool>().HasData(new Tool[]
+            {
+                new Tool{Id = 7, Name = "testTool", SourceId = 1, Weight = 1, Description = "testTool"}
+            });
+
+            builder.Entity<Weapon>().HasData(new Weapon[]
+            {
+                new Weapon{Id = 8, Name = "testWeapon", SourceId = 1, Weight = 1, Description = "testWeapon"}
             });
         }
     }

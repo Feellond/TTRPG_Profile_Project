@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using TTRPG_Project.DAL.Const;
 using TTRPG_Project.DAL.Entities.Base;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
 
@@ -7,7 +8,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
     /// <summary>
     /// Базовая сущность, которая является связующей с другими таблицами по типу
     /// </summary>
-    [Table("ItemsBase")]
     public class ItemBase : EntityDescriptionBase
     {
         public int AvailabilityType { get; set; }
@@ -15,7 +15,9 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public int Price { get; set; }
         public List<ItemBaseEffectList> ItemBaseEffectLists { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
-        //public string? Discriminator { get; set; }
+
+        [NotMapped]
+        public ItemType ItemType { get; set; }
 
         /*/// <summary>
         /// Тип таблицы, к которой необходимо обратиться. Реализована через хардкод

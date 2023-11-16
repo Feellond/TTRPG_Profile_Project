@@ -2,7 +2,6 @@
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
-    [Table("FormulaComponentList")]
     public class FormulaComponentList
     {
         public int Id { get; set; }

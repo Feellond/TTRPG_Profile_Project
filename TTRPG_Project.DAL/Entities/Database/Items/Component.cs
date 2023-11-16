@@ -3,7 +3,6 @@ using TTRPG_Project.DAL.Entities.Base;
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
-    [Table("Components")]
     public class Component : ItemBase
     {
         public string WhereToFind { get; set; } = string.Empty;

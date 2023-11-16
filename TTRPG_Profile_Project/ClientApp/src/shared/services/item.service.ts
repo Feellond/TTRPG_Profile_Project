@@ -5,6 +5,7 @@ import {
   API_BLUEPRINT,
   API_COMPONENT,
   API_FORMULA,
+  API_ITEM,
   API_TOOL,
   API_WEAPON,
 } from "shared/api/api_const";
@@ -29,19 +30,19 @@ export class ItemService {
     });
   }
 
-  async createItem({ item, itemType, toast }: ItemRequestDTO) {
+  async createItem({ item, toast }: ItemRequestDTO) {
     await this.execute({
       item: item,
-      itemType: itemType,
+      itemType: item.itemType,
       toast: toast,
       command: CommandEnum.Create,
     });
   }
 
-  async updateItem({ item, itemType, toast }: ItemRequestDTO) {
+  async updateItem({ item, toast }: ItemRequestDTO) {
     await this.execute({
       item: item,
-      itemType: itemType,
+      itemType: item.itemType,
       toast: toast,
       command: CommandEnum.Update,
     });
@@ -84,13 +85,9 @@ export class ItemService {
       case 8:
         apiString = API_COMPONENT;
         break;
-      default:
-        toast.current.show({
-          severity: "error",
-          summary: "Произошла ошибка",
-          detail: "Выберите правильный тип предмета",
-        }); // Отображаем сообщение об ошибке в Toast
-        return false;
+      case 9:
+        apiString = API_ITEM;
+        break;
     }
 
     if (command === CommandEnum.GetList) {

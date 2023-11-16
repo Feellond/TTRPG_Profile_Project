@@ -443,32 +443,6 @@ namespace TTRPG_Project.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemsBase",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    AvailabilityType = table.Column<int>(type: "int", nullable: false),
-                    Weight = table.Column<float>(type: "real", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SourceId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItemsBase", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ItemsBase_Sources_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "Sources",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Races",
                 columns: table => new
                 {
@@ -510,32 +484,6 @@ namespace TTRPG_Project.DAL.Migrations
                     table.PrimaryKey("PK_ServicePrices", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ServicePrices_Sources_SourceId",
-                        column: x => x.SourceId,
-                        principalTable: "Sources",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Skills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsDifficult = table.Column<bool>(type: "bit", nullable: false),
-                    IsClassSkill = table.Column<bool>(type: "bit", nullable: false),
-                    StatId = table.Column<int>(type: "int", nullable: false),
-                    Enabled = table.Column<bool>(type: "bit", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SourceId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Skills", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Skills_Sources_SourceId",
                         column: x => x.SourceId,
                         principalTable: "Sources",
                         principalColumn: "Id");
@@ -707,199 +655,6 @@ namespace TTRPG_Project.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AlchemicalItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AlchemicalItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AlchemicalItems_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Armor",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Reliability = table.Column<int>(type: "int", nullable: false),
-                    AmountOfEnhancements = table.Column<int>(type: "int", nullable: false),
-                    Stiffness = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Armor", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Armor_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Blueprints",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Complexity = table.Column<int>(type: "int", nullable: false),
-                    TimeSpend = table.Column<float>(type: "real", nullable: false),
-                    AdditionalPayment = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Blueprints", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Blueprints_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Components",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    WhereToFind = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false),
-                    Complexity = table.Column<int>(type: "int", nullable: false),
-                    IsAlchemical = table.Column<bool>(type: "bit", nullable: false),
-                    SubstanceType = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Components", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Components_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Formulas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Complexity = table.Column<int>(type: "int", nullable: false),
-                    TimeSpend = table.Column<float>(type: "real", nullable: false),
-                    AdditionalPayment = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Formulas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Formulas_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ItemBaseEffectList",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemBaseId = table.Column<int>(type: "int", nullable: true),
-                    EffectId = table.Column<int>(type: "int", nullable: true),
-                    Damage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ChancePercent = table.Column<int>(type: "int", nullable: false),
-                    IsDealDamage = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItemBaseEffectList", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ItemBaseEffectList_Effects_EffectId",
-                        column: x => x.EffectId,
-                        principalTable: "Effects",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ItemBaseEffectList_ItemsBase_ItemBaseId",
-                        column: x => x.ItemBaseId,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Items",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    StealthType = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Items", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Items_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tools",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tools", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Tools_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Weapons",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Accuracy = table.Column<int>(type: "int", nullable: false),
-                    Damage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Reliability = table.Column<int>(type: "int", nullable: false),
-                    Grip = table.Column<int>(type: "int", nullable: false),
-                    Distance = table.Column<int>(type: "int", nullable: false),
-                    StealthType = table.Column<int>(type: "int", nullable: false),
-                    AmountOfEnhancements = table.Column<int>(type: "int", nullable: false),
-                    IsAmmunition = table.Column<bool>(type: "bit", nullable: false),
-                    SkillId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Weapons", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Weapons_ItemsBase_Id",
-                        column: x => x.Id,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Weapons_Skills_SkillId",
-                        column: x => x.SkillId,
-                        principalTable: "Skills",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SpellSkillProtectionList",
                 columns: table => new
                 {
@@ -921,6 +676,38 @@ namespace TTRPG_Project.DAL.Migrations
                         column: x => x.SpellId,
                         principalTable: "Spells",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDifficult = table.Column<bool>(type: "bit", nullable: false),
+                    IsClassSkill = table.Column<bool>(type: "bit", nullable: false),
+                    StatId = table.Column<int>(type: "int", nullable: false),
+                    Enabled = table.Column<bool>(type: "bit", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SourceId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Skills_Sources_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "Sources",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Skills_Stats_StatId",
+                        column: x => x.StatId,
+                        principalTable: "Stats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1022,31 +809,6 @@ namespace TTRPG_Project.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CreatureRewardList",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatureId = table.Column<int>(type: "int", nullable: true),
-                    ItemBaseId = table.Column<int>(type: "int", nullable: true),
-                    Amount = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CreatureRewardList", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CreatureRewardList_Creatures_CreatureId",
-                        column: x => x.CreatureId,
-                        principalTable: "Creatures",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CreatureRewardList_ItemsBase_ItemBaseId",
-                        column: x => x.ItemBaseId,
-                        principalTable: "ItemsBase",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CreatureSpell",
                 columns: table => new
                 {
@@ -1071,77 +833,60 @@ namespace TTRPG_Project.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlueprintComponentList",
+                name: "ItemBases",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BlueprintId = table.Column<int>(type: "int", nullable: true),
-                    ComponentId = table.Column<int>(type: "int", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false)
+                    AvailabilityType = table.Column<int>(type: "int", nullable: false),
+                    Weight = table.Column<float>(type: "real", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ItemType = table.Column<int>(type: "int", nullable: true),
+                    Reliability = table.Column<int>(type: "int", nullable: true),
+                    AmountOfEnhancements = table.Column<int>(type: "int", nullable: true),
+                    Stiffness = table.Column<int>(type: "int", nullable: true),
+                    Blueprint_Complexity = table.Column<int>(type: "int", nullable: true),
+                    Blueprint_TimeSpend = table.Column<float>(type: "real", nullable: true),
+                    Blueprint_AdditionalPayment = table.Column<int>(type: "int", nullable: true),
+                    WhereToFind = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Amount = table.Column<int>(type: "int", nullable: true),
+                    Component_Complexity = table.Column<int>(type: "int", nullable: true),
+                    IsAlchemical = table.Column<bool>(type: "bit", nullable: true),
+                    SubstanceType = table.Column<int>(type: "int", nullable: true),
+                    Complexity = table.Column<int>(type: "int", nullable: true),
+                    TimeSpend = table.Column<float>(type: "real", nullable: true),
+                    AdditionalPayment = table.Column<int>(type: "int", nullable: true),
+                    StealthType = table.Column<int>(type: "int", nullable: true),
+                    Type = table.Column<int>(type: "int", nullable: true),
+                    Accuracy = table.Column<int>(type: "int", nullable: true),
+                    Damage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Weapon_Reliability = table.Column<int>(type: "int", nullable: true),
+                    Grip = table.Column<int>(type: "int", nullable: true),
+                    Distance = table.Column<int>(type: "int", nullable: true),
+                    Weapon_StealthType = table.Column<int>(type: "int", nullable: true),
+                    Weapon_AmountOfEnhancements = table.Column<int>(type: "int", nullable: true),
+                    IsAmmunition = table.Column<bool>(type: "bit", nullable: true),
+                    SkillId = table.Column<int>(type: "int", nullable: true),
+                    Enabled = table.Column<bool>(type: "bit", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SourceId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlueprintComponentList", x => x.Id);
+                    table.PrimaryKey("PK_ItemBases", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BlueprintComponentList_Blueprints_BlueprintId",
-                        column: x => x.BlueprintId,
-                        principalTable: "Blueprints",
+                        name: "FK_ItemBases_Skills_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_BlueprintComponentList_Components_ComponentId",
-                        column: x => x.ComponentId,
-                        principalTable: "Components",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SpellComponentList",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SpellId = table.Column<int>(type: "int", nullable: true),
-                    ComponentId = table.Column<int>(type: "int", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SpellComponentList", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SpellComponentList_Components_ComponentId",
-                        column: x => x.ComponentId,
-                        principalTable: "Components",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SpellComponentList_Spells_SpellId",
-                        column: x => x.SpellId,
-                        principalTable: "Spells",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FormulaComponentList",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FormulaId = table.Column<int>(type: "int", nullable: true),
-                    ComponentId = table.Column<int>(type: "int", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FormulaComponentList", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_FormulaComponentList_Components_ComponentId",
-                        column: x => x.ComponentId,
-                        principalTable: "Components",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_FormulaComponentList_Formulas_FormulaId",
-                        column: x => x.FormulaId,
-                        principalTable: "Formulas",
+                        name: "FK_ItemBases_Sources_SourceId",
+                        column: x => x.SourceId,
+                        principalTable: "Sources",
                         principalColumn: "Id");
                 });
 
@@ -1172,13 +917,140 @@ namespace TTRPG_Project.DAL.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BlueprintComponentList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlueprintId = table.Column<int>(type: "int", nullable: true),
+                    ComponentId = table.Column<int>(type: "int", nullable: true),
+                    Amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlueprintComponentList", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BlueprintComponentList_ItemBases_BlueprintId",
+                        column: x => x.BlueprintId,
+                        principalTable: "ItemBases",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_BlueprintComponentList_ItemBases_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "ItemBases",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CreatureRewardList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatureId = table.Column<int>(type: "int", nullable: true),
+                    ItemBaseId = table.Column<int>(type: "int", nullable: true),
+                    Amount = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CreatureRewardList", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CreatureRewardList_Creatures_CreatureId",
+                        column: x => x.CreatureId,
+                        principalTable: "Creatures",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_CreatureRewardList_ItemBases_ItemBaseId",
+                        column: x => x.ItemBaseId,
+                        principalTable: "ItemBases",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FormulaComponentList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FormulaId = table.Column<int>(type: "int", nullable: true),
+                    ComponentId = table.Column<int>(type: "int", nullable: true),
+                    Amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FormulaComponentList", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FormulaComponentList_ItemBases_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "ItemBases",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_FormulaComponentList_ItemBases_FormulaId",
+                        column: x => x.FormulaId,
+                        principalTable: "ItemBases",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemBaseEffectList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemBaseId = table.Column<int>(type: "int", nullable: true),
+                    EffectId = table.Column<int>(type: "int", nullable: true),
+                    Damage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ChancePercent = table.Column<int>(type: "int", nullable: false),
+                    IsDealDamage = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemBaseEffectList", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItemBaseEffectList_Effects_EffectId",
+                        column: x => x.EffectId,
+                        principalTable: "Effects",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ItemBaseEffectList_ItemBases_ItemBaseId",
+                        column: x => x.ItemBaseId,
+                        principalTable: "ItemBases",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SpellComponentList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SpellId = table.Column<int>(type: "int", nullable: true),
+                    ComponentId = table.Column<int>(type: "int", nullable: true),
+                    Amount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpellComponentList", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SpellComponentList_ItemBases_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "ItemBases",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SpellComponentList_Spells_SpellId",
+                        column: x => x.SpellId,
+                        principalTable: "Spells",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Sources",
                 columns: new[] { "Id", "CreateDate", "Enabled", "Name", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(512), true, "Базовая книга", new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(520) },
-                    { 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(521), true, "Хоумбрю", new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(522) }
+                    { 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(8839), true, "Базовая книга", new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(8852) },
+                    { 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(8854), true, "Хоумбрю", new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(8854) }
                 });
 
             migrationBuilder.InsertData(
@@ -1186,55 +1058,130 @@ namespace TTRPG_Project.DAL.Migrations
                 columns: new[] { "Id", "CreateDate", "Description", "Enabled", "Name", "SourceId", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(866), "", true, "Незаметное", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(866) },
-                    { 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(867), "", true, "Кровопускающее", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(867) },
-                    { 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(868), "", true, "Пробивающее броню", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(869) },
-                    { 4, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(870), "", true, "Дезориентирующее(1)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(870) },
-                    { 5, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(871), "", true, "Дезориентирующее(2)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(871) },
-                    { 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(872), "", true, "Дезориентирующее(3)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(872) },
-                    { 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(873), "", true, "Метеоритное", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(874) },
-                    { 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(874), "", true, "Длинное", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(875) },
-                    { 9, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(876), "", true, "Фокусирующее(1)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(876) },
-                    { 10, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(878), "", true, "Фокусирующее(2)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(878) },
-                    { 11, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(879), "", true, "Фокусирующее(3)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(879) },
-                    { 12, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(880), "", true, "Сокрушающая сила", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(880) },
-                    { 13, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(881), "", true, "Серебрянное", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(881) },
-                    { 14, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(882), "", true, "Сбалансированное(1)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(883) },
-                    { 15, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(884), "", true, "Сбалансированное(2)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(884) },
-                    { 16, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(885), "", true, "Сбалансированное(3)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(885) },
-                    { 17, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(886), "", true, "Улучшенное пробивание брони", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(886) },
-                    { 18, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(887), "", true, "Захватное", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(887) },
-                    { 19, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(888), "", true, "Ловящий лезвия", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(889) },
-                    { 20, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(889), "", true, "Магические путы", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(890) },
-                    { 21, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(891), "", true, "Медленно перезаряжающееся", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(891) },
-                    { 22, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(892), "", true, "Несмертельное", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(892) },
-                    { 23, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(893), "", true, "Опутывающее", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(893) },
-                    { 24, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(894), "", true, "Парирующее", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(895) },
-                    { 25, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(895), "", true, "Разрушающее", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(896) },
-                    { 26, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(897), "", true, "Рукопашное", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(897) },
-                    { 27, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(899), "", true, "Расчетная перезарядка", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(899) },
-                    { 28, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(900), "", true, "Улучшенное фокусирующее", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(900) },
-                    { 29, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(901), "", true, "Устанавливаемое", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(901) },
-                    { 30, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(902), "", true, "Шприц", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(902) },
-                    { 31, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(903), "", true, "Закрывает все тело", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(904) },
-                    { 32, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(905), "", true, "Огнеупорный", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(905) },
-                    { 33, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(906), "", true, "Ограничение зрения", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(906) },
-                    { 34, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(907), "", true, "Полное укрытие", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(907) },
-                    { 35, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(908), "", true, "Сопротивление(Д)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(908) },
-                    { 36, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(909), "", true, "Сопротивление(Р)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(909) },
-                    { 37, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(910), "", true, "Сопротивление(К)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(911) },
-                    { 38, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(912), "", true, "Сопротивление(С)", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(912) },
-                    { 39, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(913), "", true, "Горение", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(913) },
-                    { 40, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(914), "", true, "Дезориентация", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(914) },
-                    { 41, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(915), "", true, "Отравление", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(915) },
-                    { 42, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(916), "", true, "Кровотечение", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(917) },
-                    { 43, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(917), "", true, "Замораживание", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(918) },
-                    { 44, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(919), "", true, "Ошеломление", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(919) },
-                    { 45, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(920), "", true, "Опьянение", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(920) },
-                    { 46, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(921), "", true, "Галлюцинации", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(921) },
-                    { 47, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(922), "", true, "Тошнота", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(922) },
-                    { 48, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(923), "", true, "Удушье", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(924) },
-                    { 49, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(925), "", true, "Слепота", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(925) }
+                    { 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9235), "", true, "Незаметное", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9235) },
+                    { 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9236), "", true, "Кровопускающее", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9237) },
+                    { 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9237), "", true, "Пробивающее броню", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9238) },
+                    { 4, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9239), "", true, "Дезориентирующее(1)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9239) },
+                    { 5, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9240), "", true, "Дезориентирующее(2)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9240) },
+                    { 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9241), "", true, "Дезориентирующее(3)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9242) },
+                    { 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9242), "", true, "Метеоритное", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9243) },
+                    { 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9244), "", true, "Длинное", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9244) },
+                    { 9, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9245), "", true, "Фокусирующее(1)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9245) },
+                    { 10, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9246), "", true, "Фокусирующее(2)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9246) },
+                    { 11, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9247), "", true, "Фокусирующее(3)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9248) },
+                    { 12, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9248), "", true, "Сокрушающая сила", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9249) },
+                    { 13, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9250), "", true, "Серебрянное", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9250) },
+                    { 14, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9251), "", true, "Сбалансированное(1)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9251) },
+                    { 15, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9252), "", true, "Сбалансированное(2)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9252) },
+                    { 16, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9253), "", true, "Сбалансированное(3)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9254) },
+                    { 17, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9255), "", true, "Улучшенное пробивание брони", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9255) },
+                    { 18, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9256), "", true, "Захватное", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9256) },
+                    { 19, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9258), "", true, "Ловящий лезвия", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9258) },
+                    { 20, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9259), "", true, "Магические путы", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9259) },
+                    { 21, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9260), "", true, "Медленно перезаряжающееся", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9261) },
+                    { 22, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9262), "", true, "Несмертельное", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9262) },
+                    { 23, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9263), "", true, "Опутывающее", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9263) },
+                    { 24, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9264), "", true, "Парирующее", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9264) },
+                    { 25, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9265), "", true, "Разрушающее", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9265) },
+                    { 26, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9266), "", true, "Рукопашное", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9267) },
+                    { 27, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9268), "", true, "Расчетная перезарядка", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9268) },
+                    { 28, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9269), "", true, "Улучшенное фокусирующее", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9269) },
+                    { 29, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9270), "", true, "Устанавливаемое", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9270) },
+                    { 30, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9271), "", true, "Шприц", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9272) },
+                    { 31, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9272), "", true, "Закрывает все тело", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9273) },
+                    { 32, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9274), "", true, "Огнеупорный", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9274) },
+                    { 33, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9275), "", true, "Ограничение зрения", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9275) },
+                    { 34, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9276), "", true, "Полное укрытие", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9276) },
+                    { 35, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9277), "", true, "Сопротивление(Д)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9278) },
+                    { 36, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9279), "", true, "Сопротивление(Р)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9279) },
+                    { 37, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9280), "", true, "Сопротивление(К)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9280) },
+                    { 38, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9281), "", true, "Сопротивление(С)", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9281) },
+                    { 39, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9283), "", true, "Горение", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9283) },
+                    { 40, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9284), "", true, "Дезориентация", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9284) },
+                    { 41, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9285), "", true, "Отравление", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9286) },
+                    { 42, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9287), "", true, "Кровотечение", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9287) },
+                    { 43, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9313), "", true, "Замораживание", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9313) },
+                    { 44, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9314), "", true, "Ошеломление", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9315) },
+                    { 45, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9316), "", true, "Опьянение", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9316) },
+                    { 46, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9317), "", true, "Галлюцинации", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9317) },
+                    { 47, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9318), "", true, "Тошнота", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9319) },
+                    { 48, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9319), "", true, "Удушье", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9320) },
+                    { 49, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9321), "", true, "Слепота", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9321) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "AvailabilityType", "CreateDate", "Description", "Discriminator", "Enabled", "ItemType", "Name", "Price", "SourceId", "UpdateDate", "Weight" },
+                values: new object[] { 1, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9354), "testAlchemicaItem", "AlchemicalItem", true, 0, "testAlchemicaItem", 0, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9355), 1f });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "AmountOfEnhancements", "AvailabilityType", "CreateDate", "Description", "Discriminator", "Enabled", "ItemType", "Name", "Price", "Reliability", "SourceId", "Stiffness", "UpdateDate", "Weight" },
+                values: new object[] { 2, 0, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9375), "testArmor", "Armor", true, 0, "testArmor", 0, 0, 1, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9376), 1f });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "Blueprint_AdditionalPayment", "AvailabilityType", "Blueprint_Complexity", "CreateDate", "Description", "Discriminator", "Enabled", "ItemType", "Name", "Price", "SourceId", "Blueprint_TimeSpend", "UpdateDate", "Weight" },
+                values: new object[] { 3, 1, 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9416), "testBlueprint", "Blueprint", true, 0, "testBlueprint", 0, 1, 0f, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9416), 1f });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "Amount", "AvailabilityType", "Component_Complexity", "CreateDate", "Description", "Discriminator", "Enabled", "IsAlchemical", "ItemType", "Name", "Price", "SourceId", "SubstanceType", "UpdateDate", "Weight", "WhereToFind" },
+                values: new object[] { 4, 0, 0, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9434), "testComponent", "Component", true, false, 0, "testComponent", 0, 1, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9434), 1f, "" });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "AdditionalPayment", "AvailabilityType", "Complexity", "CreateDate", "Description", "Discriminator", "Enabled", "ItemType", "Name", "Price", "SourceId", "TimeSpend", "UpdateDate", "Weight" },
+                values: new object[] { 5, 1, 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9456), "testFormula", "Formula", true, 0, "testFormula", 0, 1, 0f, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9456), 1f });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "AvailabilityType", "CreateDate", "Description", "Discriminator", "Enabled", "ItemType", "Name", "Price", "SourceId", "StealthType", "Type", "UpdateDate", "Weight" },
+                values: new object[] { 6, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9471), "testItem", "Item", true, 0, "testItem", 0, 1, 0, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9471), 1f });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "AvailabilityType", "CreateDate", "Description", "Discriminator", "Enabled", "ItemType", "Name", "Price", "SourceId", "UpdateDate", "Weight" },
+                values: new object[] { 7, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9488), "testTool", "Tool", true, 0, "testTool", 0, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9489), 1f });
+
+            migrationBuilder.InsertData(
+                table: "ItemBases",
+                columns: new[] { "Id", "Accuracy", "Weapon_AmountOfEnhancements", "AvailabilityType", "CreateDate", "Damage", "Description", "Discriminator", "Distance", "Enabled", "Grip", "IsAmmunition", "ItemType", "Name", "Price", "Weapon_Reliability", "SkillId", "SourceId", "Weapon_StealthType", "UpdateDate", "Weight" },
+                values: new object[] { 8, 0, 0, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9503), "", "testWeapon", "Weapon", 0, true, 0, false, 0, "testWeapon", 0, 0, null, 1, 0, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9504), 1f });
+
+            migrationBuilder.InsertData(
+                table: "Stats",
+                columns: new[] { "Id", "CreateDate", "Description", "Enabled", "Name", "SourceId", "UpdateDate" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9047), "", true, "Интеллект", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9047) },
+                    { 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9050), "", true, "Реакция", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9050) },
+                    { 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9051), "", true, "Ловкость", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9051) },
+                    { 4, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9052), "", true, "Телосложение", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9053) },
+                    { 5, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9054), "", true, "Скорость", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9054) },
+                    { 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9055), "", true, "Эмпатия", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9056) },
+                    { 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9057), "", true, "Ремесло", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9057) },
+                    { 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9058), "", true, "Воля", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9058) },
+                    { 9, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9059), "", true, "Удача", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9059) },
+                    { 10, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9060), "", true, "Энергия", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9061) },
+                    { 11, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9062), "", true, "Устойчивость", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9062) },
+                    { 12, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9063), "", true, "Бег", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9063) },
+                    { 13, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9064), "", true, "Прыжок", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9064) },
+                    { 14, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9065), "", true, "Пункты Здоровья", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9066) },
+                    { 15, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9066), "", true, "Выносливость", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9067) },
+                    { 16, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9068), "", true, "Переносимый вес", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9068) },
+                    { 17, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9069), "", true, "Отдых", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9069) },
+                    { 18, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9070), "", true, "Удар рукой", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9070) },
+                    { 19, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9071), "", true, "Удар ногой", 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9071) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ItemBaseEffectList",
+                columns: new[] { "Id", "ChancePercent", "Damage", "EffectId", "IsDealDamage", "ItemBaseId" },
+                values: new object[,]
+                {
+                    { 1, 75, "", 2, false, 2 },
+                    { 2, 0, "2к6+2", 2, true, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -1242,84 +1189,58 @@ namespace TTRPG_Project.DAL.Migrations
                 columns: new[] { "Id", "CreateDate", "Description", "Enabled", "IsClassSkill", "IsDifficult", "Name", "SourceId", "StatId", "UpdateDate" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(721), "", true, false, false, "Внимание", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(722) },
-                    { 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(725), "", true, false, false, "Выживание в дикой природе", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(725) },
-                    { 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(726), "", true, false, false, "Дедукция", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(727) },
-                    { 4, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(728), "", true, false, true, "Монстрология", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(728) },
-                    { 5, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(729), "", true, false, false, "Образование", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(730) },
-                    { 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(731), "", true, false, false, "Ориентирование в городе", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(731) },
-                    { 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(732), "", true, false, false, "Передача знаний", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(733) },
-                    { 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(735), "", true, false, true, "Тактика", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(735) },
-                    { 9, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(736), "", true, false, false, "Торговля", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(736) },
-                    { 10, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(737), "", true, false, false, "Этикет", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(738) },
-                    { 11, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(739), "", true, false, true, "Язык всеобщий", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(739) },
-                    { 12, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(740), "", true, false, true, "Язык Старшей Речи", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(741) },
-                    { 13, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(742), "", true, false, true, "Язык краснолюдов", 1, 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(742) },
-                    { 14, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(743), "", true, false, false, "Ближний бой", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(744) },
-                    { 15, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(745), "", true, false, false, "Борьба", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(745) },
-                    { 16, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(746), "", true, false, false, "Верховая езда", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(746) },
-                    { 17, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(748), "", true, false, false, "Владение древковым оружием", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(748) },
-                    { 18, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(789), "", true, false, false, "Владение легкими клинками", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(789) },
-                    { 19, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(791), "", true, false, false, "Владение мечом", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(791) },
-                    { 20, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(792), "", true, false, false, "Мореходство", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(793) },
-                    { 21, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(794), "", true, false, false, "Уклонение/Изворотливость", 1, 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(794) },
-                    { 22, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(796), "", true, false, false, "Атлетика", 1, 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(796) },
-                    { 23, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(797), "", true, false, false, "Ловкость рук", 1, 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(797) },
-                    { 24, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(799), "", true, false, false, "Скрытность", 1, 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(799) },
-                    { 25, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(800), "", true, false, false, "Стрельба из арбалета", 1, 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(800) },
-                    { 26, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(802), "", true, false, false, "Стрельба из лука", 1, 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(802) },
-                    { 27, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(803), "", true, false, false, "Сила", 1, 4, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(803) },
-                    { 28, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(805), "", true, false, false, "Стойкость", 1, 4, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(805) },
-                    { 29, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(806), "", true, false, false, "Азартные игры", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(806) },
-                    { 30, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(808), "", true, false, false, "Внешний вид", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(808) },
-                    { 31, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(809), "", true, false, false, "Выступление", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(809) },
-                    { 32, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(811), "", true, false, false, "Искусство", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(811) },
-                    { 33, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(812), "", true, false, false, "Лидерство", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(812) },
-                    { 34, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(814), "", true, false, false, "Обман", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(815) },
-                    { 35, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(816), "", true, false, false, "Понимание людей", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(816) },
-                    { 36, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(817), "", true, false, false, "Соблазнение", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(818) },
-                    { 37, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(819), "", true, false, false, "Убеждение", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(819) },
-                    { 38, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(821), "", true, false, false, "Харизма", 1, 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(821) },
-                    { 39, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(822), "", true, false, true, "Алхимия", 1, 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(822) },
-                    { 40, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(824), "", true, false, false, "Взлом замков", 1, 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(824) },
-                    { 41, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(825), "", true, false, true, "Знание ловушек", 1, 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(825) },
-                    { 42, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(826), "", true, false, true, "Изготовление", 1, 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(827) },
-                    { 43, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(828), "", true, false, false, "Маскировка", 1, 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(828) },
-                    { 44, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(829), "", true, false, false, "Первая помощь", 1, 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(830) },
-                    { 45, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(831), "", true, false, false, "Подделывание", 1, 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(831) },
-                    { 46, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(832), "", true, false, false, "Запугивание", 1, 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(833) },
-                    { 47, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(835), "", true, false, true, "Наведение порчи", 1, 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(835) },
-                    { 48, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(836), "", true, false, true, "Проведение ритуалов", 1, 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(836) },
-                    { 49, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(838), "", true, false, true, "Сопротивление магии", 1, 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(838) },
-                    { 50, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(839), "", true, false, false, "Сопротивление убеждению", 1, 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(839) },
-                    { 51, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(841), "", true, false, true, "Сотворение заклинаний", 1, 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(841) },
-                    { 52, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(842), "", true, false, false, "Храбрость", 1, 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(842) }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Stats",
-                columns: new[] { "Id", "CreateDate", "Description", "Enabled", "Name", "SourceId", "UpdateDate" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(677), "", true, "Интеллект", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(678) },
-                    { 2, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(679), "", true, "Реакция", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(680) },
-                    { 3, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(681), "", true, "Ловкость", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(681) },
-                    { 4, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(682), "", true, "Телосложение", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(682) },
-                    { 5, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(683), "", true, "Скорость", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(684) },
-                    { 6, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(684), "", true, "Эмпатия", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(685) },
-                    { 7, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(686), "", true, "Ремесло", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(686) },
-                    { 8, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(687), "", true, "Воля", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(687) },
-                    { 9, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(688), "", true, "Удача", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(689) },
-                    { 10, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(689), "", true, "Энергия", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(690) },
-                    { 11, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(691), "", true, "Устойчивость", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(691) },
-                    { 12, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(693), "", true, "Бег", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(693) },
-                    { 13, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(694), "", true, "Прыжок", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(694) },
-                    { 14, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(695), "", true, "Пункты Здоровья", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(696) },
-                    { 15, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(697), "", true, "Выносливость", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(697) },
-                    { 16, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(698), "", true, "Переносимый вес", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(698) },
-                    { 17, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(699), "", true, "Отдых", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(699) },
-                    { 18, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(700), "", true, "Удар рукой", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(700) },
-                    { 19, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(701), "", true, "Удар ногой", 1, new DateTime(2023, 11, 9, 13, 56, 27, 484, DateTimeKind.Local).AddTicks(702) }
+                    { 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9095), "", true, false, false, "Внимание", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9095) },
+                    { 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9099), "", true, false, false, "Выживание в дикой природе", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9099) },
+                    { 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9101), "", true, false, false, "Дедукция", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9101) },
+                    { 4, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9102), "", true, false, true, "Монстрология", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9103) },
+                    { 5, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9104), "", true, false, false, "Образование", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9104) },
+                    { 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9105), "", true, false, false, "Ориентирование в городе", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9106) },
+                    { 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9107), "", true, false, false, "Передача знаний", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9107) },
+                    { 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9108), "", true, false, true, "Тактика", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9109) },
+                    { 9, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9110), "", true, false, false, "Торговля", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9111) },
+                    { 10, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9112), "", true, false, false, "Этикет", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9112) },
+                    { 11, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9113), "", true, false, true, "Язык всеобщий", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9114) },
+                    { 12, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9115), "", true, false, true, "Язык Старшей Речи", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9115) },
+                    { 13, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9116), "", true, false, true, "Язык краснолюдов", 1, 1, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9117) },
+                    { 14, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9146), "", true, false, false, "Ближний бой", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9147) },
+                    { 15, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9148), "", true, false, false, "Борьба", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9149) },
+                    { 16, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9150), "", true, false, false, "Верховая езда", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9150) },
+                    { 17, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9151), "", true, false, false, "Владение древковым оружием", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9152) },
+                    { 18, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9153), "", true, false, false, "Владение легкими клинками", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9153) },
+                    { 19, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9155), "", true, false, false, "Владение мечом", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9155) },
+                    { 20, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9157), "", true, false, false, "Мореходство", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9157) },
+                    { 21, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9159), "", true, false, false, "Уклонение/Изворотливость", 1, 2, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9159) },
+                    { 22, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9160), "", true, false, false, "Атлетика", 1, 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9161) },
+                    { 23, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9162), "", true, false, false, "Ловкость рук", 1, 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9162) },
+                    { 24, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9163), "", true, false, false, "Скрытность", 1, 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9164) },
+                    { 25, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9165), "", true, false, false, "Стрельба из арбалета", 1, 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9165) },
+                    { 26, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9166), "", true, false, false, "Стрельба из лука", 1, 3, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9167) },
+                    { 27, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9168), "", true, false, false, "Сила", 1, 4, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9168) },
+                    { 28, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9169), "", true, false, false, "Стойкость", 1, 4, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9170) },
+                    { 29, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9171), "", true, false, false, "Азартные игры", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9171) },
+                    { 30, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9172), "", true, false, false, "Внешний вид", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9173) },
+                    { 31, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9174), "", true, false, false, "Выступление", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9174) },
+                    { 32, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9176), "", true, false, false, "Искусство", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9176) },
+                    { 33, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9177), "", true, false, false, "Лидерство", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9177) },
+                    { 34, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9179), "", true, false, false, "Обман", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9179) },
+                    { 35, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9180), "", true, false, false, "Понимание людей", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9180) },
+                    { 36, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9182), "", true, false, false, "Соблазнение", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9183) },
+                    { 37, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9184), "", true, false, false, "Убеждение", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9184) },
+                    { 38, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9185), "", true, false, false, "Харизма", 1, 6, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9186) },
+                    { 39, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9187), "", true, false, true, "Алхимия", 1, 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9187) },
+                    { 40, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9189), "", true, false, false, "Взлом замков", 1, 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9189) },
+                    { 41, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9190), "", true, false, true, "Знание ловушек", 1, 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9190) },
+                    { 42, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9192), "", true, false, true, "Изготовление", 1, 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9192) },
+                    { 43, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9193), "", true, false, false, "Маскировка", 1, 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9193) },
+                    { 44, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9194), "", true, false, false, "Первая помощь", 1, 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9195) },
+                    { 45, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9196), "", true, false, false, "Подделывание", 1, 7, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9196) },
+                    { 46, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9198), "", true, false, false, "Запугивание", 1, 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9198) },
+                    { 47, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9199), "", true, false, true, "Наведение порчи", 1, 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9199) },
+                    { 48, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9200), "", true, false, true, "Проведение ритуалов", 1, 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9201) },
+                    { 49, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9202), "", true, false, true, "Сопротивление магии", 1, 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9202) },
+                    { 50, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9204), "", true, false, false, "Сопротивление убеждению", 1, 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9204) },
+                    { 51, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9205), "", true, false, true, "Сотворение заклинаний", 1, 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9205) },
+                    { 52, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9207), "", true, false, false, "Храбрость", 1, 8, new DateTime(2023, 11, 16, 14, 49, 35, 556, DateTimeKind.Local).AddTicks(9208) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -1482,8 +1403,13 @@ namespace TTRPG_Project.DAL.Migrations
                 column: "ItemBaseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemsBase_SourceId",
-                table: "ItemsBase",
+                name: "IX_ItemBases_SkillId",
+                table: "ItemBases",
+                column: "SkillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemBases_SourceId",
+                table: "ItemBases",
                 column: "SourceId");
 
             migrationBuilder.CreateIndex(
@@ -1500,6 +1426,11 @@ namespace TTRPG_Project.DAL.Migrations
                 name: "IX_Skills_SourceId",
                 table: "Skills",
                 column: "SourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Skills_StatId",
+                table: "Skills",
+                column: "StatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SkillsTree_ClassId",
@@ -1540,11 +1471,6 @@ namespace TTRPG_Project.DAL.Migrations
                 name: "IX_Stats_SourceId",
                 table: "Stats",
                 column: "SourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Weapons_SkillId",
-                table: "Weapons",
-                column: "SkillId");
         }
 
         /// <inheritdoc />
@@ -1552,12 +1478,6 @@ namespace TTRPG_Project.DAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Abilities");
-
-            migrationBuilder.DropTable(
-                name: "AlchemicalItems");
-
-            migrationBuilder.DropTable(
-                name: "Armor");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -1599,9 +1519,6 @@ namespace TTRPG_Project.DAL.Migrations
                 name: "ItemBaseEffectList");
 
             migrationBuilder.DropTable(
-                name: "Items");
-
-            migrationBuilder.DropTable(
                 name: "ServiceLogs");
 
             migrationBuilder.DropTable(
@@ -1617,15 +1534,6 @@ namespace TTRPG_Project.DAL.Migrations
                 name: "SpellSkillProtectionList");
 
             migrationBuilder.DropTable(
-                name: "Stats");
-
-            migrationBuilder.DropTable(
-                name: "Tools");
-
-            migrationBuilder.DropTable(
-                name: "Weapons");
-
-            migrationBuilder.DropTable(
                 name: "Races");
 
             migrationBuilder.DropTable(
@@ -1638,16 +1546,10 @@ namespace TTRPG_Project.DAL.Migrations
                 name: "Attacks");
 
             migrationBuilder.DropTable(
-                name: "Blueprints");
-
-            migrationBuilder.DropTable(
-                name: "Formulas");
-
-            migrationBuilder.DropTable(
                 name: "Classes");
 
             migrationBuilder.DropTable(
-                name: "Components");
+                name: "ItemBases");
 
             migrationBuilder.DropTable(
                 name: "Effects");
@@ -1656,19 +1558,19 @@ namespace TTRPG_Project.DAL.Migrations
                 name: "Spells");
 
             migrationBuilder.DropTable(
-                name: "Skills");
-
-            migrationBuilder.DropTable(
                 name: "Creatures");
 
             migrationBuilder.DropTable(
-                name: "ItemsBase");
+                name: "Skills");
 
             migrationBuilder.DropTable(
                 name: "SkillsList");
 
             migrationBuilder.DropTable(
                 name: "StatsList");
+
+            migrationBuilder.DropTable(
+                name: "Stats");
 
             migrationBuilder.DropTable(
                 name: "Sources");

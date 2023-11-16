@@ -2,7 +2,6 @@
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
-    [Table("BlueprintComponentList")]
     public class BlueprintComponentList
     {
         public int Id { get; set; }

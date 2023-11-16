@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using TTRPG_Project.BL.Const;
 using TTRPG_Project.BL.DTO;
+using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Items.Request;
 using TTRPG_Project.BL.Services.Items;
 using TTRPG_Project.DAL.Entities.Database.Items;
@@ -65,7 +67,11 @@ namespace TTRPG_Project.Web.Controllers
         public async Task<IActionResult> GetAlchemicalItems()
         {
             var result = await _alchemicalItemService.GetAllAsync();
-            return Ok(result);
+            var list = _mapper.Map<AlchemicalItemRequest[]>(result);
+            foreach (var item in list)
+                item.ItemType = 3;
+
+            return Ok(list);
         }
 
         /// <summary>
@@ -423,17 +429,6 @@ namespace TTRPG_Project.Web.Controllers
         }
         #endregion
 
-        //////////////////////////////////////////////////////////////////////////////////
-
-        #region *ItemBase* Базовые предметы (абсолютно все)
-        [AllowAnonymous]
-        [HttpGet("base")]
-        public async Task<IActionResult> GetBaseItems()
-        {
-            var result = await _itemBaseService.GetAllAsync();
-            return Ok(result);
-        }
-        #endregion
 
         //////////////////////////////////////////////////////////////////////////////////
 
@@ -629,6 +624,19 @@ namespace TTRPG_Project.Web.Controllers
                 return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
 
             var result = await _weaponService.DeleteAsync(item!);
+            return Ok(result);
+        }
+        #endregion
+
+        //////////////////////////////////////////////////////////////////////////////////
+
+        #region *ItemBase* Базовые предметы (абсолютно все)
+        [AllowAnonymous]
+        [HttpGet("base")]
+        public async Task<IActionResult> GetBaseItems()
+        {
+            var result = await _itemBaseService.GetAllAsync();
+
             return Ok(result);
         }
         #endregion

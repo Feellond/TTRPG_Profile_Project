@@ -5,5 +5,6 @@
         public int AvailabilityType { get; set; }
         public float Weight { get; set; }
         public int Price { get; set; }
+        public int ItemType { get; set; }
     }
 }

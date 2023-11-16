@@ -9,5 +9,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public bool IsDifficult { get; set; } = false;
         public bool IsClassSkill { get; set; } = false;
         public int StatId { get; set; }
+        public Stat Stat { get; set; }
     }
 }

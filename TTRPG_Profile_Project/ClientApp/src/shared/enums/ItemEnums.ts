@@ -1,12 +1,13 @@
 enum ItemType {
   BaseItem = 1,
-  Tools = 2,
+  Tool = 2,
   AlchemicalItem = 3,
   Armor = 4,
   Weapon = 5,
   Formula = 6,
   Blueprint = 7,
   Component = 8,
+  Item = 9,
 }
 
 enum ItemAvailabilityType {

@@ -3,8 +3,7 @@ using TTRPG_Project.DAL.Entities.Base;
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
-    [Table("Blueprints")]
-    public class Blueprint : ItemBase
+    public class Blueprint : ItemBase//: EntityDescriptionBase
     {
         public int Complexity { get; set; }
         public float TimeSpend { get; set; }
