@@ -9,6 +9,7 @@ import { Toast } from "primereact/toast";
 import { ItemDTO } from "shared/models";
 import { FindIndexById } from "entities/GeneralFunc";
 import { ItemType } from "shared/enums/ItemEnums";
+import { ShowItem } from "./ShowItem";
 
 const ItemList = () => {
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
@@ -35,17 +36,25 @@ const ItemList = () => {
   const hideDialog = () => {
     setEditDialogVisible(false);
     setItem(emptyItem);
-  }
+  };
 
   const saveItem = async () => {
-    if (item.id !== 0) return await itemService.updateItem({item: item, toast: toast});
-    else await itemService.createItem({item, toast});
+    if (item.id !== 0)
+      return await itemService.updateItem({ item: item, toast: toast });
+    else await itemService.createItem({ item, toast });
 
     hideDialog();
   };
 
+  const deleteItem = async (id: number, itemType: number) => {
+    itemService.deleteItem({id, itemType, toast})
+  }
+
   useEffect(() => {
-    let result = itemService.getItems({itemType: ItemType.BaseItem, toast: toast});
+    let result = itemService.getItems({
+      itemType: ItemType.BaseItem,
+      toast: toast,
+    });
     console.log(result);
   }, []);
 
@@ -73,77 +82,22 @@ const ItemList = () => {
       <div className="mb-4">
         <div className="card block bg-bluegray-50">
           <div className="flex flex-column text-0">
-            <div
-              className="p-2 text-2xl font-semibold cursor-pointer"
-              style={{ marginBottom: "-10px" }}
-            >
-              <a href="listitem/1">Элемент под наименованием 1 item.Name</a>
-            </div>
-            <ul className="p-2 params">
-              <li style={{ float: "right" }}>Изображение</li>
-              <li>
-                <i>Оружие, Редкий</i>
-              </li>
-              <li>
-                <strong>Стоимость в кронах:</strong> 1000,
-                <strong> Вес:</strong> 0,5кг
-              </li>
-              <li>
-                <strong>Требуемый навык:</strong>
-                <a> Владение мечом</a>
-              </li>
-              <li className="stats flex flex-row py-2">
-                <div className="stat" title="Точность">
-                  <div>Точ</div>
-                  <div>+0</div>
-                </div>
-                <div className="stat" title="Урон">
-                  <div>Урон</div>
-                  <div>3к6+2</div>
-                </div>
-                <div className="stat" title="Надежность">
-                  <div>Над</div>
-                  <div>10</div>
-                </div>
-                <div className="stat" title="Хват">
-                  <div>Хват</div>
-                  <div>1</div>
-                </div>
-                <div className="stat" title="Дистанция">
-                  <div>Дист</div>
-                  <div>-</div>
-                </div>
-                <div className="stat" title="Скрытность">
-                  <div>Скрыт</div>
-                  <div>Н/С</div>
-                </div>
-                <div className="stat" title="Количество улучшений">
-                  <div>Улуч</div>
-                  <div>1</div>
-                </div>
-                <div className="stat" title="Свойства">
-                  <div>Свойства</div>
-                  <div>
-                    <a>Горение(75%); </a>
-                    <a>Кровотечение(25%) </a>
-                    <a>Отравление(25%) </a>
-                  </div>
-                </div>
-              </li>
-              <li className="my-2">
+            {itemList.map((it, index) => (
+              <div key={index}>
+                <ShowItem data={it} />
                 <div>
-                  Дополнительная информация о предмете и возможно наиболее
-                  полная
-                </div>
-              </li>
-            </ul>
-            <div>
-              Footer
-              <Button
-                label="Редактировать предмет"
-                onClick={(e) => showEditDialog(1)}
-              />
-            </div>
+                  Footer
+                  <Button
+                    label="Редактировать предмет"
+                    onClick={(e) => showEditDialog(it.id)}
+                  />
+                  <Button
+                    label="Удалить предмет"
+                    onClick={(e) => deleteItem(it.id, it.itemType)}
+                  />
+                </div> 
+              </div>
+            ))}
           </div>
         </div>
       </div>
