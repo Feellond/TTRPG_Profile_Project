@@ -1,5 +1,5 @@
 import React from "react";
-import { ItemDTO } from "..";
+import { ItemDTO } from "shared/models";
 
 interface ShowItemProps {
   data: ItemDTO;

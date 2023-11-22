@@ -7,6 +7,8 @@ using TTRPG_Project.DAL.Data;
 using TTRPG_Project.BL.Services;
 using TTRPG_Project.BL.Services.Users;
 using TTRPG_Project.BL.Services.Items;
+using TTRPG_Project.BL.Services.Additional;
+using TTRPG_Project.BL.Services.Creatures;
 
 namespace TTRPG_Project.BL.Extensions
 {
@@ -31,10 +33,37 @@ namespace TTRPG_Project.BL.Extensions
 
             services.AddAutoMapper(typeof(MappingProfile));
 
-            //services.AddScoped<LoginService>();
-            services.AddScoped<UserService>();
-            services.AddScoped<LogService>();
+            services.AddScoped<EffectService>();
+            services.AddScoped<ServicePriceService>();
+            services.AddScoped<SourceService>();
+
+            services.AddScoped<AbilityService>();
+            services.AddScoped<AttackService>();
+            services.AddScoped<ClassService>();
+            services.AddScoped<CreatureService>();
+            services.AddScoped<RaceService>();
+            services.AddScoped<SkillService>();
+            services.AddScoped<SkillsListService>();
+            services.AddScoped<SkillsTreeService>();
+            services.AddScoped<StatService>();
+            services.AddScoped<StatsListService>();
+
+            services.AddScoped<AlchemicalItemService>();
+            services.AddScoped<ArmorService>();
+            services.AddScoped<BlueprintService>();
+            services.AddScoped<ComponentService>();
+            services.AddScoped<FormulaService>();
             services.AddScoped<ItemBaseService>();
+            services.AddScoped<ItemService>();
+            services.AddScoped<ToolService>();
+            services.AddScoped<WeaponService>();
+
+            services.AddScoped<JwtService>();
+            services.AddScoped<RoleService>();
+            services.AddScoped<UserService>();
+
+            services.AddScoped<LogService>();
+            services.AddScoped<HeadlineService>();
 
             return services;
         }

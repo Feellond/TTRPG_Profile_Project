@@ -8,6 +8,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
     /// <summary>
     /// Базовая сущность, которая является связующей с другими таблицами по типу
     /// </summary>
+    [Table("ItemBases")]
     public class ItemBase : EntityDescriptionBase
     {
         public int AvailabilityType { get; set; }

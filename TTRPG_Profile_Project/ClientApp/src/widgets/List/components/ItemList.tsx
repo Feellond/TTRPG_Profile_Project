@@ -6,10 +6,10 @@ import { EditItemShortDialog } from "widgets/Dialog";
 import { emptyItem } from "../models/EmptyItem";
 import itemService from "shared/services/item.service";
 import { Toast } from "primereact/toast";
-import { ItemDTO } from "shared/models";
 import { FindIndexById } from "entities/GeneralFunc";
 import { ItemType } from "shared/enums/ItemEnums";
 import { ShowItem } from "./ShowItem";
+import { ItemDTO } from "shared/models";
 
 const ItemList = () => {
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
@@ -51,11 +51,19 @@ const ItemList = () => {
   }
 
   useEffect(() => {
-    let result = itemService.getItems({
-      itemType: ItemType.BaseItem,
-      toast: toast,
-    });
-    console.log(result);
+    const fetchData = async () => {
+      try {
+        let result = await itemService.getItems({
+          itemType: ItemType.BaseItem,
+          toast: toast,
+        });
+        console.log(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   //onClick={(e) => handleClick(1, e)}

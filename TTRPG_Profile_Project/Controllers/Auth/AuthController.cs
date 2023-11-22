@@ -16,7 +16,7 @@ using TTRPG_Project.DAL.Entities.Database.Users;
 namespace TTRPG_Project.Web.Controllers.Security
 {
     [AllowAnonymous]
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -39,13 +39,13 @@ namespace TTRPG_Project.Web.Controllers.Security
             {
                 var user = await _userService.GetUserByNameAsync(userLogin.Login);
                 if (user is null)
-                    BadRequest(new ErrorResponse { Message = "Пользователь не найден!" });
+                    return BadRequest(new ErrorResponse { Message = "Пользователь не найден!" });
 
                 if (!await _userService.CheckPasswordAsync(user, userLogin.Password))
-                    BadRequest(new ErrorResponse { Message = "Пароли не совпадают!" });
+                    return BadRequest(new ErrorResponse { Message = "Пароли не совпадают!" });
 
                 if (!user.Enabled)
-                    BadRequest(new ErrorResponse { Message = "Пользователь удален!" });
+                    return BadRequest(new ErrorResponse { Message = "Пользователь удален!" });
 
                 var responce = await _userService.LoginAsync(user, userLogin.IsRemember);
                 return Ok(responce);
@@ -61,7 +61,7 @@ namespace TTRPG_Project.Web.Controllers.Security
             {
                 var userExists = await _userService.GetUserByNameAsync(model.Username);
                 if (userExists != null)
-                    BadRequest(new ErrorResponse { Message = "Пользователь уже существует!" });
+                    return BadRequest(new ErrorResponse { Message = "Пользователь уже существует!" });
 
                 var responce = await _userService.RegisterAsync(model);
                 return Ok(responce);

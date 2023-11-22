@@ -16,7 +16,7 @@ namespace TTRPG_Project.Web.Controllers
     [ApiController]
     [Route("api/items")]
     [Produces("application/json")]
-    [Consumes("application/json")]
+    //[Consumes("application/json")]
     public class ItemController : ControllerBase
     {
         #region Инициализация контроллера

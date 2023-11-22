@@ -4,6 +4,7 @@ using TTRPG_Project.DAL.Entities.Database.Creatures;
 
 namespace TTRPG_Project.DAL.Entities.Database.Items
 {
+    [Table("Weapons")]
     public class Weapon : ItemBase //: EntityDescriptionBase
     {
         public int Accuracy { get; set; }

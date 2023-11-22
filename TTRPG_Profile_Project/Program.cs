@@ -140,12 +140,16 @@ app.UseAuthorization();
 app.UseMiddleware<ExceptionHandling>();
 app.UseMiddleware<MyIpRateLimitMiddleware>();
 
+await InitSettings.IdentityInicializer(app);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); //https://localhost:7167/swagger/index.html
+    });
 }
 if (!app.Environment.IsDevelopment())
 {

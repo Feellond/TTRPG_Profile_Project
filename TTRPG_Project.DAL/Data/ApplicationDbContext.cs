@@ -285,12 +285,32 @@ namespace TTRPG_Project.DAL.Data
             //ВСЕ НИЖЕ ДЛЯ ТЕСТА, ПОСЛЕ НАДО БД ПЕРЕСОБРАТЬ!!!
             builder.Entity<AlchemicalItem>().HasData(new AlchemicalItem[]
             {
-                new AlchemicalItem{Id = 1, Name = "testAlchemicaItem", SourceId = 1, Weight = 1, Description = "testAlchemicaItem"}
+                new AlchemicalItem{
+                    Id = 1,
+                    Name = "testAlchemicaItem",
+                    SourceId = 1,
+                    Weight = 1,
+                    Description = "testAlchemicaItem",
+                    //ItemBaseEffectLists = new List<ItemBaseEffectList>
+                    //{
+                    //    new ItemBaseEffectList{Id = 1, EffectId = 2, ItemBaseId = 1, IsDealDamage = true, Damage = "2к6+2"},
+                    //}
+                }
             });
 
             builder.Entity<Armor>().HasData(new Armor[]
             {
-                new Armor{Id = 2, Name = "testArmor", SourceId = 1, Weight = 1, Description = "testArmor"}
+                new Armor{
+                    Id = 2, 
+                    Name = "testArmor", 
+                    SourceId = 1, 
+                    Weight = 1, 
+                    Description = "testArmor",
+                    //ItemBaseEffectLists = new List<ItemBaseEffectList>
+                    //{
+                    //    new ItemBaseEffectList{Id = 2, EffectId = 2, ItemBaseId = 2, IsDealDamage = false, ChancePercent = 75},
+                    //}
+                }
             });
 
             builder.Entity<ItemBaseEffectList>().HasData(new ItemBaseEffectList[]

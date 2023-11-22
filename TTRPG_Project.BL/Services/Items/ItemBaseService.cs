@@ -17,6 +17,22 @@ namespace TTRPG_Project.BL.Services.Items
         
         }
 
+        public new async Task<List<ItemBaseResponce>> GetAllAsync()
+        {
+            var allItems = await _dbContext.AlchemicalItems.AsNoTracking()
+                .Select(item => new ItemBaseResponce(item))
+                .Concat(_dbContext.Armors.AsNoTracking().Select(item => new ItemBaseResponce(item)))
+                .Concat(_dbContext.Blueprints.AsNoTracking().Select(item => new ItemBaseResponce(item)))
+                .Concat(_dbContext.Components.AsNoTracking().Select(item => new ItemBaseResponce(item)))
+                .Concat(_dbContext.Formulas.AsNoTracking().Select(item => new ItemBaseResponce(item)))
+                .Concat(_dbContext.Items.AsNoTracking().Select(item => new ItemBaseResponce(item)))
+                .Concat(_dbContext.Tools.AsNoTracking().Select(item => new ItemBaseResponce(item)))
+                .Concat(_dbContext.Weapons.AsNoTracking().Select(item => new ItemBaseResponce(item)))
+                .ToListAsync();
+
+            return allItems;
+        }
+
         //public async Task<IActionResult> GetAllAsync()
         //{
         //    //var itemBaseData = _dbContext.ItemBases.AsNoTracking().Select(itemBase => itemBase switch
