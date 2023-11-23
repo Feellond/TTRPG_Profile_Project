@@ -15,7 +15,7 @@ import { ItemRequestDTO } from "shared/models";
 
 export class ItemService {
   async getItems({ itemType, toast }: ItemRequestDTO) {
-    await this.execute({
+    return await this.execute({
       itemType: itemType,
       toast: toast,
       command: CommandEnum.GetList,
@@ -23,7 +23,7 @@ export class ItemService {
   }
 
   async getItem({ itemType, toast }: ItemRequestDTO) {
-    await this.execute({
+    return await this.execute({
       itemType: itemType,
       toast: toast,
       command: CommandEnum.Get,
@@ -31,7 +31,7 @@ export class ItemService {
   }
 
   async createItem({ item, toast }: ItemRequestDTO) {
-    await this.execute({
+    return await this.execute({
       item: item,
       itemType: item.itemType,
       toast: toast,
@@ -40,7 +40,7 @@ export class ItemService {
   }
 
   async updateItem({ item, toast }: ItemRequestDTO) {
-    await this.execute({
+    return await this.execute({
       item: item,
       itemType: item.itemType,
       toast: toast,
@@ -49,7 +49,7 @@ export class ItemService {
   }
 
   async deleteItem({ id, itemType, toast }: ItemRequestDTO) {
-    await this.execute({
+    return await this.execute({
       itemType: itemType,
       toast: toast,
       id: id,

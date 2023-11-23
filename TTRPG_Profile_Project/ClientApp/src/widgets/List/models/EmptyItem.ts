@@ -9,7 +9,7 @@ const emptyItem: ItemDTO = {
   price: null,
   itemBaseEffectLists: null,
   creatureRewardLists: null,
-  sourceId: 0,
+  //sourceId: 0,
   itemType: 0,
   accuracy: null,
   damage: null,
@@ -19,7 +19,7 @@ const emptyItem: ItemDTO = {
   stealthType: null,
   amountOfEnhancements: null,
   isAmmunition: null,
-  skillId: null,
+  //skillId: null,
   type: null,
   complexity: null,
   timeSpend: null,
@@ -31,6 +31,7 @@ const emptyItem: ItemDTO = {
   isAlchemical: false,
   substanceType: 0,
   stiffness: null,
+  skill: null,
 };
 
 export { emptyItem };

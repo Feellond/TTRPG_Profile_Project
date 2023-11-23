@@ -47,8 +47,8 @@ const ItemList = () => {
   };
 
   const deleteItem = async (id: number, itemType: number) => {
-    itemService.deleteItem({id, itemType, toast})
-  }
+    itemService.deleteItem({ id, itemType, toast });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,11 +58,16 @@ const ItemList = () => {
           toast: toast,
         });
         console.log(result);
+
+        if (result && result.data) {
+          const items: ItemDTO[] = result.data;
+          setItemList(items);
+        }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -87,28 +92,28 @@ const ItemList = () => {
         <Button label="Создать предмет" onClick={(e) => showCreateDialog()} />
       </div>
       <ItemFilter></ItemFilter>
-      <div className="mb-4">
-        <div className="card block bg-bluegray-50">
-          <div className="flex flex-column text-0">
-            {itemList.map((it, index) => (
+      {itemList.map((it, index) => (
+        <div className="mb-4">
+          <div className="card block bg-bluegray-50">
+            <div className="flex flex-column text-0">
               <div key={index}>
                 <ShowItem data={it} />
                 <div>
                   Footer
                   <Button
                     label="Редактировать предмет"
-                    onClick={(e) => showEditDialog(it.id)}
+                    //onClick={(e) => showEditDialog(it.id)}
                   />
                   <Button
                     label="Удалить предмет"
-                    onClick={(e) => deleteItem(it.id, it.itemType)}
+                    //onClick={(e) => deleteItem(it.id, it.itemType)}
                   />
-                </div> 
+                </div>
               </div>
-            ))}
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };

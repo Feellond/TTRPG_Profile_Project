@@ -49,6 +49,7 @@ namespace TTRPG_Project.DAL.Data
         public DbSet<SpellSkillProtectionList> SpellSkillProtectionList { get; set; }
         public DbSet<Headline> Headlines { get; set; }
         public DbSet<ServiceLog> ServiceLogs { get; set; }
+        public DbSet<Source> Sources { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -283,7 +284,8 @@ namespace TTRPG_Project.DAL.Data
             });
 
             //ВСЕ НИЖЕ ДЛЯ ТЕСТА, ПОСЛЕ НАДО БД ПЕРЕСОБРАТЬ!!!
-            builder.Entity<AlchemicalItem>().HasData(new AlchemicalItem[]
+
+            var alchItem = new AlchemicalItem[]
             {
                 new AlchemicalItem{
                     Id = 1,
@@ -291,33 +293,41 @@ namespace TTRPG_Project.DAL.Data
                     SourceId = 1,
                     Weight = 1,
                     Description = "testAlchemicaItem",
-                    //ItemBaseEffectLists = new List<ItemBaseEffectList>
-                    //{
-                    //    new ItemBaseEffectList{Id = 1, EffectId = 2, ItemBaseId = 1, IsDealDamage = true, Damage = "2к6+2"},
-                    //}
                 }
-            });
+            };
 
-            builder.Entity<Armor>().HasData(new Armor[]
+            builder.Entity<AlchemicalItem>().HasData(alchItem);
+
+            var armor = new Armor[]
             {
                 new Armor{
-                    Id = 2, 
-                    Name = "testArmor", 
-                    SourceId = 1, 
-                    Weight = 1, 
+                    Id = 2,
+                    Name = "testArmor",
+                    SourceId = 1,
+                    Weight = 1,
                     Description = "testArmor",
-                    //ItemBaseEffectLists = new List<ItemBaseEffectList>
-                    //{
-                    //    new ItemBaseEffectList{Id = 2, EffectId = 2, ItemBaseId = 2, IsDealDamage = false, ChancePercent = 75},
-                    //}
                 }
-            });
+            };
 
-            builder.Entity<ItemBaseEffectList>().HasData(new ItemBaseEffectList[]
+            builder.Entity<Armor>().HasData(armor);
+
+            var itemEffectList = new ItemBaseEffectList[]
             {
-                new ItemBaseEffectList{Id = 1, EffectId = 2, ItemBaseId = 2, IsDealDamage = false, ChancePercent = 75},
-                new ItemBaseEffectList{Id = 2, EffectId = 2, ItemBaseId = 1, IsDealDamage = true, Damage = "2к6+2"},
-            });
+                new ItemBaseEffectList{Id = 1, EffectId = 2, ItemBaseId = armor[0].Id, IsDealDamage = false, ChancePercent = 75},
+                new ItemBaseEffectList{Id = 2, EffectId = 2, ItemBaseId = alchItem[0].Id, IsDealDamage = true, Damage = "2к6+2"},
+            };
+
+            builder.Entity<ItemBaseEffectList>().HasData(itemEffectList);
+
+            //builder.Entity<AlchemicalItem>().HasData(new AlchemicalItem { 
+            //    Id = 1, 
+            //    Name = "testAlchemicalItem", 
+            //    ItemBaseEffectLists = new List<ItemBaseEffectList> { itemEffectList[0] } });
+            //builder.Entity<Armor>().HasData(new Armor { 
+            //    Id = 2, 
+            //    Name = "testArmor", 
+            //    ItemBaseEffectLists = new List<ItemBaseEffectList> { itemEffectList[1] } });
+
 
             builder.Entity<Blueprint>().HasData(new Blueprint[]
             {

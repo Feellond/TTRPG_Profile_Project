@@ -1,13 +1,10 @@
-export interface ItemShortDTO {
-  id: number;
-  name: string | null;
-  description: string | null;
-  availabilityType: number | null;
-  weight: number | null;
-  price: number | null;
+import { Effect } from "shared/models/Additional";
+import { EntityBase, EntityItemBase, Source } from "shared/models/Base";
+import { CreatureReward, Skill } from "shared/models/Creature";
+
+export interface ItemShortDTO extends EntityItemBase {
   itemBaseEffectLists: ItemBaseEffect[] | null;
   creatureRewardLists: CreatureReward[] | null;
-  sourceId: number;
   itemType: number;
 }
 
@@ -21,8 +18,7 @@ export interface ItemDTO extends ItemShortDTO {
   stealthType: number | null;
   amountOfEnhancements: number | null;
   isAmmunition: boolean | null;
-  skillId: number | null;
-
+  skill: Skill | null;
   //tool
 
   //item
@@ -42,10 +38,10 @@ export interface ItemDTO extends ItemShortDTO {
 
   //component
   whereToFind: string | null;
-  amount: number;
+  amount: number | null;
   //complexity: number;
-  isAlchemical: boolean;
-  substanceType: number;
+  isAlchemical: boolean | null;
+  substanceType: number | null;
   //formulaComponentLists: FormulaComponentList[] | null;
   //blueprintComponentLists: BlueprintComponentList[] | null;
 
@@ -57,32 +53,46 @@ export interface ItemDTO extends ItemShortDTO {
   //alchemicalItem
 }
 
-export interface ItemBaseEffect {
-  id: number;
-  itemBaseId: number;
-  effectId: number;
+export interface ItemBaseEffect extends EntityBase {
+  itemBase: ItemShortDTO;
+  effect: Effect;
   damage: string | null;
   chancePercent: number | null;
   isDealDamage: boolean | null;
 }
 
-export interface CreatureReward {
-  id: number;
-  itemBaseId: number;
-  creatureId: number;
-  amount: string | null;
-}
-
-export interface FormulaComponentList {
-  id: number;
-  formulaId: number | null;
-  componentId: number | null;
+export interface FormulaComponentList extends EntityBase {
+  //formula: Formula;
+  component: Component;
   amount: number;
 }
 
-export interface BlueprintComponentList {
-  id: number;
-  blueprintId: number | null;
-  componentId: number | null;
+export interface BlueprintComponentList extends EntityBase {
+  //blueprint: Blueprint;
+  component: Component;
   amount: number;
+}
+
+///////////////////////////////////////
+
+export interface Component extends EntityItemBase {
+  whereToFind: string;
+  amount: number;
+  complexity: number;
+  isAlchemical: boolean;
+  substanceType: number;
+}
+
+export interface Formula extends EntityItemBase {
+  complexity: number;
+  timeSpend: number;
+  additionalPayment: number;
+  formulaComponentLists: FormulaComponentList[];
+}
+
+export interface Blueprint extends EntityItemBase {
+  complexity: number;
+  timeSpend: number;
+  additionalPayment: number;
+  blueprintComponentLists: BlueprintComponentList[];
 }
