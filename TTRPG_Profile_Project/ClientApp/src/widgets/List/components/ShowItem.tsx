@@ -1,5 +1,6 @@
 import { InputNumber } from "primereact/inputnumber";
 import React, { useEffect } from "react";
+import { ItemType } from "shared/enums/ItemEnums";
 import { ItemDTO } from "shared/models";
 
 interface ShowItemProps {
@@ -54,7 +55,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
       case 9:
         return "Эфир";
     }
-  }
+  };
 
   const drawItemType = () => {
     switch (data.itemType) {
@@ -82,11 +83,11 @@ const ShowItem = ({ data }: ShowItemProps) => {
   const drawItemFromType = () => {
     switch (data.itemType) {
       case 1:
-        return (<div></div>);
+        return <div></div>;
       case 2:
-        return (<div></div>);
+        return <div></div>;
       case 3:
-        return (<div></div>);
+        return <div></div>;
       case 4:
         return drawArmor();
       case 5:
@@ -100,7 +101,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
       case 9:
         return drawItem();
     }
-  }
+  };
 
   const drawArmor = () => {
     return (
@@ -123,7 +124,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
         </div>
       </li>
     );
-  }
+  };
 
   const drawFormula = () => {
     return (
@@ -143,20 +144,20 @@ const ShowItem = ({ data }: ShowItemProps) => {
         <div className="stat" title="Компоненты">
           <div>Компоненты</div>
           {data.formulaComponentLists.length > 0 ? (
-              <div>
-                {data.formulaComponentLists.map((item, index) => (
-                  <a key={index}>
-                    {item.component.name}(x{item.amount});{" "}
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <div>-</div>
-            )}
+            <div>
+              {data.formulaComponentLists.map((item, index) => (
+                <a key={index}>
+                  {item.component.name}(x{item.amount});{" "}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div>-</div>
+          )}
         </div>
       </li>
     );
-  }
+  };
 
   const drawBlueprint = () => {
     return (
@@ -176,25 +177,25 @@ const ShowItem = ({ data }: ShowItemProps) => {
         <div className="stat" title="Компоненты">
           <div>Компоненты</div>
           {data.blueprintComponentLists.length > 0 ? (
-              <div>
-                {data.blueprintComponentLists.map((item, index) => (
-                  <a key={index}>
-                    {item.component.name}(x{item.amount});{" "}
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <div>-</div>
-            )}
+            <div>
+              {data.blueprintComponentLists.map((item, index) => (
+                <a key={index}>
+                  {item.component.name}(x{item.amount});{" "}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div>-</div>
+          )}
         </div>
       </li>
     );
-  }
+  };
 
   const drawComponent = () => {
     return (
       <li className="stats flex flex-row py-2">
-         <div className="stat" title="Местность">
+        <div className="stat" title="Местность">
           <div>Местность</div>
           <div>{data.whereToFind}</div>
         </div>
@@ -212,7 +213,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
         </div>
       </li>
     );
-  }
+  };
 
   const drawItem = () => {
     return (
@@ -223,7 +224,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
         </div>
       </li>
     );
-  }
+  };
 
   const drawWeapon = () => {
     return (
@@ -290,21 +291,25 @@ const ShowItem = ({ data }: ShowItemProps) => {
       </div>
       <ul className="p-2 params">
         <li>
-          <i>{drawItemType()}, {drawAvailabilityType()}</i>
+          <i>
+            {drawItemType()}, {drawAvailabilityType()}
+          </i>
         </li>
         <li>
-          <strong>Стоимость в кронах:</strong> {data.price},
-          <strong> Вес:</strong> <InputNumber value={data.weight} suffix="кг" />
+          <strong>Стоимость</strong> {data.price},
+          <strong> Вес:</strong> {data.weight}кг
         </li>
-        <li>
-          <strong>Требуемый навык:</strong>
-          <a>{data.skill.name}</a>
-        </li>
+        {data.skill !== null ? (
+          <li>
+            <strong>Требуемый навык:</strong>
+            <a>{data.skill.name}</a>
+          </li>
+        ) : (
+          <div></div>
+        )}
         {drawItemFromType()}
         <li className="my-2">
-          <div>
-            {data.description}
-          </div>
+          <div>{data.description}</div>
         </li>
       </ul>
     </div>

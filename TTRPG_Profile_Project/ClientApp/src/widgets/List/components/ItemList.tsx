@@ -61,6 +61,7 @@ const ItemList = () => {
 
         if (result && result.data) {
           const items: ItemDTO[] = result.data;
+          console.log(items);
           setItemList(items);
         }
       } catch (error) {
