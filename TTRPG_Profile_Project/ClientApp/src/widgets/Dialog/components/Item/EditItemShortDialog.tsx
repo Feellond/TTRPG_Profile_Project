@@ -12,7 +12,7 @@ import {
 } from "primereact/inputnumber";
 import { ItemTypeSelect } from "./ItemTypeSelect";
 import { ItemDTO } from "shared/models";
-import { AvailabilityTypeLoad, ItemTypeLoad } from "entities/ItemFunc";
+import { AvailabilityTypeLoad, ItemEntityTypeLoad } from "entities/ItemFunc";
 
 interface EditItemShortDialogProps {
   data: ItemDTO;
@@ -87,7 +87,7 @@ const EditItemShortDialog = ({
   } = useForm();
 
   useEffect(() => {
-    ItemTypeLoad({ setItems: setItemTypeOptions });
+    ItemEntityTypeLoad({ setItems: setItemTypeOptions });
     AvailabilityTypeLoad({ setItems: setAvailabilityTypeOptions });
   }, []);
 

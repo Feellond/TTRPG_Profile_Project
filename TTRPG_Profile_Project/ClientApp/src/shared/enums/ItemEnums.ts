@@ -1,4 +1,4 @@
-enum ItemType {
+enum ItemEntityType {
   BaseItem = 1,
   Tool = 2,
   AlchemicalItem = 3,
@@ -11,6 +11,7 @@ enum ItemType {
 }
 
 enum ItemAvailabilityType {
+  None = 0,
   Everywhere = 1,
   Common = 2,
   Poor = 3,
@@ -35,6 +36,33 @@ enum ArmorType {
   Light = 1,
   Medium = 2,
   Heavy = 3,
+}
+
+enum ArmorEquipmentType {
+  None = 0,
+  Head = 1,
+  Body = 2,
+  Legs = 3,
+  Shields = 4,
+  Witcher = 5,
+}
+
+enum WeaponEquipmentType {
+  None = 0,
+  Swords = 1,
+  SmallBlades = 2,
+  Axes = 3,
+  Bludgeoning = 4,
+  Spears = 5,
+  Staffs = 6,
+  Thowables = 7,
+  Bows = 8,
+  Crossbows = 9,
+  Ammunition = 10,
+}
+
+enum ItemType {
+  None = 0,
 }
 
 enum SubstanceType {
@@ -62,6 +90,18 @@ enum WhereToFindEnum {
   OceanFloor = "Дно океана",
   Coastline = "Побережье",
   Swamps = "Болота",
+  Buy = "Покупается",
+  Craft = "Изготавливается",
 }
 
-export {ItemType, ItemAvailabilityType, ItemOriginType, ItemStealthType, ArmorType, SubstanceType, WhereToFindEnum}
+export {
+  ItemEntityType,
+  ItemAvailabilityType,
+  ItemOriginType,
+  ItemStealthType,
+  ArmorType,
+  SubstanceType,
+  ArmorEquipmentType,
+  WeaponEquipmentType,
+  WhereToFindEnum,
+};

@@ -45,7 +45,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.AlchemicalItem,
+                    ItemType = (int)ItemEntityType.AlchemicalItem,
                 })
                 .ToListAsync();
 
@@ -63,7 +63,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.Armor,
+                    ItemType = (int)ItemEntityType.Armor,
                     Reliability = item.Reliability,
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     Stiffness = item.Stiffness,
@@ -86,7 +86,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.Blueprint,
+                    ItemType = (int)ItemEntityType.Blueprint,
                     Complexity = item.Complexity,
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
@@ -108,7 +108,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.Component,
+                    ItemType = (int)ItemEntityType.Component,
                     WhereToFind = item.WhereToFind,
                     Amount = item.Amount,
                     Complexity = item.Complexity,
@@ -121,8 +121,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectLists)
                     .ThenInclude(eff => eff.Effect)
-                .Include(fcl => fcl.FormulaComponentLists)
-                    .ThenInclude(c => c.Component)
+                .Include(fcl => fcl.FormulaSubstanceList)
                 .Select(item => new ItemBaseResponce
                 {
                     Id = item.Id,
@@ -133,11 +132,11 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.Formula,
+                    ItemType = (int)ItemEntityType.Formula,
                     Complexity = item.Complexity,
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
-                    FormulaComponentLists = item.FormulaComponentLists,
+                    FormulaSubstanceList = item.FormulaSubstanceList,
                 })
                 .ToListAsync();
 
@@ -155,7 +154,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.Item,
+                    ItemType = (int)ItemEntityType.Item,
                     StealthType = item.StealthType,
                     Type = item.Type,
                 })
@@ -175,7 +174,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.Tool,
+                    ItemType = (int)ItemEntityType.Tool,
                 })
                 .ToListAsync();
 
@@ -194,7 +193,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Weight = item.Weight,
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
-                    ItemType = (int)ItemType.Weapon,
+                    ItemType = (int)ItemEntityType.Weapon,
                     Accuracy = item.Accuracy,
                     Damage = item.Damage,
                     Reliability = item.Reliability,

@@ -1,18 +1,17 @@
 import { SelectItem } from "primereact/selectitem";
-import { ItemType } from "shared/enums/ItemEnums";
 
-interface ItemTypeLoadParams {
+interface ItemEntityTypeLoadParams {
   setItems: React.Dispatch<React.SetStateAction<SelectItem[]>>;
 }
 
-const ItemTypeLoad = ({ setItems }: ItemTypeLoadParams) => {
-  const itemTypeKeys = Object.keys(ItemType).filter((v) => isNaN(Number(v)));
+const ItemEntityTypeLoad = ({ setItems }: ItemEntityTypeLoadParams) => {
+  const itemTypeKeys = Object.keys(ItemEntityTypeLoad).filter((v) => isNaN(Number(v)));
   const ITOptions = itemTypeKeys.map((key) => ({
     label: key,
-    value: ItemType[key],
+    value: ItemEntityTypeLoad[key],
   }));
   setItems(ITOptions);
   console.log(ITOptions);
 };
 
-export {ItemTypeLoad}
+export {ItemEntityTypeLoad}

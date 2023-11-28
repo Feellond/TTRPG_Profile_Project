@@ -1,6 +1,4 @@
-import { InputNumber } from "primereact/inputnumber";
 import React, { useEffect } from "react";
-import { ItemType } from "shared/enums/ItemEnums";
 import { ItemDTO } from "shared/models";
 
 interface ShowItemProps {

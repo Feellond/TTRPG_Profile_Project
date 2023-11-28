@@ -11,9 +11,9 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
     [Table("ItemBases")]
     public class ItemBase : EntityDescriptionBase
     {
-        public int AvailabilityType { get; set; }
-        public float Weight { get; set; }
-        public int Price { get; set; }
+        public int AvailabilityType { get; set; } = (int)ItemAvailabilityType.None;
+        public double Weight { get; set; } = 0;
+        public int Price { get; set; } = 0;
         public List<ItemBaseEffectList> ItemBaseEffectLists { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
 

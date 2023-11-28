@@ -16,7 +16,7 @@ namespace TTRPG_Project.BL.DTO.Entities.Items.Responce
         //public float? Blueprint_TimeSpend { get; set; }
         //public int? Blueprint_AdditionalPayment { get; set; }
         public string WhereToFind { get; set; } = string.Empty;
-        public int? Amount { get; set; }
+        public string Amount { get; set; } = string.Empty;
         public int? Component_Complexity { get; set; }
         public bool? IsAlchemical { get; set; }
         public int? SubstanceType { get; set; }
@@ -34,7 +34,7 @@ namespace TTRPG_Project.BL.DTO.Entities.Items.Responce
         //public int? Weapon_AmountOfEnhancements { get; set; }
         public bool? IsAmmunition { get; set; }
         public int? SkillId { get; set; }
-        public List<FormulaComponentList>? FormulaComponentLists { get; set; }
+        public List<FormulaSubstanceList>? FormulaSubstanceList { get; set; }
         public List<BlueprintComponentList>? BlueprintComponentLists { get; set; }
         public List<ItemBaseEffectList> ItemBaseEffectLists { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();

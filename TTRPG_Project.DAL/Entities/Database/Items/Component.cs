@@ -7,11 +7,11 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
     public class Component : ItemBase
     {
         public string WhereToFind { get; set; } = string.Empty;
-        public int Amount { get; set; }
-        public int Complexity { get; set; }
-        public bool IsAlchemical { get; set; }
+        public string Amount { get; set; } = string.Empty;
+        public int Complexity { get; set; } = 0;
+        public bool IsAlchemical { get; set; } = false;
         public int SubstanceType { get; set; }
-        public List<FormulaComponentList> FormulaComponentLists { get; set; } = new();
+        public List<FormulaSubstanceList> FormulaSubstanceList { get; set; } = new();
         public List<BlueprintComponentList> BlueprintComponentLists { get; set; } = new();
     }
 }

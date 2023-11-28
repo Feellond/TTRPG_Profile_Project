@@ -7,9 +7,9 @@ import { emptyItem } from "../models/EmptyItem";
 import itemService from "shared/services/item.service";
 import { Toast } from "primereact/toast";
 import { FindIndexById } from "entities/GeneralFunc";
-import { ItemType } from "shared/enums/ItemEnums";
 import { ShowItem } from "./ShowItem";
 import { ItemDTO } from "shared/models";
+import { ItemEntityType } from "shared/enums/ItemEnums";
 
 const ItemList = () => {
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
@@ -29,6 +29,7 @@ const ItemList = () => {
   };
 
   const showCreateDialog = () => {
+    setEditDialogHeader("Создание нового предмета")
     setItem(emptyItem);
     setEditDialogVisible(true);
   };
@@ -54,7 +55,7 @@ const ItemList = () => {
     const fetchData = async () => {
       try {
         let result = await itemService.getItems({
-          itemType: ItemType.BaseItem,
+          itemType: ItemEntityType.BaseItem,
           toast: toast,
         });
         console.log(result);

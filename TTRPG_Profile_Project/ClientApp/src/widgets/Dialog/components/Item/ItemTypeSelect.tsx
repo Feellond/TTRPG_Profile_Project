@@ -195,6 +195,9 @@ const ItemTypeSelect = ({
     case 8:
       content = ComponentItem();
       break;
+    case 9:
+      content = (<div></div>);
+      break;
     default:
       content = <div>Неизвестный тип контента</div>;
   }

@@ -10,6 +10,9 @@ enum AttackType {
   Slashing = 2,
   Bludgeoning = 3,
   PiercingAndSlashing = 4,
+  SlashingAndBludgeoning = 5,
+  PiercingAndBludeoning = 6,
+  PiercingAndSlashingAndBludeoning = 7,
 }
 
 enum CreatureEffectType {
@@ -18,4 +21,4 @@ enum CreatureEffectType {
   Vulnerability = 3,
 }
 
-export {AbilityType, AttackType, CreatureEffectType}
+export { AbilityType, AttackType, CreatureEffectType };

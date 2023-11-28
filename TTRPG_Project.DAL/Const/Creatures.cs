@@ -20,6 +20,9 @@ namespace TTRPG_Project.DAL.Const
         Slashing = 2,
 		Bludgeoning = 3,
         PiercingAndSlashing = 4,
+        SlashingAndBludgeoning = 5,
+        PiercingAndBludeoning = 6,
+        PiercingAndSlashingAndBludeoning = 7,
     }
 
     public enum CreatureEffectType
