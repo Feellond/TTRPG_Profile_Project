@@ -34,8 +34,8 @@ namespace TTRPG_Project.BL.DTO.Entities.Items.Responce
         //public int? Weapon_AmountOfEnhancements { get; set; }
         public bool? IsAmmunition { get; set; }
         public int? SkillId { get; set; }
-        public List<FormulaSubstanceList>? FormulaSubstanceList { get; set; }
-        public List<BlueprintComponentList>? BlueprintComponentLists { get; set; }
+        public List<FormulaSubstanceList>? FormulaSubstanceLists { get; set; } = new();
+        public List<BlueprintComponentList>? BlueprintComponentLists { get; set; } = new();
         public List<ItemBaseEffectList> ItemBaseEffectLists { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
         public Skill? Skill { get; set; }

@@ -4,14 +4,14 @@ import { SelectItem } from "primereact/selectitem";
 import { ItemDTO } from "shared/models/Item/DTO/ItemsDTO";
 import { ListInput } from "features/inputs/listInput";
 import { Button } from 'primereact/button';
-import { ItemTypeLoad } from "entities/ItemFunc";
+import { ItemEntityTypeLoad } from "entities/ItemFunc";
 
 const ItemFilter = () => {
   const [filter, setFilter] = useState<ItemDTO>({} as ItemDTO);
   const [itemTypeOptions, setItemTypeOptions] = useState<SelectItem[]>([]);
 
   useEffect(() => {
-    ItemTypeLoad({setItems: setItemTypeOptions});
+    ItemEntityTypeLoad({setItems: setItemTypeOptions});
   }, [])
 
   return ( 

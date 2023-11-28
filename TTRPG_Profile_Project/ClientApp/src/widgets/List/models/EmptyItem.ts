@@ -24,7 +24,7 @@ const emptyItem: ItemDTO = {
   complexity: null,
   timeSpend: null,
   additionalPayment: null,
-  formulaComponentLists: null,
+  formulaSubstanceLists: null,
   blueprintComponentLists: null,
   whereToFind: null,
   amount: 0,

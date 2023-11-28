@@ -141,11 +141,11 @@ const ShowItem = ({ data }: ShowItemProps) => {
         </div>
         <div className="stat" title="Компоненты">
           <div>Компоненты</div>
-          {data.formulaComponentLists.length > 0 ? (
+          {data.formulaSubstanceLists.length > 0 ? (
             <div>
-              {data.formulaComponentLists.map((item, index) => (
+              {data.formulaSubstanceLists.map((item, index) => (
                 <a key={index}>
-                  {item.component.name}(x{item.amount});{" "}
+                  {item.substanceType}(x{item.amount});{" "}
                 </a>
               ))}
             </div>
@@ -285,7 +285,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
         className="p-2 text-2xl font-semibold cursor-pointer"
         style={{ marginBottom: "-10px" }}
       >
-        <a href="listitem/1">{data.name}</a>
+        <a href="listitem/">{data.name}</a>
       </div>
       <ul className="p-2 params">
         <li>

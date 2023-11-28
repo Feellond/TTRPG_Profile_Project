@@ -136,7 +136,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Complexity = item.Complexity,
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
-                    FormulaSubstanceList = item.FormulaSubstanceList,
+                    FormulaSubstanceLists = item.FormulaSubstanceList,
                 })
                 .ToListAsync();
 
@@ -214,6 +214,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Union(items)
                 .Union(tools)
                 .Union(weapons)
+                .OrderBy(x => x.Name)
                 .ToList();
 
             return allItems;

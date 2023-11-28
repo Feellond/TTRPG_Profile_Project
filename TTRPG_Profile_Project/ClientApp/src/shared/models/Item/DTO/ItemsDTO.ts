@@ -1,3 +1,4 @@
+import { SubstanceType } from 'shared/enums/ItemEnums';
 import { Effect } from "shared/models/Additional";
 import { EntityBase, EntityItemBase, Source } from "shared/models/Base";
 import { CreatureReward, Skill } from "shared/models/Creature";
@@ -28,7 +29,7 @@ export interface ItemDTO extends ItemShortDTO {
   complexity: number | null;
   timeSpend: number | null;
   additionalPayment: number | null;
-  formulaComponentLists: FormulaComponentList[] | null;
+  formulaSubstanceLists: FormulaComponentList[] | null;
 
   //blueprint
   //complexity: number;
@@ -63,7 +64,7 @@ export interface ItemBaseEffect extends EntityBase {
 
 export interface FormulaComponentList extends EntityBase {
   //formula: Formula;
-  component: Component;
+  substanceType: number;
   amount: number;
 }
 

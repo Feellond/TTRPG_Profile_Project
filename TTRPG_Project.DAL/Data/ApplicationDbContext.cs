@@ -854,7 +854,7 @@ namespace TTRPG_Project.DAL.Data
                     Price = 150,
                     AvailabilityType = (int)ItemAvailabilityType.Common, 
                     Complexity = 10,
-                    Name = "Капюшон вердэнского лучника", 
+                    Name = "Чертеж «Капюшон вердэнского лучника»", 
                     SourceId = 1,
                     TimeSpend = 3,
                 }
@@ -875,10 +875,9 @@ namespace TTRPG_Project.DAL.Data
                     AdditionalPayment = 1, 
                     AvailabilityType = 1, 
                     Complexity = 1, 
-                    Name = "testFormula", 
+                    Name = "Формула «Обезболивающие травы»", 
                     SourceId = 1, 
-                    Weight = 1, 
-                    Description = "testFormula"}
+                    Weight = 1,}
             });
 
             builder.Entity<FormulaSubstanceList>().HasData(new FormulaSubstanceList[]
