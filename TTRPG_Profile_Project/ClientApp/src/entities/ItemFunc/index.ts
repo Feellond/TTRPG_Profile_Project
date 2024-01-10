@@ -1,4 +1,5 @@
-import { ItemEntityTypeLoad } from "./components/ItemTypeLoad";
-import { AvailabilityTypeLoad } from "./components/AvailabilityTypeLoad";
+import { ItemEntityTypeLoad } from "./components/OptionsLoad"
+import { AvailabilityTypeLoad } from "./components/OptionsLoad"
+import { SubstanceTypeLoad } from "./components/OptionsLoad"
 
-export {ItemEntityTypeLoad, AvailabilityTypeLoad}
+export {ItemEntityTypeLoad, AvailabilityTypeLoad, SubstanceTypeLoad}

@@ -8,8 +8,14 @@ import itemService from "shared/services/item.service";
 import { Toast } from "primereact/toast";
 import { FindIndexById } from "entities/GeneralFunc";
 import { ShowItem } from "./ShowItem";
-import { ItemDTO } from "shared/models";
+import { ItemDTO, ItemFilterDTO } from "shared/models";
 import { ItemEntityType } from "shared/enums/ItemEnums";
+
+interface LazyState {
+  first: number;
+  rows: number;
+  page: number;
+}
 
 const ItemList = () => {
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
@@ -17,8 +23,34 @@ const ItemList = () => {
 
   const [itemList, setItemList] = useState<ItemDTO[]>([]);
   const [item, setItem] = useState<ItemDTO>(emptyItem);
+  const [filter, setFilter] = useState<ItemFilterDTO>({} as ItemFilterDTO);
 
   const toast = useRef<Toast>(null);
+  const [lazyState, setLazyState] = useState<LazyState>({
+    first: 0,
+    rows: 20,
+    page: 0,
+  });
+
+
+  const getParams = () => {
+    const params = {};
+    params["page"] = lazyState.page;
+    params["pageSize"] = lazyState.rows;
+    console.log(filter);
+
+    if (filter) {
+      if (filter.name) {
+        params["name"] = filter.name;
+      }
+      if (filter.itemType) {
+        params["itemType"] = filter.itemType;
+      }
+    }
+
+    console.log(params);
+    return params;
+  }
 
   const showEditDialog = (id: number) => {
     const index = FindIndexById(id, itemList);
@@ -55,8 +87,9 @@ const ItemList = () => {
     const fetchData = async () => {
       try {
         let result = await itemService.getItems({
-          itemType: ItemEntityType.BaseItem,
+          itemType: 1, //ItemEntityType.BaseItem
           toast: toast,
+          params: getParams(),
         });
         console.log(result);
 
@@ -66,12 +99,12 @@ const ItemList = () => {
           setItemList(items);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching items:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [lazyState, filter]);
 
   //onClick={(e) => handleClick(1, e)}
   const handleClick = (id, e) => {
@@ -93,12 +126,12 @@ const ItemList = () => {
       <div>
         <Button label="Создать предмет" onClick={(e) => showCreateDialog()} />
       </div>
-      <ItemFilter></ItemFilter>
+      <ItemFilter filter={filter} setFilter={setFilter}/>
       {itemList.map((it, index) => (
-        <div className="mb-4">
+        <div key={index} className="mb-4">
           <div className="card block bg-bluegray-50">
             <div className="flex flex-column text-0">
-              <div key={index}>
+              <div>
                 <ShowItem data={it} />
                 <div>
                   Footer

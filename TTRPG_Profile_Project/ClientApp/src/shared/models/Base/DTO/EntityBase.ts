@@ -3,8 +3,9 @@ interface EntityBase {
 }
 
 interface EntityDescriptionBase extends EntityBase {
-    name: string | null;
-    description: string | null;
+  name: string | null;
+  description: string | null;
+  source: string | null;
 }
 
 interface EntityItemBase extends EntityDescriptionBase {
@@ -12,4 +13,4 @@ interface EntityItemBase extends EntityDescriptionBase {
   weight: number | null;
   price: number | null;
 }
-export {EntityBase, EntityDescriptionBase, EntityItemBase}
+export { EntityBase, EntityDescriptionBase, EntityItemBase };

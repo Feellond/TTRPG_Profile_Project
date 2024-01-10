@@ -1,5 +1,5 @@
 enum ItemEntityType {
-  BaseItem = 1,
+  //BaseItem = 1,
   Tool = 2,
   AlchemicalItem = 3,
   Armor = 4,

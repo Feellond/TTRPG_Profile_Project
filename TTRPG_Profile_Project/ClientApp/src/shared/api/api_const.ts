@@ -19,3 +19,5 @@ export const API_WEAPON                     = "api/items/weapon";
 
 export const API_SOURCE                     = "api/additionals/source"
 export const API_EFFECT                     = "api/additionals/effect"
+
+export const API_SKILL                      = "api/creatures/skill"

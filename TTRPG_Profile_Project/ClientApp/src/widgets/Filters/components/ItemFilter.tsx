@@ -5,9 +5,14 @@ import { ItemDTO } from "shared/models/Item/DTO/ItemsDTO";
 import { ListInput } from "features/inputs/listInput";
 import { Button } from 'primereact/button';
 import { ItemEntityTypeLoad } from "entities/ItemFunc";
+import { ItemFilterDTO } from "shared/models";
 
-const ItemFilter = () => {
-  const [filter, setFilter] = useState<ItemDTO>({} as ItemDTO);
+interface ItemFilterProps {
+  filter: ItemFilterDTO,
+  setFilter: React.Dispatch<React.SetStateAction<ItemFilterDTO>>
+}
+
+const ItemFilter = ({filter, setFilter} : ItemFilterProps) => {
   const [itemTypeOptions, setItemTypeOptions] = useState<SelectItem[]>([]);
 
   useEffect(() => {

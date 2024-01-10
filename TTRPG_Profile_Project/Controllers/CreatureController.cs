@@ -11,7 +11,8 @@ using System.Diagnostics;
 
 namespace TTRPG_Project.Web.Controllers
 {
-    [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
+    //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
+    [AllowAnonymous]
     [ApiController]
     [Route("api/creatures")]
     [Produces("application/json")]

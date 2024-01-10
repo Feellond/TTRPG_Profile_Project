@@ -6,6 +6,7 @@ using System.ComponentModel;
 using TTRPG_Project.BL.Const;
 using TTRPG_Project.BL.DTO;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
+using TTRPG_Project.BL.DTO.Filters;
 using TTRPG_Project.BL.DTO.Items.Request;
 using TTRPG_Project.BL.Services.Items;
 using TTRPG_Project.DAL.Entities.Database.Items;
@@ -634,9 +635,10 @@ namespace TTRPG_Project.Web.Controllers
         #region *ItemBase* Базовые предметы (абсолютно все)
         [AllowAnonymous]
         [HttpGet("base")]
-        public async Task<IActionResult> GetBaseItems()
+        public async Task<IActionResult> GetBaseItems([FromQuery] ItemFilter filter)
         {
-            var result = await _itemBaseService.GetAllAsync();
+            filter.InitFilter();
+            var result = await _itemBaseService.GetAllAsync(filter);
 
             return Ok(result);
         }

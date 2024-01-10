@@ -1,12 +1,23 @@
-import React, { useState } from "react";
-import { Control, FieldValues, UseFormRegister } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import {
+  Control,
+  FieldValues,
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 import { Checkbox } from "primereact/checkbox";
-import { InputMask } from "primereact/inputmask";
 import {
   InputNumber,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
 import { ItemDTO } from "shared/models";
+import { InputText } from "primereact/inputtext";
+import { Dropdown } from "primereact/dropdown";
+import { SelectItem } from "primereact/selectitem";
+import { SkillOptionsLoad } from "entities/BestiaryOptions";
+import { StealthOptionsLoad } from "entities/GeneralFunc";
+import { ArmorEquipmentTypeLoad, ArmorTypeLoad, ItemOriginTypeLoad } from "entities/ItemFunc/components/OptionsLoad";
 
 interface ItemTypeSelectProps {
   data: ItemDTO;
@@ -14,6 +25,8 @@ interface ItemTypeSelectProps {
   visible: boolean;
   register: UseFormRegister<FieldValues>;
   control: Control<FieldValues, any>;
+  getValues: UseFormGetValues<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
 }
 
 const ItemTypeSelect = ({
@@ -22,88 +35,170 @@ const ItemTypeSelect = ({
   visible,
   register,
   control,
+  getValues,
+  setValue,
 }: ItemTypeSelectProps) => {
   const [isAmmunitionChecked, setIsAmmunitionChecked] =
     useState<boolean>(false);
+  const [skillOptions, setSkillOptions] = useState<SelectItem[]>([]);
+  const [stealthOptions, setStealthOptions] = useState<SelectItem[]>([]);
+  const [itemOriginOptions, setItemOriginOptions] = useState<SelectItem[]>([]);
+  const [armorOptions, setArmorOptions] = useState<SelectItem[]>([]);
+  const [armorEquipmentOptions, setArmorEquipmentOptions] = useState<SelectItem[]>([]);
+  const [Content, setContent] = useState<any>();
 
-  let content = null;
+  useEffect(() => {
+    SkillOptionsLoad({ setItems: setSkillOptions });
+    StealthOptionsLoad({ setItems: setStealthOptions });
+    ItemOriginTypeLoad({setItems: setItemOriginOptions});
+    ArmorTypeLoad({setItems: setArmorOptions});
+    ArmorEquipmentTypeLoad({setItems: setArmorEquipmentOptions});
+  }, []);
+
+  useEffect(() => {
+    console.log(itemType);
+    console.log(isAmmunitionChecked);
+    console.log(getValues());
+    switch (itemType) {
+      case 1:
+        setContent(BaseItem());
+        break;
+      case 2:
+        setContent(ToolItem());
+        break;
+      case 3:
+        setContent(AlchemicalItem());
+        break;
+      case 4:
+        setContent(ArmorItem());
+        break;
+      case 5:
+        setContent(WeaponItem());
+        break;
+      case 6:
+        setContent(FormulaItem());
+        break;
+      case 7:
+        setContent(BlueprintItem());
+        break;
+      case 8:
+        setContent(ComponentItem());
+        break;
+      case 9:
+        setContent(<div></div>);
+        break;
+      default:
+        setContent(<div></div>);
+    }
+  }, [itemType, isAmmunitionChecked, data]);
 
   const WeaponItem = () => {
     return (
-      <div className="card flex justify-content-center">
-        <div className="flex align-items-center">
+      <div>
+        <div className="field flex align-items-center">
           <Checkbox
-            inputId="ingredient1"
-            onChange={(e) => setIsAmmunitionChecked(e.checked)}
+            onChange={(e) => {
+              setIsAmmunitionChecked(e.checked);
+              register("isAmmunition", { value: e.checked });
+              //setValue("isAmmunition", e.checked);
+            }}
             checked={isAmmunitionChecked}
-            {...register("isAmmunition")}
           />
           <label className="ml-2">Боеприпас?</label>
         </div>
-        <span className="p-float-label">
-          <InputMask
-            id="serial"
-            mask="+99"
-            placeholder="+99"
-            value={String(data.accuracy)}
-            {...register("accuracy")}
-          />
+        <span className="field">
           <label>Точность</label>
+          <InputNumber
+            min={-100}
+            max={100}
+            placeholder="Число"
+            value={data.accuracy}
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("accuracy", { value: e.target.value });
+            }}
+          />
         </span>
-        <span className="p-float-label">
-          <InputMask
-            id="serial"
-            mask="9к9+9"
+        <span className="field">
+          <label>Урон</label>
+          <InputText
             placeholder="2к4+2"
             value={data.damage}
             {...register("damage")}
           />
-          <label>Урон</label>
         </span>
-        <span className="p-float-label">
+        <span className="field">
+          <label>Надежность</label>
           <InputNumber
             id="number-input"
             value={data.reliability}
             min={0}
             max={999}
+            placeholder="Число"
             onValueChange={(e: InputNumberValueChangeEvent) => {
               register("reliability", { value: e.target.value });
             }}
           />
-          <label>Надежность</label>
         </span>
-        <span className="p-float-label">
+        <span className="field">
+          <label>Хват</label>
           <InputNumber
             id="number-input"
             value={data.grip}
             min={0}
             max={4}
+            placeholder="Число"
             onValueChange={(e: InputNumberValueChangeEvent) => {
               register("grip", { value: e.target.value });
             }}
           />
-          <label>Хват</label>
         </span>
-        <span className="p-float-label">
-          <InputMask
-            id="serial"
-            mask="999м."
-            placeholder="20м."
-            value={String(data.distance)}
-          ></InputMask>
+        <span className="field">
           <label>Дистанция</label>
+          <InputNumber
+            value={getValues("distance")}
+            placeholder="Число"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              setValue("distance", e.target.value);
+            }}
+          ></InputNumber>
         </span>
-        <div>StealhType</div>
-        <span className="p-float-label">
-          <InputMask
-            id="serial"
-            mask="9"
-            placeholder="0"
-            value={String(data.amountOfEnhancements)}
-          ></InputMask>
+        <span className="field">
+          <label>Тип скрытности</label>
+          <Dropdown
+            value={data.stealthType}
+            showClear
+            onChange={(e) => {
+              register("skill", { value: e.value });
+
+              //setValue("isAmmunition", e.checked);
+              console.log(getValues());
+            }}
+            options={stealthOptions}
+            placeholder="Выберите тип скрытности"
+          />
+        </span>
+        <span className="field">
           <label>Количество улучшений</label>
+          <InputNumber
+            value={data.amountOfEnhancements}
+            placeholder="Число"
+          ></InputNumber>
         </span>
-        <div>skillId</div>
+        <span className="field">
+          <label>Используемый навык</label>
+          <Dropdown
+            value={data.skill}
+            showClear
+            onChange={(e) => {
+              register("skill", { value: e.value });
+
+              //setValue("isAmmunition", e.checked);
+              console.log(getValues());
+            }}
+            options={skillOptions}
+            placeholder="Выберите навык"
+          />
+        </span>
       </div>
     );
   };
@@ -111,15 +206,105 @@ const ItemTypeSelect = ({
   const ArmorItem = () => {
     return (
       <div>
-        <div>reliability</div>
-        <div>amountOfEnhancements</div>
-        <div>stiffness</div>
+        <span className="field">
+          <label>Тип брони</label>
+          <Dropdown
+            value={data.type}
+            showClear
+            onChange={(e) => {
+              register("type", { value: e.value });
+              console.log(getValues());
+            }}
+            options={armorOptions}
+            placeholder="Выберите тип брони"
+          />
+        </span>
+        <span className="field">
+          <label>Тип снаряжения</label>
+          <Dropdown
+            value={data.equipmentType}
+            showClear
+            onChange={(e) => {
+              register("equipmentType", { value: e.value });
+              console.log(getValues());
+            }}
+            options={armorEquipmentOptions}
+            placeholder="Выберите тип снаряжения"
+          />
+        </span>
+        <span className="field">
+          <label>Надежность</label>
+          <InputNumber
+            value={data.reliability}
+            min={0}
+            max={4}
+            placeholder="Число надежности"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("reliability", { value: e.target.value });
+            }}
+          />
+        </span>
+        <span className="field">
+          <label>Количество улучшений</label>
+          <InputNumber
+            value={data.amountOfEnhancements}
+            min={0}
+            max={4}
+            placeholder="Число возможных улучшений"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("amountOfEnhancements", { value: e.target.value });
+            }}
+          />
+        </span>
+        <span className="field">
+          <label>Скованность движений</label>
+          <InputNumber
+            value={data.stiffness}
+            min={0}
+            max={4}
+            placeholder="Число скованности"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("stiffness", { value: e.target.value });
+            }}
+          />
+        </span>
+        <span className="field">
+          <label>Раса создателя</label>
+          <Dropdown
+            value={data.itemOriginType}
+            showClear
+            onChange={(e) => {
+              register("itemOriginType", { value: e.value });
+              console.log(getValues());
+            }}
+            options={itemOriginOptions}
+            placeholder="Выберите расу создателя"
+          />
+        </span>
       </div>
     );
   };
 
   const ToolItem = () => {
-    return <div></div>;
+    return (
+      <div>
+        <span className="field">
+          <label>Тип скрытности</label>
+          <Dropdown
+            value={data.stealthType}
+            showClear
+            onChange={(e) => {
+              register("skill", { value: e.value });
+
+              //setValue("isAmmunition", e.checked);
+              console.log(getValues());
+            }}
+            options={stealthOptions}
+            placeholder="Выберите тип скрытности"
+          />
+        </span>
+      </div>
+    );
   };
 
   const AlchemicalItem = () => {
@@ -127,11 +312,7 @@ const ItemTypeSelect = ({
   };
 
   const BaseItem = () => {
-    return (
-      <div>
-        <div>type</div>
-      </div>
-    );
+    return <div></div>;
   };
 
   const FormulaItem = () => {
@@ -170,40 +351,8 @@ const ItemTypeSelect = ({
     );
   };
 
-  switch (itemType) {
-    case 1:
-      content = BaseItem();
-      break;
-    case 2:
-      content = ToolItem();
-      break;
-    case 3:
-      content = AlchemicalItem();
-      break;
-    case 4:
-      content = ArmorItem();
-      break;
-    case 5:
-      content = WeaponItem();
-      break;
-    case 6:
-      content = FormulaItem();
-      break;
-    case 7:
-      content = BlueprintItem();
-      break;
-    case 8:
-      content = ComponentItem();
-      break;
-    case 9:
-      content = (<div></div>);
-      break;
-    default:
-      content = <div>Неизвестный тип контента</div>;
-  }
-
   return (
-    <div style={{ visibility: visible ? "visible" : "hidden" }}>{content}</div>
+    <div style={{ visibility: visible ? "visible" : "hidden" }}>{Content}</div>
   );
 };
 

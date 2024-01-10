@@ -1,6 +1,7 @@
 import { MutableRefObject } from "react"
 import { ItemDTO } from "../DTO/ItemsDTO"
 import { Toast } from "primereact/toast"
+import { ItemFilterDTO } from "./ItemFilterDTO"
 
 interface ItemRequestDTO {
     id?: number | string,
@@ -8,6 +9,7 @@ interface ItemRequestDTO {
     itemType?: number,
     toast?: MutableRefObject<Toast>,
     command?: string,
+    params?: any,
 }
 
 interface ItemRequest {

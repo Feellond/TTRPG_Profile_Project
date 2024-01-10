@@ -1,4 +1,3 @@
-import { SubstanceType } from 'shared/enums/ItemEnums';
 import { Effect } from "shared/models/Additional";
 import { EntityBase, EntityItemBase, Source } from "shared/models/Base";
 import { CreatureReward, Skill } from "shared/models/Creature";
@@ -50,6 +49,8 @@ export interface ItemDTO extends ItemShortDTO {
   //reliability: number | null;
   //amountOfEnhancements: number | null;
   stiffness: number | null;
+  equipmentType: number | null;
+  itemOriginType: number | null;
 
   //alchemicalItem
 }

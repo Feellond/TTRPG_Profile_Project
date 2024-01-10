@@ -14,11 +14,12 @@ import { CommandEnum } from "shared/enums/GeneralEnums";
 import { ItemRequestDTO } from "shared/models";
 
 export class ItemService {
-  async getItems({ itemType, toast }: ItemRequestDTO) {
+  async getItems({ itemType, toast, params }: ItemRequestDTO) {
     return await this.execute({
       itemType: itemType,
       toast: toast,
       command: CommandEnum.GetList,
+      params: params,
     });
   }
 
@@ -57,7 +58,14 @@ export class ItemService {
     });
   }
 
-  async execute({ item, itemType, toast, id, command }: ItemRequestDTO) {
+  async execute({
+    item,
+    itemType,
+    toast,
+    id,
+    command,
+    params,
+  }: ItemRequestDTO) {
     let apiString = "";
 
     switch (itemType) {
@@ -91,7 +99,7 @@ export class ItemService {
     }
 
     if (command === CommandEnum.GetList) {
-      return await $api.get(apiString);
+      return await $api.get(apiString, { params: params });
     } else if (command === CommandEnum.Get) {
       return await $api.get(apiString + "/" + String(id));
     } else if (command === CommandEnum.Create) {

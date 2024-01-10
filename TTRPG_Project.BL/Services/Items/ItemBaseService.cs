@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
+using TTRPG_Project.BL.DTO.Filters;
 using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.DAL.Const;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Items;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace TTRPG_Project.BL.Services.Items
 {
@@ -18,19 +20,8 @@ namespace TTRPG_Project.BL.Services.Items
         
         }
 
-        public new async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<List<ItemBaseResponce>> GetAllAsync(ItemFilter filter)
         {
-            //var allItems = await _dbContext.AlchemicalItems.AsNoTracking()
-            //    .Select(item => new ItemBaseResponce(item))
-            //    .Concat(_dbContext.Armors.AsNoTracking().Select(item => new ItemBaseResponce(item)))
-            //    .Concat(_dbContext.Blueprints.AsNoTracking().Select(item => new ItemBaseResponce(item)))
-            //    .Concat(_dbContext.Components.AsNoTracking().Select(item => new ItemBaseResponce(item)))
-            //    .Concat(_dbContext.Formulas.AsNoTracking().Select(item => new ItemBaseResponce(item)))
-            //    .Concat(_dbContext.Items.AsNoTracking().Select(item => new ItemBaseResponce(item)))
-            //    .Concat(_dbContext.Tools.AsNoTracking().Select(item => new ItemBaseResponce(item)))
-            //    .Concat(_dbContext.Weapons.AsNoTracking().Select(item => new ItemBaseResponce(item)))
-            //    .ToListAsync();
-
             var alchemicalItems = await _dbContext.AlchemicalItems.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectLists)
@@ -46,8 +37,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
                     ItemType = (int)ItemEntityType.AlchemicalItem,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
             var armors = await _dbContext.Armors.AsNoTracking()
                 .Include(s => s.Source)
@@ -67,8 +57,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Reliability = item.Reliability,
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     Stiffness = item.Stiffness,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
             var blueprints = await _dbContext.Blueprints.AsNoTracking()
                 .Include(s => s.Source)
@@ -91,8 +80,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     BlueprintComponentLists = item.BlueprintComponentLists,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
             var components = await _dbContext.Components.AsNoTracking()
                 .Include(s => s.Source)
@@ -114,8 +102,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Complexity = item.Complexity,
                     IsAlchemical = item.IsAlchemical,
                     SubstanceType = item.SubstanceType,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
             var formulas = await _dbContext.Formulas.AsNoTracking()
                 .Include(s => s.Source)
@@ -137,8 +124,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     FormulaSubstanceLists = item.FormulaSubstanceList,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
             var items = await _dbContext.Items.AsNoTracking()
                 .Include(s => s.Source)
@@ -157,8 +143,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemType = (int)ItemEntityType.Item,
                     StealthType = item.StealthType,
                     Type = item.Type,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
             var tools = await _dbContext.Tools.AsNoTracking()
                 .Include(s => s.Source)
@@ -175,8 +160,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Price = item.Price,
                     ItemBaseEffectLists = item.ItemBaseEffectLists,
                     ItemType = (int)ItemEntityType.Tool,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
             var weapons = await _dbContext.Weapons.AsNoTracking()
                 .Include(s => s.Source)
@@ -203,19 +187,24 @@ namespace TTRPG_Project.BL.Services.Items
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     IsAmmunition = item.IsAmmunition,
                     Skill = item.Skill,
-                })
-                .ToListAsync();
+                }).ToListAsync();
 
-            var allItems = alchemicalItems
+            var allItemsQuery = alchemicalItems
                 .Union(armors)
                 .Union(blueprints)
                 .Union(components)
                 .Union(formulas)
                 .Union(items)
                 .Union(tools)
-                .Union(weapons)
-                .OrderBy(x => x.Name)
-                .ToList();
+                .Union(weapons);
+
+            foreach (var item in filter.whereExpression)
+            {
+                var compiledExpression = item.Compile();
+                allItemsQuery = allItemsQuery.Where(compiledExpression);
+            }
+
+            var allItems = allItemsQuery.OrderBy(x => x.Name).ToList();
 
             return allItems;
         }

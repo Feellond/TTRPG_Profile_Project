@@ -2,6 +2,7 @@ import { ItemDTO } from "../../../shared/models/Item/DTO/ItemsDTO";
 
 const emptyItem: ItemDTO = {
   id: 0,
+  source: null,
   name: null,
   description: null,
   availabilityType: null,
@@ -32,6 +33,8 @@ const emptyItem: ItemDTO = {
   substanceType: 0,
   stiffness: null,
   skill: null,
+  equipmentType: null,
+  itemOriginType: null,
 };
 
 export { emptyItem };

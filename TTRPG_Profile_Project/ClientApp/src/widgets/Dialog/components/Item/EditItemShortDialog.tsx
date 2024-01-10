@@ -13,6 +13,7 @@ import {
 import { ItemTypeSelect } from "./ItemTypeSelect";
 import { ItemDTO } from "shared/models";
 import { AvailabilityTypeLoad, ItemEntityTypeLoad } from "entities/ItemFunc";
+import { SourceOptionsLoad } from "entities/GeneralFunc";
 
 interface EditItemShortDialogProps {
   data: ItemDTO;
@@ -37,6 +38,8 @@ const EditItemShortDialog = ({
   const [itemTypeSelectVisible, setItemTypeSelectVisible] =
     useState<boolean>(false);
 
+  const [itemType, setItemType] = useState<number>(undefined);
+
   const SaveChanges = () => {
     let dialogData = getValues();
     console.log(dialogData);
@@ -47,7 +50,8 @@ const EditItemShortDialog = ({
     data.weight = dialogData.weight;
     data.price = dialogData.price;
     data.itemBaseEffectLists = dialogData.itemBaseEffectLists;
-    //data.sourceId = dialogData.sourceId;
+    data.creatureRewardLists = dialogData.creatureRewardLists;
+    data.source = dialogData.source;
     data.itemType = dialogData.itemType;
     data.accuracy = dialogData.accuracy;
     data.damage = dialogData.damage;
@@ -57,7 +61,7 @@ const EditItemShortDialog = ({
     data.stealthType = dialogData.stealthType;
     data.amountOfEnhancements = dialogData.amountOfEnhancements;
     data.isAmmunition = dialogData.isAmmunition;
-    //data.skillId = dialogData.skillId;
+    data.skill = dialogData.skill;
     data.type = dialogData.type;
     data.complexity = dialogData.complexity;
     data.timeSpend = dialogData.timeSpend;
@@ -75,6 +79,34 @@ const EditItemShortDialog = ({
 
   const SetValues = () => {
     setValue("name", data.name);
+    setValue("description", data.description);
+    setValue("availabilityType", data.availabilityType);
+    setValue("weight", data.weight);
+    setValue("price", data.price);
+    setValue("itemBaseEffectLists", data.itemBaseEffectLists);
+    setValue("creatureRewardLists", data.creatureRewardLists);
+    setValue("source", data.source);
+    setValue("itemType", data.itemType);
+    setValue("accuracy", data.accuracy);
+    setValue("damage", data.damage);
+    setValue("reliability", data.reliability);
+    setValue("grip", data.grip);
+    setValue("distance", data.distance);
+    setValue("stealthType", data.stealthType);
+    setValue("amountOfEnhancements", data.amountOfEnhancements);
+    setValue("isAmmunition", data.isAmmunition);
+    setValue("skill", data.skill);
+    setValue("type", data.type);
+    setValue("complexity", data.complexity);
+    setValue("timeSpend", data.timeSpend);
+    setValue("additionalPayment", data.additionalPayment);
+    setValue("formulaSubstanceLists", data.formulaSubstanceLists);
+    setValue("blueprintComponentLists", data.blueprintComponentLists);
+    setValue("whereToFind", data.whereToFind);
+    setValue("amount", data.amount);
+    setValue("isAlchemical", data.isAlchemical);
+    setValue("substanceType", data.substanceType);
+    setValue("stiffness", data.stiffness);
   };
 
   const {
@@ -89,9 +121,11 @@ const EditItemShortDialog = ({
   useEffect(() => {
     ItemEntityTypeLoad({ setItems: setItemTypeOptions });
     AvailabilityTypeLoad({ setItems: setAvailabilityTypeOptions });
+    SourceOptionsLoad({setItems: setSourceOptions});
   }, []);
 
   useEffect(() => {
+    setItemType(undefined);
     SetValues();
   }, [visible]);
 
@@ -123,23 +157,11 @@ const EditItemShortDialog = ({
       className="p-fluid w-auto w-8"
     >
       <form>
-        <div className="grid align-items-center">
+        <div className="grid align-items-center mt-3">
           <div className="field flex flex-column col-3">
             <span className="p-float-label">
               <InputText id="name" value={data.name} {...register("name")} />
               <label>Наименование</label>
-            </span>
-          </div>
-          <div className="field flex flex-column col-3">
-            <span className="p-float-label">
-              <InputTextarea
-                id="description"
-                value={data.description}
-                {...register("name")}
-                rows={5}
-                cols={60}
-              />
-              <label>Описание</label>
             </span>
           </div>
           <div className="field flex flex-column col-3">
@@ -164,7 +186,7 @@ const EditItemShortDialog = ({
               <label>Доступность</label>
             </span>
           </div>
-          <div className="flex-auto">
+          <div className="field flex flex-column col-3">
             <span className="p-float-label">
               <Controller
                 name="weight"
@@ -189,7 +211,7 @@ const EditItemShortDialog = ({
               <label>Вес</label>
             </span>
           </div>
-          <div className="flex-auto">
+          <div className="field flex flex-column col-3">
             <span className="p-float-label">
               <Controller
                 name="price"
@@ -212,6 +234,18 @@ const EditItemShortDialog = ({
                 )}
               />
               <label>Цена</label>
+            </span>
+          </div>
+          <div className="field flex flex-column col-12">
+            <span className="p-float-label">
+              <InputTextarea
+                id="description"
+                value={data.description}
+                {...register("description")}
+                rows={5}
+                cols={60}
+              />
+              <label>Описание</label>
             </span>
           </div>
           <div className="field flex flex-column col-3">
@@ -249,25 +283,33 @@ const EditItemShortDialog = ({
                       value={field.value}
                       onChange={(e: DropdownChangeEvent) => {
                         field.onChange(e.value);
-                        if (getValues("itemType") !== null)
+                        setItemType(e.value);
+                        if (getValues("itemType") !== undefined)
                           setItemTypeSelectVisible(true);
                         else setItemTypeSelectVisible(false);
                       }}
                       optionLabel="label"
                       options={itemTypeOptions}
+                      showClear
                     />
                   </>
                 )}
               />
+              <label>Тип предмета</label>
             </span>
           </div>
+          <div className="field flex flex-column col-12">
           <ItemTypeSelect
             data={data}
             visible={itemTypeSelectVisible}
-            itemType={getValues("itemType")}
+            //itemType={getValues("itemType")}
+            itemType={itemType}
             control={control}
             register={register}
+            getValues={getValues}
+            setValue={setValue}
           />
+          </div>
         </div>
       </form>
     </Dialog>
