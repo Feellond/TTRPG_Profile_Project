@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   Control,
+  Controller,
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
@@ -13,11 +14,17 @@ import {
 } from "primereact/inputnumber";
 import { ItemDTO } from "shared/models";
 import { InputText } from "primereact/inputtext";
-import { Dropdown } from "primereact/dropdown";
+import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { SelectItem } from "primereact/selectitem";
 import { SkillOptionsLoad } from "entities/BestiaryOptions";
 import { StealthOptionsLoad } from "entities/GeneralFunc";
-import { ArmorEquipmentTypeLoad, ArmorTypeLoad, ItemOriginTypeLoad } from "entities/ItemFunc/components/OptionsLoad";
+import {
+  ArmorEquipmentTypeLoad,
+  ArmorTypeLoad,
+  ItemOriginTypeLoad,
+} from "entities/ItemFunc/components/OptionsLoad";
+import { MultiSelect } from "primereact/multiselect";
+import { SubstanceType } from "shared/enums/ItemEnums";
 
 interface ItemTypeSelectProps {
   data: ItemDTO;
@@ -40,19 +47,25 @@ const ItemTypeSelect = ({
 }: ItemTypeSelectProps) => {
   const [isAmmunitionChecked, setIsAmmunitionChecked] =
     useState<boolean>(false);
+    const [isAlchemicalChecked, setIsAlchemicalChecked] =
+    useState<boolean>(false);
   const [skillOptions, setSkillOptions] = useState<SelectItem[]>([]);
   const [stealthOptions, setStealthOptions] = useState<SelectItem[]>([]);
   const [itemOriginOptions, setItemOriginOptions] = useState<SelectItem[]>([]);
   const [armorOptions, setArmorOptions] = useState<SelectItem[]>([]);
-  const [armorEquipmentOptions, setArmorEquipmentOptions] = useState<SelectItem[]>([]);
+  const [whereToFindOptions, setWhereToFindOptions] = useState<SelectItem[]>([]);
+  const [substanceOptions, setSubstanceOptions] = useState<SelectItem[]>([]);
+  const [armorEquipmentOptions, setArmorEquipmentOptions] = useState<
+    SelectItem[]
+  >([]);
   const [Content, setContent] = useState<any>();
 
   useEffect(() => {
     SkillOptionsLoad({ setItems: setSkillOptions });
     StealthOptionsLoad({ setItems: setStealthOptions });
-    ItemOriginTypeLoad({setItems: setItemOriginOptions});
-    ArmorTypeLoad({setItems: setArmorOptions});
-    ArmorEquipmentTypeLoad({setItems: setArmorEquipmentOptions});
+    ItemOriginTypeLoad({ setItems: setItemOriginOptions });
+    ArmorTypeLoad({ setItems: setArmorOptions });
+    ArmorEquipmentTypeLoad({ setItems: setArmorEquipmentOptions });
   }, []);
 
   useEffect(() => {
@@ -164,18 +177,25 @@ const ItemTypeSelect = ({
         </span>
         <span className="field">
           <label>Тип скрытности</label>
-          <Dropdown
-            value={data.stealthType}
-            showClear
-            onChange={(e) => {
-              register("skill", { value: e.value });
-
-              //setValue("isAmmunition", e.checked);
-              console.log(getValues());
-            }}
-            options={stealthOptions}
-            placeholder="Выберите тип скрытности"
+          <Controller
+            name="stealthType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={stealthOptions}
+                  placeholder="Выберите тип скрытности"
+                />
+              </>
+            )}
           />
+
         </span>
         <span className="field">
           <label>Количество улучшений</label>
@@ -186,17 +206,23 @@ const ItemTypeSelect = ({
         </span>
         <span className="field">
           <label>Используемый навык</label>
-          <Dropdown
-            value={data.skill}
-            showClear
-            onChange={(e) => {
-              register("skill", { value: e.value });
-
-              //setValue("isAmmunition", e.checked);
-              console.log(getValues());
-            }}
-            options={skillOptions}
-            placeholder="Выберите навык"
+          <Controller
+            name="skill"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={skillOptions}
+                  placeholder="Выберите навык"
+                />
+              </>
+            )}
           />
         </span>
       </div>
@@ -208,28 +234,44 @@ const ItemTypeSelect = ({
       <div>
         <span className="field">
           <label>Тип брони</label>
-          <Dropdown
-            value={data.type}
-            showClear
-            onChange={(e) => {
-              register("type", { value: e.value });
-              console.log(getValues());
-            }}
-            options={armorOptions}
-            placeholder="Выберите тип брони"
+          <Controller
+            name="type"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={armorOptions}
+                  placeholder="Выберите тип брони"
+                />
+              </>
+            )}
           />
         </span>
         <span className="field">
           <label>Тип снаряжения</label>
-          <Dropdown
-            value={data.equipmentType}
-            showClear
-            onChange={(e) => {
-              register("equipmentType", { value: e.value });
-              console.log(getValues());
-            }}
-            options={armorEquipmentOptions}
-            placeholder="Выберите тип снаряжения"
+          <Controller
+            name="equipmentType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={armorEquipmentOptions}
+                  placeholder="Выберите тип снаряжения"
+                />
+              </>
+            )}
           />
         </span>
         <span className="field">
@@ -237,7 +279,7 @@ const ItemTypeSelect = ({
           <InputNumber
             value={data.reliability}
             min={0}
-            max={4}
+            max={999}
             placeholder="Число надежности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
               register("reliability", { value: e.target.value });
@@ -249,7 +291,7 @@ const ItemTypeSelect = ({
           <InputNumber
             value={data.amountOfEnhancements}
             min={0}
-            max={4}
+            max={99}
             placeholder="Число возможных улучшений"
             onValueChange={(e: InputNumberValueChangeEvent) => {
               register("amountOfEnhancements", { value: e.target.value });
@@ -261,7 +303,7 @@ const ItemTypeSelect = ({
           <InputNumber
             value={data.stiffness}
             min={0}
-            max={4}
+            max={99}
             placeholder="Число скованности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
               register("stiffness", { value: e.target.value });
@@ -270,15 +312,23 @@ const ItemTypeSelect = ({
         </span>
         <span className="field">
           <label>Раса создателя</label>
-          <Dropdown
-            value={data.itemOriginType}
-            showClear
-            onChange={(e) => {
-              register("itemOriginType", { value: e.value });
-              console.log(getValues());
-            }}
-            options={itemOriginOptions}
-            placeholder="Выберите расу создателя"
+          <Controller
+            name="itemOriginType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={itemOriginOptions}
+                  placeholder="Выберите расу создателя"
+                />
+              </>
+            )}
           />
         </span>
       </div>
@@ -290,17 +340,23 @@ const ItemTypeSelect = ({
       <div>
         <span className="field">
           <label>Тип скрытности</label>
-          <Dropdown
-            value={data.stealthType}
-            showClear
-            onChange={(e) => {
-              register("skill", { value: e.value });
-
-              //setValue("isAmmunition", e.checked);
-              console.log(getValues());
-            }}
-            options={stealthOptions}
-            placeholder="Выберите тип скрытности"
+          <Controller
+            name="stealthType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={stealthOptions}
+                  placeholder="Выберите тип скрытности"
+                />
+              </>
+            )}
           />
         </span>
       </div>
@@ -315,13 +371,121 @@ const ItemTypeSelect = ({
     return <div></div>;
   };
 
+  const [substances, setSubstances] = useState(data.formulaSubstanceLists || []);
+  const handleAddSubstance = () => {
+    setSubstances([...substances, {id: 0, substanceType: 1, amount: 0 }]);
+  };
+
+  const handleRemoveSubstance = (index: number) => {
+    const newSubstances = [...substances];
+    newSubstances.splice(index, 1);
+    setSubstances(newSubstances);
+  };
+
+  const handleSubstanceTypeChange = (index: number, substanceType: number) => {
+    const newSubstances = [...substances];
+    newSubstances[index].substanceType = substanceType;
+    setSubstances(newSubstances);
+  };
+
+  const handleAmountChange = (index: number, amount: number) => {
+    const newSubstances = [...substances];
+    newSubstances[index].amount = amount;
+    setSubstances(newSubstances);
+  };
+
   const FormulaItem = () => {
     return (
       <div>
-        <div>complexity</div>
-        <div>timeSpend</div>
-        <div>additionalPayment</div>
-        <div>formulaComponentLists</div>
+        <div>
+          <span className="field">
+            <label>Сложность</label>
+            <InputNumber
+              value={data.complexity}
+              min={0}
+              max={999}
+              placeholder="Число сложности"
+              onValueChange={(e: InputNumberValueChangeEvent) => {
+                register("complexity", { value: e.target.value });
+              }}
+            />
+          </span>
+        </div>
+        <div>
+          <span className="field">
+            <label>Требуемое время изготовления</label>
+            <InputNumber
+              value={data.timeSpend}
+              min={0}
+              max={999999}
+              placeholder="Время изготовления"
+              onValueChange={(e: InputNumberValueChangeEvent) => {
+                register("timeSpend", { value: e.target.value });
+              }}
+            />
+          </span>
+        </div>
+        <div>
+          <span className="field">
+            <label>Доплата</label>
+            <InputNumber
+              value={data.additionalPayment}
+              min={0}
+              max={999999}
+              placeholder="Число доплаты"
+              onValueChange={(e: InputNumberValueChangeEvent) => {
+                register("additionalPayment", { value: e.target.value });
+              }}
+            />
+          </span>
+        </div>
+        <div>
+          <span className="field">
+            <label>formulaComponentLists</label>
+            <div>
+              {data.formulaSubstanceLists ? (
+                data.formulaSubstanceLists.map((substance, index) => (
+                  <div key={index}>
+                    <span className="field">
+                      <label>Substance Type:</label>
+                      <select
+                        value={substance.substanceType}
+                        onChange={(e) =>
+                          handleSubstanceTypeChange(
+                            index,
+                            parseInt(e.target.value)
+                          )
+                        }
+                      >
+                        {Object.entries(SubstanceType).map(([key, value]) => (
+                          <option key={value} value={value}>
+                            {key}
+                          </option>
+                        ))}
+                      </select>
+                    </span>
+                    <span className="field">
+                      <label>Amount:</label>
+                      <input
+                        type="number"
+                        value={substance.amount}
+                        onChange={(e) =>
+                          handleAmountChange(index, parseInt(e.target.value))
+                        }
+                      />
+                    </span>
+                    <button onClick={() => handleRemoveSubstance(index)}>
+                      Remove Substance
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div></div>
+              )}
+              <button type="button" onClick={handleAddSubstance}>Add Substance</button>
+            </div>
+          </span>
+        </div>
       </div>
     );
   };
@@ -329,10 +493,57 @@ const ItemTypeSelect = ({
   const BlueprintItem = () => {
     return (
       <div>
-        <div>complexity</div>
-        <div>timeSpend</div>
-        <div>additionalPayment</div>
-        <div>blueprintComponentLists</div>
+        <span className="field">
+          <label>Сложность</label>
+          <InputNumber
+            value={data.complexity}
+            min={0}
+            max={999}
+            placeholder="Число сложности"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("complexity", { value: e.target.value });
+            }}
+          />
+        </span>
+        <span className="field">
+          <label>Требуемое время изготовления</label>
+          <InputNumber
+            value={data.timeSpend}
+            min={0}
+            max={999999}
+            placeholder="Время изготовления"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("timeSpend", { value: e.target.value });
+            }}
+          />
+        </span>
+        <span className="field">
+          <label>Доплата</label>
+          <InputNumber
+            value={data.additionalPayment}
+            min={0}
+            max={999999}
+            placeholder="Число доплаты"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("additionalPayment", { value: e.target.value });
+            }}
+          />
+        </span>
+        <span className="field">
+          <label>blueprintComponentLists</label>
+          <Dropdown
+            //value={data.}
+            showClear
+            onChange={(e) => {
+              register("", { value: e.value });
+
+              //setValue("isAmmunition", e.checked);
+              //console.log(getValues());
+            }}
+            //options={}
+            placeholder="Выберите тип скрытности"
+          />
+        </span>
       </div>
     );
   };
@@ -340,13 +551,70 @@ const ItemTypeSelect = ({
   const ComponentItem = () => {
     return (
       <div>
-        <div>whereToFind</div>
-        <div>amount</div>
-        <div>complexity</div>
-        <div>isAlchemical</div>
-        <div>substanceType</div>
-        <div>formulaComponentLists</div>
-        <div>blueprintComponentLists</div>
+        <span className="field">
+          <label>whereToFind</label>
+          <Dropdown
+            value={data.whereToFind}
+            showClear
+            onChange={(e) => {
+              register("whereToFind", { value: e.value });
+
+              //setValue("isAmmunition", e.checked);
+              //console.log(getValues());
+            }}
+            options={whereToFindOptions}
+            placeholder="Выберите тип скрытности"
+          />
+        </span>
+        <span className="field">
+          <label>Количество</label>
+          <InputNumber
+            value={data.amount}
+            min={0}
+            max={999}
+            placeholder="Число, сколько получит при сборе"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("amount", { value: e.target.value });
+            }}
+          />
+        </span>
+        <span className="field">
+          <label>Сложность</label>
+          <InputNumber
+            value={data.complexity}
+            min={0}
+            max={4}
+            placeholder="Число сложности"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              register("complexity", { value: e.target.value });
+            }}
+          />
+        </span>
+        <div>
+          <Checkbox
+            onChange={(e) => {
+              setIsAlchemicalChecked(e.checked);
+              register("isAlchemical", { value: e.checked });
+            }}
+            checked={isAlchemicalChecked}
+          />
+          <label className="ml-2">Алхимический компонент?</label>
+        </div>
+        <span className="field">
+          <label>substanceType</label>
+          <Dropdown
+            value={data.substanceType}
+            showClear
+            onChange={(e) => {
+              register("substanceType", { value: e.value });
+
+              //setValue("isAmmunition", e.checked);
+              //console.log(getValues());
+            }}
+            options={substanceOptions}
+            placeholder="Выберите тип скрытности"
+          />
+        </span>
       </div>
     );
   };

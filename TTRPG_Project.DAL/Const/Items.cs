@@ -39,17 +39,17 @@ namespace TTRPG_Project.DAL.Const
         /// </summary>
         CantHide = 1,
         /// <summary>
-        /// Крупное (К): можно спрятать под плащом.
+        /// Маленькое (М): можно спрятать в кармане.
         /// </summary>
-        Large = 2,
+        Tiny = 2,
         /// <summary>
         /// Небольшое (Н): можно спрятать под курткой.
         /// </summary>
         Small = 3,
         /// <summary>
-        /// Маленькое (М): можно спрятать в кармане.
+        /// Крупное (К): можно спрятать под плащом.
         /// </summary>
-        Tiny = 4,
+        Large = 4,
     }
 
     public enum ArmorType
@@ -94,7 +94,7 @@ namespace TTRPG_Project.DAL.Const
         /// <summary>
         /// Аер
         /// </summary>
-		Aer = 1,
+		Caelum = 1,
         /// <summary>
         /// Гидроген
         /// </summary>
@@ -131,6 +131,7 @@ namespace TTRPG_Project.DAL.Const
 
     public static class WhereToFindEnum
     {
+        public static readonly string Distilleries  = "Винокурни";
         public static readonly string Caves         = "Пещеры";
         public static readonly string Cities        = "Города";
         public static readonly string Imps          = "Бесы";

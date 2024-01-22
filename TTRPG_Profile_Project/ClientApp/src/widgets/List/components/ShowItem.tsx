@@ -1,3 +1,4 @@
+import { AetherSVG, CaelumSVG, FulgurSVG, HydragenumSVG, QuebrithSVG, RebisSVG, SolSVG, VermilionSVG, VitriolSVG } from "img";
 import React, { useEffect } from "react";
 import { ItemDTO } from "shared/models";
 
@@ -6,6 +7,70 @@ interface ShowItemProps {
 }
 
 const ShowItem = ({ data }: ShowItemProps) => {
+  const drawWeaponEquipmentType = () => {
+    switch (data.equipmentType) {
+      case 1:
+        return "Мечи";
+      case 2:
+        return "Кинжалы";
+      case 3:
+        return "Топоры";
+      case 4:
+        return "Дробящее";
+      case 5:
+        return "Копья";
+      case 6:
+        return "Посохи";
+      case 7:
+        return "Метательное";
+      case 8:
+        return "Луки";
+      case 9:
+        return "Арбалеты";
+      case 10:
+        return "Боеприпас";
+    }
+  };
+
+  const drawArmorEquipmentType = () => {
+    switch (data.equipmentType) {
+      case 1:
+        return "Голова";
+      case 2:
+        return "Тело";
+      case 3:
+        return "Ноги";
+      case 4:
+        return "Щит";
+      case 5:
+        return "Ведьмачий";
+    }
+  };
+
+  const drawArmorType = () => {
+    switch (data.type) {
+      case 1:
+        return "Легкий";
+      case 2:
+        return "Средний";
+      case 3:
+        return "Тяжелый";
+    }
+  };
+
+  const drawItemOriginType = () => {
+    switch (data.itemOriginType) {
+      case 1:
+        return "Люди";
+      case 2:
+        return "Старший народ";
+      case 3:
+        return "Ведьмачий";
+      case 4:
+        return "Реликт";
+    }
+  };
+
   const drawStealthType = () => {
     switch (data.stealthType) {
       case 1:
@@ -22,45 +87,90 @@ const ShowItem = ({ data }: ShowItemProps) => {
   const drawAvailabilityType = () => {
     switch (data.availabilityType) {
       case 1:
-        return "Повсеместное";
+        return ", Повсеместное";
       case 2:
-        return "Обычное";
+        return ", Обычное";
       case 3:
-        return "Редкое";
+        return ", Редкое";
       case 4:
-        return "Уникальное";
+        return ", Уникальное";
     }
   };
 
   const drawSubstanceType = () => {
     switch (data.substanceType) {
       case 1:
-        return "Аэр";
+        return (
+          <div>
+            Аэр
+            {CaelumSVG()}
+          </div>
+        );
       case 2:
-        return "Гидраген";
+        return (
+          <div>
+            Гидраген
+            {HydragenumSVG()}
+          </div>
+        );
       case 3:
-        return "Квебрит";
+        return (
+          <div>
+            Квебрит
+            {QuebrithSVG()}
+          </div>
+        );
       case 4:
-        return "";
+        return (
+          <div>
+            Киноварь
+            {VermilionSVG()}
+          </div>
+        );
       case 5:
-        return "";
+        return (
+          <div>
+            Купорос
+            {VitriolSVG()}
+          </div>
+        );
       case 6:
-        return "Рэбис";
+        return (
+          <div>
+            Рэбис
+            {RebisSVG()}
+          </div>
+        );
       case 7:
-        return "";
+        return (
+          <div>
+            Солнце
+            {SolSVG()}
+          </div>
+        );
       case 8:
-        return "";
+        return (
+          <div>
+            Фульгор
+            {FulgurSVG()}
+          </div>
+        );
       case 9:
-        return "Эфир";
+        return (
+          <div>
+            Эфир
+            {AetherSVG()}
+          </div>
+        );
     }
   };
 
-  const drawItemType = () => {
+  const drawItemEntityType = () => {
     switch (data.itemType) {
       case 1:
         return "";
       case 2:
-        return "Инстурмент";
+        return "Инструмент";
       case 3:
         return "Алхимия";
       case 4:
@@ -78,35 +188,14 @@ const ShowItem = ({ data }: ShowItemProps) => {
     }
   };
 
-  const drawItemFromType = () => {
-    switch (data.itemType) {
-      case 1:
-        return <div></div>;
-      case 2:
-        return <div></div>;
-      case 3:
-        return <div></div>;
-      case 4:
-        return drawArmor();
-      case 5:
-        return drawWeapon();
-      case 6:
-        return drawFormula();
-      case 7:
-        return drawBlueprint();
-      case 8:
-        return drawComponent();
-      case 9:
-        return drawItem();
-    }
-  };
+  /////////////////////////////////////////////////////
 
   const drawArmor = () => {
     return (
       <li className="stats flex flex-row py-2">
         <div className="stat" title="Тип брони">
           <div>Тип брони</div>
-          <div>{}</div>
+          <div>{drawArmorType()}</div>
         </div>
         <div className="stat" title="Надежность">
           <div>Над</div>
@@ -205,15 +294,28 @@ const ShowItem = ({ data }: ShowItemProps) => {
           <div>СЛ</div>
           <div>{data.complexity}</div>
         </div>
+        {data.isAlchemical ? (
         <div className="stat" title="Тип субстанции">
           <div>Тип субстанции</div>
-          <div>{drawSubstanceType()}</div>
+          {drawSubstanceType()}
         </div>
+        ) : (<div></div>)}
       </li>
     );
   };
 
   const drawItem = () => {
+    return (
+      <li className="stats flex flex-row py-2">
+        <div className="stat" title="Скрытность">
+          <div>Скрыт</div>
+          <div>{drawStealthType()}</div>
+        </div>
+      </li>
+    );
+  };
+
+  const drawTool = () => {
     return (
       <li className="stats flex flex-row py-2">
         <div className="stat" title="Скрытность">
@@ -275,6 +377,29 @@ const ShowItem = ({ data }: ShowItemProps) => {
     );
   };
 
+  const drawItemFromType = () => {
+    switch (data.itemType) {
+      case 1:
+        return <div></div>;
+      case 2:
+        return drawTool();
+      case 3:
+        return <div></div>;
+      case 4:
+        return drawArmor();
+      case 5:
+        return drawWeapon();
+      case 6:
+        return drawFormula();
+      case 7:
+        return drawBlueprint();
+      case 8:
+        return drawComponent();
+      case 9:
+        return drawItem();
+    }
+  };
+
   useEffect(() => {}, [data]);
 
   //Когда будут добавлены изображения, то добавить это после <ul className="p-2 params">
@@ -290,12 +415,13 @@ const ShowItem = ({ data }: ShowItemProps) => {
       <ul className="p-2 params">
         <li>
           <i>
-            {drawItemType()}, {drawAvailabilityType()}
+            {drawItemEntityType()}
+            {drawAvailabilityType()}
           </i>
         </li>
         <li>
-          <strong>Стоимость</strong> {data.price},
-          <strong> Вес:</strong> {data.weight}кг
+          <strong>Стоимость</strong> {data.price},<strong> Вес:</strong>{" "}
+          {data.weight}кг
         </li>
         {data.skill !== null ? (
           <li>

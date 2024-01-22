@@ -1,6 +1,30 @@
 import { OptionsParamsLoad } from "entities/Interface";
-import { ItemStealthType } from "shared/enums/ItemEnums";
+import { ItemStealthType, SubstanceType, WhereToFindEnum } from "shared/enums/ItemEnums";
 import generalService from "shared/services/general.service";
+
+const SubstanceOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
+  const availabilityTypeKeys = Object.keys(SubstanceType).filter((v) =>
+    isNaN(Number(v))
+  );
+  const ITOptions = availabilityTypeKeys.map((key) => ({
+    label: key,
+    value: SubstanceType[key],
+  }));
+  setItems(ITOptions);
+  console.log(ITOptions);
+};
+
+const WhereToFindOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
+  const availabilityTypeKeys = Object.keys(WhereToFindEnum).filter((v) =>
+    isNaN(Number(v))
+  );
+  const ITOptions = availabilityTypeKeys.map((key) => ({
+    label: key,
+    value: WhereToFindEnum[key],
+  }));
+  setItems(ITOptions);
+  console.log(ITOptions);
+};
 
 const StealthOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
   const availabilityTypeKeys = Object.keys(ItemStealthType).filter((v) =>
@@ -36,4 +60,4 @@ const SourceOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
       }
   };
 
-  export {StealthOptionsLoad, SourceOptionsLoad}
+  export {WhereToFindOptionsLoad, StealthOptionsLoad, SourceOptionsLoad}

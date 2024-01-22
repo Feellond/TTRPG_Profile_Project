@@ -27,9 +27,9 @@ enum ItemOriginType {
 
 enum ItemStealthType {
   CantHide = 1,
-  Large = 2,
+  Tiny = 2,
   Small = 3,
-  Tiny = 4,
+  Large = 4,
 }
 
 enum ArmorType {
@@ -61,37 +61,48 @@ enum WeaponEquipmentType {
   Ammunition = 10,
 }
 
-enum ItemType {
-  None = 0,
-}
-
 enum SubstanceType {
-  Aer = 1,
-  Hydragenium = 2,
-  Quebrith = 3,
-  Vermilion = 4,
-  Vitriol = 5,
-  Rebis = 6,
-  Sol = 7,
-  Fulgur = 8,
-  Aether = 9,
+  Caelum = 1, //Аэр
+  Hydragenium = 2, //Гидраген
+  Quebrith = 3, //Квебрит
+  Vermilion = 4,  //Киноварь
+  Vitriol = 5,  //Купорос
+  Rebis = 6,  //Рэбис
+  Sol = 7,    //Солнце
+  Fulgur = 8, //Фульгор
+  Aether = 9, //Эфир
 }
 
 enum WhereToFindEnum {
   Caves = "Пещеры",
   Cities = "Города",
-  ImpTerritory = "Территория бесов или бесы",
+  Imps = "Бесы",
+  ImpTerritory = "Территория бесов",
+  Mages = "Маги",
+  PowerPlace = "Места силы",
   Fields = "Поля",
+  Plantations = "Плантации",
   Forests = "Леса",
   Mountains = "Горы",
   Underground = "Под землей",
   BlueMountains = "Синие горы",
   EndriagNests = "Гнезда эндриаг",
   OceanFloor = "Дно океана",
+  Rivers = "Реки",
+  RiversCoast = "Берега реки",
   Coastline = "Побережье",
   Swamps = "Болота",
   Buy = "Покупается",
   Craft = "Изготавливается",
+  Anywhere = "Где угодно на поверхности земли",
+  Everywhere = "Где угодно",
+  Campfire = "Костер",
+  Burned = "Сгоревшие предметы",
+  Monsters = "Чудовища",
+  Animals = "Животные",
+  Birds = "Птицы",
+  Wolfs = "Волки",
+  Wyverns = "Виверны"
 }
 
 export {
