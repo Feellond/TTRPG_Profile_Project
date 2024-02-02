@@ -8,5 +8,7 @@ namespace TTRPG_Project.BL.DTO.Items.Request
         public int Reliability { get; set; }
         public int AmountOfEnhancements { get; set; }
         public int Stiffness { get; set; }
+        public int ItemOriginType { get; set; }
+        public int EquipmentType { get; set; }
     }
 }

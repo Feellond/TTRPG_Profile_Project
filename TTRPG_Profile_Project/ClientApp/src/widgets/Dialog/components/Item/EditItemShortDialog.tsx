@@ -49,8 +49,8 @@ const EditItemShortDialog = ({
     data.availabilityType = dialogData.availabilityType;
     data.weight = dialogData.weight;
     data.price = dialogData.price;
-    data.itemBaseEffectLists = dialogData.itemBaseEffectLists;
-    data.creatureRewardLists = dialogData.creatureRewardLists;
+    data.itemBaseEffectList = dialogData.itemBaseEffectList;
+    data.creatureRewardList = dialogData.creatureRewardList;
     data.source = dialogData.source;
     data.itemType = dialogData.itemType;
     data.accuracy = dialogData.accuracy;
@@ -66,8 +66,8 @@ const EditItemShortDialog = ({
     data.complexity = dialogData.complexity;
     data.timeSpend = dialogData.timeSpend;
     data.additionalPayment = dialogData.additionalPayment;
-    data.formulaSubstanceLists = dialogData.formulaSubstanceLists;
-    data.blueprintComponentLists = dialogData.blueprintComponentLists;
+    data.formulaSubstanceList = dialogData.formulaSubstanceList;
+    data.blueprintComponentList = dialogData.blueprintComponentList;
     data.whereToFind = dialogData.whereToFind;
     data.amount = dialogData.amount;
     data.isAlchemical = dialogData.isAlchemical;
@@ -83,8 +83,8 @@ const EditItemShortDialog = ({
     setValue("availabilityType", data.availabilityType);
     setValue("weight", data.weight);
     setValue("price", data.price);
-    setValue("itemBaseEffectLists", data.itemBaseEffectLists);
-    setValue("creatureRewardLists", data.creatureRewardLists);
+    setValue("itemBaseEffectList", data.itemBaseEffectList);
+    setValue("creatureRewardList", data.creatureRewardList);
     setValue("source", data.source);
     setValue("itemType", data.itemType);
     setValue("accuracy", data.accuracy);
@@ -100,8 +100,8 @@ const EditItemShortDialog = ({
     setValue("complexity", data.complexity);
     setValue("timeSpend", data.timeSpend);
     setValue("additionalPayment", data.additionalPayment);
-    setValue("formulaSubstanceLists", data.formulaSubstanceLists);
-    setValue("blueprintComponentLists", data.blueprintComponentLists);
+    setValue("formulaSubstanceList", data.formulaSubstanceList);
+    setValue("blueprintComponentList", data.blueprintComponentList);
     setValue("whereToFind", data.whereToFind);
     setValue("amount", data.amount);
     setValue("isAlchemical", data.isAlchemical);

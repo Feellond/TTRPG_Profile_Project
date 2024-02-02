@@ -9,6 +9,7 @@ using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Filters;
 using TTRPG_Project.BL.DTO.Items.Request;
 using TTRPG_Project.BL.Services.Items;
+using TTRPG_Project.DAL.Const;
 using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.Web.Controllers
@@ -31,7 +32,6 @@ namespace TTRPG_Project.Web.Controllers
         private readonly ItemService _itemService;
         private readonly ToolService _toolService;
         private readonly WeaponService _weaponService;
-        private readonly IMapper _mapper;
 
         public ItemController(
             AlchemicalItemService alchemicalItemService,
@@ -42,8 +42,7 @@ namespace TTRPG_Project.Web.Controllers
             ItemBaseService itemBaseService,
             ItemService itemService, 
             ToolService toolService, 
-            WeaponService weaponService,
-            IMapper mapper
+            WeaponService weaponService
             )
         {
             _alchemicalItemService = alchemicalItemService;
@@ -55,7 +54,6 @@ namespace TTRPG_Project.Web.Controllers
             _itemService = itemService;
             _toolService = toolService;
             _weaponService = weaponService;
-            _mapper = mapper;
         }
         #endregion
 
@@ -69,11 +67,7 @@ namespace TTRPG_Project.Web.Controllers
         public async Task<IActionResult> GetAlchemicalItems()
         {
             var result = await _alchemicalItemService.GetAllAsync();
-            var list = _mapper.Map<AlchemicalItemRequest[]>(result);
-            foreach (var item in list)
-                item.ItemType = 3;
-
-            return Ok(list);
+            return Ok(result);
         }
 
         /// <summary>
@@ -107,7 +101,7 @@ namespace TTRPG_Project.Web.Controllers
         ///  "availabilityType": 1,
         ///  "weight": 0.5,
         ///  "price": 100,
-        ///  "itemBaseEffectLists": [
+        ///  "itemBaseEffectList": [
         ///    {
         ///      "effectId": 1,
         ///      "damage": "1d6+2",
@@ -115,7 +109,7 @@ namespace TTRPG_Project.Web.Controllers
         ///      "isDealDamage": true
         ///    }
         ///  ],
-        ///   "creatureRewardLists": [
+        ///   "creatureRewardList": [
         ///  {
         ///    "creatureId": 1,
         ///    "itemBaseId": 2,
@@ -132,8 +126,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newAlcItem = _mapper.Map<AlchemicalItem>(request);
-                var result = await _alchemicalItemService.CreateAsync(newAlcItem);
+                var result = await _alchemicalItemService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -146,8 +139,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var AlcItem = _mapper.Map<AlchemicalItem>(request);
-                var result = await _alchemicalItemService.UpdateAsync(AlcItem);
+                var result = await _alchemicalItemService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -158,11 +150,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("alchemicalitem")]
         public async Task<IActionResult> DeleteAlchemicalItem(int alchemicalItemId)
         {
-            var item = await _alchemicalItemService.GetByIdAsync(alchemicalItemId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _alchemicalItemService.DeleteAsync(item!);
+            var result = await _alchemicalItemService.DeleteAsync(alchemicalItemId);
             return Ok(result);
         }
         #endregion
@@ -194,12 +182,11 @@ namespace TTRPG_Project.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost("armor")]
-        public async Task<IActionResult> CreateArmor([FromBody] AlchemicalItemRequest request)
+        public async Task<IActionResult> CreateArmor([FromBody] ArmorRequest request)
         {
             if (ModelState.IsValid)
             {
-                var newArmor = _mapper.Map<Armor>(request);
-                var result = await _armorService.CreateAsync(newArmor);
+                var result = await _armorService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -208,12 +195,11 @@ namespace TTRPG_Project.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut("armor")]
-        public async Task<IActionResult> UpdateArmor([FromBody] AlchemicalItemRequest request)
+        public async Task<IActionResult> UpdateArmor([FromBody] ArmorRequest request)
         {
             if (ModelState.IsValid)
             {
-                var armor = _mapper.Map<Armor>(request);
-                var result = await _armorService.UpdateAsync(armor);
+                var result = await _armorService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -222,13 +208,9 @@ namespace TTRPG_Project.Web.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("armor")]
-        public async Task<IActionResult> DeleteArmor(int alchemicalItemId)
+        public async Task<IActionResult> DeleteArmor(int armorId)
         {
-            var item = await _armorService.GetByIdAsync(alchemicalItemId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _armorService.DeleteAsync(item!);
+            var result = await _armorService.DeleteAsync(armorId);
             return Ok(result);
         }
         #endregion
@@ -264,8 +246,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newBlueprint = _mapper.Map<Blueprint>(request);
-                var result = await _blueprintService.CreateAsync(newBlueprint);
+                var result = await _blueprintService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -278,8 +259,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var blueprint = _mapper.Map<Blueprint>(request);
-                var result = await _blueprintService.UpdateAsync(blueprint);
+                var result = await _blueprintService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -290,11 +270,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("blueprint")]
         public async Task<IActionResult> DeleteBlueprint(int blueprintId)
         {
-            var item = await _blueprintService.GetByIdAsync(blueprintId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _blueprintService.DeleteAsync(item!);
+            var result = await _blueprintService.DeleteAsync(blueprintId);
             return Ok(result);
         }
         #endregion
@@ -330,8 +306,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newComponent = _mapper.Map<DAL.Entities.Database.Items.Component>(request);
-                var result = await _componentService.CreateAsync(newComponent);
+                var result = await _componentService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -344,8 +319,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var component = _mapper.Map<DAL.Entities.Database.Items.Component>(request);
-                var result = await _componentService.UpdateAsync(component);
+                var result = await _componentService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -356,11 +330,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("component")]
         public async Task<IActionResult> DeleteComponent(int componentId)
         {
-            var item = await _componentService.GetByIdAsync(componentId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _componentService.DeleteAsync(item!);
+            var result = await _componentService.DeleteAsync(componentId);
             return Ok(result);
         }
         #endregion
@@ -396,8 +366,8 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newFormula = _mapper.Map<Formula>(request);
-                var result = await _formulaService.CreateAsync(newFormula);
+                //var newFormula = _mapper.Map<Formula>(request);               
+                var result = await _formulaService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -410,8 +380,8 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var formula = _mapper.Map<Formula>(request);
-                var result = await _formulaService.UpdateAsync(formula);
+                //var formula = _mapper.Map<Formula>(request);
+                var result = await _formulaService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -422,11 +392,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("formula")]
         public async Task<IActionResult> DeleteFormula(int formulaId)
         {
-            var item = await _formulaService.GetByIdAsync(formulaId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _formulaService.DeleteAsync(item!);
+            var result = await _formulaService.DeleteAsync(formulaId);
             return Ok(result);
         }
         #endregion
@@ -463,8 +429,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newItem = _mapper.Map<Item>(request);
-                var result = await _itemService.CreateAsync(newItem);
+                var result = await _itemService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -477,8 +442,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var item = _mapper.Map<Item>(request);
-                var result = await _itemService.UpdateAsync(item);
+                var result = await _itemService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -489,11 +453,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("item")]
         public async Task<IActionResult> DeleteItem(int itemId)
         {
-            var item = await _itemService.GetByIdAsync(itemId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _itemService.DeleteAsync(item!);
+            var result = await _itemService.DeleteAsync(itemId);
             return Ok(result);
         }
         #endregion
@@ -529,8 +489,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newItem = _mapper.Map<Tool>(request);
-                var result = await _toolService.CreateAsync(newItem);
+                var result = await _toolService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -543,8 +502,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var item = _mapper.Map<Tool>(request);
-                var result = await _toolService.UpdateAsync(item);
+                var result = await _toolService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -555,11 +513,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("tool")]
         public async Task<IActionResult> DeleteTool(int toolId)
         {
-            var item = await _toolService.GetByIdAsync(toolId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _toolService.DeleteAsync(item!);
+            var result = await _toolService.DeleteAsync(toolId);
             return Ok(result);
         }
         #endregion
@@ -595,8 +549,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newItem = _mapper.Map<Weapon>(request);
-                var result = await _weaponService.CreateAsync(newItem);
+                var result = await _weaponService.CreateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -609,8 +562,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var item = _mapper.Map<Weapon>(request);
-                var result = await _weaponService.UpdateAsync(item);
+                var result = await _weaponService.UpdateAsync(request);
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
@@ -621,11 +573,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("weapon")]
         public async Task<IActionResult> DeleteWeapon(int toolId)
         {
-            var item = await _weaponService.GetByIdAsync(toolId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _weaponService.DeleteAsync(item!);
+            var result = await _weaponService.DeleteAsync(toolId);
             return Ok(result);
         }
         #endregion

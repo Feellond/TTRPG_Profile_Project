@@ -8,6 +8,7 @@ namespace TTRPG_Project.BL.DTO.Exceptions
 {
     public class CustomException : Exception
     {
+        public string Details { get; set; }
         public int StatusCode { get; set; }
 
         public CustomException()
@@ -19,6 +20,11 @@ namespace TTRPG_Project.BL.DTO.Exceptions
             : base(message)
         {
 
+        }
+        public CustomException(string message, string details)
+            : base(message)
+        {
+            Details = details;
         }
     }
 }

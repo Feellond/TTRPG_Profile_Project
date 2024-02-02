@@ -10,7 +10,7 @@ namespace TTRPG_Project.BL.DTO.Items.Request
         public int AvailabilityType { get; set; }
         public float Weight { get; set; }
         public int Price { get; set; }
-        public List<ItemBaseEffectListDTO> ItemBaseEffectLists { get; set; } = new();
-        public List<CreatureRewardListDTO> CreatureRewardLists { get; set; } = new();
+        public List<ItemBaseEffectListDTO> ItemBaseEffectList { get; set; } = new();
+        public List<CreatureRewardListDTO> CreatureRewardList { get; set; } = new();
     }
 }

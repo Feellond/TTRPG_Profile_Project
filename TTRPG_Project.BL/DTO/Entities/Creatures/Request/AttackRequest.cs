@@ -12,6 +12,6 @@ namespace TTRPG_Project.BL.DTO.Creatures.Request
         public int Distance { get; set; }
         public int AttackSpeed { get; set; }
         public int AttackEffectListId { get; set; }
-        public List<AttackEffectListDTO> AttackEffectLists { get; set; } = new();
+        public List<AttackEffectListDTO> AttackEffectList { get; set; } = new();
     }
 }

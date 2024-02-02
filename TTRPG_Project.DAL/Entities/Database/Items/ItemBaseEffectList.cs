@@ -5,7 +5,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
 {
     public class ItemBaseEffectList
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int? ItemBaseId { get; set; }
         public ItemBase? ItemBase { get; set; }
         public int? EffectId { get; set; }

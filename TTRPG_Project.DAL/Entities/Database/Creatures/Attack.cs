@@ -15,6 +15,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public int Distance { get; set; }
         public int AttackSpeed { get; set; }
         public int AttackEffectListId { get; set; }
-        public List<AttackEffectList> AttackEffectLists { get; set; } = new();
+        public List<AttackEffectList> AttackEffectList { get; set; } = new();
     }
 }

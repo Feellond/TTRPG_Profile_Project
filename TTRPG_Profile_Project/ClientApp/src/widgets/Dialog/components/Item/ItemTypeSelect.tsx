@@ -12,7 +12,7 @@ import {
   InputNumber,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
-import { ItemDTO } from "shared/models";
+import { Component, ItemDTO } from "shared/models";
 import { InputText } from "primereact/inputtext";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { SelectItem } from "primereact/selectitem";
@@ -21,7 +21,10 @@ import { StealthOptionsLoad } from "entities/GeneralFunc";
 import {
   ArmorEquipmentTypeLoad,
   ArmorTypeLoad,
+  ComponentsTypeLoad,
   ItemOriginTypeLoad,
+  SubstanceTypeLoad,
+  WhereToFindTypeLoad,
 } from "entities/ItemFunc/components/OptionsLoad";
 import { MultiSelect } from "primereact/multiselect";
 import { SubstanceType } from "shared/enums/ItemEnums";
@@ -47,13 +50,16 @@ const ItemTypeSelect = ({
 }: ItemTypeSelectProps) => {
   const [isAmmunitionChecked, setIsAmmunitionChecked] =
     useState<boolean>(false);
-    const [isAlchemicalChecked, setIsAlchemicalChecked] =
+  const [isAlchemicalChecked, setIsAlchemicalChecked] =
     useState<boolean>(false);
+  const [componentsOptions, setComponentsOptions] = useState<SelectItem[]>([]);
   const [skillOptions, setSkillOptions] = useState<SelectItem[]>([]);
   const [stealthOptions, setStealthOptions] = useState<SelectItem[]>([]);
   const [itemOriginOptions, setItemOriginOptions] = useState<SelectItem[]>([]);
   const [armorOptions, setArmorOptions] = useState<SelectItem[]>([]);
-  const [whereToFindOptions, setWhereToFindOptions] = useState<SelectItem[]>([]);
+  const [whereToFindOptions, setWhereToFindOptions] = useState<SelectItem[]>(
+    []
+  );
   const [substanceOptions, setSubstanceOptions] = useState<SelectItem[]>([]);
   const [armorEquipmentOptions, setArmorEquipmentOptions] = useState<
     SelectItem[]
@@ -61,11 +67,14 @@ const ItemTypeSelect = ({
   const [Content, setContent] = useState<any>();
 
   useEffect(() => {
+    ComponentsTypeLoad({setItems: setComponentsOptions});
     SkillOptionsLoad({ setItems: setSkillOptions });
     StealthOptionsLoad({ setItems: setStealthOptions });
     ItemOriginTypeLoad({ setItems: setItemOriginOptions });
     ArmorTypeLoad({ setItems: setArmorOptions });
     ArmorEquipmentTypeLoad({ setItems: setArmorEquipmentOptions });
+    WhereToFindTypeLoad({setItems: setWhereToFindOptions});
+    SubstanceTypeLoad({setItems: setSubstanceOptions})
   }, []);
 
   useEffect(() => {
@@ -168,10 +177,12 @@ const ItemTypeSelect = ({
         <span className="field">
           <label>Дистанция</label>
           <InputNumber
-            value={getValues("distance")}
+            //value={getValues("distance")}
+            value={data.distance}
             placeholder="Число"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              setValue("distance", e.target.value);
+              register("distance", { value: e.target.value });
+              //setValue("distance", e.target.value);
             }}
           ></InputNumber>
         </span>
@@ -195,7 +206,6 @@ const ItemTypeSelect = ({
               </>
             )}
           />
-
         </span>
         <span className="field">
           <label>Количество улучшений</label>
@@ -371,27 +381,33 @@ const ItemTypeSelect = ({
     return <div></div>;
   };
 
-  const [substances, setSubstances] = useState(data.formulaSubstanceLists || []);
+  const [substances, setSubstances] = useState(
+    data.formulaSubstanceList || []
+  );
   const handleAddSubstance = () => {
-    setSubstances([...substances, {id: 0, substanceType: 1, amount: 0 }]);
+    setSubstances([...substances, { id: 0, substanceType: 1, amount: 0 }]);
+    register("formulaSubstanceList", { value: substances });
   };
 
   const handleRemoveSubstance = (index: number) => {
     const newSubstances = [...substances];
     newSubstances.splice(index, 1);
     setSubstances(newSubstances);
+    register("formulaSubstanceList", { value: substances });
   };
 
   const handleSubstanceTypeChange = (index: number, substanceType: number) => {
     const newSubstances = [...substances];
     newSubstances[index].substanceType = substanceType;
     setSubstances(newSubstances);
+    register("formulaSubstanceList", { value: substances });
   };
 
-  const handleAmountChange = (index: number, amount: number) => {
+  const handleAmountSubstanceChange = (index: number, amount: number) => {
     const newSubstances = [...substances];
     newSubstances[index].amount = amount;
     setSubstances(newSubstances);
+    register("formulaSubstanceList", { value: substances });
   };
 
   const FormulaItem = () => {
@@ -441,14 +457,14 @@ const ItemTypeSelect = ({
         </div>
         <div>
           <span className="field">
-            <label>formulaComponentLists</label>
+            <label>formulaComponentList</label>
             <div>
-              {data.formulaSubstanceLists ? (
-                data.formulaSubstanceLists.map((substance, index) => (
+              {substances ? (
+                substances.map((substance, index) => (
                   <div key={index}>
                     <span className="field">
                       <label>Substance Type:</label>
-                      <select
+                      <Dropdown
                         value={substance.substanceType}
                         onChange={(e) =>
                           handleSubstanceTypeChange(
@@ -456,13 +472,10 @@ const ItemTypeSelect = ({
                             parseInt(e.target.value)
                           )
                         }
-                      >
-                        {Object.entries(SubstanceType).map(([key, value]) => (
-                          <option key={value} value={value}>
-                            {key}
-                          </option>
-                        ))}
-                      </select>
+                        optionLabel="label"
+                        options={substanceOptions}
+                        placeholder="Выберите тип субстанции"
+                      />
                     </span>
                     <span className="field">
                       <label>Amount:</label>
@@ -470,7 +483,7 @@ const ItemTypeSelect = ({
                         type="number"
                         value={substance.amount}
                         onChange={(e) =>
-                          handleAmountChange(index, parseInt(e.target.value))
+                          handleAmountSubstanceChange(index, parseInt(e.target.value))
                         }
                       />
                     </span>
@@ -482,12 +495,43 @@ const ItemTypeSelect = ({
               ) : (
                 <div></div>
               )}
-              <button type="button" onClick={handleAddSubstance}>Add Substance</button>
+              <button type="button" onClick={handleAddSubstance}>
+                Add Substance
+              </button>
             </div>
           </span>
         </div>
       </div>
     );
+  };
+
+  const [components, setComponents] = useState(
+    data.blueprintComponentList || []
+  );
+  const handleAddComponent = () => {
+    setComponents([...components, { id: 0, component: null, amount: 0 }]);
+    register("blueprintComponentList", { value: components });
+  };
+
+  const handleRemoveComponent = (index: number) => {
+    const newComponents = [...components];
+    newComponents.splice(index, 1);
+    setComponents(newComponents);
+    register("blueprintComponentList", { value: components });
+  };
+
+  const handleComponentTypeChange = (index: number, component: Component) => {
+    const newComponents = [...components];
+    newComponents[index].component = component;
+    setComponents(newComponents);
+    register("blueprintComponentList", { value: components });
+  };
+
+  const handleAmountComponentChange = (index: number, amount: number) => {
+    const newComponents = [...components];
+    newComponents[index].amount = amount;
+    setComponents(newComponents);
+    register("blueprintComponentList", { value: components });
   };
 
   const BlueprintItem = () => {
@@ -530,19 +574,48 @@ const ItemTypeSelect = ({
           />
         </span>
         <span className="field">
-          <label>blueprintComponentLists</label>
-          <Dropdown
-            //value={data.}
-            showClear
-            onChange={(e) => {
-              register("", { value: e.value });
-
-              //setValue("isAmmunition", e.checked);
-              //console.log(getValues());
-            }}
-            //options={}
-            placeholder="Выберите тип скрытности"
-          />
+          <label>blueprintComponentList</label>
+          <div>
+            {components ? (
+              components.map((component, index) => (
+                <div key={index}>
+                  <span className="field">
+                    <label>Component Type:</label>
+                    <Dropdown
+                        value={component.component}
+                        onChange={(e) =>
+                          handleComponentTypeChange(
+                            index,
+                            e.value
+                          )
+                        }
+                        optionLabel="label"
+                        options={componentsOptions}
+                        placeholder="Выберите компоненты"
+                      />
+                  </span>
+                  <span className="field">
+                    <label>Amount:</label>
+                    <input
+                      type="number"
+                      value={component.amount}
+                      onChange={(e) =>
+                        handleAmountComponentChange(index, parseInt(e.target.value))
+                      }
+                    />
+                  </span>
+                  <button onClick={() => handleRemoveComponent(index)}>
+                    Remove Substance
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div></div>
+            )}
+            <button type="button" onClick={handleAddComponent}>
+              Add Substance
+            </button>
+          </div>
         </span>
       </div>
     );

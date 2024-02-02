@@ -24,7 +24,7 @@ namespace TTRPG_Project.BL.Services.Items
         {
             var alchemicalItems = await _dbContext.AlchemicalItems.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Select(item => new ItemBaseResponce
                 {
@@ -35,13 +35,13 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.AlchemicalItem,
                 }).ToListAsync();
 
             var armors = await _dbContext.Armors.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Select(item => new ItemBaseResponce
                 {
@@ -52,7 +52,7 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Armor,
                     Reliability = item.Reliability,
                     AmountOfEnhancements = item.AmountOfEnhancements,
@@ -61,9 +61,9 @@ namespace TTRPG_Project.BL.Services.Items
 
             var blueprints = await _dbContext.Blueprints.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Include(bcl => bcl.BlueprintComponentLists)
+                .Include(bcl => bcl.BlueprintComponentList)
                     .ThenInclude(c => c.Component)
                 .Select(item => new ItemBaseResponce
                 {
@@ -74,17 +74,17 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Blueprint,
                     Complexity = item.Complexity,
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
-                    BlueprintComponentLists = item.BlueprintComponentLists,
+                    BlueprintComponentList = item.BlueprintComponentList,
                 }).ToListAsync();
 
             var components = await _dbContext.Components.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Select(item => new ItemBaseResponce
                 {
@@ -95,7 +95,7 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Component,
                     WhereToFind = item.WhereToFind,
                     Amount = item.Amount,
@@ -106,7 +106,7 @@ namespace TTRPG_Project.BL.Services.Items
 
             var formulas = await _dbContext.Formulas.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(fcl => fcl.FormulaSubstanceList)
                 .Select(item => new ItemBaseResponce
@@ -118,17 +118,17 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Formula,
                     Complexity = item.Complexity,
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
-                    FormulaSubstanceLists = item.FormulaSubstanceList,
+                    FormulaSubstanceList = item.FormulaSubstanceList,
                 }).ToListAsync();
 
             var items = await _dbContext.Items.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Select(item => new ItemBaseResponce
                 {
@@ -139,7 +139,7 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Item,
                     StealthType = item.StealthType,
                     Type = item.Type,
@@ -147,7 +147,7 @@ namespace TTRPG_Project.BL.Services.Items
 
             var tools = await _dbContext.Tools.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Select(item => new ItemBaseResponce
                 {
@@ -158,13 +158,13 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Tool,
                 }).ToListAsync();
 
             var weapons = await _dbContext.Weapons.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(ibe => ibe.ItemBaseEffectLists)
+                .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(s => s.Skill)
                 .Select(item => new ItemBaseResponce
@@ -176,7 +176,7 @@ namespace TTRPG_Project.BL.Services.Items
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
-                    ItemBaseEffectLists = item.ItemBaseEffectLists,
+                    ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Weapon,
                     Accuracy = item.Accuracy,
                     Damage = item.Damage,

@@ -97,69 +97,78 @@ const ShowItem = ({ data }: ShowItemProps) => {
     }
   };
 
-  const drawSubstanceType = () => {
-    switch (data.substanceType) {
+  const drawSubstanceType = (substanceType: number, amount: number) => {
+    switch (substanceType) {
       case 1:
         return (
-          <div>
+          <div className="flex m-auto">
             Аэр
             {CaelumSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 2:
         return (
-          <div>
+          <div className="flex m-auto">
             Гидраген
             {HydragenumSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 3:
         return (
-          <div>
+          <div className="flex m-auto">
             Квебрит
             {QuebrithSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 4:
         return (
-          <div>
+          <div className="flex m-auto">
             Киноварь
             {VermilionSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 5:
         return (
-          <div>
+          <div className="flex m-auto">
             Купорос
             {VitriolSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 6:
         return (
-          <div>
+          <div className="flex m-auto">
             Рэбис
             {RebisSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 7:
         return (
-          <div>
+          <div className="flex m-auto">
             Солнце
             {SolSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 8:
         return (
-          <div>
+          <div className="flex m-auto">
             Фульгор
             {FulgurSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
       case 9:
         return (
-          <div>
+          <div className="flex m-auto">
             Эфир
             {AetherSVG()}
+            {amount !== 0 ? (<p>(x{amount});</p>) : (<p></p>)}
           </div>
         );
     }
@@ -230,14 +239,10 @@ const ShowItem = ({ data }: ShowItemProps) => {
         </div>
         <div className="stat" title="Компоненты">
           <div>Компоненты</div>
-          {data.formulaSubstanceLists.length > 0 ? (
-            <div>
-              {data.formulaSubstanceLists.map((item, index) => (
-                <a key={index}>
-                  {item.substanceType}(x{item.amount});{" "}
-                </a>
-              ))}
-            </div>
+          {data.formulaSubstanceList.length > 0 ? (
+            data.formulaSubstanceList.map((item, index) =>
+              drawSubstanceType(item.substanceType, item.amount)
+            )
           ) : (
             <div>-</div>
           )}
@@ -263,9 +268,9 @@ const ShowItem = ({ data }: ShowItemProps) => {
         </div>
         <div className="stat" title="Компоненты">
           <div>Компоненты</div>
-          {data.blueprintComponentLists.length > 0 ? (
+          {data.blueprintComponentList.length > 0 ? (
             <div>
-              {data.blueprintComponentLists.map((item, index) => (
+              {data.blueprintComponentList.map((item, index) => (
                 <a key={index}>
                   {item.component.name}(x{item.amount});{" "}
                 </a>
@@ -297,7 +302,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
         {data.isAlchemical ? (
         <div className="stat" title="Тип субстанции">
           <div>Тип субстанции</div>
-          {drawSubstanceType()}
+          {drawSubstanceType(data.substanceType, 0)}
         </div>
         ) : (<div></div>)}
       </li>
@@ -360,9 +365,9 @@ const ShowItem = ({ data }: ShowItemProps) => {
         <div className="stat" title="Свойства">
           <div>
             <div>Свойства</div>
-            {data.itemBaseEffectLists.length > 0 ? (
+            {data.itemBaseEffectList.length > 0 ? (
               <div>
-                {data.itemBaseEffectLists.map((effect, index) => (
+                {data.itemBaseEffectList.map((effect, index) => (
                   <a key={index}>
                     {effect.effect.name}({effect.chancePercent}%);{" "}
                   </a>

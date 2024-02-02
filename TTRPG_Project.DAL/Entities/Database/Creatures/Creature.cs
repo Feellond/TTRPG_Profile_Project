@@ -24,7 +24,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public StatsList? StatsList { get; set; }
         public int? SkillsListId { get; set; }
         public SkillsList? SkillsList { get; set; }
-        public List<CreatureEffectList> CreatureEffectLists { get; set; } = new();
+        public List<CreatureEffectList> CreatureEffectList { get; set; } = new();
         public int EvasionBase { get; set; }
         public int AthleticsBase { get; set; }
         public int BlockBase { get; set; }
@@ -36,7 +36,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public string GroupSize { get; set; } = string.Empty;
         public List<Attack> Attacks { get; set; } = new();
         public List<Abilitiy> Abilities { get; set; } = new();
-        public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
+        public List<CreatureRewardList> CreatureRewardList { get; set; } = new();
         public List<Spell> Spells { get; set; } = new();
     }
 }

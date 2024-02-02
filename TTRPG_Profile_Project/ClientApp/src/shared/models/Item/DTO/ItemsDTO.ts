@@ -3,8 +3,8 @@ import { EntityBase, EntityItemBase, Source } from "shared/models/Base";
 import { CreatureReward, Skill } from "shared/models/Creature";
 
 export interface ItemShortDTO extends EntityItemBase {
-  itemBaseEffectLists: ItemBaseEffect[] | null;
-  creatureRewardLists: CreatureReward[] | null;
+  itemBaseEffectList: ItemBaseEffect[] | null;
+  creatureRewardList: CreatureReward[] | null;
   itemType: number;
 }
 
@@ -28,13 +28,13 @@ export interface ItemDTO extends ItemShortDTO {
   complexity: number | null;
   timeSpend: number | null;
   additionalPayment: number | null;
-  formulaSubstanceLists: FormulaComponentList[] | null;
+  formulaSubstanceList: FormulaComponentList[] | null;
 
   //blueprint
   //complexity: number;
   //timeSpend: number | null;
   //additionalPayment: number | null;
-  blueprintComponentLists: BlueprintComponentList[] | null;
+  blueprintComponentList: BlueprintComponentList[] | null;
 
   //component
   whereToFind: string | null;
@@ -42,8 +42,8 @@ export interface ItemDTO extends ItemShortDTO {
   //complexity: number;
   isAlchemical: boolean | null;
   substanceType: number | null;
-  //formulaComponentLists: FormulaComponentList[] | null;
-  //blueprintComponentLists: BlueprintComponentList[] | null;
+  //formulaComponentList: FormulaComponentList[] | null;
+  //blueprintComponentList: BlueprintComponentList[] | null;
 
   //armor
   //reliability: number | null;
@@ -56,7 +56,7 @@ export interface ItemDTO extends ItemShortDTO {
 }
 
 export interface ItemBaseEffect extends EntityBase {
-  itemBase: ItemShortDTO;
+  //itemBase: ItemShortDTO;
   effect: Effect;
   damage: string | null;
   chancePercent: number | null;
@@ -65,12 +65,13 @@ export interface ItemBaseEffect extends EntityBase {
 
 export interface FormulaComponentList extends EntityBase {
   //formula: Formula;
+  id: number | null;
   substanceType: number;
   amount: number;
 }
 
 export interface BlueprintComponentList extends EntityBase {
-  //blueprint: Blueprint;
+  id: number | null;
   component: Component;
   amount: number;
 }
@@ -89,12 +90,12 @@ export interface Formula extends EntityItemBase {
   complexity: number;
   timeSpend: number;
   additionalPayment: number;
-  formulaComponentLists: FormulaComponentList[];
+  formulaComponentList: FormulaComponentList[];
 }
 
 export interface Blueprint extends EntityItemBase {
   complexity: number;
   timeSpend: number;
   additionalPayment: number;
-  blueprintComponentLists: BlueprintComponentList[];
+  blueprintComponentList: BlueprintComponentList[];
 }

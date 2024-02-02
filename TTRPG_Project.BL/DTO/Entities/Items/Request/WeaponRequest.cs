@@ -1,4 +1,5 @@
 ﻿using TTRPG_Project.BL.DTO.Base;
+using TTRPG_Project.DAL.Entities.Database.Creatures;
 
 namespace TTRPG_Project.BL.DTO.Items.Request
 {
@@ -12,6 +13,9 @@ namespace TTRPG_Project.BL.DTO.Items.Request
         public int StealthType { get; set; }
         public int AmountOfEnhancements { get; set; }
         public bool IsAmmunition { get; set; }
+        public int Type { get; set; }
+        public int EquipmentType { get; set; }
         public int? SkillId { get; set; }
+        public Skill? Skill { get; set; }
     }
 }

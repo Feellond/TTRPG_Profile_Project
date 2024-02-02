@@ -26,6 +26,8 @@ namespace TTRPG_Project.BL.DTO.Entities.Items.Responce
         public int? StealthType { get; set; }
         public int? Type { get; set; }
         public int? Accuracy { get; set; }
+        public int? EquipmentType { get; set; }
+        public int? ItemOriginType { get; set; }
         public string Damage { get; set; } = string.Empty;
         //public int? Weapon_Reliability { get; set; }
         public int? Grip { get; set; }
@@ -34,10 +36,10 @@ namespace TTRPG_Project.BL.DTO.Entities.Items.Responce
         //public int? Weapon_AmountOfEnhancements { get; set; }
         public bool? IsAmmunition { get; set; }
         public int? SkillId { get; set; }
-        public List<FormulaSubstanceList>? FormulaSubstanceLists { get; set; } = new();
-        public List<BlueprintComponentList>? BlueprintComponentLists { get; set; } = new();
-        public List<ItemBaseEffectList> ItemBaseEffectLists { get; set; } = new();
-        public List<CreatureRewardList> CreatureRewardLists { get; set; } = new();
+        public List<FormulaSubstanceList>? FormulaSubstanceList { get; set; } = new();
+        public List<BlueprintComponentList>? BlueprintComponentList { get; set; } = new();
+        public List<ItemBaseEffectList> ItemBaseEffectList { get; set; } = new();
+        public List<CreatureRewardList> CreatureRewardList { get; set; } = new();
         public Skill? Skill { get; set; }
         public int ItemType { get; set; }
 

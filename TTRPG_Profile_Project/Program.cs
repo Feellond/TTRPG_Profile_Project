@@ -68,7 +68,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { 
+    options.SwaggerDoc("v1", new OpenApiInfo { //https://localhost:7167/swagger/index.html
         Title = "ToDo API", 
         Version = "v1", 
         Description = "An ASP.NET Core Web API for managing ToDo items",
