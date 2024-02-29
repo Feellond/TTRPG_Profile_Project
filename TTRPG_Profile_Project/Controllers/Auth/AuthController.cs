@@ -48,7 +48,7 @@ namespace TTRPG_Project.Web.Controllers.Security
                     return BadRequest(new ErrorResponse { Message = "Пользователь удален!" });
 
                 var responce = await _userService.LoginAsync(user, userLogin.IsRemember);
-                return Ok(responce);
+                return Ok(responce.Value);
             }
             return BadRequest(new ErrorResponse { Message = "Не правильно заполнена форма авторизации!" });
         }

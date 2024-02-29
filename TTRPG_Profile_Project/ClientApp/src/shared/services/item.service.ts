@@ -68,6 +68,17 @@ export class ItemService {
   }: ItemRequestDTO) {
     let apiString = "";
 
+    if (item) {
+      if (item.name === null || item.name === "") {
+        toast.current.show({
+          severity: "error",
+          summary: "Произошла ошибка",
+          detail: "Предмет не имеет наименования",
+        }); // Отображаем сообщение об ошибке в Toast
+        return false;
+      }
+    }
+
     switch (itemType) {
       case 1:
         apiString = API_BASEITEM;
@@ -96,20 +107,26 @@ export class ItemService {
       case 9:
         apiString = API_ITEM;
         break;
+      default:
+        toast.current.show({
+          severity: "error",
+          summary: "Произошла ошибка",
+          detail: "Не выбран тип предмета",
+        }); // Отображаем сообщение об ошибке в Toast
+        return false;
     }
+    console.log("executed")
+    console.log(apiString)
+    console.log(item)
 
     if (command === CommandEnum.GetList) {
       return await $api.get(apiString, { params: params });
     } else if (command === CommandEnum.Get) {
       return await $api.get(apiString + "/" + String(id));
     } else if (command === CommandEnum.Create) {
-      return await $api.post(apiString, {
-        weaponRequest: item,
-      });
+      return await $api.post(apiString, item);
     } else if (command === CommandEnum.Update) {
-      return await $api.put(apiString, {
-        weaponRequest: item,
-      });
+      return await $api.put(apiString, item);
     } else if (command === CommandEnum.Delete) {
       return await $api.delete(apiString + "/" + String(id));
     }

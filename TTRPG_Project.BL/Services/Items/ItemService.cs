@@ -1,5 +1,6 @@
 ﻿using IdentityModel;
 using Microsoft.EntityFrameworkCore;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -14,13 +15,13 @@ namespace TTRPG_Project.BL.Services.Items
     {
         public ItemService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<ItemBaseResponce> GetAllAsync()
         {
             var items = await _dbContext.Items.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -35,7 +36,13 @@ namespace TTRPG_Project.BL.Services.Items
                     Type = item.Type,
                 }).ToListAsync();
 
-            return items;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = items,
+            };
+
+            return responce;
         }
 
         public async Task<ItemBaseResponce?> GetByIdAsync(int id)
@@ -45,7 +52,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -60,7 +67,13 @@ namespace TTRPG_Project.BL.Services.Items
                     Type = item.Type,
                 }).FirstOrDefault();
 
-            return item;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = new List<ItemBaseInfo>() { item },
+            };
+
+            return responce;
         }
 
         public virtual async Task<bool> CreateAsync(ItemRequest request)
@@ -80,7 +93,7 @@ namespace TTRPG_Project.BL.Services.Items
                 }).ToList(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
                 StealthType = request.StealthType,
                 Type = request.Type,
@@ -100,7 +113,7 @@ namespace TTRPG_Project.BL.Services.Items
             item.UpdateDate = DateTime.Now;
             item.Weight = request.Weight;
             item.Price = request.Price;
-            item.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id;
+            item.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
             item.Description = request.Description;
             item.AvailabilityType = request.AvailabilityType;
             item.StealthType = request.StealthType; 

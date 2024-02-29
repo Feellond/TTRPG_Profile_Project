@@ -28,7 +28,7 @@ const emptyItem: ItemDTO = {
   formulaSubstanceList: null,
   blueprintComponentList: null,
   whereToFind: null,
-  amount: 0,
+  amount: null,
   isAlchemical: false,
   substanceType: 0,
   stiffness: null,

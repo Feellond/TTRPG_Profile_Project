@@ -1,17 +1,19 @@
-﻿using IdentityModel;
-using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
-using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using LinqKit;
 using TTRPG_Project.DAL.Const;
+using TTRPG_Project.BL.DTO.Entities.Items;
 
 namespace TTRPG_Project.BL.DTO.Filters
 {
     public class ItemFilter
     {
-        public List<Expression<Func<ItemBaseResponce, bool>>> whereExpression = new List<Expression<Func<ItemBaseResponce, bool>>>();
-        public List<Func<IQueryable<ItemBaseResponce>, IIncludableQueryable<ItemBaseResponce, object>>> includeExpression = new();
+        public List<Expression<Func<ItemBaseInfo, bool>>> whereExpression = new List<Expression<Func<ItemBaseInfo, bool>>>();
+        public List<Func<IQueryable<ItemBaseInfo>, IIncludableQueryable<ItemBaseInfo, object>>> includeExpression = new();
+
+        public int First { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
 
         public string? Name { get; set; }
         public List<int>? ItemType { get; set; }
@@ -21,7 +23,7 @@ namespace TTRPG_Project.BL.DTO.Filters
         {
             if (!string.IsNullOrEmpty(Name))
             {
-                Expression<Func<ItemBaseResponce, bool>> filter = entity =>
+                Expression<Func<ItemBaseInfo, bool>> filter = entity =>
                     entity.Name.ToLower().Contains(Name.ToLower());
 
                 whereExpression.Add(filter);
@@ -31,9 +33,9 @@ namespace TTRPG_Project.BL.DTO.Filters
                 if (ItemType.Count > 0)
                 {
                     var typeFilters = ItemType.Select(type =>
-                        PredicateBuilder.New<ItemBaseResponce>(entity => entity.ItemType == type)).ToList();
+                        PredicateBuilder.New<ItemBaseInfo>(entity => entity.ItemType == type)).ToList();
 
-                    Expression<Func<ItemBaseResponce, bool>> finalTypeFilter = typeFilters.Aggregate((current, next) => current.Or(next));
+                    Expression<Func<ItemBaseInfo, bool>> finalTypeFilter = typeFilters.Aggregate((current, next) => current.Or(next));
 
                     whereExpression.Add(finalTypeFilter);
                 }

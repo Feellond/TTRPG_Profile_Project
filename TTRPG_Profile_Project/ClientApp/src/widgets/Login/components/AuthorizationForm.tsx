@@ -7,12 +7,14 @@ import { Controller, useForm } from "react-hook-form";
 import { classNames } from "primereact/utils";
 import Store from "shared/store/store";
 import { ILoginDTO } from "shared/models";
+import { Card } from "primereact/card";
+import "../scss/style.scss";
 
 interface AuthorizationFormProps {
-    store?: Store,
+  store?: Store;
 }
 
-const AuthorizationForm = ({store} : AuthorizationFormProps) => {
+const AuthorizationForm = ({ store }: AuthorizationFormProps) => {
   const toast = useRef<Toast>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -27,7 +29,7 @@ const AuthorizationForm = ({store} : AuthorizationFormProps) => {
     setIsLoading(true);
 
     let loginData: ILoginDTO = {
-      userName: String(data.username),
+      login: String(data.login),
       password: String(data.password),
     };
 
@@ -39,7 +41,8 @@ const AuthorizationForm = ({store} : AuthorizationFormProps) => {
 
     if (store.isAuth) {
       const url = `/`;
-      window.open(url, "_blank");
+      //window.open(url, "_blank");
+      window.location.href = url;
     } else toastShow("Ошибка", "Не правильный логин или пароль");
 
     setIsLoading(false);
@@ -63,68 +66,70 @@ const AuthorizationForm = ({store} : AuthorizationFormProps) => {
   };
 
   return (
-    <div className="w-full" style={{ marginTop: "-20px" }}>
-      <div className="card block bg-bluegray-50">
-        <div className="text-center">
-          <h2>Авторизация</h2>
-        </div>
-        <form>
-          <Controller
-            name="username"
-            control={control}
-            rules={{ required: "Заполните обязательное поле" }}
-            render={({ field, fieldState }) => (
-              <>
-                <div className="p-inputgroup">
-                  <span className="p-inputgroup-addon">
-                    <i className="pi pi-user"></i>
-                  </span>
-                  <InputText
-                    id={field.name}
-                    value={field.value}
-                    className={classNames({ "p-invalid": fieldState.error })}
-                    placeholder="Логин"
-                    onChange={(e) => field.onChange(e.target.value)}
-                  />
-                </div>
-                {getFormErrorMessage(field.name)}
-              </>
-            )}
-          />
-          <Controller
-            name="password"
-            control={control}
-            rules={{ required: "Заполните обязательное поле" }}
-            render={({ field, fieldState }) => (
-              <>
-                <div className="p-inputgroup">
-                  <span className="p-inputgroup-addon">
-                    <i className="pi pi-lock"></i>
-                  </span>
-                  <Password
-                    id={field.name}
-                    value={field.value}
-                    {...field}
-                    inputRef={field.ref}
-                    className={classNames({ "p-invalid": fieldState.error })}
-                    placeholder="Пароль"
-                    feedback={false}
-                  />
-                </div>
-                {getFormErrorMessage(field.name)}
-              </>
-            )}
-          />
-          <div className="d-grid gap-2">
-            <Button
-              loading={isLoading}
-              onClick={handleSubmit(onSubmit)}
-              label="Авторизация"
-            />
+    <Card style={{ minHeight: "500px", margin: "0 auto" }}>
+      <div className="w-50">
+        <div className="card block bg-bluegray-50">
+          <div className="text-center">
+            <h2 className="color-text-main">Авторизация</h2>
           </div>
-        </form>
+          <form>
+            <Controller
+              name="login"
+              control={control}
+              rules={{ required: "Заполните обязательное поле" }}
+              render={({ field, fieldState }) => (
+                <>
+                  <div className="p-inputgroup">
+                    <span className="p-inputgroup-addon">
+                      <i className="pi pi-user"></i>
+                    </span>
+                    <InputText
+                      id={field.name}
+                      value={field.value}
+                      className={classNames({ "p-invalid": fieldState.error })}
+                      placeholder="Логин"
+                      onChange={(e) => field.onChange(e.target.value)}
+                    />
+                  </div>
+                  {getFormErrorMessage(field.name)}
+                </>
+              )}
+            />
+            <Controller
+              name="password"
+              control={control}
+              rules={{ required: "Заполните обязательное поле" }}
+              render={({ field, fieldState }) => (
+                <>
+                  <div className="p-inputgroup">
+                    <span className="p-inputgroup-addon">
+                      <i className="pi pi-lock"></i>
+                    </span>
+                    <Password
+                      id={field.name}
+                      value={field.value}
+                      {...field}
+                      inputRef={field.ref}
+                      className={classNames({ "p-invalid": fieldState.error })}
+                      placeholder="Пароль"
+                      feedback={false}
+                    />
+                  </div>
+                  {getFormErrorMessage(field.name)}
+                </>
+              )}
+            />
+            <div className="d-grid gap-2">
+              <Button
+                loading={isLoading}
+                onClick={handleSubmit(onSubmit)}
+                label="Авторизация"
+              />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -26,8 +26,6 @@ import {
   SubstanceTypeLoad,
   WhereToFindTypeLoad,
 } from "entities/ItemFunc/components/OptionsLoad";
-import { MultiSelect } from "primereact/multiselect";
-import { SubstanceType } from "shared/enums/ItemEnums";
 
 interface ItemTypeSelectProps {
   data: ItemDTO;
@@ -66,6 +64,13 @@ const ItemTypeSelect = ({
   >([]);
   const [Content, setContent] = useState<any>();
 
+  const [substances, setSubstances] = useState(
+    data.formulaSubstanceList || []
+  );
+  const [components, setComponents] = useState(
+    data.blueprintComponentList || []
+  );
+
   useEffect(() => {
     ComponentsTypeLoad({setItems: setComponentsOptions});
     SkillOptionsLoad({ setItems: setSkillOptions });
@@ -75,12 +80,13 @@ const ItemTypeSelect = ({
     ArmorEquipmentTypeLoad({ setItems: setArmorEquipmentOptions });
     WhereToFindTypeLoad({setItems: setWhereToFindOptions});
     SubstanceTypeLoad({setItems: setSubstanceOptions})
-  }, []);
 
-  useEffect(() => {
     console.log(itemType);
     console.log(isAmmunitionChecked);
     console.log(getValues());
+  }, [visible]);
+
+  useEffect(() => {
     switch (itemType) {
       case 1:
         setContent(BaseItem());
@@ -112,7 +118,7 @@ const ItemTypeSelect = ({
       default:
         setContent(<div></div>);
     }
-  }, [itemType, isAmmunitionChecked, data]);
+  }, [itemType, isAmmunitionChecked, data, substances, components]);
 
   const WeaponItem = () => {
     return (
@@ -381,33 +387,31 @@ const ItemTypeSelect = ({
     return <div></div>;
   };
 
-  const [substances, setSubstances] = useState(
-    data.formulaSubstanceList || []
-  );
-  const handleAddSubstance = () => {
-    setSubstances([...substances, { id: 0, substanceType: 1, amount: 0 }]);
+  useEffect(() => {
+    console.log(substances);
     register("formulaSubstanceList", { value: substances });
+  }, [substances]);
+
+  const handleAddSubstance = () => {
+    setSubstances(substances => [...substances, { id: 0, substanceType: 1, amount: 0 }]);
   };
 
   const handleRemoveSubstance = (index: number) => {
     const newSubstances = [...substances];
     newSubstances.splice(index, 1);
     setSubstances(newSubstances);
-    register("formulaSubstanceList", { value: substances });
   };
 
   const handleSubstanceTypeChange = (index: number, substanceType: number) => {
     const newSubstances = [...substances];
     newSubstances[index].substanceType = substanceType;
     setSubstances(newSubstances);
-    register("formulaSubstanceList", { value: substances });
   };
 
   const handleAmountSubstanceChange = (index: number, amount: number) => {
     const newSubstances = [...substances];
     newSubstances[index].amount = amount;
     setSubstances(newSubstances);
-    register("formulaSubstanceList", { value: substances });
   };
 
   const FormulaItem = () => {
@@ -457,13 +461,13 @@ const ItemTypeSelect = ({
         </div>
         <div>
           <span className="field">
-            <label>formulaComponentList</label>
+            <label>Список субстанций:</label>
             <div>
               {substances ? (
                 substances.map((substance, index) => (
                   <div key={index}>
                     <span className="field">
-                      <label>Substance Type:</label>
+                      <label>Тип субстацнии:</label>
                       <Dropdown
                         value={substance.substanceType}
                         onChange={(e) =>
@@ -478,7 +482,7 @@ const ItemTypeSelect = ({
                       />
                     </span>
                     <span className="field">
-                      <label>Amount:</label>
+                      <label>Количество:</label>
                       <input
                         type="number"
                         value={substance.amount}
@@ -487,8 +491,8 @@ const ItemTypeSelect = ({
                         }
                       />
                     </span>
-                    <button onClick={() => handleRemoveSubstance(index)}>
-                      Remove Substance
+                    <button type="button" onClick={() => handleRemoveSubstance(index)}>
+                      Убрать субстанцию
                     </button>
                   </div>
                 ))
@@ -496,7 +500,7 @@ const ItemTypeSelect = ({
                 <div></div>
               )}
               <button type="button" onClick={handleAddSubstance}>
-                Add Substance
+                Добавить субстанцию
               </button>
             </div>
           </span>
@@ -505,33 +509,31 @@ const ItemTypeSelect = ({
     );
   };
 
-  const [components, setComponents] = useState(
-    data.blueprintComponentList || []
-  );
+  useEffect(() => {
+    console.log(components);
+    register("blueprintComponentList", { value: components });
+  }, [components]);
+
   const handleAddComponent = () => {
     setComponents([...components, { id: 0, component: null, amount: 0 }]);
-    register("blueprintComponentList", { value: components });
   };
 
   const handleRemoveComponent = (index: number) => {
     const newComponents = [...components];
     newComponents.splice(index, 1);
     setComponents(newComponents);
-    register("blueprintComponentList", { value: components });
   };
 
   const handleComponentTypeChange = (index: number, component: Component) => {
     const newComponents = [...components];
     newComponents[index].component = component;
     setComponents(newComponents);
-    register("blueprintComponentList", { value: components });
   };
 
   const handleAmountComponentChange = (index: number, amount: number) => {
     const newComponents = [...components];
     newComponents[index].amount = amount;
     setComponents(newComponents);
-    register("blueprintComponentList", { value: components });
   };
 
   const BlueprintItem = () => {
@@ -574,13 +576,13 @@ const ItemTypeSelect = ({
           />
         </span>
         <span className="field">
-          <label>blueprintComponentList</label>
+          <label>Список компонентов: </label>
           <div>
             {components ? (
               components.map((component, index) => (
                 <div key={index}>
                   <span className="field">
-                    <label>Component Type:</label>
+                    <label>Компонент:</label>
                     <Dropdown
                         value={component.component}
                         onChange={(e) =>
@@ -591,11 +593,11 @@ const ItemTypeSelect = ({
                         }
                         optionLabel="label"
                         options={componentsOptions}
-                        placeholder="Выберите компоненты"
+                        placeholder="Выберите компонент"
                       />
                   </span>
                   <span className="field">
-                    <label>Amount:</label>
+                    <label>Количество:</label>
                     <input
                       type="number"
                       value={component.amount}
@@ -604,8 +606,8 @@ const ItemTypeSelect = ({
                       }
                     />
                   </span>
-                  <button onClick={() => handleRemoveComponent(index)}>
-                    Remove Substance
+                  <button type="button" onClick={() => handleRemoveComponent(index)}>
+                    Убрать компонент
                   </button>
                 </div>
               ))
@@ -613,7 +615,7 @@ const ItemTypeSelect = ({
               <div></div>
             )}
             <button type="button" onClick={handleAddComponent}>
-              Add Substance
+              Добавить компонент
             </button>
           </div>
         </span>
@@ -625,7 +627,7 @@ const ItemTypeSelect = ({
     return (
       <div>
         <span className="field">
-          <label>whereToFind</label>
+          <label>Где найти?</label>
           <Dropdown
             value={data.whereToFind}
             showClear
@@ -636,19 +638,17 @@ const ItemTypeSelect = ({
               //console.log(getValues());
             }}
             options={whereToFindOptions}
-            placeholder="Выберите тип скрытности"
+            placeholder="Выберите где"
           />
         </span>
         <span className="field">
           <label>Количество</label>
-          <InputNumber
+          <InputText
             value={data.amount}
             min={0}
             max={999}
             placeholder="Число, сколько получит при сборе"
-            onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("amount", { value: e.target.value });
-            }}
+            {...register("amount")}
           />
         </span>
         <span className="field">
@@ -656,14 +656,14 @@ const ItemTypeSelect = ({
           <InputNumber
             value={data.complexity}
             min={0}
-            max={4}
+            max={9999}
             placeholder="Число сложности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
               register("complexity", { value: e.target.value });
             }}
           />
         </span>
-        <div>
+        <div className="my-2">
           <Checkbox
             onChange={(e) => {
               setIsAlchemicalChecked(e.checked);
@@ -674,7 +674,7 @@ const ItemTypeSelect = ({
           <label className="ml-2">Алхимический компонент?</label>
         </div>
         <span className="field">
-          <label>substanceType</label>
+          <label>Тип субстанции</label>
           <Dropdown
             value={data.substanceType}
             showClear
@@ -685,7 +685,7 @@ const ItemTypeSelect = ({
               //console.log(getValues());
             }}
             options={substanceOptions}
-            placeholder="Выберите тип скрытности"
+            placeholder="Выберите тип субстанции"
           />
         </span>
       </div>

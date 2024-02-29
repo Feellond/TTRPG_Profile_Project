@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -13,13 +14,13 @@ namespace TTRPG_Project.BL.Services.Items
     {
         public ComponentService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<ItemBaseResponce> GetAllAsync()
         {
             var components = await _dbContext.Components.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -37,7 +38,13 @@ namespace TTRPG_Project.BL.Services.Items
                     SubstanceType = item.SubstanceType,
                 }).ToListAsync();
 
-            return components;
+            ItemBaseResponce responce = new()
+            {
+                Count = components.Count,
+                Items = components,
+            };
+
+            return responce;
         }
 
         public async Task<ItemBaseResponce?> GetByIdAsync(int id)
@@ -47,7 +54,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -65,7 +72,13 @@ namespace TTRPG_Project.BL.Services.Items
                     SubstanceType = item.SubstanceType,
                 }).FirstOrDefault();
 
-            return component;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = new List<ItemBaseInfo>() { component },
+            };
+
+            return responce;
         }
 
         public virtual async Task<bool> CreateAsync(ComponentRequest request)
@@ -85,7 +98,7 @@ namespace TTRPG_Project.BL.Services.Items
                 }).ToList(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
                 WhereToFind = request.WhereToFind,
                 Amount = request.Amount,
@@ -108,7 +121,7 @@ namespace TTRPG_Project.BL.Services.Items
             component.UpdateDate = DateTime.Now;
             component.Weight = request.Weight;
             component.Price = request.Price;
-            component.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id;
+            component.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
             component.Description = request.Description;
             component.AvailabilityType = request.AvailabilityType;
             component.WhereToFind = request.WhereToFind;

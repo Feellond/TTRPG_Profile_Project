@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Drawing.Printing;
 using System.Linq;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Filters;
 using TTRPG_Project.BL.Services.Base;
@@ -20,13 +23,13 @@ namespace TTRPG_Project.BL.Services.Items
         
         }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync(ItemFilter filter)
+        public async Task<ItemBaseResponce> GetAllAsync(ItemFilter filter)
         {
             var alchemicalItems = await _dbContext.AlchemicalItems.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -43,7 +46,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -65,7 +68,7 @@ namespace TTRPG_Project.BL.Services.Items
                     .ThenInclude(eff => eff.Effect)
                 .Include(bcl => bcl.BlueprintComponentList)
                     .ThenInclude(c => c.Component)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -86,7 +89,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -109,7 +112,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(fcl => fcl.FormulaSubstanceList)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -130,7 +133,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -149,7 +152,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -160,6 +163,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Price = item.Price,
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Tool,
+                    StealthType = item.StealthType,
                 }).ToListAsync();
 
             var weapons = await _dbContext.Weapons.AsNoTracking()
@@ -167,7 +171,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(s => s.Skill)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -204,9 +208,16 @@ namespace TTRPG_Project.BL.Services.Items
                 allItemsQuery = allItemsQuery.Where(compiledExpression);
             }
 
-            var allItems = allItemsQuery.OrderBy(x => x.Name).ToList();
+            //var skip = (filter.Page - 1) * filter.PageSize;
+            var count = allItemsQuery.Count();
+            var allItems = allItemsQuery.OrderBy(x => x.Name).Skip(filter.First).Take(filter.PageSize).ToList();
+            ItemBaseResponce responce = new()
+            {
+                Count = count,
+                Items = allItems,
+            };
 
-            return allItems;
+            return responce;
         }
     }
 }

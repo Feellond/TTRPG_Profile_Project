@@ -9,8 +9,10 @@ namespace TTRPG_Project.DAL.Data
     public static class InitSettings
     {
         public const string ADMIN_USERNAME = "Admin";
+        public const string MODER_USERNAME = "Moderator";
 
         private static readonly string defaultPassword = "1qaz@WSX4593";
+        private static readonly string moderatorPassword = "12QWasZX";
 
         public static async System.Threading.Tasks.Task IdentityInicializer(IApplicationBuilder app)
         {
@@ -39,6 +41,7 @@ namespace TTRPG_Project.DAL.Data
             }
 
             await CreateIfNotExistUser(userManager, ADMIN_USERNAME, "Администратор системы", defaultPassword, "email@mail.ru");
+            await CreateIfNotExistUser(userManager, MODER_USERNAME, "Модератор", moderatorPassword, "email@mail.ru");
         }
 
         public static async Task CreateIfNotExistUser(
@@ -66,7 +69,7 @@ namespace TTRPG_Project.DAL.Data
 
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(user, Roles.ADMINISTRATOR);
+                    if (user.UserName == "Admin") await userManager.AddToRoleAsync(user, Roles.ADMINISTRATOR);
                     await userManager.AddToRoleAsync(user, Roles.MODERATOR);
                     await userManager.AddToRoleAsync(user, Roles.USER);
                 }

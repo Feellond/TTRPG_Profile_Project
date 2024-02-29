@@ -2,22 +2,25 @@ import { ItemFilter } from "widgets/Filters";
 import React, { useEffect, useRef, useState } from "react";
 import "../scss/style.scss";
 import { Button } from "primereact/button";
-import { EditItemShortDialog } from "widgets/Dialog";
+import { DeleteItemDialog, EditItemShortDialog } from "widgets/Dialog";
 import { emptyItem } from "../models/EmptyItem";
 import itemService from "shared/services/item.service";
 import { Toast } from "primereact/toast";
 import { FindIndexById } from "entities/GeneralFunc";
 import { ShowItem } from "./ShowItem";
 import { ItemDTO, ItemFilterDTO } from "shared/models";
-import { ItemEntityType } from "shared/enums/ItemEnums";
+import { Paginator, PaginatorPageChangeEvent } from 'primereact/paginator';
 
 interface LazyState {
   first: number;
   rows: number;
   page: number;
+  totalRecords: number;
 }
 
 const ItemList = () => {
+  const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
+
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
   const [editDialogHeader, setEditDialogHeader] = useState<string>("");
 
@@ -28,13 +31,21 @@ const ItemList = () => {
   const toast = useRef<Toast>(null);
   const [lazyState, setLazyState] = useState<LazyState>({
     first: 0,
-    rows: 20,
+    rows: 10,
     page: 0,
+    totalRecords: 100,
   });
 
+  const onPageChange = (event: PaginatorPageChangeEvent) => {
+    lazyState.first = event.first;
+    lazyState.rows = event.rows;
+    fetchData();
+    console.log(lazyState)
+  };
 
   const getParams = () => {
     const params = {};
+    params["first"] = lazyState.first;
     params["page"] = lazyState.page;
     params["pageSize"] = lazyState.rows;
     console.log(filter);
@@ -46,6 +57,7 @@ const ItemList = () => {
       if (filter.itemType) {
         params["itemType"] = filter.itemType;
       }
+      
     }
 
     console.log(params);
@@ -53,9 +65,11 @@ const ItemList = () => {
   }
 
   const showEditDialog = (id: number) => {
+    setEditDialogHeader("Изменение предмета");
     const index = FindIndexById(id, itemList);
     if (index !== -1) {
-      setItem(itemList[index]);
+      const selectedItem = { ...itemList[index] }; // Создание копии объекта
+      setItem(selectedItem);
       setEditDialogVisible(true);
     }
   };
@@ -66,43 +80,68 @@ const ItemList = () => {
     setEditDialogVisible(true);
   };
 
+  const showDeleteDialog = (id: number) => {
+    const index = FindIndexById(id, itemList);
+    if (index !== -1) {
+      const selectedItem = { ...itemList[index] }; // Создание копии объекта
+      setItem(selectedItem);
+      setDeleteDialogVisible(true);
+    }
+  }
+
   const hideDialog = () => {
+    setDeleteDialogVisible(false);
     setEditDialogVisible(false);
     setItem(emptyItem);
   };
 
   const saveItem = async () => {
+    let result;
     if (item.id !== 0)
-      return await itemService.updateItem({ item: item, toast: toast });
-    else await itemService.createItem({ item, toast });
+      result = await itemService.updateItem({ item: item, toast: toast });
+    else result = await itemService.createItem({ item, toast });
 
-    hideDialog();
+    if (result !== false)
+    {
+      hideDialog();
+      fetchData();
+    }
   };
 
   const deleteItem = async (id: number, itemType: number) => {
-    itemService.deleteItem({ id, itemType, toast });
+    let result = await itemService.deleteItem({ id, itemType, toast });
+
+    if (result !== false) {
+      hideDialog();
+      fetchData();
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      let result = await itemService.getItems({
+        itemType: 1, //ItemEntityType.BaseItem
+        toast: toast,
+        params: getParams(),
+      });
+      console.log(result);
+
+      if (result && result.data) {
+        lazyState.totalRecords = result.data.count;
+        const items: ItemDTO[] = result.data.items;
+        console.log(items);
+        setItemList(items);
+      }
+    } catch (error) {
+      console.error("Error fetching items:", error);
+    }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        let result = await itemService.getItems({
-          itemType: 1, //ItemEntityType.BaseItem
-          toast: toast,
-          params: getParams(),
-        });
-        console.log(result);
 
-        if (result && result.data) {
-          const items: ItemDTO[] = result.data;
-          console.log(items);
-          setItemList(items);
-        }
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
+  }, [])
 
+  useEffect(() => {
     fetchData();
   }, [lazyState, filter]);
 
@@ -116,6 +155,13 @@ const ItemList = () => {
 
   return (
     <div className="w-full" style={{ marginTop: "-20px" }}>
+      <Toast ref={toast} />
+      <DeleteItemDialog
+        data={item}
+        visible={deleteDialogVisible}
+        deleteItem={deleteItem}
+        onHide={hideDialog}
+      />
       <EditItemShortDialog
         data={item}
         header={editDialogHeader}
@@ -126,7 +172,7 @@ const ItemList = () => {
       <div>
         <Button label="Создать предмет" onClick={(e) => showCreateDialog()} />
       </div>
-      <ItemFilter filter={filter} setFilter={setFilter}/>
+      <ItemFilter filter={filter} setFilter={setFilter} />
       {itemList.map((it, index) => (
         <div key={index} className="mb-4">
           <div className="card block bg-bluegray-50">
@@ -137,11 +183,11 @@ const ItemList = () => {
                   Footer
                   <Button
                     label="Редактировать предмет"
-                    //onClick={(e) => showEditDialog(it.id)}
+                    onClick={(e) => showEditDialog(it.id)}
                   />
                   <Button
                     label="Удалить предмет"
-                    //onClick={(e) => deleteItem(it.id, it.itemType)}
+                    onClick={(e) => showDeleteDialog(it.id)}
                   />
                 </div>
               </div>
@@ -149,6 +195,13 @@ const ItemList = () => {
           </div>
         </div>
       ))}
+      <Paginator
+        first={lazyState.first}
+        rows={lazyState.rows}
+        totalRecords={lazyState.totalRecords}
+        rowsPerPageOptions={[10, 20, 50, 100]}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 };

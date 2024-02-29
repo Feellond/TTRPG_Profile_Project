@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -13,14 +14,14 @@ namespace TTRPG_Project.BL.Services.Items
     {
         public BlueprintService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<ItemBaseResponce> GetAllAsync()
         {
             var blueprints = await _dbContext.Blueprints.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(fcl => fcl.BlueprintComponentList)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -37,7 +38,13 @@ namespace TTRPG_Project.BL.Services.Items
                     BlueprintComponentList = item.BlueprintComponentList,
                 }).ToListAsync();
 
-            return blueprints;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = blueprints,
+            };
+
+            return responce;
         }
 
         public async Task<ItemBaseResponce?> GetByIdAsync(int id)
@@ -48,7 +55,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(fcl => fcl.BlueprintComponentList)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -65,7 +72,13 @@ namespace TTRPG_Project.BL.Services.Items
                     BlueprintComponentList = item.BlueprintComponentList,
                 }).FirstOrDefault();
 
-            return blueprint;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = new List<ItemBaseInfo>() { blueprint },
+            };
+
+            return responce;
         }
 
         public virtual async Task<bool> CreateAsync(BlueprintRequest request)
@@ -85,7 +98,7 @@ namespace TTRPG_Project.BL.Services.Items
                 ItemType = (ItemType)ItemEntityType.Blueprint,
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
                 TimeSpend = request.TimeSpend,
                 Weight = request.Weight,
             };
@@ -104,7 +117,7 @@ namespace TTRPG_Project.BL.Services.Items
             blueprint.TimeSpend = request.TimeSpend;
             blueprint.Weight = request.Weight;
             blueprint.Price = request.Price;
-            blueprint.SourceId = _dbContext.Sources.Where(x => x.Name == request.Name).First().Id;
+            blueprint.SourceId = _dbContext.Sources.Where(x => x.Name == request.Name).FirstOrDefault()?.Id ?? 2;
             blueprint.AdditionalPayment = request.AdditionalPayment;
             blueprint.Complexity = request.Complexity;
             blueprint.Description = request.Description;

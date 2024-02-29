@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -13,13 +15,13 @@ namespace TTRPG_Project.BL.Services.Items
     {
         public ArmorService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<ItemBaseResponce> GetAllAsync()
         {
             var armors = await _dbContext.Armors.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -39,7 +41,13 @@ namespace TTRPG_Project.BL.Services.Items
                     
                 }).ToListAsync();
 
-            return armors;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = armors
+            };
+
+            return responce;
         }
 
         public async Task<ItemBaseResponce?> GetByIdAsync(int id)
@@ -48,7 +56,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -68,7 +76,13 @@ namespace TTRPG_Project.BL.Services.Items
 
                 }).FirstOrDefault();
 
-            return armor;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = new List<ItemBaseInfo>() { armor },
+            };
+
+            return responce;
         }
 
         public virtual async Task<bool> CreateAsync(ArmorRequest request)
@@ -88,7 +102,7 @@ namespace TTRPG_Project.BL.Services.Items
                 }).ToList(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
                 EquipmentType = request.EquipmentType,
                 Reliability = request.Reliability,
@@ -111,7 +125,7 @@ namespace TTRPG_Project.BL.Services.Items
             armor.UpdateDate = DateTime.Now;
             armor.Weight = request.Weight;
             armor.Price = request.Price;
-            armor.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id;
+            armor.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
             armor.Description = request.Description;
             armor.AvailabilityType = request.AvailabilityType;
             armor.EquipmentType = request.EquipmentType;

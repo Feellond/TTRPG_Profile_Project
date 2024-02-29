@@ -1,6 +1,7 @@
 ﻿using Azure.Core;
 using IdentityModel;
 using Microsoft.EntityFrameworkCore;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -15,14 +16,14 @@ namespace TTRPG_Project.BL.Services.Items
     {
         public FormulaService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<ItemBaseResponce> GetAllAsync()
         {
             var formulas = await _dbContext.Formulas.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(fcl => fcl.FormulaSubstanceList)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -39,7 +40,13 @@ namespace TTRPG_Project.BL.Services.Items
                     FormulaSubstanceList = item.FormulaSubstanceList,
                 }).ToListAsync();
 
-            return formulas;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = formulas
+            };
+
+            return responce;
         }
 
         public async Task<ItemBaseResponce?> GetByIdAsync(int id)
@@ -50,7 +57,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(fcl => fcl.FormulaSubstanceList)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -67,7 +74,13 @@ namespace TTRPG_Project.BL.Services.Items
                     FormulaSubstanceList = item.FormulaSubstanceList,
                 }).FirstOrDefault();
 
-            return formula;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = new List<ItemBaseInfo>() { formula },
+            };
+
+            return responce;
         }
 
         public virtual async Task<bool> CreateAsync(FormulaRequest request)
@@ -87,7 +100,7 @@ namespace TTRPG_Project.BL.Services.Items
                 ItemType = (ItemType)ItemEntityType.Formula,
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
                 TimeSpend = request.TimeSpend,
                 Weight = request.Weight,
             };
@@ -107,7 +120,7 @@ namespace TTRPG_Project.BL.Services.Items
             formula.TimeSpend = request.TimeSpend;
             formula.Weight = request.Weight;
             formula.Price = request.Price;
-            formula.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id;
+            formula.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
             formula.AdditionalPayment = request.AdditionalPayment;
             formula.Complexity = request.Complexity;
             formula.Description = request.Description;

@@ -38,7 +38,7 @@ export interface ItemDTO extends ItemShortDTO {
 
   //component
   whereToFind: string | null;
-  amount: number | null;
+  amount: string | null;
   //complexity: number;
   isAlchemical: boolean | null;
   substanceType: number | null;

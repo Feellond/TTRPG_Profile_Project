@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -13,13 +15,13 @@ namespace TTRPG_Project.BL.Services.Items
     {
         public AlchemicalItemService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<ItemBaseResponce> GetAllAsync()
         {
             var alcItems = await _dbContext.AlchemicalItems.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -32,7 +34,13 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemType = (int)ItemEntityType.AlchemicalItem,
                 }).ToListAsync();
 
-            return alcItems;
+            ItemBaseResponce responce = new()
+            {
+                Count = alcItems.Count,
+                Items = alcItems,
+            };
+
+            return responce;
         }
 
         public async Task<ItemBaseResponce?> GetByIdAsync(int id)
@@ -42,7 +50,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -55,7 +63,13 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemType = (int)ItemEntityType.AlchemicalItem,
                 }).FirstOrDefault();
 
-            return alcItem;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = new List<ItemBaseInfo>() { alcItem },
+            };
+
+            return responce;
         }
 
         public virtual async Task<bool> CreateAsync(AlchemicalItemRequest request)
@@ -75,7 +89,7 @@ namespace TTRPG_Project.BL.Services.Items
                 }).ToList(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
             };
 
@@ -93,7 +107,7 @@ namespace TTRPG_Project.BL.Services.Items
             alcItem.UpdateDate = DateTime.Now;
             alcItem.Weight = request.Weight;
             alcItem.Price = request.Price;
-            alcItem.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id;
+            alcItem.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
             alcItem.Description = request.Description;
             alcItem.AvailabilityType = request.AvailabilityType;
 

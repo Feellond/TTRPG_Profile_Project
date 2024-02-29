@@ -4,6 +4,7 @@ import {
   ArmorType,
   ItemAvailabilityType,
   ItemOriginType,
+  WhereToFindEnum,
 } from "shared/enums/ItemEnums";
 import { ItemEntityType } from "shared/enums/ItemEnums";
 import { SubstanceType } from "shared/enums/ItemEnums";
@@ -80,12 +81,12 @@ const ArmorEquipmentTypeLoad = ({ setItems }: OptionsParamsLoad) => {
 };
 
 const WhereToFindTypeLoad = ({ setItems }: OptionsParamsLoad) => {
-  const itemTypeKeys = Object.keys(WhereToFindTypeLoad).filter((v) =>
+  const itemTypeKeys = Object.keys(WhereToFindEnum).filter((v) =>
     isNaN(Number(v))
   );
   const ITOptions = itemTypeKeys.map((key) => ({
     label: key,
-    value: WhereToFindTypeLoad[key],
+    value: WhereToFindEnum[key],
   }));
   setItems(ITOptions);
   console.log(ITOptions);

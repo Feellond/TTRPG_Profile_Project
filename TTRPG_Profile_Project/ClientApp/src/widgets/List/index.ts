@@ -1,4 +1,41 @@
 import { ItemList } from "./components/ItemList";
 import { ShowItem } from "./components/ShowItem";
+import {
+  drawArmor,
+  drawArmorEquipmentType,
+  drawArmorType,
+  drawAvailabilityType,
+  drawBlueprint,
+  drawComponent,
+  drawFormula,
+  drawItem,
+  drawItemEntityType,
+  drawItemFromType,
+  drawItemOriginType,
+  drawStealthType,
+  drawTool,
+  drawWeapon,
+  drawWeaponEquipmentType,
+  drawSubstanceType,
+} from "./components/functions/DrawFunctions";
 
-export {ItemList, ShowItem}
+export {
+  ItemList,
+  ShowItem,
+  drawArmor,
+  drawArmorEquipmentType,
+  drawArmorType,
+  drawAvailabilityType,
+  drawBlueprint,
+  drawComponent,
+  drawFormula,
+  drawItem,
+  drawItemEntityType,
+  drawItemFromType,
+  drawItemOriginType,
+  drawStealthType,
+  drawTool,
+  drawWeapon,
+  drawWeaponEquipmentType,
+  drawSubstanceType,
+};

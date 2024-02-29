@@ -18,7 +18,7 @@ namespace TTRPG_Project.Web.Controllers
     [AllowAnonymous]
     [ApiController]
     [Route("api/items")]
-    [Produces("application/json")]
+    //[Produces("application/json")]
     //[Consumes("application/json")]
     public class ItemController : ControllerBase
     {
@@ -147,10 +147,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("alchemicalitem")]
-        public async Task<IActionResult> DeleteAlchemicalItem(int alchemicalItemId)
+        [HttpDelete("alchemicalitem/{Id}")]
+        public async Task<IActionResult> DeleteAlchemicalItem(int Id)
         {
-            var result = await _alchemicalItemService.DeleteAsync(alchemicalItemId);
+            var result = await _alchemicalItemService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion
@@ -207,10 +207,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("armor")]
-        public async Task<IActionResult> DeleteArmor(int armorId)
+        [HttpDelete("armor/{Id}")]
+        public async Task<IActionResult> DeleteArmor(int Id)
         {
-            var result = await _armorService.DeleteAsync(armorId);
+            var result = await _armorService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion
@@ -267,10 +267,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("blueprint")]
-        public async Task<IActionResult> DeleteBlueprint(int blueprintId)
+        [HttpDelete("blueprint/{Id}")]
+        public async Task<IActionResult> DeleteBlueprint(int Id)
         {
-            var result = await _blueprintService.DeleteAsync(blueprintId);
+            var result = await _blueprintService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion
@@ -327,10 +327,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("component")]
-        public async Task<IActionResult> DeleteComponent(int componentId)
+        [HttpDelete("component/{Id}")]
+        public async Task<IActionResult> DeleteComponent(int Id)
         {
-            var result = await _componentService.DeleteAsync(componentId);
+            var result = await _componentService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion
@@ -389,10 +389,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("formula")]
-        public async Task<IActionResult> DeleteFormula(int formulaId)
+        [HttpDelete("formula/{Id}")]
+        public async Task<IActionResult> DeleteFormula(int Id)
         {
-            var result = await _formulaService.DeleteAsync(formulaId);
+            var result = await _formulaService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion
@@ -450,10 +450,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("item")]
-        public async Task<IActionResult> DeleteItem(int itemId)
+        [HttpDelete("item/{Id}")]
+        public async Task<IActionResult> DeleteItem(int Id)
         {
-            var result = await _itemService.DeleteAsync(itemId);
+            var result = await _itemService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion
@@ -510,10 +510,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("tool")]
-        public async Task<IActionResult> DeleteTool(int toolId)
+        [HttpDelete("tool/{Id}")]
+        public async Task<IActionResult> DeleteTool(int Id)
         {
-            var result = await _toolService.DeleteAsync(toolId);
+            var result = await _toolService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion
@@ -570,10 +570,10 @@ namespace TTRPG_Project.Web.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("weapon")]
-        public async Task<IActionResult> DeleteWeapon(int toolId)
+        [HttpDelete("weapon/{Id}")]
+        public async Task<IActionResult> DeleteWeapon(int Id)
         {
-            var result = await _weaponService.DeleteAsync(toolId);
+            var result = await _weaponService.DeleteAsync(Id);
             return Ok(result);
         }
         #endregion

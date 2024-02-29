@@ -74,7 +74,7 @@ const EditItemShortDialog = ({
     data.substanceType = dialogData.substanceType;
     data.stiffness = dialogData.stiffness;
     console.log(data);
-    //onSave();
+    onSave();
   };
 
   const SetValues = () => {
@@ -121,11 +121,14 @@ const EditItemShortDialog = ({
   useEffect(() => {
     ItemEntityTypeLoad({ setItems: setItemTypeOptions });
     AvailabilityTypeLoad({ setItems: setAvailabilityTypeOptions });
-    SourceOptionsLoad({setItems: setSourceOptions});
+    SourceOptionsLoad({ setItems: setSourceOptions });
   }, []);
 
   useEffect(() => {
-    setItemType(undefined);
+    setItemType(data.itemType);
+    if (getValues("itemType") !== undefined) setItemTypeSelectVisible(true);
+    else setItemTypeSelectVisible(false);
+
     SetValues();
   }, [visible]);
 
@@ -160,7 +163,21 @@ const EditItemShortDialog = ({
         <div className="grid align-items-center mt-3">
           <div className="field flex flex-column col-3">
             <span className="p-float-label">
-              <InputText id="name" value={data.name} {...register("name")} />
+              <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <InputText
+                      id={field.name}
+                      value={field.value}
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                      }}
+                    />
+                  </>
+                )}
+              />
               <label>Наименование</label>
             </span>
           </div>
@@ -238,12 +255,22 @@ const EditItemShortDialog = ({
           </div>
           <div className="field flex flex-column col-12">
             <span className="p-float-label">
-              <InputTextarea
-                id="description"
-                value={data.description}
-                {...register("description")}
-                rows={5}
-                cols={60}
+              <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <InputTextarea
+                      id={field.name}
+                      value={field.value}
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                      }}
+                      rows={5}
+                      cols={60}
+                    />
+                  </>
+                )}
               />
               <label>Описание</label>
             </span>
@@ -299,16 +326,16 @@ const EditItemShortDialog = ({
             </span>
           </div>
           <div className="field flex flex-column col-12">
-          <ItemTypeSelect
-            data={data}
-            visible={itemTypeSelectVisible}
-            //itemType={getValues("itemType")}
-            itemType={itemType}
-            control={control}
-            register={register}
-            getValues={getValues}
-            setValue={setValue}
-          />
+            <ItemTypeSelect
+              data={data}
+              visible={itemTypeSelectVisible}
+              //itemType={getValues("itemType")}
+              itemType={itemType}
+              control={control}
+              register={register}
+              getValues={getValues}
+              setValue={setValue}
+            />
           </div>
         </div>
       </form>

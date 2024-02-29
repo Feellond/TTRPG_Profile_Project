@@ -31,8 +31,8 @@ export default class Store {
     this.globalToast = toast;
   }
 
-  async login({ userName, password }: ILoginDTO) {
-    const responce = await authService.login({ userName, password });
+  async login({ login, password }: ILoginDTO) {
+    const responce = await authService.login({ login, password });
     console.log(responce);
     tokenService.setAccessToken(responce.data.accessToken);
     tokenService.setRefreshToken(responce.data.refreshToken);

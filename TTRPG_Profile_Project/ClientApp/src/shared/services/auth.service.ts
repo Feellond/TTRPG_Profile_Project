@@ -18,11 +18,11 @@ export class AuthService {
   }
 
   async login({
-    userName,
+    login,
     password,
   }: ILoginDTO): Promise<AxiosResponse<ITokenResponceDTO>> {
     return $api.post<ITokenResponceDTO>(API_LOGIN, {
-      userName,
+      login,
       password,
     });
   }

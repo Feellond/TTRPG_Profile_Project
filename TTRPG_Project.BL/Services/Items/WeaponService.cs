@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TTRPG_Project.BL.DTO.Entities.Items;
 using TTRPG_Project.BL.DTO.Entities.Items.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Items.Request;
@@ -14,14 +15,14 @@ namespace TTRPG_Project.BL.Services.Items
     {
         public WeaponService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<List<ItemBaseResponce>> GetAllAsync()
+        public async Task<ItemBaseResponce> GetAllAsync()
         {
             var weapons = await _dbContext.Weapons.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(ibe => ibe.Skill)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -44,7 +45,13 @@ namespace TTRPG_Project.BL.Services.Items
                     IsAmmunition = item.IsAmmunition,
                 }).ToListAsync();
 
-            return weapons;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = weapons,
+            };
+
+            return responce;
         }
 
         public async Task<ItemBaseResponce?> GetByIdAsync(int id)
@@ -55,7 +62,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
                 .Include(ibe => ibe.Skill)
-                .Select(item => new ItemBaseResponce
+                .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
                     Name = item.Name,
@@ -78,7 +85,13 @@ namespace TTRPG_Project.BL.Services.Items
                     IsAmmunition = item.IsAmmunition,
                 }).FirstOrDefault();
 
-            return weapon;
+            ItemBaseResponce responce = new()
+            {
+                Count = 1,
+                Items = new List<ItemBaseInfo>() { weapon },
+            };
+
+            return responce;
         }
 
         public virtual async Task<bool> CreateAsync(WeaponRequest request)
@@ -98,7 +111,7 @@ namespace TTRPG_Project.BL.Services.Items
                 }).ToList(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
                 StealthType = request.StealthType,
                 Type = request.Type,
@@ -127,7 +140,7 @@ namespace TTRPG_Project.BL.Services.Items
             tool.UpdateDate = DateTime.Now;
             tool.Weight = request.Weight;
             tool.Price = request.Price;
-            tool.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).First().Id;
+            tool.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
             tool.Description = request.Description;
             tool.AvailabilityType = request.AvailabilityType;
             tool.StealthType = request.StealthType;
