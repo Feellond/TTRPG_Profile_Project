@@ -1,4 +1,4 @@
-import { ItemDTO } from "../../../shared/models/Item/DTO/ItemsDTO";
+import { ItemDTO } from "./ItemsDTO";
 
 const emptyItem: ItemDTO = {
   id: 0,

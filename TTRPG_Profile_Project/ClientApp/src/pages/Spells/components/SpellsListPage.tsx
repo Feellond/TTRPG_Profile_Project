@@ -1,11 +1,13 @@
+import { Card } from "primereact/card";
 import React from "react";
+import { SpellList } from "widgets/List";
 
 const SpellsListPage = () => {
 
     return (
-        <div>
-
-        </div>
+        <Card style={{ minHeight: "500px", margin: "0 auto" }}>
+            <SpellList/>
+        </Card>
     )
 }
 

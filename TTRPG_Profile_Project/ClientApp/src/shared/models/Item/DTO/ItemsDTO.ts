@@ -1,5 +1,5 @@
 import { Effect } from "shared/models/Additional";
-import { EntityBase, EntityItemBase, Source } from "shared/models/Base";
+import { EntityBase, EntityItemBase } from "shared/models/Base";
 import { CreatureReward, Skill } from "shared/models/Creature";
 
 export interface ItemShortDTO extends EntityItemBase {

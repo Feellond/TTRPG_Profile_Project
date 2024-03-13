@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { SelectItem } from "primereact/selectitem";
-import { ItemDTO } from "shared/models/Item/DTO/ItemsDTO";
 import { ListInput } from "features/inputs/listInput";
 import { Button } from 'primereact/button';
 import { ItemEntityTypeLoad } from "entities/ItemFunc";

@@ -1,4 +1,4 @@
-import { ItemList } from "./components/ItemList";
+import { ListShow } from "./components/ListShow";
 import { ShowItem } from "./components/ShowItem";
 import {
   drawArmor,
@@ -17,10 +17,10 @@ import {
   drawWeapon,
   drawWeaponEquipmentType,
   drawSubstanceType,
-} from "./components/functions/DrawFunctions";
+} from "../../entities/DrawItem/components/DrawItemFunctions";
 
 export {
-  ItemList,
+  ListShow,
   ShowItem,
   drawArmor,
   drawArmorEquipmentType,
