@@ -8,6 +8,7 @@ using AutoMapper;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
 using TTRPG_Project.BL.DTO.Creatures.Request;
 using System.Diagnostics;
+using TTRPG_Project.BL.DTO.Filters;
 
 namespace TTRPG_Project.Web.Controllers
 {
@@ -83,8 +84,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newAbility = _mapper.Map<Abilitiy>(request);
-                var result = await _abilityService.CreateAsync(newAbility);
+                var result = await _abilityService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -96,8 +96,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var ability = _mapper.Map<Abilitiy>(request);
-                var result = await _abilityService.UpdateAsync(ability);
+                var result = await _abilityService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -107,11 +106,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("ability")]
         public async Task<IActionResult> DeleteAbility(int abilityId)
         {
-            var ability = await _abilityService.GetByIdAsync(abilityId);
-            if (ability is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _abilityService.DeleteAsync(ability!);
+            var result = await _abilityService.DeleteAsync(abilityId!);
             return Ok(result);
         }
 
@@ -142,8 +137,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newAttack = _mapper.Map<Attack>(request);
-                var result = await _attackService.CreateAsync(newAttack);
+                var result = await _attackService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -155,8 +149,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var attack = _mapper.Map<Attack>(request);
-                var result = await _attackService.UpdateAsync(attack);
+                var result = await _attackService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -166,11 +159,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("attack")]
         public async Task<IActionResult> DeleteAttack(int attackId)
         {
-            var attack = await _attackService.GetByIdAsync(attackId);
-            if (attack is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _attackService.DeleteAsync(attack!);
+            var result = await _attackService.DeleteAsync(attackId!);
             return Ok(result);
         }
         #endregion
@@ -200,8 +189,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newClass = _mapper.Map<Class>(request);
-                var result = await _classService.CreateAsync(newClass);
+                var result = await _classService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -213,8 +201,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var editClass = _mapper.Map<Class>(request);
-                var result = await _classService.UpdateAsync(editClass);
+                var result = await _classService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -224,11 +211,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("class")]
         public async Task<IActionResult> DeleteClass(int classId)
         {
-            var deleteClass = await _classService.GetByIdAsync(classId);
-            if (deleteClass is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _classService.DeleteAsync(deleteClass!);
+            var result = await _classService.DeleteAsync(classId!);
             return Ok(result);
         }
         #endregion
@@ -236,10 +219,13 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Creature* Существо, Бестия, Монстр
+        [AllowAnonymous]
         [HttpGet("creature")]
-        public async Task<IActionResult> GetCreatures()
+        public async Task<IActionResult> GetCreatures([FromQuery] CreatureFilter filter)
         {
-            var result = await _creatureService.GetAllAsync();
+            filter.InitFilter();
+            var result = await _creatureService.GetAllAsync(filter);
+
             return Ok(result);
         }
 
@@ -282,11 +268,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("creature")]
         public async Task<IActionResult> DeleteCreature(int creatureId)
         {
-            var creature = await _creatureService.GetByIdAsync(creatureId);
-            if (creature is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _creatureService.DeleteAsync(creature!);
+            var result = await _creatureService.DeleteAsync(creatureId!);
             return Ok(result);
         }
         #endregion
@@ -316,8 +298,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newRace = _mapper.Map<Race>(request);
-                var result = await _raceService.CreateAsync(newRace);
+                var result = await _raceService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -329,8 +310,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var race = _mapper.Map<Race>(request);
-                var result = await _raceService.UpdateAsync(race);
+                var result = await _raceService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -340,11 +320,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("race")]
         public async Task<IActionResult> DeleteRace(int raceId)
         {
-            var race = await _raceService.GetByIdAsync(raceId);
-            if (race is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _raceService.DeleteAsync(race!);
+            var result = await _raceService.DeleteAsync(raceId!);
             return Ok(result);
         }
         #endregion
@@ -374,8 +350,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newSkill = _mapper.Map<Skill>(request);
-                var result = await _skillService.CreateAsync(newSkill);
+                var result = await _skillService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -387,8 +362,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var skill = _mapper.Map<Skill>(request);
-                var result = await _skillService.UpdateAsync(skill);
+                var result = await _skillService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -398,11 +372,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("skill")]
         public async Task<IActionResult> DeleteSkill(int skillId)
         {
-            var item = await _skillService.GetByIdAsync(skillId);
-            if (item is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _skillService.DeleteAsync(item!);
+            var result = await _skillService.DeleteAsync(skillId!);
             return Ok(result);
         }
         #endregion
@@ -432,8 +402,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newSkillList = _mapper.Map<SkillsList>(request);
-                var result = await _skillsListService.CreateAsync(newSkillList);
+                var result = await _skillsListService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -445,8 +414,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var skillList = _mapper.Map<SkillsList>(request);
-                var result = await _skillsListService.UpdateAsync(skillList);
+                var result = await _skillsListService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -456,11 +424,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("skillList")]
         public async Task<IActionResult> DeleteSkillList(int skillListId)
         {
-            var skillList = await _skillsListService.GetByIdAsync(skillListId);
-            if (skillList is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _skillsListService.DeleteAsync(skillList!);
+            var result = await _skillsListService.DeleteAsync(skillListId!);
             return Ok(result);
         }
         #endregion
@@ -490,8 +454,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newSkillTree = _mapper.Map<SkillsTree>(request);
-                var result = await _skillsTreeService.CreateAsync(newSkillTree);
+                var result = await _skillsTreeService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -503,8 +466,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var skillTree = _mapper.Map<SkillsTree>(request);
-                var result = await _skillsTreeService.UpdateAsync(skillTree);
+                var result = await _skillsTreeService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -514,11 +476,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("skillTree")]
         public async Task<IActionResult> DeleteSkillTree(int skillTreeId)
         {
-            var skillTree = await _skillsTreeService.GetByIdAsync(skillTreeId);
-            if (skillTree is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _skillsTreeService.DeleteAsync(skillTree!);
+            var result = await _skillsTreeService.DeleteAsync(skillTreeId!);
             return Ok(result);
         }
         #endregion
@@ -548,8 +506,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newStat = _mapper.Map<Stat>(request);
-                var result = await _statService.CreateAsync(newStat);
+                var result = await _statService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -557,12 +514,11 @@ namespace TTRPG_Project.Web.Controllers
         }
 
         [HttpPut("stat")]
-        public async Task<IActionResult> EditStat([FromBody] SkillsListRequest request)
+        public async Task<IActionResult> EditStat([FromBody] StatRequest request)
         {
             if (ModelState.IsValid)
             {
-                var stat = _mapper.Map<Stat>(request);
-                var result = await _statService.UpdateAsync(stat);
+                var result = await _statService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -572,11 +528,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("stat")]
         public async Task<IActionResult> DeleteStat(int statId)
         {
-            var stat = await _statService.GetByIdAsync(statId);
-            if (stat is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _statService.DeleteAsync(stat!);
+            var result = await _statService.DeleteAsync(statId!);
             return Ok(result);
         }
         #endregion
@@ -606,8 +558,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newStatList = _mapper.Map<StatsList>(request);
-                var result = await _statsListService.CreateAsync(newStatList);
+                var result = await _statsListService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -619,8 +570,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var statList = _mapper.Map<StatsList>(request);
-                var result = await _statsListService.UpdateAsync(statList);
+                var result = await _statsListService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -630,13 +580,11 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete("statList")]
         public async Task<IActionResult> DeleteStatList(int statListId)
         {
-            var statList = await _statsListService.GetByIdAsync(statListId);
-            if (statList is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _statsListService.DeleteAsync(statList!);
+            var result = await _statsListService.DeleteAsync(statListId!);
             return Ok(result);
         }
         #endregion
+
+        //////////////////////////////////////////////////////////////////////////////////
     }
 }

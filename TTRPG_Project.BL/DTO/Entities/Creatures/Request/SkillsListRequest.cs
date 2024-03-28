@@ -2,7 +2,7 @@
 
 namespace TTRPG_Project.BL.DTO.Creatures.Request
 {
-    public class SkillsListRequest : BaseDesctiptionDTO
+    public class SkillsListRequest : BaseDescriptionDTO
     {
         public int AttentionId { get; set; }
         public int AttentionValue { get; set; }

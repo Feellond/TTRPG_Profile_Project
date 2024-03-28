@@ -8,5 +8,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     {
         public int Energy { get; set; }
         public string DefaultMagicAbilities { get; set; } = string.Empty;
+        public int? SkillsTreeId { get; set; }
+        public SkillsTree? SkillsTree { get; set; }
     }
 }

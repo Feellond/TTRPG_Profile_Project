@@ -4,7 +4,7 @@ using TTRPG_Project.DAL.Entities.Database.Spells;
 
 namespace TTRPG_Project.BL.DTO.Entities.Spells.Request
 {
-    public class SpellRequest : BaseDesctiptionDTO
+    public class SpellRequest : BaseDescriptionDTO
     {
         public int EnduranceCost { get; set; }
         public int Distance { get; set; }

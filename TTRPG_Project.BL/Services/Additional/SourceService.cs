@@ -4,8 +4,8 @@ using TTRPG_Project.DAL.Entities.Database.Additional;
 
 namespace TTRPG_Project.BL.Services.Additional
 {
-    public class EffectService : BaseService<Effect, int>
+    public class SourceService : BaseService<Source, int>
     {
-        public EffectService(ApplicationDbContext dbContext) : base(dbContext) { }
+        public SourceService(ApplicationDbContext dbContext) : base(dbContext) { }
     }
 }

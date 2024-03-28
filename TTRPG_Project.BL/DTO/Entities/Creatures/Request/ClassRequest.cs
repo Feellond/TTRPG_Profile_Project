@@ -2,9 +2,9 @@
 
 namespace TTRPG_Project.BL.DTO.Creatures.Request
 {
-    public class ClassRequest : BaseDesctiptionDTO
+    public class ClassRequest : BaseDescriptionDTO
     {
         public int Energy { get; set; }
-        public List<string> DefaultMagicAbilities { get; set; } = new List<string>();
+        public string DefaultMagicAbilities { get; set; } = string.Empty;
     }
 }

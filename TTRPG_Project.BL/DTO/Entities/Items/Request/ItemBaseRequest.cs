@@ -5,7 +5,7 @@ using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.BL.DTO.Items.Request
 {
-    public class ItemBaseRequest : BaseDesctiptionDTO
+    public class ItemBaseRequest : BaseDescriptionDTO
     {
         public int AvailabilityType { get; set; }
         public float Weight { get; set; }

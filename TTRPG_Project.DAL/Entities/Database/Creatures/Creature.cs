@@ -10,7 +10,8 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     [Table("Creatures")]
     public class Creature : EntityDescriptionBase
     {
-        public int RaceId { get; set; }
+        public int? RaceId { get; set; }
+        public Race? Race { get; set; }
         public string AdditionalInformation { get; set; } = string.Empty;
         public int EducationSkill { get; set; } = 10;
         public string SuperstitionsInformation { get; set; } = string.Empty;
@@ -24,7 +25,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public StatsList? StatsList { get; set; }
         public int? SkillsListId { get; set; }
         public SkillsList? SkillsList { get; set; }
-        public List<CreatureEffectList> CreatureEffectList { get; set; } = new();
         public int EvasionBase { get; set; }
         public int AthleticsBase { get; set; }
         public int BlockBase { get; set; }
@@ -35,7 +35,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public string Intellect { get; set; } = string.Empty;
         public string GroupSize { get; set; } = string.Empty;
         public List<Attack> Attacks { get; set; } = new();
-        public List<Abilitiy> Abilities { get; set; } = new();
+        public List<Ability> Abilities { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardList { get; set; } = new();
         public List<Spell> Spells { get; set; } = new();
     }

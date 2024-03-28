@@ -2,7 +2,7 @@
 
 namespace TTRPG_Project.BL.DTO.Creatures.Request
 {
-    public class StatsListRequest : BaseDesctiptionDTO
+    public class StatsListRequest : BaseDescriptionDTO
     {
         public int IntellectId { get; set; }
         public int IntellectValue { get; set; }

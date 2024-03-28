@@ -2,7 +2,7 @@
 
 namespace TTRPG_Project.BL.DTO.Creatures.Request
 {
-    public class StatRequest : BaseDesctiptionDTO
+    public class StatRequest : BaseDescriptionDTO
     {
     }
 }

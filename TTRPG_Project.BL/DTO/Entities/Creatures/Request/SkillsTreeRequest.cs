@@ -1,10 +1,12 @@
 ﻿using TTRPG_Project.BL.DTO.Base;
+using TTRPG_Project.DAL.Entities.Database.Creatures;
 
 namespace TTRPG_Project.BL.DTO.Creatures.Request
 {
-    public class SkillsTreeRequest : BaseDesctiptionDTO
+    public class SkillsTreeRequest : BaseDescriptionDTO
     {
         public int? ClassId { get; set; }
+        public Class? Class { get; set; }
 
         public int MainSkillId { get; set; }
         public int MainSkillValue { get; set; }

@@ -3,7 +3,7 @@ using TTRPG_Project.BL.DTO.Items;
 
 namespace TTRPG_Project.BL.DTO.Base
 {
-    public class BaseItemDTO : BaseDesctiptionDTO
+    public class BaseItemDTO : BaseDescriptionDTO
     {
         public int AvailabilityType { get; set; }
         public double Weight { get; set; }

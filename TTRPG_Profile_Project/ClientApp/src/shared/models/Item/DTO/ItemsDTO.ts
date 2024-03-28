@@ -1,10 +1,10 @@
 import { Effect } from "shared/models/Additional";
 import { EntityBase, EntityItemBase } from "shared/models/Base";
-import { CreatureReward, Skill } from "shared/models/Creature";
+import { CreatureRewardList, Skill } from "shared/models/Bestiary";
 
 export interface ItemShortDTO extends EntityItemBase {
   itemBaseEffectList: ItemBaseEffect[] | null;
-  creatureRewardList: CreatureReward[] | null;
+  creatureRewardList: CreatureRewardList[] | null;
   itemType: number;
 }
 

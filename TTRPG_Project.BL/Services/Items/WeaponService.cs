@@ -111,7 +111,7 @@ namespace TTRPG_Project.BL.Services.Items
                 }).ToList(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2, 
                 Weight = request.Weight,
                 StealthType = request.StealthType,
                 Type = request.Type,
@@ -132,43 +132,43 @@ namespace TTRPG_Project.BL.Services.Items
 
         public virtual async Task<bool> UpdateAsync(WeaponRequest request)
         {
-            var tool = _dbContext.Weapons.Where(x => x.Id == request.Id).FirstOrDefault();
-            if (tool is null)
+            var weapon = _dbContext.Weapons.Where(x => x.Id == request.Id).FirstOrDefault();
+            if (weapon is null)
                 throw new CustomException("Оружие не не найдено!");
 
-            tool.Name = request.Name;
-            tool.UpdateDate = DateTime.Now;
-            tool.Weight = request.Weight;
-            tool.Price = request.Price;
-            tool.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
-            tool.Description = request.Description;
-            tool.AvailabilityType = request.AvailabilityType;
-            tool.StealthType = request.StealthType;
-            tool.Type = request.Type;
-            tool.EquipmentType = request.EquipmentType;
-            tool.Accuracy = request.Accuracy;
-            tool.Damage = request.Damage;
-            tool.Reliability = request.Reliability;
-            tool.Grip = request.Grip;
-            tool.Distance = request.Distance;
-            tool.AmountOfEnhancements = request.AmountOfEnhancements;
-            tool.IsAmmunition = request.IsAmmunition;
-            tool.SkillId = request.SkillId ?? request.Skill?.Id;
+            weapon.Name = request.Name;
+            weapon.UpdateDate = DateTime.Now;
+            weapon.Weight = request.Weight;
+            weapon.Price = request.Price;
+            weapon.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            weapon.Description = request.Description;
+            weapon.AvailabilityType = request.AvailabilityType;
+            weapon.StealthType = request.StealthType;
+            weapon.Type = request.Type;
+            weapon.EquipmentType = request.EquipmentType;
+            weapon.Accuracy = request.Accuracy;
+            weapon.Damage = request.Damage;
+            weapon.Reliability = request.Reliability;
+            weapon.Grip = request.Grip;
+            weapon.Distance = request.Distance;
+            weapon.AmountOfEnhancements = request.AmountOfEnhancements;
+            weapon.IsAmmunition = request.IsAmmunition;
+            weapon.SkillId = request.SkillId ?? request.Skill?.Id;
 
-            var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == tool.Id).ToListAsync();
+            var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == weapon.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);
 
-            tool.ItemBaseEffectList = request.ItemBaseEffectList.Select(dto => new ItemBaseEffectList
+            weapon.ItemBaseEffectList = request.ItemBaseEffectList.Select(dto => new ItemBaseEffectList
             {
-                Id = dto.Id ?? 0,
-                ItemBaseId = tool.Id,
+                Id = dto.Id,
+                ItemBaseId = weapon.Id,
                 ChancePercent = dto.ChancePercent,
                 Damage = dto.Damage,
                 EffectId = dto.Effect?.Id ?? 0,
                 IsDealDamage = dto.IsDealDamage,
             }).ToList();
 
-            _dbContext.Entry(tool).State = EntityState.Modified;
+            _dbContext.Entry(weapon).State = EntityState.Modified;
             return await SaveAsync();
         }
 

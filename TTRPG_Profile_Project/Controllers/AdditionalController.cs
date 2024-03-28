@@ -92,7 +92,7 @@ namespace TTRPG_Project.Web.Controllers
 
         //////////////////////////////////////////////////////////////////////////////////        
 
-        #region *Effect* Эффекты, состояния
+        #region *Source* Источники
         [HttpGet("source")]
         public async Task<IActionResult> GetSources()
         {

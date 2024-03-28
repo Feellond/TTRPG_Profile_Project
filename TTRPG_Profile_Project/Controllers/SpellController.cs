@@ -55,8 +55,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newSpell = _mapper.Map<Spell>(request);
-                var result = await _spellService.CreateAsync(newSpell);
+                var result = await _spellService.CreateAsync(request);
 
                 return Ok(result);
             }
@@ -68,8 +67,7 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var spell = _mapper.Map<Spell>(request);
-                var result = await _spellService.UpdateAsync(spell);
+                var result = await _spellService.UpdateAsync(request);
 
                 return Ok(result);
             }
@@ -79,11 +77,7 @@ namespace TTRPG_Project.Web.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteSpell(int spellId)
         {
-            var spell = await _spellService.GetByIdAsync(spellId);
-            if (spell is null)
-                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
-
-            var result = await _spellService.DeleteAsync(spell!);
+            var result = await _spellService.DeleteAsync(spellId!);
             return Ok(result);
         }
     }
