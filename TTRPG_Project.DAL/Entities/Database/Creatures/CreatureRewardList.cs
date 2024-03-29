@@ -7,8 +7,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     public class CreatureRewardList
     {
         public int Id { get; set; }
-        public int? CreatureId { get; set; }
-        public Creature? Creature { get; set; }
+        public List<Creature> Creature { get; set; } = new();
         public int? ItemBaseId { get; set; }
         public ItemBase? ItemBase { get; set; }
         public string Amount { get; set; } = string.Empty;

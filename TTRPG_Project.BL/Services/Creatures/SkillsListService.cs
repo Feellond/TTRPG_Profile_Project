@@ -68,8 +68,6 @@ namespace TTRPG_Project.BL.Services.Creatures
                 CharismaValue = request.CharismaValue,
                 CityOrientationId = request.CityOrientationId,
                 CityOrientationValue = request.CityOrientationValue,
-                ClassSkill = request.ClassSkill,
-                ClassSkillValue = request.ClassSkillValue,
                 CourageId = request.CourageId,
                 CourageValue = request.CourageValue,
                 CrossbowMasteryId = request.CrossbowMasteryId,
@@ -96,8 +94,12 @@ namespace TTRPG_Project.BL.Services.Creatures
                 IntimidationValue = request.IntimidationValue,
                 KnowledgeTransferId = request.KnowledgeTransferId,
                 KnowledgeTransferValue = request.KnowledgeTransferValue,
-                LanguageId = request.LanguageId,
-                LanguageValue = request.LanguageValue,
+                LanguageGeneralId = request.LanguageGeneralId,
+                LanguageGeneralValue = request.LanguageGeneralValue,
+                LanguageHighId = request.LanguageHighId,
+                LanguageHighValue = request.LanguageHighValue,
+                LanguageDwarfId = request.LanguageDwarfId,
+                LanguageDwarfValue = request.LanguageDwarfValue,
                 LeadershipId = request.LeadershipId,
                 LeadershipValue = request.LeadershipValue,
                 LightBladeMasteryId = request.LightBladeMasteryId,
@@ -180,8 +182,6 @@ namespace TTRPG_Project.BL.Services.Creatures
             skillsList.CharismaValue = request.CharismaValue;
             skillsList.CityOrientationId = request.CityOrientationId;
             skillsList.CityOrientationValue = request.CityOrientationValue;
-            skillsList.ClassSkill = request.ClassSkill;
-            skillsList.ClassSkillValue = request.ClassSkillValue;
             skillsList.CourageId = request.CourageId;
             skillsList.CourageValue = request.CourageValue;
             skillsList.CrossbowMasteryId = request.CrossbowMasteryId;
@@ -208,8 +208,12 @@ namespace TTRPG_Project.BL.Services.Creatures
             skillsList.IntimidationValue = request.IntimidationValue;
             skillsList.KnowledgeTransferId = request.KnowledgeTransferId;
             skillsList.KnowledgeTransferValue = request.KnowledgeTransferValue;
-            skillsList.LanguageId = request.LanguageId;
-            skillsList.LanguageValue = request.LanguageValue;
+            skillsList.LanguageGeneralId = request.LanguageGeneralId;
+            skillsList.LanguageGeneralValue = request.LanguageGeneralValue;
+            skillsList.LanguageHighId = request.LanguageHighId;
+            skillsList.LanguageHighValue = request.LanguageHighValue;
+            skillsList.LanguageDwarfId = request.LanguageDwarfId;
+            skillsList.LanguageDwarfValue = request.LanguageDwarfValue;
             skillsList.LeadershipId = request.LeadershipId;
             skillsList.LeadershipValue = request.LeadershipValue;
             skillsList.LightBladeMasteryId = request.LightBladeMasteryId;

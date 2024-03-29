@@ -2,7 +2,7 @@
 
 namespace TTRPG_Project.BL.DTO.Entities.Additional.Request
 {
-    public class SourceRequest : BaseDesctiptionDTO
+    public class SourceRequest : BaseDescriptionDTO
     {
     }
 }

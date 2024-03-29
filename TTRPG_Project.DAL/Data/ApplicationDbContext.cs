@@ -23,6 +23,7 @@ namespace TTRPG_Project.DAL.Data
         public DbSet<AttackEffectList> AttackEffectList { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Creature> Creatures { get; set; }
+        public DbSet<CreatureAttack> CreatureAttacks { get; set; }
         public DbSet<CreatureRewardList> CreatureRewardList { get; set; }
         //public DbSet<CreatureSpellsList> CreatureSpellsList { get; set; }
         public DbSet<Race> Races { get; set; }
@@ -1490,6 +1491,15 @@ namespace TTRPG_Project.DAL.Data
                     Description = "Всегда с собой таскай верёвку. " +
                     "Я не раз в ямы проваливался, да и на скалы карабкаться приходилось. " +
                     "Ситуаций, где нужна верёвка, предостаточно"
+                },
+                new Item
+                {
+                    Id = 91,
+                    Name = "Кроны",
+                    SourceId = 1,
+                    Weight = 0.01,
+                    Price = 1,
+                    Description = "Валюта это",
                 }
             });
 
@@ -1693,6 +1703,8 @@ namespace TTRPG_Project.DAL.Data
                     SourceId = 1,
                 },
             });
+
+            #region #Creatures Data
 
             var abilityList = new Ability[]
             {
@@ -2004,6 +2016,8 @@ namespace TTRPG_Project.DAL.Data
             {
                 new SkillsList
                 {
+                    Id = 1,
+
                     AttentionId = 1,
                     SurvivalId = 2,
                     DeductionId = 3,
@@ -2026,22 +2040,252 @@ namespace TTRPG_Project.DAL.Data
                     CityOrientationValue = 0,
                     KnowledgeTransferValue = 0,
                     TacticsValue = 0,
+                    TradingValue = 0,
                     EtiquetteValue = 0,
                     LanguageGeneralValue = 0,
                     LanguageHighValue = 0,
                     LanguageDwarfValue = 0,
+
+                    StrengthId = 27,
+                    EnduranceId = 28,
+
+                    StrengthValue = 0,
+                    EnduranceValue = 5,
+
+                    MeleeCombatId = 14,
+                    WrestlingId = 15,
+                    RidingId = 16,
+                    PoleWeaponMasteryId = 17,
+                    LightBladeMasteryId = 18,
+                    SwordsmanshipId = 19,
+                    SeamanshipId = 20,
+                    EvasionId = 21,
+
+                    MeleeCombatValue = 0,
+                    WrestlingValue = 6,
+                    RidingValue = 0,
+                    PoleWeaponMasteryValue = 0,
+                    LightBladeMasteryValue = 5,
+                    SwordsmanshipValue = 6,
+                    SeamanshipValue = 0,
+                    EvasionValue = 4,
+
+                    AthleticsId = 22,
+                    ManualDexterityId = 23,
+                    StealthId = 24,
+                    CrossbowMasteryId = 25,
+                    ArcheryId = 26,
+
+                    AthleticsValue = 4,
+                    ManualDexterityValue = 0,
+                    StealthValue = 3,
+                    CrossbowMasteryValue = 4,
+                    ArcheryValue = 0,
+
+                    GamblingId = 29,
+                    AppearanceId = 30,
+                    PublicSpeakingId = 31,
+                    ArtistryId = 32,
+                    LeadershipId = 33,
+                    DeceptionId = 34,
+                    UnderstandingPeopleId = 35,
+                    SeductionId = 36,
+                    PersuasionId = 37,
+                    CharismaId = 38,
+
+                    GamblingValue = 0,
+                    AppearanceValue = 0,
+                    PublicSpeakingValue = 0,
+                    ArtistryValue = 0,
+                    LeadershipValue = 0,
+                    DeceptionValue = 0,
+                    UnderstandingPeopleValue = 0,
+                    SeductionValue = 0,
+                    PersuasionValue = 0,
+                    CharismaValue = 0,
+
+                    AlchemyId = 39,
+                    LockpickingId = 40,
+                    TrapKnowledgeId = 41,
+                    ManufacturingId = 42,
+                    CamouflageId = 43,
+                    FirstAidId = 44,
+                    ForgeryId = 45,
+
+                    AlchemyValue = 0,
+                    LockpickingValue = 0,
+                    TrapKnowledgeValue = 0,
+                    ManufacturingValue = 0,
+                    CamouflageValue = 0,
+                    FirstAidValue = 0,
+                    ForgeryValue = 0,
+
+                    IntimidationId = 46,
+                    CorruptionId = 47,
+                    RitualsId = 48,
+                    MagicResistanceId = 49,
+                    PersuasionResistanceId = 50,
+                    SpellcastingId = 51,
+                    CourageId = 52,
+
+                    IntimidationValue = 0,
+                    CorruptionValue = 0,
+                    RitualsValue = 0,
+                    MagicResistanceValue = 4,
+                    PersuasionResistanceValue = 5,
+                    SpellcastingValue = 0,
+                    CourageValue = 7,
                 },
             });
 
+            var creatureRewardList = new CreatureRewardList[]
+            {
+                new CreatureRewardList
+                {
+                    Id = 1,
+                    Amount = "3к10",
+                    ItemBaseId = 90,
+                }
+            };
+
+            builder.Entity<CreatureRewardList>().HasData(creatureRewardList);
+            
             var creatureList = new Creature[]
             {
                 new Creature
                 {
                     Id = 1,
+                    Name = "Разбойник",
+                    Description = "",
+                    AdditionalInformation = "",
+                    //Abilities = abilityList.ToList(),
+                    Armor = 5,
+                    AthleticsBase = 9,
+                    //Attacks = attackList.ToList(),
+                    BlockBase = 12,
+                    Complexity = (int)Complexity.EasySimple,
+                    //CreatureRewardList = creatureRewardList.ToList(),
+                    EducationSkill = 8,
+                    MonsterLoreSkill = 10,
+                    SuperstitionsInformation = "Хе, разбойники, дезертиры, ренегаты, сукины дети... Называй их как хочешь. Люди ступают на преступный путь" +
+                    " ради денег и власти, но в большинстве своём они делают это от страха и голода. Все знают, что уровень преступности растёт во время" +
+                    " войны. Так было в прошлых двух войнах, и вот сейчас опять. Но это не значит, что простой народ с этим согласен. Хех, не говорите это" +
+                    " в лицо убийце, но среднестатистический ублюдок о бандите того же мнения, что и о гуле. И те, и другие прячутся по грязным закоулкам" +
+                    " мира, ждут момента, чтобы напасть, и устраивают засаду на добрых трудяг, чтобы отобрать заработанное кровью и потом.",
+                    MonsterLoreInformation = "Разбойники — одна из самых распространённых угроз на дороге, но отнюдь не самая опасная. Куда тяжелее скинуть" +
+                    " с себя гуля, чем расправиться с парочкой разбойников. Но порой они могут представлять настоящую угрозу, особенно когда их много." +
+                    " Большая часть разбойников — это солдаты без армии, наёмники без контракта или дезертиры, которые покинули одну из воюющих сторон." +
+                    " Разбойники просты. Первые ряды побегут с полуторными мечами наголо. Те, кто на такое не способен, воспользуются арбалетами. Разбойникам" +
+                    " обычно нужны три вещи: безопасность, деньги и что-нибудь, на чём можно выместить свой гнев. С ними не то чтобы просто расправиться," +
+                    " но, в отличие от большинства чудовищ, можно воззвать к их разуму. Возможно, вы сумеете убедить их не убивать вас. Разбойники," +
+                    " скорее всего, сдадутся, если вы нанесёте им достаточно урона.\r\nОднако некоторые разбойники, странствующие крепко сбитыми группами," +
+                    " могут начать сражаться яростнее, если убить их товарищей. На истерзанном войной Севере стоит быть осторожнее: нехватка пищи заставила" +
+                    " некоторых разбойников стать каннибалами. Каннибалы зачастую сходят с ума и нападают с бешеной яростью — они не сдаются, даже стоя" +
+                    " одной ногой в могиле. Если не хотите драться, будьте внимательны на дороге. =",
+                    EvasionBase = 10,
+                    GroupSize = "Банда из 3-15 разбойников",
+                    HabitatPlace = "Часто рядом с городами и на трактах", 
+                    Height = 180,
+                    Intellect = "Человеческий",
+                    MoneyReward = 10,
+                    RaceId = 4,
+                    Regeneration = 0,
+                    SkillsListId = 1,
+                    SourceId = 1,
+                    SpellResistBase = 8,
+                    StatsListId = 1,
+                    Weight = 80,
                 }
             };
 
             builder.Entity<Creature>().HasData(creatureList);
+
+            builder.Entity<CreatureAttack>().HasData(new CreatureAttack[]
+            {
+                new CreatureAttack
+                {
+                    Id = 1,
+                    AttackId = 1,
+                    CreatureId = 1,
+                },
+                new CreatureAttack
+                {
+                    Id = 2,
+                    AttackId = 2,
+                    CreatureId = 1,
+                },
+                new CreatureAttack
+                {
+                    Id = 3,
+                    AttackId = 3,
+                    CreatureId = 1,
+                },
+            });
+
+            #endregion
+
+            #region #Spells Data
+
+            var spellSkillProtectionList = new SpellSkillProtectionList[]
+            {
+                new SpellSkillProtectionList
+                {
+                    Id = 1,
+                    SkillId = 14,
+                },
+                new SpellSkillProtectionList
+                {
+                    Id = 2,
+                    SkillId = 17,
+                },
+                new SpellSkillProtectionList
+                {
+                    Id = 3,
+                    SkillId = 18,
+                },
+                new SpellSkillProtectionList
+                {
+                    Id = 4,
+                    SkillId = 19,
+                },
+                new SpellSkillProtectionList
+                {
+                    Id = 5,
+                    SkillId = 21,
+                },
+            };
+
+            builder.Entity<SpellSkillProtectionList>().HasData(spellSkillProtectionList);
+
+            //builder.Entity<Spell>().HasData(new Spell[]
+            //{
+            //    new Spell
+            //    {
+            //        Id = 1,
+            //        Name = "Слепящая пыль",
+            //        Description = "Слепящая пыль позволяет направить в глаза цели горсть магической пыли, которая ослепит её на время действия заклинания.",
+            //        CheckDC = -1,
+            //        ConcetrationEnduranceCost = 0,
+            //        DangerInfo = "",
+            //        Distance = 4,
+            //        Duration = "1к10 раундов",
+            //        EnduranceCost = 3,
+            //        IsConcetration = false,
+            //        IsDruidSpell = false,
+            //        IsPriestSpell = false,
+            //        PreparationTime = 0,
+            //        SourceId = 1,
+            //        SourceType = (int)SpellSource.Mixed,
+            //        SourceTypeDescription = "",
+            //        SpellLevel = 1,
+            //        SpellSkillProtectionList = spellSkillProtectionList.ToList(),
+            //        SpellType = (int)SpellType.Spell,
+            //        SpellTypeDescription = "",
+            //        WithdrawalCondition = "",
+            //    },
+            //});
+
+            #endregion
         }
     }
 }

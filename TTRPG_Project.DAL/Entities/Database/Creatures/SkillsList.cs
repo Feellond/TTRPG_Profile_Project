@@ -144,8 +144,8 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public int? IntimidationId { get; set; }
         public int? IntimidationValue { get; set; } = 0;
 
-        public int? SpellcastingId { get; set; }
-        public int? SpellcastingValue { get; set; } = 0;
+        public int? CorruptionId { get; set; }
+        public int? CorruptionValue { get; set; } = 0;
 
         public int? RitualsId { get; set; }
         public int? RitualsValue { get; set; } = 0;
@@ -156,10 +156,10 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public int? PersuasionResistanceId { get; set; }
         public int? PersuasionResistanceValue { get; set; } = 0;
 
+        public int? SpellcastingId { get; set; }
+        public int? SpellcastingValue { get; set; } = 0;
+
         public int? CourageId { get; set; }
         public int? CourageValue { get; set; } = 0;
-
-        public int? ClassSkill { get; set; }
-        public int? ClassSkillValue { get; set; } = 0;
     }
 }

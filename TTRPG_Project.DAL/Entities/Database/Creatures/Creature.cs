@@ -34,7 +34,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public string HabitatPlace { get; set; } = string.Empty;
         public string Intellect { get; set; } = string.Empty;
         public string GroupSize { get; set; } = string.Empty;
-        public List<Attack> Attacks { get; set; } = new();
+        public List<CreatureAttack> CreatureAttacks { get; set; } = new();
         public List<Ability> Abilities { get; set; } = new();
         public List<CreatureRewardList> CreatureRewardList { get; set; } = new();
         public List<Spell> Spells { get; set; } = new();

@@ -27,14 +27,28 @@ namespace TTRPG_Project.BL.Services.Creatures
 
         public async Task<CreatureResponce> GetAllAsync(CreatureFilter filter)
         {
+            //var creatures = await _dbContext.Creatures.AsNoTracking()
+            //    .Include(s => s.Source)
+            //    .Include(r => r.Race)
+            //    .Include(stats => stats.StatsList)
+            //    .Include(skills => skills.SkillsList)
+            //    .Include(a => a.Attacks)
+            //        .ThenInclude(ael => ael.AttackEffectList)
+            //            .ThenInclude(e => e.Effect)
+            //    .Include(ab => ab.Abilities)
+            //        .ThenInclude(r => r.Race)
+            //    .Include(crl => crl.CreatureRewardList)
+            //        .ThenInclude(item => item.ItemBase).ToListAsync();
+
             var creatures = await _dbContext.Creatures.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(r => r.Race)
                 .Include(stats => stats.StatsList)
                 .Include(skills => skills.SkillsList)
-                .Include(a => a.Attacks)
-                    .ThenInclude(ael => ael.AttackEffectList)
-                        .ThenInclude(e => e.Effect)
+                .Include(a => a.CreatureAttacks)
+                    .ThenInclude(x => x.Attack)
+                        .ThenInclude(ael => ael.AttackEffectList)
+                            .ThenInclude(e => e.Effect)
                 .Include(ab => ab.Abilities)
                     .ThenInclude(r => r.Race)
                 .Include(crl => crl.CreatureRewardList)
@@ -66,9 +80,10 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(r => r.Race)
                 .Include(stats => stats.StatsList)
                 .Include(skills => skills.SkillsList)
-                .Include(a => a.Attacks)
-                    .ThenInclude(ael => ael.AttackEffectList)
-                        .ThenInclude(e => e.Effect)
+                .Include(a => a.CreatureAttacks)
+                    .ThenInclude(x => x.Attack)
+                        .ThenInclude(ael => ael.AttackEffectList)
+                            .ThenInclude(e => e.Effect)
                 .Include(ab => ab.Abilities)
                     .ThenInclude(r => r.Race)
                 .Include(crl => crl.CreatureRewardList)
@@ -102,7 +117,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 AdditionalInformation = request.AdditionalInformation,
                 Armor = request.Armor,
                 AthleticsBase = request.AthleticsBase,
-                Attacks = request.Attacks,
+                CreatureAttacks = request.CreatureAttacks,
                 BlockBase = request.BlockBase,
                 Complexity = request.Complexity,
                 CreatureRewardList = request.CreatureRewardList.Select(dto => new CreatureRewardList
@@ -144,7 +159,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             creature.AdditionalInformation = request.AdditionalInformation;
             creature.Armor = request.Armor;
             creature.AthleticsBase = request.AthleticsBase;
-            creature.Attacks = request.Attacks;
+            creature.CreatureAttacks = request.CreatureAttacks;
             creature.BlockBase = request.BlockBase;
             creature.Complexity = request.Complexity;
             creature.Description = request.Description;
@@ -180,8 +195,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                 SourceId = _dbContext.Sources.Where(x => x.Name == ((dto.Source == null) ? "" : dto.Source.Name)).FirstOrDefault()?.Id ?? 2,
             }).ToList();
 
-            var ccrList = await _dbContext.Abilitiys.Where(x => x.Creature == null ? false : x.Creature.Any(k => k.Id == creature.Id)).ToListAsync();
-            _dbContext.RemoveRange(ccrList);
+            //var ccrList = await _dbContext.CreatureRewardList.Where(x => x.CreatureId == creature.Id).ToListAsync();
+            //_dbContext.RemoveRange(ccrList);
             creature.CreatureRewardList = request.CreatureRewardList.Select(dto => new CreatureRewardList
             {
                 Id = dto.Id ?? 0,

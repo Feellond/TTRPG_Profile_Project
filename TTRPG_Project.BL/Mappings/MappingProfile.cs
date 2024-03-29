@@ -34,7 +34,7 @@ namespace Partners.BL.Mappings
             //CreateMap<ItemBase, ItemBaseResponce>().ReverseMap();
             //Вопрос в целесообразности. Либо всю мешанину в ItemResponce, либо создавать на каждый как: AlchemicalItemResponce, ...Responce, ...
 
-            CreateMap<AbilitiyRequest, Abilitiy>().ReverseMap();
+            CreateMap<AbilitiyRequest, Ability>().ReverseMap();
             CreateMap<AttackRequest, Attack>().ReverseMap();
             CreateMap<ClassRequest, Class>().ReverseMap();
             CreateMap<CreatureRequest, Creature>().ReverseMap();

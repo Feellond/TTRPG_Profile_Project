@@ -2,7 +2,7 @@
 
 namespace TTRPG_Project.BL.DTO.Additional.Request
 {
-    public class EffectRequest : BaseDesctiptionDTO
+    public class EffectRequest : BaseDescriptionDTO
     {
     }
 }

@@ -8,7 +8,7 @@ namespace TTRPG_Project.BL.DTO.Entities.Spells.Request
     {
         public int EnduranceCost { get; set; }
         public int Distance { get; set; }
-        public int Duration { get; set; }
+        public string Duration { get; set; }
         public List<SpellSkillProtectionList> SpellSkillProtectionList { get; set; } = new();
         public bool IsConcetration { get; set; } = false;
         public int ConcetrationEnduranceCost { get; set; } = 0;

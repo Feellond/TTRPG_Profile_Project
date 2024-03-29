@@ -51,7 +51,6 @@ namespace TTRPG_Project.BL.Services.Creatures
         {
             SkillsTree skillsTree = new()
             {
-                ClassId = request.ClassId ?? request.Class?.Id,
                 Description = request.Description,
                 FirstLeftSkillId = request.FirstLeftSkillId,
                 FirstLeftSkillValue = request.FirstLeftSkillValue,
@@ -87,7 +86,6 @@ namespace TTRPG_Project.BL.Services.Creatures
             if (skillsTree is null)
                 throw new CustomException("Существо не найдено!");
 
-            skillsTree.ClassId = request.ClassId ?? request.Class?.Id;
             skillsTree.Description = request.Description;
             skillsTree.FirstLeftSkillId = request.FirstLeftSkillId;
             skillsTree.FirstLeftSkillValue = request.FirstLeftSkillValue;

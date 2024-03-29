@@ -65,7 +65,6 @@ namespace TTRPG_Project.BL.Services.Creatures
                 AttackSpeed = request.AttackSpeed,
                 AttackType = request.AttackType,
                 BaseAttack = request.BaseAttack,
-                CreatureId = request.CreatureId ?? request.Creature?.Id,
                 Damage = request.Damage,
                 Description = request.Description,
                 Distance = request.Distance,
@@ -94,7 +93,6 @@ namespace TTRPG_Project.BL.Services.Creatures
             attack.AttackSpeed = request.AttackSpeed;
             attack.AttackType = request.AttackType;
             attack.BaseAttack = request.BaseAttack;
-            attack.CreatureId = request.CreatureId ?? request.Creature?.Id;
             attack.Damage = request.Damage;
             attack.Description = request.Description;
             attack.Distance = request.Distance;
