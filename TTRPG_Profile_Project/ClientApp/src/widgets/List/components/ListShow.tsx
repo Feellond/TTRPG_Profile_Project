@@ -20,7 +20,7 @@ import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
 import { ShowSpell } from "./ShowSpell";
 import { ShowBestiary } from "./ShowBestiary";
 
-interface ListShow {
+interface IListShow {
   getParams: () => {};
   lazyState: LazyState;
   entityList: ItemDTO[];
@@ -42,7 +42,7 @@ const ListShow = ({
   toast,
   filter,
   setFilter,
-}: ListShow) => {
+}: IListShow) => {
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
 
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
