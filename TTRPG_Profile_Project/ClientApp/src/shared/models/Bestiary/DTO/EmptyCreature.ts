@@ -1,20 +1,19 @@
 import {
-  Abilitiy,
-  Attack,
-  AttackEffectList,
-  Class,
-  Creature,
-  CreatureEffectList,
-  CreatureRewardList,
-  Race,
-  Skill,
-  SkillsList,
-  SkillsTree,
-  Stat,
-  StatsList,
-} from "..";
+  IAbilitiy,
+  IAttack,
+  IAttackEffectList,
+  IClass,
+  ICreature,
+  IRace,
+  IReward,
+  ISkill,
+  ISkillsList,
+  ISkillsTree,
+  IStat,
+  IStatsList,
+} from "./BestiaryDTO";
 
-export const emptyAbilitiy: Abilitiy = {
+export const emptyAbilitiy: IAbilitiy = {
   id: 0,
   name: null,
   description: null,
@@ -24,7 +23,7 @@ export const emptyAbilitiy: Abilitiy = {
   type: null,
 };
 
-export const emptyAttack: Attack = {
+export const emptyAttack: IAttack = {
   id: 0,
   name: null,
   description: null,
@@ -39,16 +38,16 @@ export const emptyAttack: Attack = {
   attackEffectList: [],
 };
 
-export const emptyAttackEffectList: AttackEffectList = {
+export const emptyAttackEffectList: IAttackEffectList = {
   id: 0,
-  attack: null,
+  //attack: null,
   effect: null,
   damage: "",
   chancePercent: 0,
   isDealDamage: false,
 };
 
-export const emptyClass: Class = {
+export const emptyClass: IClass = {
   id: 0,
   name: null,
   description: null,
@@ -57,7 +56,7 @@ export const emptyClass: Class = {
   defaultMagicAbilities: "",
 };
 
-export const emptyCreature: Creature = {
+export const emptyCreature: ICreature = {
   id: 0,
   name: null,
   description: null,
@@ -74,7 +73,6 @@ export const emptyCreature: Creature = {
   regeneration: 0,
   statsList: null,
   skillsList: null,
-  creatureEffectList: [],
   evasionBase: 0,
   athleticsBase: 0,
   blockBase: 0,
@@ -84,34 +82,28 @@ export const emptyCreature: Creature = {
   habitatPlace: "",
   intellect: "",
   groupSize: "",
-  attacks: [],
-  abilities: [],
-  creatureRewardList: [],
+  creatureAttacks: [],
+  creatureAbilitys: [],
+  creatureReward: [],
 };
 
-export const emptyCreatureEffectList: CreatureEffectList = {
+export const emptyReward: IReward = {
   id: 0,
-  creature: null,
-  effect: null,
-  type: 0,
-  chancePercent: 0,
-};
-
-export const emptyCreatureRewardList: CreatureRewardList = {
-  id: 0,
-  creature: null,
-  itemBase: null,
+  name: null,
+  description: null,
+  source: null,
+  item: null,
   amount: "",
 };
 
-export const emptyRace: Race = {
+export const emptyRace: IRace = {
   id: 0,
   name: null,
   description: null,
   source: null,
 };
 
-export const emptySkill: Skill = {
+export const emptySkill: ISkill = {
   id: 0,
   name: null,
   description: null,
@@ -121,7 +113,7 @@ export const emptySkill: Skill = {
   stat: null,
 };
 
-export const emptySkillsList: SkillsList = {
+export const emptySkillsList: ISkillsList = {
   attentionId: 0,
   attentionValue: 0,
   survivalId: 0,
@@ -198,7 +190,7 @@ export const emptySkillsList: SkillsList = {
   classSkillValue: 0,
 };
 
-export const emptySkillsTree: SkillsTree = {
+export const emptySkillsTree: ISkillsTree = {
   id: 0,
   class: null,
   mainSkillId: 0,
@@ -223,14 +215,14 @@ export const emptySkillsTree: SkillsTree = {
   thirdRightSkillValue: 0,
 };
 
-export const emptyStat: Stat = {
+export const emptyStat: IStat = {
   id: 0,
   name: null,
   description: null,
   source: null,
 };
 
-export const emptyStatsList: StatsList = {
+export const emptyStatsList: IStatsList = {
   id: 0,
   intellectId: 0,
   intellectValue: 0,

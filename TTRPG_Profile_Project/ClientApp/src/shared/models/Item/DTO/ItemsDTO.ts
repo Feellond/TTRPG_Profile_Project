@@ -1,10 +1,10 @@
+import { ICreatureReward, ISkill } from "shared/models";
 import { Effect } from "shared/models/Additional";
 import { EntityBase, EntityItemBase } from "shared/models/Base";
-import { CreatureRewardList, Skill } from "shared/models/Bestiary";
 
 export interface ItemShortDTO extends EntityItemBase {
   itemBaseEffectList: ItemBaseEffect[] | null;
-  creatureRewardList: CreatureRewardList[] | null;
+  creatureRewardList: ICreatureReward[] | null;
   itemType: number;
 }
 
@@ -18,7 +18,7 @@ export interface ItemDTO extends ItemShortDTO {
   stealthType: number | null;
   amountOfEnhancements: number | null;
   isAmmunition: boolean | null;
-  skill: Skill | null;
+  skill: ISkill | null;
   //tool
 
   //item

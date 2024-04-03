@@ -10,7 +10,7 @@ namespace TTRPG_Project.BL.DTO.Entities.Items.Responce
     public class ItemBaseResponce
     {
         public int Count { get; set; }
-        public List<ItemBaseInfo> Items { get; set; }
+        public List<ItemBaseInfo> Entitys { get; set; }
 
         //public ItemBaseResponce(AlchemicalItem alchemicalItem)
         //{

@@ -25,6 +25,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Spells
         public string SourceTypeDescription { get; set; } = string.Empty;
         public bool IsPriestSpell { get; set; } = false;
         public bool IsDruidSpell { get; set; } = false;
-        public List<Creature> Creatures { get; set; } = new();
+        //public List<Creature> Creatures { get; set; } = new();
     }
 }

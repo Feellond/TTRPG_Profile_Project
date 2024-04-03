@@ -4,7 +4,7 @@ import { Toast } from "primereact/toast"
 
 interface ItemRequestDTO {
     id?: number | string,
-    item?: ItemDTO,
+    entity?: ItemDTO,
     itemType?: number,
     toast?: MutableRefObject<Toast>,
     command?: string,

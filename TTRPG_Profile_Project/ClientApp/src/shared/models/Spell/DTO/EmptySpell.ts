@@ -1,6 +1,6 @@
-import { Spell } from "..";
+import { ISpell } from "./SpellDTO";
 
-const emptySpell: Spell = {
+const emptySpell: ISpell = {
     id: 0,
     name: null,
     description: null,

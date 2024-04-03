@@ -200,12 +200,12 @@ namespace TTRPG_Project.BL.Services.Items
                 .Union(formulas)
                 .Union(items)
                 .Union(tools)
-                .Union(weapons);
+                .Union(weapons).ToList();
 
             foreach (var item in filter.whereExpression)
             {
                 var compiledExpression = item.Compile();
-                allItemsQuery = allItemsQuery.Where(compiledExpression);
+                allItemsQuery = allItemsQuery.Where(compiledExpression).ToList();
             }
 
             //var skip = (filter.Page - 1) * filter.PageSize;
@@ -214,7 +214,7 @@ namespace TTRPG_Project.BL.Services.Items
             ItemBaseResponce responce = new()
             {
                 Count = count,
-                Items = allItems,
+                Entitys = allItems,
             };
 
             return responce;

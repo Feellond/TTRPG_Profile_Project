@@ -10,26 +10,39 @@ import {
   EditItemShortDialog,
   EditSpellDialog,
 } from "widgets/Dialog";
-import { emptyItem } from "../../../shared/models/Item/DTO/EmptyItem";
-import itemService from "shared/services/item.service";
 import { Toast } from "primereact/toast";
 import { FindIndexById } from "entities/GeneralFunc";
 import { ShowItem } from "./ShowItem";
-import { ItemDTO, ItemFilterDTO, LazyState } from "shared/models";
+import {
+  CreatureFilterDTO,
+  ICreature,
+  ISpell,
+  ItemDTO,
+  ItemFilterDTO,
+  LazyState,
+  SpellFilterDTO,
+} from "shared/models";
 import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
 import { ShowSpell } from "./ShowSpell";
 import { ShowBestiary } from "./ShowBestiary";
+import itemService from "shared/services/item.service";
+import bestiaryService from "shared/services/bestiary.service";
 
 interface IListShow {
   getParams: () => {};
   lazyState: LazyState;
-  entityList: ItemDTO[];
-  setEntityList: React.Dispatch<React.SetStateAction<ItemDTO[]>>;
-  entity: ItemDTO;
-  setEntity: React.Dispatch<React.SetStateAction<ItemDTO>>;
+  entityList: ItemDTO[] | ICreature[] | ISpell[];
+  setEntityList: React.Dispatch<
+    React.SetStateAction<ItemDTO[] | ICreature[] | ISpell[]>
+  >;
+  entity: ItemDTO | ICreature | ISpell;
+  setEntity: React.Dispatch<React.SetStateAction<ItemDTO | ICreature | ISpell>>;
+  emptyEntity: ItemDTO | ICreature | ISpell;
   toast: React.MutableRefObject<Toast>;
-  filter: ItemFilterDTO;
-  setFilter: React.Dispatch<React.SetStateAction<ItemFilterDTO>>;
+  filter: ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO;
+  setFilter: React.Dispatch<
+    React.SetStateAction<ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO>
+  >;
 }
 
 const ListShow = ({
@@ -39,6 +52,7 @@ const ListShow = ({
   setEntityList,
   entity,
   setEntity,
+  emptyEntity,
   toast,
   filter,
   setFilter,
@@ -49,7 +63,7 @@ const ListShow = ({
   const [editDialogHeader, setEditDialogHeader] = useState<string>("");
 
   const showContentFunc = ({ data }) => {
-    if ("availabilityType" in data) {
+    if ("itemType" in data) {
       // Переменная data имеет тип ItemDTO
       return (
         <div>
@@ -67,21 +81,21 @@ const ListShow = ({
       // Переменная data имеет тип BestiaryDTO
       return (
         <div>
-          <ShowBestiary />
+          <ShowBestiary data={data}/>
         </div>
       );
     }
   };
 
   const showDialogs = () => {
-    if ("availabilityType" in entity) {
+    if ("itemType" in entity) {
       // Переменная data имеет тип ItemDTO
       return (
         <div>
           <DeleteItemDialog
             data={entity}
             visible={deleteDialogVisible}
-            deleteItem={deleteItem}
+            deleteItem={deleteEntity}
             onHide={hideDialog}
           />
           <EditItemShortDialog
@@ -89,7 +103,7 @@ const ListShow = ({
             header={editDialogHeader}
             visible={editDialogVisible}
             onHide={hideDialog}
-            onSave={saveItem}
+            onSave={saveEntity}
           />
         </div>
       );
@@ -131,7 +145,7 @@ const ListShow = ({
 
   const showCreateDialog = () => {
     setEditDialogHeader("Создание нового предмета");
-    setEntity(emptyItem);
+    setEntity(emptyEntity);
     setEditDialogVisible(true);
   };
 
@@ -147,14 +161,32 @@ const ListShow = ({
   const hideDialog = () => {
     setDeleteDialogVisible(false);
     setEditDialogVisible(false);
-    setEntity(emptyItem);
+    setEntity(emptyEntity);
   };
 
-  const saveItem = async () => {
+  const saveEntity = async () => {
     let result;
-    if (entity.id !== 0)
-      result = await itemService.updateItem({ item: entity, toast: toast });
-    else result = await itemService.createItem({ item: entity, toast });
+    if ("itemType" in entity) {
+      if (entity.id !== 0)
+        result = await itemService.updateEntity({
+          entity: entity as ItemDTO,
+          toast: toast,
+        });
+      else
+        result = await itemService.createEntity({
+          entity: entity as ItemDTO,
+          toast,
+        });
+    } else if ("race" in entity) {
+      if (entity.id !== 0)
+        result = await bestiaryService.updateEntity({
+          entity: entity as ICreature,
+        });
+      else
+        result = await bestiaryService.createEntity({
+          entity: entity as ICreature,
+        });
+    }
 
     if (result !== false) {
       hideDialog();
@@ -162,8 +194,13 @@ const ListShow = ({
     }
   };
 
-  const deleteItem = async (id: number, itemType: number) => {
-    let result = await itemService.deleteItem({ id, itemType, toast });
+  const deleteEntity = async (id: number, itemType: number) => {
+    let result;
+
+    if ("itemType" in entity)
+      result = await itemService.deleteEntity({ id, itemType, toast });
+    else if ("race" in entity)
+      result = await bestiaryService.deleteEntity({ id });
 
     if (result !== false) {
       hideDialog();
@@ -173,21 +210,30 @@ const ListShow = ({
 
   const fetchData = async () => {
     try {
-      let result = await itemService.getItems({
-        itemType: 1, //ItemEntityType.BaseItem
-        toast: toast,
-        params: getParams(),
-      });
+      let result;
+
+      if ("itemType" in entity) {
+        result = await itemService.getEntitys({
+          itemType: 1, //ItemEntityType.BaseItem
+          toast: toast,
+          params: getParams(),
+        });
+      } else {
+        result = await bestiaryService.getEntitys({
+          params: getParams(),
+        });
+      }
+
       console.log(result);
 
       if (result && result.data) {
         lazyState.totalRecords = result.data.count;
-        const items: ItemDTO[] = result.data.items;
-        console.log(items);
-        setEntityList(items);
+        const entitys = result.data.entitys;
+        console.log(entitys);
+        setEntityList(entitys);
       }
     } catch (error) {
-      console.error("Error fetching items:", error);
+      console.error("Error fetching entitys:", error);
     }
   };
 
@@ -198,12 +244,12 @@ const ListShow = ({
   }, [lazyState, filter]);
 
   //onClick={(e) => handleClick(1, e)}
-  const handleClick = (id, e) => {
-    e.preventDefault(); // Предотвращаем переход по ссылке
+  // const handleClick = (id, e) => {
+  //   e.preventDefault(); // Предотвращаем переход по ссылке
 
-    const url = `listitem/${id}`;
-    window.open(url, "_blank");
-  };
+  //   const url = `listitem/${id}`;
+  //   window.open(url, "_blank");
+  // };
 
   return (
     <div className="w-full" style={{ marginTop: "-20px" }}>
@@ -213,28 +259,36 @@ const ListShow = ({
         <Button label="Создать предмет" onClick={(e) => showCreateDialog()} />
       </div>
       <ShowFilter filter={filter} setFilter={setFilter} />
-      {entityList.map((it, index) => (
-        <div key={index} className="mb-4">
-          <div className="card block bg-bluegray-50">
-            <div className="flex flex-column text-0">
-              <div>
-                {showContentFunc({ data: it })}
+      {entityList !== null && entityList !== undefined ? (
+        entityList.map((it, index) => (
+          <div key={index} className="mb-4">
+            <div className="card block bg-bluegray-50">
+              <div className="flex flex-column text-0">
                 <div>
-                  Footer
-                  <Button
-                    label="Редактировать предмет"
-                    onClick={(e) => showEditDialog(it.id)}
-                  />
-                  <Button
-                    label="Удалить предмет"
-                    onClick={(e) => showDeleteDialog(it.id)}
-                  />
+                  {showContentFunc({ data: it })}
+                  {"itemType" in entity ? (
+                    <div>
+                      Footer
+                      <Button
+                        label="Редактировать предмет"
+                        onClick={(e) => showEditDialog(it.id)}
+                      />
+                      <Button
+                        label="Удалить предмет"
+                        onClick={(e) => showDeleteDialog(it.id)}
+                      />
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div></div>
+      )}
       <Paginator
         first={lazyState.first}
         rows={lazyState.rows}

@@ -1,6 +1,6 @@
 interface ItemFilterDTO {
     name: string,
-    itemType: number[],
+    itemType: number[] | null,
     equipmentType: number,
     type: number,
     itemOriginType: number,

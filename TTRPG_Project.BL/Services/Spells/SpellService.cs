@@ -43,12 +43,12 @@ namespace TTRPG_Project.BL.Services.Spells
             }
 
             var count = spells.Count();
-            var allSpells = spells.OrderBy(x => x.Name).Skip(filter.First).Take(filter.Page).ToList();
+            var allSpells = spells.OrderBy(x => x.Name).Skip(filter.First).Take(filter.PageSize).ToList();
 
             SpellResponce responce = new()
             {
                 Count = count,
-                Spells = allSpells,
+                Entitys = allSpells,
             };
 
             return responce;
@@ -66,7 +66,7 @@ namespace TTRPG_Project.BL.Services.Spells
             SpellResponce responce = new()
             {
                 Count = 1,
-                Spells = new List<Spell>() { spell },
+                Entitys = new List<Spell>() { spell },
             };
 
             return responce;

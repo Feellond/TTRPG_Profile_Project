@@ -21,7 +21,7 @@ namespace TTRPG_Project.BL.DTO.Creatures.Request
         public StatsList? StatsList { get; set; }
         public int? SkillsListId { get; set; }
         public SkillsList? SkillsList { get; set; }
-        public List<CreatureEffectListDTO> CreatureEffectList { get; set; } = new();
+        //public List<CreatureEffectListDTO> CreatureEffectList { get; set; } = new();
         public int EvasionBase { get; set; }
         public int AthleticsBase { get; set; }
         public int BlockBase { get; set; }
@@ -32,8 +32,8 @@ namespace TTRPG_Project.BL.DTO.Creatures.Request
         public string Intellect { get; set; } = string.Empty;
         public string GroupSize { get; set; } = string.Empty;
         public List<CreatureAttack> CreatureAttacks { get; set; } = new();
-        public List<Ability> Abilities { get; set; } = new();
-        public List<CreatureRewardListDTO> CreatureRewardList { get; set; } = new();
+        public List<CreatureAbility> CreatureAbilitys { get; set; } = new();
+        public List<CreatureReward> CreatureReward { get; set; } = new();
         public List<Spell> Spells { get; set; } = new();
     }
 }

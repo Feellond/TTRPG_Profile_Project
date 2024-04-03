@@ -2,15 +2,15 @@ import { Component } from "shared/models";
 import { Effect } from "shared/models/Additional";
 import { EntityDescriptionBase } from "shared/models/Base";
 
-export interface Spell extends EntityDescriptionBase {
+export interface ISpell extends EntityDescriptionBase {
     enduranceCost: number;
     distance: number;
     duration: number;
-    spellSkillProtectionList: SpellSkillProtectionList[] | null;
+    spellSkillProtectionList: ISpellSkillProtectionList[] | null;
     isConcentration: boolean;
     concentrationEnduranceCost: number;
     spellLevel: number;
-    spellComponentList: SpellComponentList[] | null;
+    spellComponentList: ISpellComponentList[] | null;
     checkDC: number;
     preparationTime: number;
     dangerInfo: string;
@@ -23,12 +23,12 @@ export interface Spell extends EntityDescriptionBase {
     isDruidSpell: boolean;
 }
 
-export interface SpellSkillProtectionList {
+export interface ISpellSkillProtectionList {
     id: number | null;
     effect: Effect;
 }
 
-export interface SpellComponentList {
+export interface ISpellComponentList {
     id: number | null;
     component: Component;
     amount: number;

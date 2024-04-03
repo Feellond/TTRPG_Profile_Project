@@ -9,6 +9,7 @@ using System.Drawing.Printing;
 using System.Linq;
 using TTRPG_Project.BL.DTO.Creatures;
 using TTRPG_Project.BL.DTO.Creatures.Request;
+using TTRPG_Project.BL.DTO.Entities.Creatures;
 using TTRPG_Project.BL.DTO.Entities.Creatures.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
 using TTRPG_Project.BL.DTO.Filters;
@@ -49,10 +50,47 @@ namespace TTRPG_Project.BL.Services.Creatures
                     .ThenInclude(x => x.Attack)
                         .ThenInclude(ael => ael.AttackEffectList)
                             .ThenInclude(e => e.Effect)
-                .Include(ab => ab.Abilities)
-                    .ThenInclude(r => r.Race)
-                .Include(crl => crl.CreatureRewardList)
-                    .ThenInclude(item => item.ItemBase).ToListAsync();
+                .Include(ab => ab.CreatureAbilitys)
+                    .ThenInclude(r => r.Ability)
+                .Include(crl => crl.CreatureReward)
+                    .ThenInclude(reward => reward.Reward)
+                        .ThenInclude(item => item.ItemBase)
+                    .Select(creature => new CreatureDTO
+                    {
+                        Id = creature.Id,
+                        Name = creature.Name,
+                        Description = creature.Description,
+                        Source = (creature.Source != null ? creature.Source.Name : ""),
+                        CreatureAbilitys = creature.CreatureAbilitys,
+                        AdditionalInformation = creature.AdditionalInformation,
+                        Armor = creature.Armor,
+                        AthleticsBase = creature.AthleticsBase,
+                        BlockBase = creature.BlockBase,
+                        Complexity = creature.Complexity,
+                        CreatureAttacks = creature.CreatureAttacks,
+                        CreatureReward = creature.CreatureReward,
+                        EducationSkill = creature.EducationSkill,
+                        EvasionBase = creature.EvasionBase,
+                        GroupSize = creature.GroupSize,
+                        HabitatPlace = creature.HabitatPlace,
+                        Height = creature.Height,
+                        Intellect = creature.Intellect,
+                        MoneyReward = creature.MoneyReward,
+                        MonsterLoreInformation = creature.MonsterLoreInformation,
+                        MonsterLoreSkill = creature.MonsterLoreSkill,
+                        Race = creature.Race,
+                        RaceId = creature.RaceId,
+                        Regeneration = creature.Regeneration,
+                        SkillsList = creature.SkillsList,
+                        SkillsListId = creature.SkillsListId,
+                        SpellResistBase = creature.SpellResistBase,
+                        Spells = creature.Spells,
+                        StatsList = creature.StatsList,
+                        StatsListId = creature.StatsListId,
+                        SuperstitionsInformation = creature.SuperstitionsInformation,
+                        Weight = creature.Weight,
+                    })
+                    .ToListAsync();
 
             foreach (var expression in filter.whereExpression)
             {
@@ -61,12 +99,12 @@ namespace TTRPG_Project.BL.Services.Creatures
             }
 
             var count = creatures.Count();
-            var allCreatures = creatures.OrderBy(x => x.Name).Skip(filter.First).Take(filter.Page).ToList();
+            var allCreatures = creatures.OrderBy(x => x.Name).Skip(filter.First).Take(filter.PageSize).ToList();
 
             CreatureResponce responce = new()
             {
                 Count = count,
-                Creatures = allCreatures,
+                Entitys = allCreatures,
             };
 
             return responce;
@@ -84,10 +122,46 @@ namespace TTRPG_Project.BL.Services.Creatures
                     .ThenInclude(x => x.Attack)
                         .ThenInclude(ael => ael.AttackEffectList)
                             .ThenInclude(e => e.Effect)
-                .Include(ab => ab.Abilities)
-                    .ThenInclude(r => r.Race)
-                .Include(crl => crl.CreatureRewardList)
-                    .ThenInclude(item => item.ItemBase)
+                .Include(ab => ab.CreatureAbilitys)
+                    .ThenInclude(r => r.Ability)
+                .Include(crl => crl.CreatureReward)
+                    .ThenInclude(reward => reward.Reward)
+                        .ThenInclude(item => item.ItemBase)
+                    .Select(creature => new CreatureDTO
+                    {
+                        Id = creature.Id,
+                        Name = creature.Name,
+                        Description = creature.Description,
+                        Source = (creature.Source != null ? creature.Source.Name : ""),
+                        CreatureAbilitys = creature.CreatureAbilitys,
+                        AdditionalInformation = creature.AdditionalInformation,
+                        Armor = creature.Armor,
+                        AthleticsBase = creature.AthleticsBase,
+                        BlockBase = creature.BlockBase,
+                        Complexity = creature.Complexity,
+                        CreatureAttacks = creature.CreatureAttacks,
+                        CreatureReward = creature.CreatureReward,
+                        EducationSkill = creature.EducationSkill,
+                        EvasionBase = creature.EvasionBase,
+                        GroupSize = creature.GroupSize,
+                        HabitatPlace = creature.HabitatPlace,
+                        Height = creature.Height,
+                        Intellect = creature.Intellect,
+                        MoneyReward = creature.MoneyReward,
+                        MonsterLoreInformation = creature.MonsterLoreInformation,
+                        MonsterLoreSkill = creature.MonsterLoreSkill,
+                        Race = creature.Race,
+                        RaceId = creature.RaceId,
+                        Regeneration = creature.Regeneration,
+                        SkillsList = creature.SkillsList,
+                        SkillsListId = creature.SkillsListId,
+                        SpellResistBase = creature.SpellResistBase,
+                        Spells = creature.Spells,
+                        StatsList = creature.StatsList,
+                        StatsListId = creature.StatsListId,
+                        SuperstitionsInformation = creature.SuperstitionsInformation,
+                        Weight = creature.Weight,
+                    })
                 .FirstOrDefaultAsync();
 
             if (creature is null)
@@ -96,7 +170,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             CreatureResponce responce = new()
             {
                 Count = 1,
-                Creatures = new List<Creature>() { creature }
+                Entitys = new List<CreatureDTO>() { creature }
             };
 
             return responce;
@@ -106,13 +180,10 @@ namespace TTRPG_Project.BL.Services.Creatures
         {
             Creature creature = new()
             {
-                Abilities = request.Abilities.Select(dto => new Ability
+                CreatureAbilitys = request.CreatureAbilitys.Select(dto => new CreatureAbility
                 {
-                    Name = dto.Name,
-                    RaceId = dto.RaceId ?? dto.Race?.Id,
-                    Type = dto.Type,
-                    Description = dto.Description,
-                    SourceId = _dbContext.Sources.Where(x => x.Name == ((dto.Source == null) ? "" : dto.Source.Name)).FirstOrDefault()?.Id ?? 2,
+                    AbilityId = dto.AbilityId,
+                    CreatureId = dto.CreatureId,
                 }).ToList(),
                 AdditionalInformation = request.AdditionalInformation,
                 Armor = request.Armor,
@@ -120,10 +191,10 @@ namespace TTRPG_Project.BL.Services.Creatures
                 CreatureAttacks = request.CreatureAttacks,
                 BlockBase = request.BlockBase,
                 Complexity = request.Complexity,
-                CreatureRewardList = request.CreatureRewardList.Select(dto => new CreatureRewardList
+                CreatureReward = request.CreatureReward.Select(dto => new CreatureReward
                 {
-                    Amount = dto.Amount,
-                    ItemBaseId = dto.ItemBaseId ?? dto.ItemBase?.Id,
+                    CreatureId = dto.CreatureId,
+                    RewardId = dto.RewardId,
                 }).ToList(),
                 Description = request.Description,
                 EducationSkill = request.EducationSkill,
@@ -185,23 +256,20 @@ namespace TTRPG_Project.BL.Services.Creatures
 
             //var caList = await _dbContext.Abilitiys.Where(x => x.Creature == null ? false : x.Creature.Any(k => k.Id == creature.Id)).ToListAsync();
             //_dbContext.RemoveRange(caList);
-            creature.Abilities = request.Abilities.Select(dto => new Ability
+            creature.CreatureAbilitys = request.CreatureAbilitys.Select(dto => new CreatureAbility
             {
                 Id = dto.Id,
-                Name = dto.Name,
-                RaceId = dto.RaceId ?? dto.Race?.Id,
-                Type = dto.Type,
-                Description = dto.Description,
-                SourceId = _dbContext.Sources.Where(x => x.Name == ((dto.Source == null) ? "" : dto.Source.Name)).FirstOrDefault()?.Id ?? 2,
+                AbilityId = dto.AbilityId,
+                CreatureId = dto.CreatureId,
             }).ToList();
 
             //var ccrList = await _dbContext.CreatureRewardList.Where(x => x.CreatureId == creature.Id).ToListAsync();
             //_dbContext.RemoveRange(ccrList);
-            creature.CreatureRewardList = request.CreatureRewardList.Select(dto => new CreatureRewardList
+            creature.CreatureReward = request.CreatureReward.Select(dto => new CreatureReward
             {
-                Id = dto.Id ?? 0,
-                Amount = dto.Amount,
-                ItemBaseId = dto.ItemBaseId ?? dto.ItemBase?.Id,
+                Id = dto.Id,
+                CreatureId = dto.CreatureId,
+                RewardId = dto.RewardId,
             }).ToList();
 
             _dbContext.Entry(creature).State = EntityState.Modified;

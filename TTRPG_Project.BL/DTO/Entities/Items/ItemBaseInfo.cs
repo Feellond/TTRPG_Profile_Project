@@ -35,9 +35,6 @@ namespace TTRPG_Project.BL.DTO.Entities.Items
         public int? SkillId { get; set; }
         public List<FormulaSubstanceList>? FormulaSubstanceList { get; set; } = new();
         public List<BlueprintComponentList>? BlueprintComponentList { get; set; } = new();
-        public List<ItemBaseEffectList> ItemBaseEffectList { get; set; } = new();
-        public List<CreatureRewardList> CreatureRewardList { get; set; } = new();
         public Skill? Skill { get; set; }
-        public int ItemType { get; set; }
     }
 }

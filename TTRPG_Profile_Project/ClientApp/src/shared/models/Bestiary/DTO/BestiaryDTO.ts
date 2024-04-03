@@ -2,39 +2,39 @@ import { Effect } from "shared/models/Additional";
 import { EntityBase, EntityDescriptionBase } from "shared/models/Base";
 import { ItemShortDTO } from "shared/models/Item/DTO/ItemsDTO";
 
-export interface Abilitiy extends EntityDescriptionBase {
-  creature: Creature | null;
-  race: Race | null;
+export interface IAbilitiy extends EntityDescriptionBase {
+  creature: ICreature | null;
+  race: IRace | null;
   type: number | null;
 }
 
-export interface Attack extends EntityDescriptionBase {
-  creature: Creature | null;
+export interface IAttack extends EntityDescriptionBase {
+  creature: ICreature | null;
   baseAttack: number;
   attackType: number;
   damage: string;
   reliability: number;
   distance: number;
   attackSpeed: number;
-  attackEffectList: AttackEffectList[];
+  attackEffectList: IAttackEffectList[];
 }
 
-export interface AttackEffectList {
+export interface IAttackEffectList {
   id: number;
-  attack?: Attack | null;
+  //attack?: IAttack | null;
   effect?: Effect | null;
   damage: string;
   chancePercent: number;
   isDealDamage: boolean;
 }
 
-export interface Class extends EntityDescriptionBase {
+export interface IClass extends EntityDescriptionBase {
   energy: number;
   defaultMagicAbilities: string;
 }
 
-export interface Creature extends EntityDescriptionBase {
-  race: Race;
+export interface ICreature extends EntityDescriptionBase {
+  race: IRace;
   additionalInformation: string;
   educationSkill: number;
   superstitionsInformation: string;
@@ -44,9 +44,8 @@ export interface Creature extends EntityDescriptionBase {
   moneyReward: number;
   armor: number;
   regeneration: number;
-  statsList: StatsList | null;
-  skillsList: SkillsList | null;
-  creatureEffectList: CreatureEffectList[];
+  statsList: IStatsList | null;
+  skillsList: ISkillsList | null;
   evasionBase: number;
   athleticsBase: number;
   blockBase: number;
@@ -56,36 +55,41 @@ export interface Creature extends EntityDescriptionBase {
   habitatPlace: string;
   intellect: string;
   groupSize: string;
-  attacks: Attack[];
-  abilities: Abilitiy[];
-  creatureRewardList: CreatureRewardList[];
+  creatureAttacks: ICreatureAttack[] | null;
+  creatureAbilitys: ICreatureAbilitys[];
+  creatureReward: ICreatureReward[] | null;
   //Spells: Spell[];
 }
 
-export interface CreatureEffectList {
-  id: number;
-  creature?: Creature | null;
-  effect?: Effect | null;
-  type: number;
-  chancePercent: number;
+export interface ICreatureReward {
+  id: number | null;
+  reward: IReward;
 }
 
-export interface CreatureRewardList {
-  id: number;
-  creature?: Creature | null;
-  itemBase?: ItemShortDTO | null;
+export interface ICreatureAttack {
+  id: number | null;
+  attack: IAttack;
+}
+
+export interface ICreatureAbilitys {
+  id: number | null;
+  ability: IAbilitiy;
+}
+
+export interface IRace extends EntityDescriptionBase {}
+
+export interface IReward extends EntityDescriptionBase {
+  item?: ItemShortDTO | null;
   amount: string;
 }
 
-export interface Race extends EntityDescriptionBase {}
-
-export interface Skill extends EntityDescriptionBase {
+export interface ISkill extends EntityDescriptionBase {
   isDifficult: boolean;
   isClassSkill: boolean;
-  stat: Stat;
+  stat: IStat;
 }
 
-export interface SkillsList {
+export interface ISkillsList {
   attentionId: number;
   attentionValue: number;
 
@@ -198,8 +202,8 @@ export interface SkillsList {
   classSkillValue: number;
 }
 
-export interface SkillsTree extends EntityBase {
-  class?: Class;
+export interface ISkillsTree extends EntityBase {
+  class?: IClass;
 
   mainSkillId: number;
   mainSkillValue: number;
@@ -226,8 +230,8 @@ export interface SkillsTree extends EntityBase {
   thirdRightSkillValue: number;
 }
 
-export interface Stat extends EntityDescriptionBase {}
-export interface StatsList extends EntityBase {
+export interface IStat extends EntityDescriptionBase {}
+export interface IStatsList extends EntityBase {
   intellectId: number;
   intellectValue: number;
 

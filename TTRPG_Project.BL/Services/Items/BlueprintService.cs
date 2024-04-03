@@ -41,7 +41,7 @@ namespace TTRPG_Project.BL.Services.Items
             ItemBaseResponce responce = new()
             {
                 Count = 1,
-                Items = blueprints,
+                Entitys = blueprints,
             };
 
             return responce;
@@ -75,7 +75,7 @@ namespace TTRPG_Project.BL.Services.Items
             ItemBaseResponce responce = new()
             {
                 Count = 1,
-                Items = new List<ItemBaseInfo>() { blueprint },
+                Entitys = new List<ItemBaseInfo>() { blueprint },
             };
 
             return responce;

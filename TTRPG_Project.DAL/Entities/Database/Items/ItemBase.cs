@@ -15,7 +15,7 @@ namespace TTRPG_Project.DAL.Entities.Database.Items
         public double Weight { get; set; } = 0;
         public int Price { get; set; } = 0;
         public List<ItemBaseEffectList> ItemBaseEffectList { get; set; } = new();
-        public List<CreatureRewardList> CreatureRewardList { get; set; } = new();
+        public List<CreatureReward> CreatureReward { get; set; } = new();
 
         [NotMapped]
         public ItemType ItemType { get; set; }

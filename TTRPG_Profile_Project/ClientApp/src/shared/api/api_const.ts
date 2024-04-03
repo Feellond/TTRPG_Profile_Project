@@ -20,4 +20,17 @@ export const API_WEAPON                     = "api/items/weapon";
 export const API_SOURCE                     = "api/additionals/source"
 export const API_EFFECT                     = "api/additionals/effect"
 
+export const API_ABILITY                    = "api/creatures/ability"
+export const API_ATTACK                     = "api/creatures/attack"
+export const API_CLASS                      = "api/creatures/class"
+export const API_CREATURE                   = "api/creatures/creature"
+export const API_RACE                       = "api/creatures/race"
 export const API_SKILL                      = "api/creatures/skill"
+export const API_SKILLIST                   = "api/creatures/skillList"
+export const API_SKILLTREE                  = "api/creatures/skillTree"
+export const API_STAT                       = "api/creatures/stat"
+export const API_STATLIST                   = "api/creatures/statList"
+
+export const API_SPELL                      = "api/spells"
+export const API_SPELLCOMPONENTLIST         = "api/spells/spellComponentList"
+export const API_SPELLSPELLSKILLPROTECTIONLIST = "api/spells/spellSkillProtectionList"

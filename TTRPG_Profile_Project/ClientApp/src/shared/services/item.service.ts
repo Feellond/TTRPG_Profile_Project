@@ -14,7 +14,7 @@ import { CommandEnum } from "shared/enums/GeneralEnums";
 import { ItemRequestDTO } from "shared/models";
 
 export class ItemService {
-  async getItems({ itemType, toast, params }: ItemRequestDTO) {
+  async getEntitys({ itemType, toast, params }: ItemRequestDTO) {
     return await this.execute({
       itemType: itemType,
       toast: toast,
@@ -23,7 +23,7 @@ export class ItemService {
     });
   }
 
-  async getItem({ itemType, toast }: ItemRequestDTO) {
+  async getEntity({ itemType, toast }: ItemRequestDTO) {
     return await this.execute({
       itemType: itemType,
       toast: toast,
@@ -31,25 +31,25 @@ export class ItemService {
     });
   }
 
-  async createItem({ item, toast }: ItemRequestDTO) {
+  async createEntity({ entity, toast }: ItemRequestDTO) {
     return await this.execute({
-      item: item,
-      itemType: item.itemType,
+      entity: entity,
+      itemType: entity.itemType,
       toast: toast,
       command: CommandEnum.Create,
     });
   }
 
-  async updateItem({ item, toast }: ItemRequestDTO) {
+  async updateEntity({ entity, toast }: ItemRequestDTO) {
     return await this.execute({
-      item: item,
-      itemType: item.itemType,
+      entity: entity,
+      itemType: entity.itemType,
       toast: toast,
       command: CommandEnum.Update,
     });
   }
 
-  async deleteItem({ id, itemType, toast }: ItemRequestDTO) {
+  async deleteEntity({ id, itemType, toast }: ItemRequestDTO) {
     return await this.execute({
       itemType: itemType,
       toast: toast,
@@ -59,7 +59,7 @@ export class ItemService {
   }
 
   async execute({
-    item,
+    entity,
     itemType,
     toast,
     id,
@@ -68,8 +68,8 @@ export class ItemService {
   }: ItemRequestDTO) {
     let apiString = "";
 
-    if (item) {
-      if (item.name === null || item.name === "") {
+    if (entity) {
+      if (entity.name === null || entity.name === "") {
         toast.current.show({
           severity: "error",
           summary: "Произошла ошибка",
@@ -117,16 +117,16 @@ export class ItemService {
     }
     console.log("executed")
     console.log(apiString)
-    console.log(item)
+    console.log(entity)
 
     if (command === CommandEnum.GetList) {
       return await $api.get(apiString, { params: params });
     } else if (command === CommandEnum.Get) {
       return await $api.get(apiString + "/" + String(id));
     } else if (command === CommandEnum.Create) {
-      return await $api.post(apiString, item);
+      return await $api.post(apiString, entity);
     } else if (command === CommandEnum.Update) {
-      return await $api.put(apiString, item);
+      return await $api.put(apiString, entity);
     } else if (command === CommandEnum.Delete) {
       return await $api.delete(apiString + "/" + String(id));
     }

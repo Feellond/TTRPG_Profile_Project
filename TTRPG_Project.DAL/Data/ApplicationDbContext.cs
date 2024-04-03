@@ -24,7 +24,8 @@ namespace TTRPG_Project.DAL.Data
         public DbSet<Class> Classes { get; set; }
         public DbSet<Creature> Creatures { get; set; }
         public DbSet<CreatureAttack> CreatureAttacks { get; set; }
-        public DbSet<CreatureRewardList> CreatureRewardList { get; set; }
+        public DbSet<CreatureReward> CreatureRewardList { get; set; }
+        public DbSet<Reward> Rewards { get; set; }
         //public DbSet<CreatureSpellsList> CreatureSpellsList { get; set; }
         public DbSet<Race> Races { get; set; }
         public DbSet<Skill> Skills { get; set; }
@@ -1934,7 +1935,7 @@ namespace TTRPG_Project.DAL.Data
                 new AttackEffectList
                 {
                     Id = 1,
-                    AttackId = 3,
+                    //AttackId = 3,
                     EffectId = 50,
                     ChancePercent = 0,
                     Damage = "50м",
@@ -1943,7 +1944,7 @@ namespace TTRPG_Project.DAL.Data
                 new AttackEffectList
                 {
                     Id = 2,
-                    AttackId = 3,
+                    //AttackId = 3,
                     EffectId = 21,
                     ChancePercent = 0,
                     Damage = "",
@@ -1952,7 +1953,7 @@ namespace TTRPG_Project.DAL.Data
                 new AttackEffectList
                 {
                     Id = 3,
-                    AttackId = 3,
+                    //AttackId = 3,
                     EffectId = 51,
                     ChancePercent = 0,
                     Damage = "",
@@ -2138,9 +2139,9 @@ namespace TTRPG_Project.DAL.Data
                 },
             });
 
-            var creatureRewardList = new CreatureRewardList[]
+            var creatureRewardList = new Reward[]
             {
-                new CreatureRewardList
+                new Reward
                 {
                     Id = 1,
                     Amount = "3к10",
@@ -2148,7 +2149,7 @@ namespace TTRPG_Project.DAL.Data
                 }
             };
 
-            builder.Entity<CreatureRewardList>().HasData(creatureRewardList);
+            builder.Entity<Reward>().HasData(creatureRewardList);
             
             var creatureList = new Creature[]
             {

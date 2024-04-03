@@ -6,6 +6,6 @@ namespace TTRPG_Project.BL.DTO.Entities.Spells.Responce
     public class SpellResponce
     {
         public int Count { get; set; }
-        public List<Spell> Spells { get; set; }
+        public List<Spell> Entitys { get; set; }
     }
 }

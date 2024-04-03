@@ -21,4 +21,17 @@ enum CreatureEffectType {
   Vulnerability = 3,
 }
 
-export { AbilityType, AttackType, CreatureEffectType };
+enum Complexity {
+  EasySimple = 1,
+  EasyComplex = 2,
+  EasyDifficult = 3,
+  MediumSimple = 4,
+  MediumComplex = 5,
+  MediumDifficult = 6,
+  HardSimple = 7,
+  HardComplex = 8,
+  HardDifficult = 9,
+  Exceptional = 10,
+}
+
+export { AbilityType, AttackType, CreatureEffectType, Complexity };

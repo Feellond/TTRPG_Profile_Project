@@ -39,12 +39,35 @@ const ItemEntityTypeLoad = ({ setItems }: OptionsParamsLoad) => {
     isNaN(Number(v))
   );
   const ITOptions = itemTypeKeys.map((key) => ({
-    label: key,
+    label: EntityTypeKeyToRus(key),
     value: ItemEntityType[key],
   }));
   setItems(ITOptions);
   console.log(ITOptions);
 };
+
+const EntityTypeKeyToRus = (enumKey) => {
+  switch(enumKey){
+    case "Tool":
+      return "Инструменты";
+    case "AlchemicalItem":
+      return "Алхимический предмет";
+    case "Armor":
+      return "Броня";
+    case "Weapon":
+      return "Оружие";
+    case "Formula":
+      return "Формула";
+    case "Blueprint":
+      return "Чертеж";
+    case "Component":
+      return "Компонент";
+    case "Item":
+      return "Обычный предмет";
+    default:
+      return enumKey;
+  }
+}
 
 const ItemOriginTypeLoad = ({ setItems }: OptionsParamsLoad) => {
   const itemTypeKeys = Object.keys(ItemOriginType).filter((v) =>
@@ -94,7 +117,7 @@ const WhereToFindTypeLoad = ({ setItems }: OptionsParamsLoad) => {
 
 const ComponentsTypeLoad = async ({ setItems }: OptionsParamsLoad) => {
   try {
-    let responce = await itemService.getItems({itemType: 8})
+    let responce = await itemService.getEntitys({itemType: 8})
     if (responce && responce.data) {
         console.log("Components responce data:");
         console.log(responce.data);

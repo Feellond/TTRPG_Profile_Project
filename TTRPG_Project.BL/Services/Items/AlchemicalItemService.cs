@@ -37,7 +37,7 @@ namespace TTRPG_Project.BL.Services.Items
             ItemBaseResponce responce = new()
             {
                 Count = alcItems.Count,
-                Items = alcItems,
+                Entitys = alcItems,
             };
 
             return responce;
@@ -66,7 +66,7 @@ namespace TTRPG_Project.BL.Services.Items
             ItemBaseResponce responce = new()
             {
                 Count = 1,
-                Items = new List<ItemBaseInfo>() { alcItem },
+                Entitys = new List<ItemBaseInfo>() { alcItem },
             };
 
             return responce;

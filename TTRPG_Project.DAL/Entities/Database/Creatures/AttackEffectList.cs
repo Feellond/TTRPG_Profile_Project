@@ -3,7 +3,6 @@ using TTRPG_Project.DAL.Entities.Database.Additional;
 
 namespace TTRPG_Project.DAL.Entities.Database.Creatures
 {
-    [Table("AttackEffectList")]
     public class AttackEffectList
     {
         public int Id { get; set; }

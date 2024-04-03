@@ -7,7 +7,9 @@ import { ListShow } from "widgets/List";
 const ItemsListPage = () => {
   const [itemList, setItemList] = useState<ItemDTO[]>([]);
   const [item, setItem] = useState<ItemDTO>(emptyItem);
-  const [filter, setFilter] = useState<ItemFilterDTO>({} as ItemFilterDTO);
+  const [filter, setFilter] = useState<ItemFilterDTO>({
+    itemType: null
+  } as ItemFilterDTO);
 
   const toast = useRef<Toast>(null);
   const [lazyState, setLazyState] = useState<LazyState>({
@@ -46,6 +48,7 @@ const ItemsListPage = () => {
         setEntity={setItem}
         entityList={itemList}
         setEntityList={setItemList}
+        emptyEntity={emptyItem}
         toast={toast}
         filter={filter}
         setFilter={setFilter}
