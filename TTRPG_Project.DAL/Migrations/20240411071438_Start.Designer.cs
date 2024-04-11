@@ -12,7 +12,7 @@ using TTRPG_Project.DAL.Data;
 namespace TTRPG_Project.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240403082551_Start")]
+    [Migration("20240411071438_Start")]
     partial class Start
     {
         /// <inheritdoc />
@@ -169,532 +169,532 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6564),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7432),
                             Description = "",
                             Enabled = true,
                             Name = "Незаметное",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6565)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7433)
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6566),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7434),
                             Description = "",
                             Enabled = true,
                             Name = "Кровопускающее",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6566)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7434)
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6567),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7435),
                             Description = "",
                             Enabled = true,
                             Name = "Пробивающее броню",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6567)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7435)
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6568),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7436),
                             Description = "",
                             Enabled = true,
                             Name = "Дезориентирующее(1)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6568)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7436)
                         },
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6569),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7437),
                             Description = "",
                             Enabled = true,
                             Name = "Дезориентирующее(2)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6569)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7438)
                         },
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6570),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7438),
                             Description = "",
                             Enabled = true,
                             Name = "Дезориентирующее(3)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6570)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7439)
                         },
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6571),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7440),
                             Description = "",
                             Enabled = true,
                             Name = "Метеоритное",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6571)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7440)
                         },
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6572),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7441),
                             Description = "",
                             Enabled = true,
                             Name = "Длинное",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6572)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7441)
                         },
                         new
                         {
                             Id = 9,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6573),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7442),
                             Description = "",
                             Enabled = true,
                             Name = "Фокусирующее(1)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6574)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7442)
                         },
                         new
                         {
                             Id = 10,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6574),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7443),
                             Description = "",
                             Enabled = true,
                             Name = "Фокусирующее(2)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6575)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7443)
                         },
                         new
                         {
                             Id = 11,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6575),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7444),
                             Description = "",
                             Enabled = true,
                             Name = "Фокусирующее(3)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6576)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7444)
                         },
                         new
                         {
                             Id = 12,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6577),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7445),
                             Description = "",
                             Enabled = true,
                             Name = "Сокрушающая сила",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6577)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7446)
                         },
                         new
                         {
                             Id = 13,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6578),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7446),
                             Description = "",
                             Enabled = true,
                             Name = "Серебрянное",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6578)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7447)
                         },
                         new
                         {
                             Id = 14,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6579),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7447),
                             Description = "",
                             Enabled = true,
                             Name = "Сбалансированное(1)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6579)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7448)
                         },
                         new
                         {
                             Id = 15,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6581),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7448),
                             Description = "",
                             Enabled = true,
                             Name = "Сбалансированное(2)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6581)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7449)
                         },
                         new
                         {
                             Id = 16,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6582),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7450),
                             Description = "",
                             Enabled = true,
                             Name = "Сбалансированное(3)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6582)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7450)
                         },
                         new
                         {
                             Id = 17,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6583),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7451),
                             Description = "",
                             Enabled = true,
                             Name = "Улучшенное пробивание брони",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6583)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7451)
                         },
                         new
                         {
                             Id = 18,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6584),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7452),
                             Description = "",
                             Enabled = true,
                             Name = "Захватное",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6584)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7452)
                         },
                         new
                         {
                             Id = 19,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6585),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7453),
                             Description = "",
                             Enabled = true,
                             Name = "Ловящий лезвия",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6585)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7453)
                         },
                         new
                         {
                             Id = 20,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6586),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7454),
                             Description = "",
                             Enabled = true,
                             Name = "Магические путы",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6586)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7454)
                         },
                         new
                         {
                             Id = 21,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6587),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7455),
                             Description = "",
                             Enabled = true,
                             Name = "Медленно перезаряжающееся",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6587)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7455)
                         },
                         new
                         {
                             Id = 22,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6588),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7456),
                             Description = "",
                             Enabled = true,
                             Name = "Несмертельное",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6589)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7456)
                         },
                         new
                         {
                             Id = 23,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6589),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7457),
                             Description = "",
                             Enabled = true,
                             Name = "Опутывающее",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6590)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7457)
                         },
                         new
                         {
                             Id = 24,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6591),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7463),
                             Description = "",
                             Enabled = true,
                             Name = "Парирующее",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6592)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7463)
                         },
                         new
                         {
                             Id = 25,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6592),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7464),
                             Description = "",
                             Enabled = true,
                             Name = "Разрушающее",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6593)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7464)
                         },
                         new
                         {
                             Id = 26,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6593),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7465),
                             Description = "",
                             Enabled = true,
                             Name = "Рукопашное",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6594)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7465)
                         },
                         new
                         {
                             Id = 27,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6594),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7466),
                             Description = "",
                             Enabled = true,
                             Name = "Расчетная перезарядка",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6595)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7466)
                         },
                         new
                         {
                             Id = 28,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6596),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7467),
                             Description = "",
                             Enabled = true,
                             Name = "Улучшенное фокусирующее",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6596)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7467)
                         },
                         new
                         {
                             Id = 29,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6597),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7468),
                             Description = "",
                             Enabled = true,
                             Name = "Устанавливаемое",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6597)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7468)
                         },
                         new
                         {
                             Id = 30,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6598),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7469),
                             Description = "",
                             Enabled = true,
                             Name = "Шприц",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6598)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7469)
                         },
                         new
                         {
                             Id = 31,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6599),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7470),
                             Description = "",
                             Enabled = true,
                             Name = "Закрывает все тело",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6599)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7470)
                         },
                         new
                         {
                             Id = 32,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6600),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7471),
                             Description = "",
                             Enabled = true,
                             Name = "Огнеупорный",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6600)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7471)
                         },
                         new
                         {
                             Id = 33,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6601),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7472),
                             Description = "",
                             Enabled = true,
                             Name = "Ограничение зрения",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6601)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7473)
                         },
                         new
                         {
                             Id = 34,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6602),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7473),
                             Description = "",
                             Enabled = true,
                             Name = "Полное укрытие",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6602)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7474)
                         },
                         new
                         {
                             Id = 35,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6603),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7474),
                             Description = "",
                             Enabled = true,
                             Name = "Сопротивление(Д)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6603)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7475)
                         },
                         new
                         {
                             Id = 36,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6604),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7475),
                             Description = "",
                             Enabled = true,
                             Name = "Сопротивление(Р)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6605)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7476)
                         },
                         new
                         {
                             Id = 37,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6605),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7477),
                             Description = "",
                             Enabled = true,
                             Name = "Сопротивление(К)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6606)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7477)
                         },
                         new
                         {
                             Id = 38,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6606),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7478),
                             Description = "",
                             Enabled = true,
                             Name = "Сопротивление(С)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6607)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7478)
                         },
                         new
                         {
                             Id = 39,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6608),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7479),
                             Description = "",
                             Enabled = true,
                             Name = "Горение",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6609)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7479)
                         },
                         new
                         {
                             Id = 40,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6609),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7480),
                             Description = "",
                             Enabled = true,
                             Name = "Дезориентация",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6610)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7480)
                         },
                         new
                         {
                             Id = 41,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6610),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7481),
                             Description = "",
                             Enabled = true,
                             Name = "Отравление",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6611)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7481)
                         },
                         new
                         {
                             Id = 42,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6612),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7482),
                             Description = "",
                             Enabled = true,
                             Name = "Кровотечение",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6612)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7482)
                         },
                         new
                         {
                             Id = 43,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6613),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7483),
                             Description = "",
                             Enabled = true,
                             Name = "Замораживание",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6613)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7483)
                         },
                         new
                         {
                             Id = 44,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6614),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7484),
                             Description = "",
                             Enabled = true,
                             Name = "Ошеломление",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6614)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7484)
                         },
                         new
                         {
                             Id = 45,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6615),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7485),
                             Description = "",
                             Enabled = true,
                             Name = "Опьянение",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6615)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7485)
                         },
                         new
                         {
                             Id = 46,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6616),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7486),
                             Description = "",
                             Enabled = true,
                             Name = "Галлюцинации",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6616)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7486)
                         },
                         new
                         {
                             Id = 47,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6618),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7489),
                             Description = "",
                             Enabled = true,
                             Name = "Тошнота",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6618)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7490)
                         },
                         new
                         {
                             Id = 48,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6619),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7490),
                             Description = "",
                             Enabled = true,
                             Name = "Удушье",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6619)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7491)
                         },
                         new
                         {
                             Id = 49,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6620),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7492),
                             Description = "",
                             Enabled = true,
                             Name = "Слепота",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6620)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7492)
                         },
                         new
                         {
                             Id = 50,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6621),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7493),
                             Description = "",
                             Enabled = true,
                             Name = "Дистанция",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6621)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7493)
                         },
                         new
                         {
                             Id = 51,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6622),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7494),
                             Description = "",
                             Enabled = true,
                             Name = "Точность+1",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6622)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7494)
                         },
                         new
                         {
                             Id = 52,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6623),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7495),
                             Description = "",
                             Enabled = true,
                             Name = "Точность+2",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6623)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7495)
                         },
                         new
                         {
                             Id = 53,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6624),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7496),
                             Description = "",
                             Enabled = true,
                             Name = "Точность+3",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6624)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7496)
                         });
                 });
 
@@ -765,18 +765,18 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6232),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7019),
                             Enabled = true,
                             Name = "Базовая книга",
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6241)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7029)
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6243),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7031),
                             Enabled = true,
                             Name = "Хоумбрю",
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6243)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7031)
                         });
                 });
 
@@ -826,158 +826,158 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7197),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8024),
                             Description = "Благодаря обострённым чувствам ведьмаки не получают штрафов при слабом свете и получают врождённый бонус +1 к Вниманию, а также возможность выслеживания по запаху",
                             Enabled = true,
                             Name = "Обостренные чувства",
                             RaceId = 1,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7197)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8024)
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7199),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8026),
                             Description = "После всех мутаций ведьмаки становятся невосприимчивы к болезням и способны использовать мутагены",
                             Enabled = true,
                             Name = "Стойкость мутанта",
                             RaceId = 1,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7200)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8026)
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7201),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8028),
                             Description = "Из-за пережитых страданий и мутаций эмоции у ведьмаков притупляются. Ведьмакам не нужно совершать проверки Храбрости против Запугивания, но они получают штраф -4 к Эмпатии. При этом значение Эмпатии ведьмака не может быть ниже 1.",
                             Enabled = true,
                             Name = "Притупление эмоций",
                             RaceId = 1,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7201)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8028)
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7202),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8029),
                             Description = "Благодаря интенсивным тренировкам и мутациям ведьмаки куда быстрее и проворнее обычных людей. Они получают постоянный бонус +1 к Реакции и Ловкости, позволяющий сделать эти значения больше 10.",
                             Enabled = true,
                             Name = "Молниеносная реакция",
                             RaceId = 1,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7203)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8029)
                         },
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7204),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8031),
                             Description = "У эльфов есть врождённая творческая жилка и развитое чувство прекрасного. Эльфы получают врождённый бонус +1 к Искусству.",
                             Enabled = true,
                             Name = "Чувство прекрасного",
                             RaceId = 2,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7204)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8031)
                         },
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7205),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8032),
                             Description = "Благодаря давним традициям и постоянным тренировкам эльфы — одни из лучших лучников в мире. Эльфы получают врождённый бонус +2 к Стрельбе из лука и способны выхватывать и натягивать лук, не тратя на это действие.",
                             Enabled = true,
                             Name = "Стрелок",
                             RaceId = 2,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7206)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8032)
                         },
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7207),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8034),
                             Description = "Эльфы тесно связаны с природой. Они не тревожат животных — любой зверь, встреченный эльфом, будет относиться к нему дружелюбно и не нападёт без провокации. Эльфы также способны автоматически находить любые обычные и повсеместные субстанции растительного происхождения, если искомые растения обитают в природе на данной территории",
                             Enabled = true,
                             Name = "Единение с природой",
                             RaceId = 2,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7207)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8034)
                         },
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7208),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8035),
                             Description = "У краснолюдов весьма крепкая кожа, имеющая врождённую прочность 2. Данная величина прибавляется к прочности любой брони и не может быть понижена разрушающим уроном.",
                             Enabled = true,
                             Name = "Закаленный",
                             RaceId = 3,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7209)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8036)
                         },
                         new
                         {
                             Id = 9,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7210),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8037),
                             Description = "Благодаря невысокому росту и склонности к тяжелой работе, требующей физических усилий, краснолюды получают +1 к Силе и повышают свое значение Переносимого веса на 25.",
                             Enabled = true,
                             Name = "Силач",
                             RaceId = 3,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7210)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8037)
                         },
                         new
                         {
                             Id = 10,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7211),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8038),
                             Description = "Краснолюды - прекрасные оценщики, обладающие вниманием к деталям, а потому обмануть их весьма трудно. Краснолюды получают врожденный бонус +1 к Торговле.",
                             Enabled = true,
                             Name = "Наметанный глаз",
                             RaceId = 3,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7212)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8039)
                         },
                         new
                         {
                             Id = 11,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7213),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8041),
                             Description = "В мире, где нелюдям не доверяют, людям довериться куда проще. У людей есть врожденный бонус +1 к проверкам Харизмы, Соблазнения и Убеждения против других людей.",
                             Enabled = true,
                             Name = "Доверие",
                             RaceId = 4,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7214)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8041)
                         },
                         new
                         {
                             Id = 12,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7215),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8042),
                             Description = "Люди умны и зачастую находят великолепные решения сложных проблем. Люди получают врожденный бонус +1 к Дедукции.",
                             Enabled = true,
                             Name = "Изобретательность",
                             RaceId = 4,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7215)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8042)
                         },
                         new
                         {
                             Id = 13,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7216),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8044),
                             Description = "Одно из величайших преимуществ человеческой расы — нежелание отступать даже в опасной ситуации. Они могут собраться с духом и перебросить неудачный результат проверки Сопротивления убеждению или Храбрости, но не более 3 раз за игровую партию. В таком случае из двух результатов выбирают наивысший, но если результат всё равно провальный, то вновь использовать Упрямство нельзя.",
                             Enabled = true,
                             Name = "Упрямство",
                             RaceId = 4,
                             SourceId = 1,
                             Type = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7217)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8044)
                         });
                 });
 
@@ -1041,7 +1041,7 @@ namespace TTRPG_Project.DAL.Migrations
                             AttackSpeed = 1,
                             AttackType = 4,
                             BaseAttack = 12,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7260),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8085),
                             Damage = "2к6+2",
                             Description = "",
                             Distance = 0,
@@ -1049,7 +1049,7 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Железный полуторный меч",
                             Reliability = 10,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7260)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8085)
                         },
                         new
                         {
@@ -1057,7 +1057,7 @@ namespace TTRPG_Project.DAL.Migrations
                             AttackSpeed = 1,
                             AttackType = 4,
                             BaseAttack = 11,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7265),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8090),
                             Damage = "1к6",
                             Description = "",
                             Distance = 0,
@@ -1065,7 +1065,7 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Кинжал",
                             Reliability = 10,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7265)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8091)
                         },
                         new
                         {
@@ -1073,7 +1073,7 @@ namespace TTRPG_Project.DAL.Migrations
                             AttackSpeed = 1,
                             AttackType = 1,
                             BaseAttack = 10,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7267),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8093),
                             Damage = "2к6+2",
                             Description = "",
                             Distance = 0,
@@ -1081,7 +1081,7 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Ручной арбалет",
                             Reliability = 10,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7268)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8093)
                         });
                 });
 
@@ -1194,7 +1194,7 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7250),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8078),
                             DefaultMagicAbilities = "",
                             Description = "Я ведь уже говорил тебе, что странствовал какое-то время с ведьмаком? Так вот. Спросил я его как-то, почему он ведьмаком остался. Это ведь явно не работа мечты — входишь в деревню, дети прячутся, отцы своих дочурок по домам запирают. Впрочем, ответ был ожидаем — он попросту незнал другой жизни. На самом деле логично. Вот живёшь ты, живёшь, занимаешься одним делом, а больше-то ничего и не умеешь. Но не всё так плохо. Ведьмаки — это сила. Мечники они отменные — тот ведьмак, с которым я странствовал, как-то раз арбалетный болт отбил на лету. Могу повторить, если тебя это не впечатлило. Своим кручением-верчением они вполне способны в капусту покрошить более медленных мечников. Двигаются ведьмаки так быстро, что со стороны за мечом не уследишь и каждый взмах превращается в серебряную полосу. И не стоит забывать об алхимии! Раньше они точно с собой таскали всякие эликсиры и масла, благодаря которым на поле боя превращались в сущих дьяволов — становились быстрее и раны залечивали, как волколаки. Вдобавок ко всему ведьмаки чуточку магией владеют. Ну, не такой мощной, как настоящие чародеи, но всё же заклинания свои творят. Называется это знаками. Это такие пассы руками, обладающие магическим действием. Любой маг на это лишь пофыркает, поскольку такие вещи не дотягивают даже до простейших заклинаний, но всёравно знаки весьма эффективны. Так что честно тебе скажу: я рад, что ведьмаки только на чудовищ охотятся. Ну... по крайней мере, когда-то так было.",
                             Enabled = true,
@@ -1202,7 +1202,7 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Ведьмак",
                             SkillsTreeId = 1,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7250)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8078)
                         });
                 });
 
@@ -1257,6 +1257,10 @@ namespace TTRPG_Project.DAL.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
+                    b.Property<string>("Immunities")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Intellect")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1281,6 +1285,10 @@ namespace TTRPG_Project.DAL.Migrations
                     b.Property<int>("Regeneration")
                         .HasColumnType("int");
 
+                    b.Property<string>("Resistances")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("SkillsListId")
                         .HasColumnType("int");
 
@@ -1299,6 +1307,10 @@ namespace TTRPG_Project.DAL.Migrations
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Vulnerabilities")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Weight")
                         .HasColumnType("real");
@@ -1324,7 +1336,7 @@ namespace TTRPG_Project.DAL.Migrations
                             AthleticsBase = 9,
                             BlockBase = 12,
                             Complexity = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7390),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8227),
                             Description = "",
                             EducationSkill = 8,
                             Enabled = true,
@@ -1332,6 +1344,7 @@ namespace TTRPG_Project.DAL.Migrations
                             GroupSize = "Банда из 3-15 разбойников",
                             HabitatPlace = "Часто рядом с городами и на трактах",
                             Height = 180,
+                            Immunities = "",
                             Intellect = "Человеческий",
                             MoneyReward = 10,
                             MonsterLoreInformation = "Разбойники — одна из самых распространённых угроз на дороге, но отнюдь не самая опасная. Куда тяжелее скинуть с себя гуля, чем расправиться с парочкой разбойников. Но порой они могут представлять настоящую угрозу, особенно когда их много. Большая часть разбойников — это солдаты без армии, наёмники без контракта или дезертиры, которые покинули одну из воюющих сторон. Разбойники просты. Первые ряды побегут с полуторными мечами наголо. Те, кто на такое не способен, воспользуются арбалетами. Разбойникам обычно нужны три вещи: безопасность, деньги и что-нибудь, на чём можно выместить свой гнев. С ними не то чтобы просто расправиться, но, в отличие от большинства чудовищ, можно воззвать к их разуму. Возможно, вы сумеете убедить их не убивать вас. Разбойники, скорее всего, сдадутся, если вы нанесёте им достаточно урона.\r\nОднако некоторые разбойники, странствующие крепко сбитыми группами, могут начать сражаться яростнее, если убить их товарищей. На истерзанном войной Севере стоит быть осторожнее: нехватка пищи заставила некоторых разбойников стать каннибалами. Каннибалы зачастую сходят с ума и нападают с бешеной яростью — они не сдаются, даже стоя одной ногой в могиле. Если не хотите драться, будьте внимательны на дороге. =",
@@ -1339,12 +1352,14 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Разбойник",
                             RaceId = 4,
                             Regeneration = 0,
+                            Resistances = "",
                             SkillsListId = 1,
                             SourceId = 1,
                             SpellResistBase = 8,
                             StatsListId = 1,
                             SuperstitionsInformation = "Хе, разбойники, дезертиры, ренегаты, сукины дети... Называй их как хочешь. Люди ступают на преступный путь ради денег и власти, но в большинстве своём они делают это от страха и голода. Все знают, что уровень преступности растёт во время войны. Так было в прошлых двух войнах, и вот сейчас опять. Но это не значит, что простой народ с этим согласен. Хех, не говорите это в лицо убийце, но среднестатистический ублюдок о бандите того же мнения, что и о гуле. И те, и другие прячутся по грязным закоулкам мира, ждут момента, чтобы напасть, и устраивают засаду на добрых трудяг, чтобы отобрать заработанное кровью и потом.",
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7391),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8227),
+                            Vulnerabilities = "",
                             Weight = 80f
                         });
                 });
@@ -1481,162 +1496,162 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7171),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7997),
                             Description = "Ведьмаки — тема деликатная с тех самых пор, как их создали много веков тому назад. Но, знаешь, даже когда они были нарасхват, их не особо-то любили. Ведьмаков выращивали из людских детей в пяти ведьмачьих школах. Там дети проходили какую-то лютую подготовку, после которой становились живым оружием. Быстрые до одури, могут сражаться вслепую и обучены охотиться считай на всех тварей, каких только можно встретить. Через парулет тренировок их подвергают мутациям — известней всего так называемое Испытание травами. Ведьмак, с которым мне довелось странствовать, рассказал, что переживает эту дрянь только один дитёнок из четырёх. Те, кто выжил, меняются. Глаза у них становятся кошачьими, а эмоции напрочь отмирают. Вроде как последнее со временем налаживается — например, тот самый знакомый мне ведьмак по дороге шутки-то малясь травил. Но с того самого момента, как ведьмаки мутируют, они становятся убийцами. Они перерождаются ради единственной цели — убивать чудовищ. И если доведётся тебе повидать ведьмака в деле, то поймёшь, что все те пройденные страдания были не зря. Одна только проблема: они мутанты, а люди мутантов ненавидят. С адаптацией в обществе у ведьмаков плохо, и для большинства они — хладнокровные бессердечные выродки, что честным людям кишки выпускают, предварительно ограбив да их дочек снасильничав",
                             Enabled = true,
                             Name = "Ведьмаки",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7171)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7997)
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7172),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7999),
                             Description = "История эльфов (точнее Aen Seidhe, поскольку наши эльфы далеко не единственные) весьма грустная. Они прибыли сюда неизвестно откуда на огромных белых кораблях. Случилось это незадолго до появления людей. Я бы не назвал эльфов добряками, но с остальными они как-то уживались. От людей они не сильно отличаются: высокие, худые, любят на другие народы свысока смотреть. Разве что уши острые, жизнь вечная, да, считай, полное единение с природой — эльфы много поколений только и делали, что занимались собирательством и строили дворцы. Унихза время поеданияягод да кореньев и клыков-то не осталось. Правда, всё равно не советую их из себя выводить — на поле боя эльфы могут устроить тот ещё ад. Броню они толком не носят, но заприметить эльфа в лесу также тяжело, как зимой лягушку найти. А уж искуснее лучника чем эльф, днём с огнём не сыщешь.",
                             Enabled = true,
                             Name = "Эльфы (Aen Seidhe)",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7172)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7999)
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7173),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8000),
                             Description = "Друже, вот что я тебе скажу: реки высохнут, горы рассыплются, а краснолюды никуда не денутся. Может, мы и низенькие в сравнении с эльфами и людьми, да только в силе и закалке им с нами не тягаться. Мы — само воплощение стойкости! Краснолюды уже не первый век существуют в этом мире. Жили себе спокойно в горах, ковали. Мы народ достаточно дружелюбный, если познакомиться с нами поближе. Да и уживаемся спокойно со всеми... если нас не бесить, конечно. Человечишки нас не особо любят, но мы им нужны — кто ж сталь им ковать будет и торговать? К тому же, в отличие от сраных эльфов, мы не держим на людей зла. Нас не трогают — и мы их не трогаем в ответ. Порой даже кружечку-другую готовы раздавить вместе с человеком. Жаль, конечно, что вся эта безумная расистская дрянь по Северу расползлась. Теперь и на краснолюдов травлю открыли. Повезло ещё, что люди наших девок нормально от мужиков отличить не могут, а то бы всех уже увели! Ведь нету бабы краше нраснолюдки. Правильно говорят: чем пышнее борода, тем приятнее... ну, ты понимаешь.",
                             Enabled = true,
                             Name = "Краснолюды",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7173)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8000)
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7174),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8001),
                             Description = "Ох, будь я покозлистее, то всю желчь излил бы тебе о том, как людишки насолили моему народу и остальным Старшим Народам. Но я не такой. С людьми я служил бок о бок на войне с Нильфгаардом; в той же темерской армии большинство — люди. Не все они говнюки — бывают и хорошие. По характеру люди-mo разные. Обычно они весьма стойкие ребята. Разве что частенько начинают то за «правое дело» воевать, то тыкать пальцами и бояться. Сейчас люди на Континенте — преобладающий вид, и они об этом прекрасно знают... чёрт, даже не надо стараться, чтобы о них гадости говорить. Люди почти уничтожили Старшие Народы, выкосили вранов, оставили в живых всего пару сотен боболаков, построили свои города на руинах Старших Народов и каждый день кого-то из Старших убивают. Но нет, они не все говнюки. Да, большинство магов — люди, и именно они погрузили мир в хаос, но они также сделали мир лучше с помощью науки и магии. Люди умные и, на самом деле, верные — если ты с человеком дружен, он тебя в беде не бросит.",
                             Enabled = true,
                             Name = "Люди",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7175)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8001)
                         },
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7176),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8002),
                             Description = "Формально гуманоиды чудовищами не являются. Это люди, эльфы, краснолюды и прочие представители Старших Народов. Гуманоиды разнообразны в плане поведения и мест обитания. Важно помнить, что даже\r\nпо стандартным правилам гуманоиды не имеют восприимчивости к серебру и сопротивления стали.",
                             Enabled = true,
                             Name = "Гуманоиды",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7176)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8003)
                         },
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7177),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8004),
                             Description = "Трупоеды едят трупы, и зачастую их можно встретить на кладбищах, полях боя и в глубоких пещерах. Их отталкивающая внешность обманчива — это вполне живые существа с иных планов. Менее разумные трупоеды, такие как гули, нападают на всё, что оказывается поблизости. Умные трупоеды, вроде кладбищенских баб, бродят по кладбищам и заманивают селян.",
                             Enabled = true,
                             Name = "Трупоеды",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7177)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8004)
                         },
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7178),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8005),
                             Description = "Духи представляют собой сильные желания усопших. Обычно они появляются тогда, когда кого-то убивают или когда кто-то перед смертью испытывает интенсивные эмоции. Многие духи разумны, но все они целиком захвачены каким-то одним чувством — обычно яростью, — что просто не позволяет вести с ними диалог.",
                             Enabled = true,
                             Name = "Духи",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7178)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8005)
                         },
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7179),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8006),
                             Description = "Звери, как и гуманоиды, формально не относятся к чудовищам. В этой категории — собаки, волки и тому подобные существа. Они не имеют восприимчивости к серебру и сопротивления стали. Встретить их и вблизи поселений. Охотятся они преимущественно на селян и скот.",
                             Enabled = true,
                             Name = "Звери",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7180)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8006)
                         },
                         new
                         {
                             Id = 9,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7181),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8007),
                             Description = "Проклятые — это люди и нелюди, на которых было наложено проклятие, превратившее их в чудовиш. Наиболее распространены волколаки. Поскольку это проклятые люди они обычно живут в человеческих поселениях. В большинстве своём такие существа открыто агрессивны по отношению к людям.",
                             Enabled = true,
                             Name = "Проклятые",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7181)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8008)
                         },
                         new
                         {
                             Id = 10,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7182),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8009),
                             Description = "Этот класс объединяет множество разных химер вроде сирен и грифонов — соединение частей разных животных. Гибриды необычайно разнообразны и предпочитают различные среды обитания. Те, у кого есть способность к полёту, живут на возвышенностях, хотя в целом гибридов можно найти повсемест но, в самых разных зонах.",
                             Enabled = true,
                             Name = "Гибриды",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7182)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8010)
                         },
                         new
                         {
                             Id = 11,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7183),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8010),
                             Description = "Инсектоиды — это огромные насекомые и арахниды, которые бродят за пределами поселений, подстерегая неосторожных путников. Инсектоиды — хищники, обычно нападающие из засады и ранящие своих жертв ядовитыми жвалами или когтями. Если подобратьсслишком близко к гнезду инсектоидов, то вскоре вас может окружить целый рой этих существ.",
                             Enabled = true,
                             Name = "Инсектоиды",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7184)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8011)
                         },
                         new
                         {
                             Id = 12,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7185),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8012),
                             Description = "Духи стихий - восхитительные создания магии: големы, элементали, гаргульи и им подобные. Большинство таких существ призваны магами и жрецами. Они следуют приказам призвавшего, у них практически нет своей воли. Но если призвать их в этот мир, не связав узами, духистихий становятся ужасающей силой, способной уничтожать города.",
                             Enabled = true,
                             Name = "Духи стихий",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7185)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8012)
                         },
                         new
                         {
                             Id = 13,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7186),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8013),
                             Description = "Реликты — силы природы, периодически проявляющиеся за пределами поселений. Скорее всего, эти чудовища прибыли в наш мир во время Сопряжения Сфер. Все они владеют магиейи тесно связаны с природой. По разумности реликты различаются: от умных и хитрых до примитивных и жестоких.",
                             Enabled = true,
                             Name = "Реликты",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7186)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8013)
                         },
                         new
                         {
                             Id = 14,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7187),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8014),
                             Description = "Огры, включая троллей, накеров и великанов, — это гуманоидные создания, зачастую с почти человеческим интеллектом. Большинство из них велики и нескладны (за исключением накеров). Они не только способны создавать племенные сообщества, но и, в случае троллей, кое-как разговаривать на человеческом языке и Старшей Речи.",
                             Enabled = true,
                             Name = "Огры",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7187)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8014)
                         },
                         new
                         {
                             Id = 15,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7188),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8015),
                             Description = "Среди драконидов есть такие существа, как виверны и драконы. Большинство драконидов — это крупные крылатые ящеры, крайне опасные (особенно в ближнем бою), но дикие. Истинные драконы по интеллекту близки к людям, а то и вовсе их превосходят и обладают куда большим количеством способностей. Логова драконидов расположены высоко в горах.",
                             Enabled = true,
                             Name = "Дракониды",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7189)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8015)
                         },
                         new
                         {
                             Id = 16,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7189),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8016),
                             Description = "Вампиры — весьма разнообразная группа кровососущих чудовищ. Обычно они охотятся в руинах, хотя могущественные вампиры могут процветать и в городах. Низшие вампиры — это неразумные твари, раздирающие тела на части и затем выпивающие кровь. Высшие вампиры способны без проблем влиться в человеческое общество и обладают огромной силой.",
                             Enabled = true,
                             Name = "Вампиры",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7190)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8017)
                         });
                 });
 
@@ -1719,7 +1734,7 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6439),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7296),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1727,12 +1742,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Внимание",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6439)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7297)
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6440),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7300),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1740,12 +1755,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Выживание в дикой природе",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6441)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7300)
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6442),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7302),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1753,12 +1768,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Дедукция",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6442)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7302)
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6443),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7303),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1766,12 +1781,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Монстрология",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6444)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7303)
                         },
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6445),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7305),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1779,12 +1794,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Образование",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6445)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7305)
                         },
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6446),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7306),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1792,12 +1807,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Ориентирование в городе",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6447)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7306)
                         },
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6448),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7308),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1805,12 +1820,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Передача знаний",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6448)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7308)
                         },
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6449),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7309),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1818,12 +1833,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Тактика",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6449)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7309)
                         },
                         new
                         {
                             Id = 9,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6450),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7310),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1831,12 +1846,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Торговля",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6451)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7311)
                         },
                         new
                         {
                             Id = 10,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6453),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7312),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1844,12 +1859,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Этикет",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6454)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7312)
                         },
                         new
                         {
                             Id = 11,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6455),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7313),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1857,12 +1872,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Язык всеобщий",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6455)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7314)
                         },
                         new
                         {
                             Id = 12,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6456),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7315),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1870,12 +1885,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Язык Старшей Речи",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6456)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7315)
                         },
                         new
                         {
                             Id = 13,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6458),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7316),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1883,12 +1898,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Язык краснолюдов",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6458)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7317)
                         },
                         new
                         {
                             Id = 14,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6459),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7318),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1896,12 +1911,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Ближний бой",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6459)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7318)
                         },
                         new
                         {
                             Id = 15,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6460),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7319),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1909,12 +1924,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Борьба",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6461)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7319)
                         },
                         new
                         {
                             Id = 16,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6463),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7321),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1922,12 +1937,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Верховая езда",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6463)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7322)
                         },
                         new
                         {
                             Id = 17,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6464),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7323),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1935,12 +1950,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Владение древковым оружием",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6464)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7323)
                         },
                         new
                         {
                             Id = 18,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6466),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7324),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1948,12 +1963,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Владение легкими клинками",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6466)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7324)
                         },
                         new
                         {
                             Id = 19,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6468),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7325),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1961,12 +1976,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Владение мечом",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6468)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7326)
                         },
                         new
                         {
                             Id = 20,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6469),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7327),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1974,12 +1989,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Мореходство",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6469)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7327)
                         },
                         new
                         {
                             Id = 21,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6471),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7328),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -1987,12 +2002,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Уклонение/Изворотливость",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6471)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7328)
                         },
                         new
                         {
                             Id = 22,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6472),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7330),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2000,12 +2015,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Атлетика",
                             SourceId = 1,
                             StatId = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6472)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7330)
                         },
                         new
                         {
                             Id = 23,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6473),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7331),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2013,12 +2028,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Ловкость рук",
                             SourceId = 1,
                             StatId = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6474)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7331)
                         },
                         new
                         {
                             Id = 24,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6475),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7332),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2026,12 +2041,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Скрытность",
                             SourceId = 1,
                             StatId = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6475)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7333)
                         },
                         new
                         {
                             Id = 25,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6476),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7334),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2039,12 +2054,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Стрельба из арбалета",
                             SourceId = 1,
                             StatId = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6477)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7334)
                         },
                         new
                         {
                             Id = 26,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6478),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7337),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2052,12 +2067,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Стрельба из лука",
                             SourceId = 1,
                             StatId = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6478)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7337)
                         },
                         new
                         {
                             Id = 27,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6479),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7338),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2065,12 +2080,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Сила",
                             SourceId = 1,
                             StatId = 4,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6479)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7338)
                         },
                         new
                         {
                             Id = 28,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6481),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7339),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2078,12 +2093,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Стойкость",
                             SourceId = 1,
                             StatId = 4,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6481)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7340)
                         },
                         new
                         {
                             Id = 29,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6482),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7341),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2091,12 +2106,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Азартные игры",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6482)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7341)
                         },
                         new
                         {
                             Id = 30,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6483),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7342),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2104,12 +2119,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Внешний вид",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6484)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7342)
                         },
                         new
                         {
                             Id = 31,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6485),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7344),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2117,12 +2132,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Выступление",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6485)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7344)
                         },
                         new
                         {
                             Id = 32,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6487),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7346),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2130,12 +2145,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Искусство",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6487)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7346)
                         },
                         new
                         {
                             Id = 33,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6489),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7347),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2143,12 +2158,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Лидерство",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6489)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7347)
                         },
                         new
                         {
                             Id = 34,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6490),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7348),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2156,12 +2171,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Обман",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6490)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7349)
                         },
                         new
                         {
                             Id = 35,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6491),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7350),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2169,12 +2184,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Понимание людей",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6492)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7350)
                         },
                         new
                         {
                             Id = 36,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6493),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7351),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2182,12 +2197,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Соблазнение",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6493)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7352)
                         },
                         new
                         {
                             Id = 37,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6494),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7353),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2195,12 +2210,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Убеждение",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6494)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7353)
                         },
                         new
                         {
                             Id = 38,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6496),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7354),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2208,12 +2223,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Харизма",
                             SourceId = 1,
                             StatId = 6,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6496)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7354)
                         },
                         new
                         {
                             Id = 39,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6497),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7355),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2221,12 +2236,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Алхимия",
                             SourceId = 1,
                             StatId = 7,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6497)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7356)
                         },
                         new
                         {
                             Id = 40,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6498),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7357),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2234,12 +2249,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Взлом замков",
                             SourceId = 1,
                             StatId = 7,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6499)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7357)
                         },
                         new
                         {
                             Id = 41,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6500),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7358),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2247,12 +2262,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Знание ловушек",
                             SourceId = 1,
                             StatId = 7,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6500)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7358)
                         },
                         new
                         {
                             Id = 42,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6502),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7360),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2260,12 +2275,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Изготовление",
                             SourceId = 1,
                             StatId = 7,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6502)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7360)
                         },
                         new
                         {
                             Id = 43,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6503),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7361),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2273,12 +2288,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Маскировка",
                             SourceId = 1,
                             StatId = 7,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6503)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7361)
                         },
                         new
                         {
                             Id = 44,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6504),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7362),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2286,12 +2301,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Первая помощь",
                             SourceId = 1,
                             StatId = 7,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6505)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7363)
                         },
                         new
                         {
                             Id = 45,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6506),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7364),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2299,12 +2314,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Подделывание",
                             SourceId = 1,
                             StatId = 7,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6506)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7364)
                         },
                         new
                         {
                             Id = 46,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6507),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7365),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2312,12 +2327,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Запугивание",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6507)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7365)
                         },
                         new
                         {
                             Id = 47,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6509),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7367),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2325,12 +2340,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Наведение порчи",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6509)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7367)
                         },
                         new
                         {
                             Id = 48,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6511),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7369),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2338,12 +2353,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Проведение ритуалов",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6511)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7369)
                         },
                         new
                         {
                             Id = 49,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6512),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7370),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2351,12 +2366,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Сопротивление магии",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6512)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7370)
                         },
                         new
                         {
                             Id = 50,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6514),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7371),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2364,12 +2379,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Сопротивление убеждению",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6514)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7372)
                         },
                         new
                         {
                             Id = 51,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6515),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7373),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2377,12 +2392,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Сотворение заклинаний",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6515)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7373)
                         },
                         new
                         {
                             Id = 52,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6516),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7374),
                             Description = "",
                             Enabled = true,
                             IsClassSkill = false,
@@ -2390,12 +2405,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Храбрость",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6517)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7375)
                         },
                         new
                         {
                             Id = 53,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6518),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7376),
                             Description = "Большинство ведьмаков проводят детство и юность в крепости, корпя над пыльными томами и проходя чудовищные боевые тренировки. Многие говорят, что главное оружие ведьмака — это знания о чудовищах и умение найти выход из любой ситуации. Находясь в опасной среде или на пересечённой местности, ведьмак может снизить соответствующие штрафы на половину значения своего навыка Подготовка ведьмака (минимум 1). Подготовку ведьмака также можно использовать в любой ситуации, где понадобился бы навык Монстрология.",
                             Enabled = true,
                             IsClassSkill = true,
@@ -2403,36 +2418,36 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Подготовка ведьмака",
                             SourceId = 1,
                             StatId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6518)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7376)
                         },
                         new
                         {
                             Id = 54,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6519),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7377),
                             Description = "Ведьмак может войти в медитативный транс, что позволяет ему получить все преимущества сна, но при этом сохранять бдительность. Во время медитации ведьмак считается находящимся в сознании для того, чтобы заметить что-либо в радиусе в метрах, равном удвоенному значению его Медитации.",
                             Enabled = true,
                             IsClassSkill = true,
                             IsDifficult = false,
                             Name = "Магический клинок",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6520)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7378)
                         },
                         new
                         {
                             Id = 55,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6521),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7379),
                             Description = "По мере того как ведьмак всё больше использует знаки, его тело постепенно привыкает к течению магической энергии. Каждые 2 очка, вложенные в способность Магический источник, повышают значение Энергии ведьмака на 1. Когда эта способность достигает 10 уровня, максимальное значение Энергии ведьмака становится равно 7. Эта способность развивается аналогично прочим навыкам.",
                             Enabled = true,
                             IsClassSkill = true,
                             IsDifficult = false,
                             Name = "Магический источник",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6521)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7379)
                         },
                         new
                         {
                             Id = 56,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6522),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7380),
                             Description = "Когда ведьмак становится целью заклинания, инвокации или порчи, он может совершить проверку способности Гелиотроп, чтобы попытаться отменить эффект. Он должен выкинуть результат, который больше либо равен результату его противника, а также потратить количество Выносливости, равное половине Выносливости, затраченной на сотворение магии.",
                             Enabled = true,
                             IsClassSkill = true,
@@ -2440,36 +2455,36 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Гелиотроп",
                             SourceId = 1,
                             StatId = 8,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6522)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7380)
                         },
                         new
                         {
                             Id = 57,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6524),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7381),
                             Description = "а годы употребления ядовитых ведьмачьих эликсиров ведьмаки привыкают к токсинам. Ведьмак может выдержать отвары и эликсиры суммарной токсичностью на 5% больше за каждые 2 очка, вложенные в способность Крепкий желудок. Эта способность развивается аналогично прочим навыкам. На 10 уровне максимальная токсичность для ведьмака равна 150%.",
                             Enabled = true,
                             IsClassSkill = true,
                             IsDifficult = false,
                             Name = "Крепкий желудок",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6524)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7382)
                         },
                         new
                         {
                             Id = 58,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6525),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7383),
                             Description = "Будучи отравленным, ведьмак впадает в ярость и наносит дополнительно 1 урон в ближнем бою за каждый уровень Ярости. В этом состоянии единственная цель ведьмака — добраться до безопасного места или убить отравителя. Действие Ярости заканчивается одновременно с действием яда. Ведьмак может попытаться избавиться от Ярости раньше, совершив проверку Стойкости со СЛ 15.",
                             Enabled = true,
                             IsClassSkill = true,
                             IsDifficult = false,
                             Name = "Ярость",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6525)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7383)
                         },
                         new
                         {
                             Id = 59,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6526),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7384),
                             Description = "Принимая отвар, ведьмак может совершить проверку Трансмутации со СЛ 18. При успехе тело ведьмака принимает в себя несколько больше мутагена, чем обычно, что позволяет получить бонус в зависимости от принятого отвара (см. таблицу на полях). Длительность действия отвара уменьшается вдвое. Дополнительные мутации слишком малы, чтобы их заметить.",
                             Enabled = true,
                             IsClassSkill = true,
@@ -2477,12 +2492,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Трансмутация",
                             SourceId = 1,
                             StatId = 4,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6527)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7384)
                         },
                         new
                         {
                             Id = 60,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6528),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7386),
                             Description = "Ведьмак может совершить проверку этой способности со штрафом -3, чтобы отбить летящий физический снаряд. При отбивании ведьмак может выбрать цель в пределах 10 м. Эта цель должна совершить действие защиты против броска Отбивания стрел ведьмака, или она будет ошеломлена из-за попадания отбитого снаряда.",
                             Enabled = true,
                             IsClassSkill = true,
@@ -2490,12 +2505,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Отбивание стрел",
                             SourceId = 1,
                             StatId = 3,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6528)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7386)
                         },
                         new
                         {
                             Id = 61,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6530),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7387),
                             Description = "Закончив свой ход, ведьмак может потратить 5 очков Вын и совершить проверку Быстрого удара со СЛ, равной Реа противника хЗ. При успехе ведьмак совершает ещё одну атаку в этот раунд против этого противника, которая может включать в себя разоружение, подсечку и прочие атаки.",
                             Enabled = true,
                             IsClassSkill = true,
@@ -2503,12 +2518,12 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Быстрый удар",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6530)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7387)
                         },
                         new
                         {
                             Id = 62,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6533),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7389),
                             Description = "Потратив 5 очков Вын за раунд, ведьмак может закрутиться в Вихре, совершая каждый ход по одной атаке против всех, кто находится в пределах дистанции его меча. Проверка Вихрясчитается проверкой атаки. Находясь в Вихре, ведьмак может только поддерживать его, уклоняться и передвигаться на 2 метра за раунд. Любое другое действие или полученный удар прекращают Вихрь.",
                             Enabled = true,
                             IsClassSkill = true,
@@ -2516,7 +2531,7 @@ namespace TTRPG_Project.DAL.Migrations
                             Name = "Вихрь",
                             SourceId = 1,
                             StatId = 2,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6533)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7389)
                         });
                 });
 
@@ -2879,7 +2894,7 @@ namespace TTRPG_Project.DAL.Migrations
                             CorruptionValue = 0,
                             CourageId = 52,
                             CourageValue = 7,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7336),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8172),
                             CrossbowMasteryId = 25,
                             CrossbowMasteryValue = 4,
                             DeceptionId = 34,
@@ -2961,7 +2976,7 @@ namespace TTRPG_Project.DAL.Migrations
                             TrapKnowledgeValue = 0,
                             UnderstandingPeopleId = 35,
                             UnderstandingPeopleValue = 0,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7336),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8173),
                             WrestlingId = 15,
                             WrestlingValue = 6
                         });
@@ -3065,7 +3080,7 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7238),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8065),
                             Description = "",
                             Enabled = true,
                             FirstLeftSkillId = 54,
@@ -3089,7 +3104,7 @@ namespace TTRPG_Project.DAL.Migrations
                             ThirdMiddleSkillValue = 0,
                             ThirdRightSkillId = 62,
                             ThirdRightSkillValue = 0,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7238)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8066)
                         });
                 });
 
@@ -3131,192 +3146,192 @@ namespace TTRPG_Project.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6391),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7216),
                             Description = "",
                             Enabled = true,
                             Name = "Интеллект",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6391)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7216)
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6393),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7218),
                             Description = "",
                             Enabled = true,
                             Name = "Реакция",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6393)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7219)
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6394),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7220),
                             Description = "",
                             Enabled = true,
                             Name = "Ловкость",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6395)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7220)
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6395),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7221),
                             Description = "",
                             Enabled = true,
                             Name = "Телосложение",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6396)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7221)
                         },
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6396),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7222),
                             Description = "",
                             Enabled = true,
                             Name = "Скорость",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6397)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7222)
                         },
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6398),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7223),
                             Description = "",
                             Enabled = true,
                             Name = "Эмпатия",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6398)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7223)
                         },
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6399),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7224),
                             Description = "",
                             Enabled = true,
                             Name = "Ремесло",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6399)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7224)
                         },
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6400),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7225),
                             Description = "",
                             Enabled = true,
                             Name = "Воля",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6400)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7225)
                         },
                         new
                         {
                             Id = 9,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6401),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7226),
                             Description = "",
                             Enabled = true,
                             Name = "Удача",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6401)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7227)
                         },
                         new
                         {
                             Id = 10,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6402),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7227),
                             Description = "",
                             Enabled = true,
                             Name = "Энергия",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6402)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7228)
                         },
                         new
                         {
                             Id = 11,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6403),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7229),
                             Description = "",
                             Enabled = true,
                             Name = "Устойчивость",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6404)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7229)
                         },
                         new
                         {
                             Id = 12,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6404),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7230),
                             Description = "",
                             Enabled = true,
                             Name = "Бег",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6405)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7230)
                         },
                         new
                         {
                             Id = 13,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6406),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7231),
                             Description = "",
                             Enabled = true,
                             Name = "Прыжок",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6406)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7231)
                         },
                         new
                         {
                             Id = 14,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6407),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7232),
                             Description = "",
                             Enabled = true,
                             Name = "Пункты Здоровья",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6407)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7232)
                         },
                         new
                         {
                             Id = 15,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6408),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7233),
                             Description = "",
                             Enabled = true,
                             Name = "Выносливость",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6408)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7233)
                         },
                         new
                         {
                             Id = 16,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6409),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7234),
                             Description = "",
                             Enabled = true,
                             Name = "Переносимый вес",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6409)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7234)
                         },
                         new
                         {
                             Id = 17,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6410),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7235),
                             Description = "",
                             Enabled = true,
                             Name = "Отдых",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6410)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7236)
                         },
                         new
                         {
                             Id = 18,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6411),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7236),
                             Description = "",
                             Enabled = true,
                             Name = "Удар рукой",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6411)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7237)
                         },
                         new
                         {
                             Id = 19,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6413),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7238),
                             Description = "",
                             Enabled = true,
                             Name = "Удар ногой",
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6413)
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7239)
                         });
                 });
 
@@ -3463,7 +3478,7 @@ namespace TTRPG_Project.DAL.Migrations
                             ConstitutionValue = 5,
                             CraftsmanshipId = 7,
                             CraftsmanshipValue = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7303),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8130),
                             DexterityId = 3,
                             DexterityValue = 5,
                             EmpathyId = 6,
@@ -3495,7 +3510,7 @@ namespace TTRPG_Project.DAL.Migrations
                             RunningValue = 12,
                             SpeedId = 5,
                             SpeedValue = 4,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7304),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(8130),
                             WeightId = 16,
                             WeightValue = 50,
                             WillpowerId = 8,
@@ -4083,13 +4098,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 1,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6640),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7512),
                             Description = "Прикладывание к ране обезболивающих трав притупляет боль, снижая штраф от критических ранений и состояния «при смерти» на 2. Эффект действует 2d10 раундов.",
                             Enabled = true,
                             Name = "Обезболивающие травы",
                             Price = 12,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6641),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7512),
                             Weight = 0.10000000000000001,
                             ItemType = 0
                         });
@@ -4127,13 +4142,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 2,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6658),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7529),
                             Description = "Вердонские лучники — крепкие ребята. Обычно они не слишком усердствуют с бронёй — дриады-то всёравно в щели между доспехами дротик-другой засадят. Зато они носят хорошие плотные капюшоны, расшитые сине-чёрным стрельчатым узором.",
                             Enabled = true,
                             Name = "Капюшон вердэнского лучника",
                             Price = 100,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6658),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7530),
                             Weight = 0.5,
                             AmountOfEnhancements = 1,
                             EquipmentType = 1,
@@ -4168,13 +4183,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 86,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7064),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7874),
                             Description = "",
                             Enabled = true,
                             Name = "Чертеж «Капюшон вердэнского лучника»",
                             Price = 150,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7064),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7874),
                             Weight = 0.0,
                             AdditionalPayment = 70,
                             Complexity = 10,
@@ -4214,13 +4229,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 3,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6704),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7569),
                             Description = "",
                             Enabled = true,
                             Name = "Пепел",
                             Price = 1,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6705),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7569),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 10,
@@ -4233,13 +4248,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 4,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6713),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7594),
                             Description = "",
                             Enabled = true,
                             Name = "Уголь",
                             Price = 1,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6714),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7594),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 14,
@@ -4252,13 +4267,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 5,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6718),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7601),
                             Description = "",
                             Enabled = true,
                             Name = "Хлопок",
                             Price = 1,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6718),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7601),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -4271,13 +4286,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 6,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6722),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7605),
                             Description = "",
                             Enabled = true,
                             Name = "Двойное полотно",
                             Price = 22,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6722),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7605),
                             Weight = 0.10000000000000001,
                             Amount = "",
                             Complexity = 0,
@@ -4290,13 +4305,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 7,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6725),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7608),
                             Description = "",
                             Enabled = true,
                             Name = "Стекло",
                             Price = 5,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6725),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7608),
                             Weight = 0.5,
                             Amount = "",
                             Complexity = 0,
@@ -4309,13 +4324,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 8,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6727),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7610),
                             Description = "",
                             Enabled = true,
                             Name = "Укрепленное дерево",
                             Price = 16,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6727),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7611),
                             Weight = 0.10000000000000001,
                             Amount = "",
                             Complexity = 0,
@@ -4328,13 +4343,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 9,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6730),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7613),
                             Description = "",
                             Enabled = true,
                             Name = "Полотно",
                             Price = 9,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6730),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7613),
                             Weight = 0.10000000000000001,
                             Amount = "",
                             Complexity = 0,
@@ -4347,13 +4362,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 10,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6732),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7615),
                             Description = "",
                             Enabled = true,
                             Name = "Масло",
                             Price = 3,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6732),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7615),
                             Weight = 0.10000000000000001,
                             Amount = "",
                             Complexity = 0,
@@ -4366,13 +4381,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 11,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6735),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7617),
                             Description = "",
                             Enabled = true,
                             Name = "Смлоа",
                             Price = 2,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6735),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7618),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 10,
@@ -4385,13 +4400,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 12,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6737),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7621),
                             Description = "",
                             Enabled = true,
                             Name = "Шелк",
                             Price = 50,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6737),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7621),
                             Weight = 0.10000000000000001,
                             Amount = "",
                             Complexity = 0,
@@ -4404,13 +4419,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 13,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6739),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7623),
                             Description = "",
                             Enabled = true,
                             Name = "Нитки",
                             Price = 3,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6739),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7623),
                             Weight = 0.10000000000000001,
                             Amount = "",
                             Complexity = 0,
@@ -4423,13 +4438,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 14,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6741),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7625),
                             Description = "",
                             Enabled = true,
                             Name = "Древесина",
                             Price = 3,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6741),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7626),
                             Weight = 1.0,
                             Amount = "2к6",
                             Complexity = 8,
@@ -4442,13 +4457,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 15,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6744),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7628),
                             Description = "",
                             Enabled = true,
                             Name = "Воск",
                             Price = 2,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6744),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7629),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 12,
@@ -4461,13 +4476,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 16,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6746),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7631),
                             Description = "",
                             Enabled = true,
                             Name = "Кости животных",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6746),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7631),
                             Weight = 4.0,
                             Amount = "Варьируется",
                             Complexity = 0,
@@ -4480,13 +4495,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 17,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6748),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7633),
                             Description = "",
                             Enabled = true,
                             Name = "Коровья шкура",
                             Price = 10,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6749),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7633),
                             Weight = 5.0,
                             Amount = "",
                             Complexity = 0,
@@ -4499,13 +4514,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 18,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6750),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7635),
                             Description = "",
                             Enabled = true,
                             Name = "Кожа драконида",
                             Price = 58,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6751),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7635),
                             Weight = 5.0,
                             Amount = "",
                             Complexity = 0,
@@ -4518,13 +4533,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 19,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6753),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7638),
                             Description = "",
                             Enabled = true,
                             Name = "Чешуя драконида",
                             Price = 30,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6753),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7638),
                             Weight = 5.0,
                             Amount = "1к6",
                             Complexity = 0,
@@ -4537,13 +4552,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 20,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6755),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7640),
                             Description = "",
                             Enabled = true,
                             Name = "Перья",
                             Price = 4,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6755),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7640),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 0,
@@ -4556,13 +4571,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 21,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6757),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7642),
                             Description = "",
                             Enabled = true,
                             Name = "Укрепленная кожа",
                             Price = 48,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6757),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7642),
                             Weight = 3.0,
                             Amount = "",
                             Complexity = 0,
@@ -4575,13 +4590,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 22,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6759),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7644),
                             Description = "",
                             Enabled = true,
                             Name = "Кожа",
                             Price = 28,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6759),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7644),
                             Weight = 2.0,
                             Amount = "",
                             Complexity = 0,
@@ -4594,13 +4609,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 23,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6761),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7646),
                             Description = "",
                             Enabled = true,
                             Name = "Лирийская кожа",
                             Price = 60,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6761),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7646),
                             Weight = 2.0,
                             Amount = "",
                             Complexity = 0,
@@ -4613,13 +4628,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 24,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6765),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7648),
                             Description = "",
                             Enabled = true,
                             Name = "Волчья шкура",
                             Price = 14,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6765),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7649),
                             Weight = 3.0,
                             Amount = "3",
                             Complexity = 0,
@@ -4632,13 +4647,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 25,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6767),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7652),
                             Description = "",
                             Enabled = true,
                             Name = "Чернящее масло",
                             Price = 24,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6767),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7652),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 16,
@@ -4651,13 +4666,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 26,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6769),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7654),
                             Description = "",
                             Enabled = true,
                             Name = "Масло из дрейка",
                             Price = 45,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6769),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7654),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 16,
@@ -4670,13 +4685,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 27,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6773),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7657),
                             Description = "",
                             Enabled = true,
                             Name = "Эфирная смазка",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6773),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7657),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 14,
@@ -4689,13 +4704,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 28,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6783),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7659),
                             Description = "",
                             Enabled = true,
                             Name = "Травильная кислота",
                             Price = 2,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6783),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7660),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 14,
@@ -4708,13 +4723,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 29,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6785),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7662),
                             Description = "",
                             Enabled = true,
                             Name = "Пятая эссенция",
                             Price = 82,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6785),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7662),
                             Weight = 0.10000000000000001,
                             Amount = "Варьируется",
                             Complexity = 0,
@@ -4727,13 +4742,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 30,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6789),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7666),
                             Description = "",
                             Enabled = true,
                             Name = "Огров воск",
                             Price = 10,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6789),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7666),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 14,
@@ -4746,13 +4761,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 31,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6791),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7668),
                             Description = "",
                             Enabled = true,
                             Name = "Точильный порошок",
                             Price = 32,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6791),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7668),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 16,
@@ -4765,13 +4780,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 32,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6793),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7670),
                             Description = "",
                             Enabled = true,
                             Name = "Дубильные травы",
                             Price = 3,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6794),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7670),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 14,
@@ -4784,13 +4799,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 33,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6796),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7673),
                             Description = "",
                             Enabled = true,
                             Name = "Темное железо",
                             Price = 52,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6796),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7673),
                             Weight = 1.5,
                             Amount = "1к6",
                             Complexity = 18,
@@ -4803,13 +4818,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 34,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6799),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7676),
                             Description = "",
                             Enabled = true,
                             Name = "Темная сталь",
                             Price = 82,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6799),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7676),
                             Weight = 1.0,
                             Amount = "",
                             Complexity = 0,
@@ -4822,13 +4837,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 35,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6807),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7678),
                             Description = "",
                             Enabled = true,
                             Name = "Двимерит",
                             Price = 240,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6808),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7679),
                             Weight = 1.0,
                             Amount = "",
                             Complexity = 0,
@@ -4841,13 +4856,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 36,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6810),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7681),
                             Description = "",
                             Enabled = true,
                             Name = "Самоцветы",
                             Price = 100,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6810),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7681),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/2",
                             Complexity = 24,
@@ -4860,13 +4875,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 37,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6813),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7702),
                             Description = "",
                             Enabled = true,
                             Name = "Совершенный самоцвет",
                             Price = 1000,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6813),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7702),
                             Weight = 0.10000000000000001,
                             Amount = "",
                             Complexity = 0,
@@ -4879,13 +4894,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 38,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6815),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7705),
                             Description = "",
                             Enabled = true,
                             Name = "Светящаяся руда",
                             Price = 80,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6815),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7705),
                             Weight = 1.0,
                             Amount = "1к6/2",
                             Complexity = 20,
@@ -4898,13 +4913,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 39,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6818),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7708),
                             Description = "",
                             Enabled = true,
                             Name = "Золото",
                             Price = 85,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6818),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7708),
                             Weight = 1.0,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -4917,13 +4932,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 40,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6820),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7710),
                             Description = "",
                             Enabled = true,
                             Name = "Железо",
                             Price = 30,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6820),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7710),
                             Weight = 1.5,
                             Amount = "1к6",
                             Complexity = 16,
@@ -4936,13 +4951,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 41,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6822),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7712),
                             Description = "",
                             Enabled = true,
                             Name = "Махакамский двимерит",
                             Price = 300,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6823),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7713),
                             Weight = 1.0,
                             Amount = "",
                             Complexity = 0,
@@ -4955,13 +4970,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 42,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6825),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7715),
                             Description = "",
                             Enabled = true,
                             Name = "Махакамская сталь",
                             Price = 114,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6825),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7715),
                             Weight = 1.0,
                             Amount = "",
                             Complexity = 0,
@@ -4974,13 +4989,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 43,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6828),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7718),
                             Description = "",
                             Enabled = true,
                             Name = "Метеорит",
                             Price = 98,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6828),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7718),
                             Weight = 1.0,
                             Amount = "1к6/2",
                             Complexity = 24,
@@ -4993,13 +5008,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 44,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6830),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7720),
                             Description = "",
                             Enabled = true,
                             Name = "Речная глина",
                             Price = 5,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6830),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7720),
                             Weight = 1.5,
                             Amount = "1к6",
                             Complexity = 14,
@@ -5012,13 +5027,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 45,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6832),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7722),
                             Description = "",
                             Enabled = true,
                             Name = "Серебро",
                             Price = 72,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6832),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7723),
                             Weight = 1.0,
                             Amount = "1к6/2",
                             Complexity = 16,
@@ -5031,13 +5046,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 46,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6834),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7726),
                             Description = "",
                             Enabled = true,
                             Name = "Сталь",
                             Price = 48,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6835),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7726),
                             Weight = 1.0,
                             Amount = "",
                             Complexity = 0,
@@ -5050,13 +5065,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 47,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6837),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7728),
                             Description = "",
                             Enabled = true,
                             Name = "Камень",
                             Price = 4,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6837),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7728),
                             Weight = 2.0,
                             Amount = "2к6",
                             Complexity = 8,
@@ -5069,13 +5084,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 48,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6839),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7730),
                             Description = "",
                             Enabled = true,
                             Name = "Третогорская сталь",
                             Price = 64,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6839),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7730),
                             Weight = 1.0,
                             Amount = "",
                             Complexity = 0,
@@ -5088,13 +5103,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 49,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6841),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7732),
                             Description = "",
                             Enabled = true,
                             Name = "Зерриканская смесь",
                             Price = 30,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6841),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7733),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -5107,13 +5122,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 50,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6845),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7735),
                             Description = "",
                             Enabled = true,
                             Name = "Зеленая плесень",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6845),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7735),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5126,13 +5141,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 51,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6847),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7737),
                             Description = "",
                             Enabled = true,
                             Name = "Переступень",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6847),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7737),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5145,13 +5160,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 52,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6850),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7739),
                             Description = "",
                             Enabled = true,
                             Name = "Помет беса",
                             Price = 20,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6850),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7740),
                             Weight = 1.0,
                             Amount = "1к6/2",
                             Complexity = 20,
@@ -5164,13 +5179,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 53,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6853),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7743),
                             Description = "",
                             Enabled = true,
                             Name = "Омела",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6853),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7743),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5183,13 +5198,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 54,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6856),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7746),
                             Description = "",
                             Enabled = true,
                             Name = "Паутинник",
                             Price = 18,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6856),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7746),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5202,13 +5217,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 55,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6858),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7748),
                             Description = "",
                             Enabled = true,
                             Name = "Optima mater",
                             Price = 100,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6858),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7748),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -5221,13 +5236,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 56,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6860),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7751),
                             Description = "",
                             Enabled = true,
                             Name = "Жимолость",
                             Price = 21,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6860),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7751),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5240,13 +5255,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 57,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6862),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7753),
                             Description = "",
                             Enabled = true,
                             Name = "Листья балиссы",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6863),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7753),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5259,13 +5274,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 58,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6865),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7755),
                             Description = "",
                             Enabled = true,
                             Name = "Сера",
                             Price = 14,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6865),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7755),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5278,13 +5293,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 59,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6867),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7757),
                             Description = "",
                             Enabled = true,
                             Name = "Собачья петрушка",
                             Price = 2,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6868),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7757),
                             Weight = 0.10000000000000001,
                             Amount = "2к6",
                             Complexity = 10,
@@ -5297,13 +5312,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 60,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6869),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7759),
                             Description = "",
                             Enabled = true,
                             Name = "Царская водка",
                             Price = 20,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6870),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7760),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5316,13 +5331,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 61,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6872),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7762),
                             Description = "",
                             Enabled = true,
                             Name = "Аконит",
                             Price = 9,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6872),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7762),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5335,13 +5350,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 62,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6876),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7766),
                             Description = "",
                             Enabled = true,
                             Name = "Корень лопуха",
                             Price = 32,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6876),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7766),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 16,
@@ -5354,13 +5369,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 63,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6878),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7768),
                             Description = "",
                             Enabled = true,
                             Name = "Корень мандрагоры",
                             Price = 65,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6879),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7768),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -5373,13 +5388,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 64,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6881),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7770),
                             Description = "",
                             Enabled = true,
                             Name = "Фосфор",
                             Price = 20,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6881),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7771),
                             Weight = 0.5,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5392,13 +5407,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 65,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6883),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7773),
                             Description = "",
                             Enabled = true,
                             Name = "Calcium equum",
                             Price = 12,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6883),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7773),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5411,13 +5426,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 66,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6885),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7775),
                             Description = "",
                             Enabled = true,
                             Name = "Вороний глаз",
                             Price = 17,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6886),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7775),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5430,13 +5445,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 67,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6888),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7778),
                             Description = "",
                             Enabled = true,
                             Name = "Грибы-шибальцы",
                             Price = 17,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6888),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7778),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5449,13 +5464,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 68,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6896),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7780),
                             Description = "",
                             Enabled = true,
                             Name = "Лепестки белого мирта",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6896),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7780),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5468,13 +5483,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 69,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6898),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7782),
                             Description = "",
                             Enabled = true,
                             Name = "Плод балиссы",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6898),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7782),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5487,13 +5502,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 70,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6900),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7801),
                             Description = "",
                             Enabled = true,
                             Name = "Ячмень",
                             Price = 9,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6900),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7802),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5506,13 +5521,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 71,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6903),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7805),
                             Description = "",
                             Enabled = true,
                             Name = "Винный камень",
                             Price = 88,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6903),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7805),
                             Weight = 0.5,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -5525,13 +5540,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 72,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6905),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7807),
                             Description = "",
                             Enabled = true,
                             Name = "Волокна хана",
                             Price = 17,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6905),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7807),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5544,13 +5559,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 73,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6907),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7809),
                             Description = "",
                             Enabled = true,
                             Name = "Ласточкина трава",
                             Price = 8,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6907),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7810),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5563,13 +5578,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 74,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6909),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7812),
                             Description = "",
                             Enabled = true,
                             Name = "Лунная крошка",
                             Price = 91,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6910),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7813),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -5582,13 +5597,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 75,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6912),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7815),
                             Description = "",
                             Enabled = true,
                             Name = "Вербена",
                             Price = 18,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6912),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7815),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5601,13 +5616,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 76,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6914),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7817),
                             Description = "",
                             Enabled = true,
                             Name = "Листья волчьего алоэ",
                             Price = 39,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6914),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7817),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5620,13 +5635,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 77,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6916),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7819),
                             Description = "",
                             Enabled = true,
                             Name = "Краснолюдский бессмертник",
                             Price = 75,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6917),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7820),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -5639,13 +5654,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 78,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6918),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7821),
                             Description = "",
                             Enabled = true,
                             Name = "Эмбрион эндриаги",
                             Price = 55,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6919),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7822),
                             Weight = 1.5,
                             Amount = "1к6",
                             Complexity = 0,
@@ -5658,13 +5673,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 79,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6922),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7823),
                             Description = "",
                             Enabled = true,
                             Name = "Жемчуг",
                             Price = 100,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6922),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7824),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/3",
                             Complexity = 20,
@@ -5677,13 +5692,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 80,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(6924),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7826),
                             Description = "",
                             Enabled = true,
                             Name = "Корень зарника",
                             Price = 18,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7013),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7826),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5696,13 +5711,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 81,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7016),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7829),
                             Description = "",
                             Enabled = true,
                             Name = "Лепестки гинации",
                             Price = 17,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7016),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7829),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5715,13 +5730,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 82,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7018),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7831),
                             Description = "",
                             Enabled = true,
                             Name = "Лепестки морозника",
                             Price = 19,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7018),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7831),
                             Weight = 0.10000000000000001,
                             Amount = "1к6",
                             Complexity = 15,
@@ -5734,13 +5749,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 83,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7020),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7833),
                             Description = "",
                             Enabled = true,
                             Name = "Плод берберки",
                             Price = 9,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7020),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7834),
                             Weight = 0.10000000000000001,
                             Amount = "1к10",
                             Complexity = 12,
@@ -5753,13 +5768,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 84,
                             AvailabilityType = 4,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7023),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7836),
                             Description = "",
                             Enabled = true,
                             Name = "Ртутный раствор",
                             Price = 77,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7023),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7836),
                             Weight = 0.10000000000000001,
                             Amount = "1к6/2",
                             Complexity = 18,
@@ -5772,13 +5787,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 85,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7025),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7838),
                             Description = "",
                             Enabled = true,
                             Name = "Склеродерм",
                             Price = 5,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7026),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7838),
                             Weight = 0.10000000000000001,
                             Amount = "2к6",
                             Complexity = 10,
@@ -5812,13 +5827,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 87,
                             AvailabilityType = 1,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7097),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7914),
                             Description = "",
                             Enabled = true,
                             Name = "Формула «Обезболивающие травы»",
                             Price = 0,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7098),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7914),
                             Weight = 1.0,
                             AdditionalPayment = 1,
                             Complexity = 1,
@@ -5847,13 +5862,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 88,
                             AvailabilityType = 0,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7130),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7940),
                             Description = "Всегда с собой таскай верёвку. Я не раз в ямы проваливался, да и на скалы карабкаться приходилось. Ситуаций, где нужна верёвка, предостаточно",
                             Enabled = true,
                             Name = "Веревка (20 метров)",
                             Price = 20,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7130),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7940),
                             Weight = 1.5,
                             ItemType = 0,
                             StealthType = 0,
@@ -5863,13 +5878,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 91,
                             AvailabilityType = 0,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7131),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7961),
                             Description = "Валюта это",
                             Enabled = true,
                             Name = "Кроны",
                             Price = 1,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7132),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7961),
                             Weight = 0.01,
                             ItemType = 0,
                             StealthType = 0,
@@ -5894,13 +5909,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 89,
                             AvailabilityType = 3,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7143),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7974),
                             Description = "Позволяют создавать алхимические составы",
                             Enabled = true,
                             Name = "Инструменты алхимика",
                             Price = 80,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7143),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7974),
                             Weight = 3.0,
                             ItemType = 0,
                             StealthType = 4
@@ -5957,13 +5972,13 @@ namespace TTRPG_Project.DAL.Migrations
                         {
                             Id = 90,
                             AvailabilityType = 2,
-                            CreateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7157),
+                            CreateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7985),
                             Description = "",
                             Enabled = true,
                             Name = "Стилет",
                             Price = 275,
                             SourceId = 1,
-                            UpdateDate = new DateTime(2024, 4, 3, 15, 25, 51, 69, DateTimeKind.Local).AddTicks(7158),
+                            UpdateDate = new DateTime(2024, 4, 11, 14, 14, 38, 295, DateTimeKind.Local).AddTicks(7985),
                             Weight = 0.5,
                             Accuracy = 1,
                             AmountOfEnhancements = 1,

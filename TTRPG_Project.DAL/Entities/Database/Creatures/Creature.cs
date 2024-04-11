@@ -31,6 +31,9 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public int SpellResistBase { get; set; }
         public int Height { get; set; }
         public float Weight { get; set; }
+        public string Vulnerabilities { get; set; } = string.Empty;
+        public string Immunities { get; set; } = string.Empty;
+        public string Resistances { get; set; } = string.Empty;
         public string HabitatPlace { get; set; } = string.Empty;
         public string Intellect { get; set; } = string.Empty;
         public string GroupSize { get; set; } = string.Empty;

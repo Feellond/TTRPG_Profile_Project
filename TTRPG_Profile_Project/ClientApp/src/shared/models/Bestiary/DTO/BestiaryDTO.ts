@@ -44,6 +44,9 @@ export interface ICreature extends EntityDescriptionBase {
   moneyReward: number;
   armor: number;
   regeneration: number;
+  resistances: string;
+  immunities: string;
+  vulnerabilities: string;
   statsList: IStatsList | null;
   skillsList: ISkillsList | null;
   evasionBase: number;
@@ -120,8 +123,14 @@ export interface ISkillsList {
   etiquetteId: number;
   etiquetteValue: number;
 
-  languageId: number;
-  languageValue: number;
+  languageGeneralId: number;
+  languageGeneralValue: number;
+
+  languageHighId: number;
+  languageHighValue: number;
+
+  languageDwarfId: number;
+  languageDwarfValue: number;
 
   strengthId: number;
   strengthValue: number;
@@ -192,8 +201,50 @@ export interface ISkillsList {
   seductionId: number;
   seductionValue: number;
 
+  persuasionId: number;
+  persuasionValue: number;
+
+  charismaId: number;
+  charismaValue: number;
+
+  alchemyId: number;
+  alchemyValue: number;
+
+  lockpickingId: number;
+  lockpickingValue: number;
+
+  trapKnowledgeId: number;
+  trapKnowledgeValue: number;
+
+  manufacturingId: number;
+  manufacturingValue: number;
+
+  camouflageId: number;
+  camouflageValue: number;
+
+  firstAidId: number;
+  firstAidValue: number;
+
+  forgeryId: number;
+  forgeryValue: number;
+
+  intimidationId: number;
+  intimidationValue: number;
+
+  corruptionId: number;
+  corruptionValue: number;
+
+  ritualsId: number;
+  ritualsValue: number;
+
+  magicResistanceId: number;
+  magicResistanceValue: number;
+
   persuasionResistanceId: number;
   persuasionResistanceValue: number;
+
+  spellcastingId: number;
+  spellcastingValue: number;
 
   courageId: number;
   courageValue: number;

@@ -73,9 +73,12 @@ namespace TTRPG_Project.BL.Services.Creatures
                         EvasionBase = creature.EvasionBase,
                         GroupSize = creature.GroupSize,
                         HabitatPlace = creature.HabitatPlace,
+                        Resistances = creature.Resistances,
                         Height = creature.Height,
                         Intellect = creature.Intellect,
                         MoneyReward = creature.MoneyReward,
+                        Immunities = creature.Immunities,
+                        Vulnerabilities = creature.Vulnerabilities,
                         MonsterLoreInformation = creature.MonsterLoreInformation,
                         MonsterLoreSkill = creature.MonsterLoreSkill,
                         Race = creature.Race,
@@ -145,9 +148,12 @@ namespace TTRPG_Project.BL.Services.Creatures
                         EvasionBase = creature.EvasionBase,
                         GroupSize = creature.GroupSize,
                         HabitatPlace = creature.HabitatPlace,
+                        Immunities = creature.Immunities,
                         Height = creature.Height,
                         Intellect = creature.Intellect,
                         MoneyReward = creature.MoneyReward,
+                        Resistances = creature.Resistances,
+                        Vulnerabilities = creature.Vulnerabilities,
                         MonsterLoreInformation = creature.MonsterLoreInformation,
                         MonsterLoreSkill = creature.MonsterLoreSkill,
                         Race = creature.Race,
@@ -203,7 +209,10 @@ namespace TTRPG_Project.BL.Services.Creatures
                 HabitatPlace = request.HabitatPlace,
                 Height = request.Height,
                 Intellect = request.Intellect,
+                Resistances = request.Resistances,
+                Immunities = request.Immunities,
                 MoneyReward = request.MoneyReward,
+                Vulnerabilities = request.Vulnerabilities,
                 MonsterLoreInformation = request.MonsterLoreInformation,
                 MonsterLoreSkill = request.MonsterLoreSkill,
                 Name = request.Name,
@@ -241,6 +250,9 @@ namespace TTRPG_Project.BL.Services.Creatures
             creature.Height = request.Height;
             creature.Intellect = request.Intellect;
             creature.MoneyReward = request.MoneyReward;
+            creature.Resistances = request.Resistances;
+            creature.Immunities = request.Immunities;
+            creature.Vulnerabilities = request.Vulnerabilities;
             creature.MonsterLoreInformation = request.MonsterLoreInformation;
             creature.MonsterLoreSkill = request.MonsterLoreSkill;
             creature.Name = request.Name;
