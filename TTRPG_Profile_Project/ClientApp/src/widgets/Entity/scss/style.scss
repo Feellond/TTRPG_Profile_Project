@@ -1,0 +1,41 @@
+.creatureInfo .p-accordion .p-accordion-header .p-accordion-header-link{
+    background-color: white;
+}
+
+.creatureInfo .p-accordion .p-accordion-content {
+    background-color: white;
+}
+
+.creatureAttacks, .creatureSkills, .showSkills {
+    table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid black;
+      }
+
+      thead th {
+        text-align: center;
+      }
+      
+      thead th:nth-child(1) {
+        width: 20%;
+      }
+      
+      th,
+      td {
+        padding: 5px;
+      }
+
+      tbody td {
+        text-align: center;
+      }
+
+      tbody tr:nth-child(odd) {
+        background-color: var(--bluegray-100);;
+      }
+      
+      tbody tr:nth-child(even) {
+        //background-color: #e495e4;
+      }
+}

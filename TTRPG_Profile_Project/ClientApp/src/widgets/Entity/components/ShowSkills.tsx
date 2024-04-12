@@ -11,9 +11,9 @@ export const ShowSkills = ({ statList, skillsList, isAllSkills }: IShowSkills) =
   useEffect(() => {}, [isAllSkills]);
 
   return (
-    <div className="flex">
+    <div className="flex m-2 text-center showSkills">
       {isAllSkills ? (
-        <div className="flex">
+        <div className="flex flex-wrap">
           <div>
             <h6>Интеллект</h6>
             <div>Внимание {skillsList?.attentionValue + statList?.intellectValue}</div>
@@ -54,12 +54,13 @@ export const ShowSkills = ({ statList, skillsList, isAllSkills }: IShowSkills) =
             <div>Скрытность {skillsList?.stealthValue + statList?.dexterityValue}</div>
             <div>Стрельба из арбалета {skillsList?.crossbowMasteryValue + statList?.dexterityValue}</div>
             <div>Стрельба из лука {skillsList?.crossbowMasteryValue + statList?.dexterityValue}</div>
+            <div className="mt-2">
+              <h6>Телосложение</h6>
+              <div>Сила {skillsList?.strengthValue + statList?.constitutionValue}</div>
+              <div>Стойкость {skillsList?.enduranceValue + statList?.constitutionValue}</div>
+            </div>
           </div>
-          <div>
-            <h6>Телосложение</h6>
-            <div>Сила {skillsList?.strengthValue + statList?.constitutionValue}</div>
-            <div>Стойкость {skillsList?.enduranceValue + statList?.constitutionValue}</div>
-          </div>
+          
           <div>
             <h6>Эмпатия</h6>
             <div>Азартные игры {skillsList?.gamblingValue + statList?.empathyValue}</div>
@@ -95,66 +96,68 @@ export const ShowSkills = ({ statList, skillsList, isAllSkills }: IShowSkills) =
           </div>
         </div>
       ) : (
-        <div>
-          {skillsList?.attentionValue !== 0 ? (<div>Внимание {skillsList?.attentionValue + statList?.intellectValue}</div>) : "" }
-          {skillsList?.survivalValue !== 0 ? (<div>Выживание в дикой природе {skillsList?.survivalValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.deductionValue !== 0 ? (<div>Дедукция {skillsList?.deductionValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.monsterologyValue !== 0 ? (<div>Монстрология {skillsList?.monsterologyValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.educationValue !== 0 ? (<div>Образование {skillsList?.educationValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.cityOrientationValue !== 0 ? (<div>Ориентирование в городе {skillsList?.cityOrientationValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.knowledgeTransferValue !== 0 ? (<div>Передача знаний {skillsList?.knowledgeTransferValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.tacticsValue !== 0 ? (<div>Тактика {skillsList?.tacticsValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.tradingValue !== 0 ? (<div>Торговля {skillsList?.tradingValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.etiquetteValue !== 0 ? (<div>Этикет {skillsList?.etiquetteValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.languageGeneralValue !== 0 ? (<div>Язык: всеобщий {skillsList?.languageGeneralValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.languageHighValue !== 0 ? (<div>Язык: Старшая Речь {skillsList?.languageHighValue + statList?.intellectValue}</div>) : ""}
-          {skillsList?.languageDwarfValue !== 0 ? (<div>Язык: язык краснолюдов {skillsList?.languageDwarfValue + statList?.intellectValue}</div>) : ""}
-          
-          {skillsList?.meleeCombatValue !== 0 ? (<div>Ближний бой {skillsList?.meleeCombatValue + statList?.reactionValue}</div>) : ""}
-          {skillsList?.wrestlingValue !== 0 ? (<div>Борьба {skillsList?.wrestlingValue + statList?.reactionValue}</div>) : ""}
-          {skillsList?.ridingValue !== 0 ? (<div>Верховая езда {skillsList?.ridingValue + statList?.reactionValue}</div>) : ""}
-          {skillsList?.poleWeaponMasteryValue !== 0 ? (<div>Владение древковым оружием {skillsList?.poleWeaponMasteryValue + statList?.reactionValue}</div>) : ""}
-          {skillsList?.lightBladeMasteryValue !== 0 ? (<div>Владение легкими клинками {skillsList?.lightBladeMasteryValue + statList?.reactionValue}</div>) : ""}
-          {skillsList?.swordsmanshipValue !== 0 ? (<div>Владение мечом {skillsList?.swordsmanshipValue + statList?.reactionValue}</div>) : ""}
-          {skillsList?.seamanshipValue !== 0 ? (<div>Мореходство {skillsList?.seamanshipValue + statList?.reactionValue}</div>) : ""}
-          {skillsList?.evasionValue !== 0 ? (<div>Уклонение/Изворотливость {skillsList?.evasionValue + statList?.reactionValue}</div>) : ""}
+        <table>
+          <tbody>
+            {skillsList?.attentionValue !== 0 ? (<tr><td>Внимание</td><td>{skillsList?.attentionValue + statList?.intellectValue}</td></tr>) : "" }
+            {skillsList?.survivalValue !== 0 ? (<tr><td>Выживание в дикой природе</td><td>{skillsList?.survivalValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.deductionValue !== 0 ? (<tr><td>Дедукция</td><td>{skillsList?.deductionValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.monsterologyValue !== 0 ? (<tr><td>Монстрология</td><td>{skillsList?.monsterologyValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.educationValue !== 0 ? (<tr><td>Образование</td><td>{skillsList?.educationValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.cityOrientationValue !== 0 ? (<tr><td>Ориентирование в городе</td><td>{skillsList?.cityOrientationValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.knowledgeTransferValue !== 0 ? (<tr><td>Передача знаний</td><td>{skillsList?.knowledgeTransferValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.tacticsValue !== 0 ? (<tr><td>Тактика</td><td>{skillsList?.tacticsValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.tradingValue !== 0 ? (<tr><td>Торговля</td><td>{skillsList?.tradingValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.etiquetteValue !== 0 ? (<tr><td>Этикет</td><td>{skillsList?.etiquetteValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.languageGeneralValue !== 0 ? (<tr><td>Язык: всеобщий</td><td>{skillsList?.languageGeneralValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.languageHighValue !== 0 ? (<tr><td>Язык: Старшая Речь</td><td>{skillsList?.languageHighValue + statList?.intellectValue}</td></tr>) : ""}
+            {skillsList?.languageDwarfValue !== 0 ? (<tr><td>Язык: язык краснолюдов</td><td>{skillsList?.languageDwarfValue + statList?.intellectValue}</td></tr>) : ""}
+            
+            {skillsList?.meleeCombatValue !== 0 ? (<tr><td>Ближний бой</td><td>{skillsList?.meleeCombatValue + statList?.reactionValue}</td></tr>) : ""}
+            {skillsList?.wrestlingValue !== 0 ? (<tr><td>Борьба</td><td>{skillsList?.wrestlingValue + statList?.reactionValue}</td></tr>) : ""}
+            {skillsList?.ridingValue !== 0 ? (<tr><td>Верховая езда</td><td>{skillsList?.ridingValue + statList?.reactionValue}</td></tr>) : ""}
+            {skillsList?.poleWeaponMasteryValue !== 0 ? (<tr><td>Владение древковым оружием</td><td>{skillsList?.poleWeaponMasteryValue + statList?.reactionValue}</td></tr>) : ""}
+            {skillsList?.lightBladeMasteryValue !== 0 ? (<tr><td>Владение легкими клинками</td><td>{skillsList?.lightBladeMasteryValue + statList?.reactionValue}</td></tr>) : ""}
+            {skillsList?.swordsmanshipValue !== 0 ? (<tr><td>Владение мечом</td><td>{skillsList?.swordsmanshipValue + statList?.reactionValue}</td></tr>) : ""}
+            {skillsList?.seamanshipValue !== 0 ? (<tr><td>Мореходство</td><td>{skillsList?.seamanshipValue + statList?.reactionValue}</td></tr>) : ""}
+            {skillsList?.evasionValue !== 0 ? (<tr><td>Уклонение/Изворотливость</td><td>{skillsList?.evasionValue + statList?.reactionValue}</td></tr>) : ""}
 
-          {skillsList?.athleticsValue !== 0 ? (<div>Атлетика {skillsList?.athleticsValue + statList?.dexterityValue}</div>) : ""}
-          {skillsList?.manualDexterityValue !== 0 ? (<div>Ловкость рук {skillsList?.manualDexterityValue + statList?.dexterityValue}</div>) : ""}
-          {skillsList?.stealthValue !== 0 ? (<div>Скрытность {skillsList?.stealthValue + statList?.dexterityValue}</div>) : ""}
-          {skillsList?.crossbowMasteryValue !== 0 ? (<div>Стрельба из арбалета {skillsList?.crossbowMasteryValue + statList?.dexterityValue}</div>) : ""}
-          {skillsList?.crossbowMasteryValue !== 0 ? (<div>Стрельба из лука {skillsList?.crossbowMasteryValue + statList?.dexterityValue}</div>) : ""}
+            {skillsList?.athleticsValue !== 0 ? (<tr><td>Атлетика</td><td>{skillsList?.athleticsValue + statList?.dexterityValue}</td></tr>) : ""}
+            {skillsList?.manualDexterityValue !== 0 ? (<tr><td>Ловкость рук</td><td>{skillsList?.manualDexterityValue + statList?.dexterityValue}</td></tr>) : ""}
+            {skillsList?.stealthValue !== 0 ? (<tr><td>Скрытность</td><td>{skillsList?.stealthValue + statList?.dexterityValue}</td></tr>) : ""}
+            {skillsList?.crossbowMasteryValue !== 0 ? (<tr><td>Стрельба из арбалета</td><td>{skillsList?.crossbowMasteryValue + statList?.dexterityValue}</td></tr>) : ""}
+            {skillsList?.crossbowMasteryValue !== 0 ? (<tr><td>Стрельба из лука</td><td>{skillsList?.crossbowMasteryValue + statList?.dexterityValue}</td></tr>) : ""}
 
-          {skillsList?.strengthValue !== 0 ? (<div>Сила {skillsList?.strengthValue + statList?.constitutionValue}</div>) : ""}
-          {skillsList?.enduranceValue !== 0 ? (<div>Стойкость {skillsList?.enduranceValue + statList?.constitutionValue}</div>) : ""}
+            {skillsList?.strengthValue !== 0 ? (<tr><td>Сила</td><td>{skillsList?.strengthValue + statList?.constitutionValue}</td></tr>) : ""}
+            {skillsList?.enduranceValue !== 0 ? (<tr><td>Стойкость</td><td>{skillsList?.enduranceValue + statList?.constitutionValue}</td></tr>) : ""}
 
-          {skillsList?.gamblingValue !== 0 ? (<div>Азартные игры {skillsList?.gamblingValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.appearanceValue !== 0 ? (<div>Внешний вид {skillsList?.appearanceValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.publicSpeakingValue !== 0 ? (<div>Выступление {skillsList?.publicSpeakingValue + statList?.empathyValue}</div>) : ""}            
-          {skillsList?.artistryValue !== 0 ? (<div>Искусство {skillsList?.artistryValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.leadershipValue !== 0 ? (<div>Лидерство {skillsList?.leadershipValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.deceptionValue !== 0 ? (<div>Обман {skillsList?.deceptionValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.understandingPeopleValue !== 0 ? (<div>Понимание людей {skillsList?.understandingPeopleValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.seductionValue !== 0 ? (<div>Соблазнение {skillsList?.seductionValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.persuasionValue !== 0 ? (<div>Убеждение {skillsList?.persuasionValue + statList?.empathyValue}</div>) : ""}
-          {skillsList?.charismaValue !== 0 ? (<div>Харизма {skillsList?.charismaValue + statList?.empathyValue}</div>) : ""}
+            {skillsList?.gamblingValue !== 0 ? (<tr><td>Азартные игры</td><td>{skillsList?.gamblingValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.appearanceValue !== 0 ? (<tr><td>Внешний вид</td><td>{skillsList?.appearanceValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.publicSpeakingValue !== 0 ? (<tr><td>Выступление</td><td>{skillsList?.publicSpeakingValue + statList?.empathyValue}</td></tr>) : ""}            
+            {skillsList?.artistryValue !== 0 ? (<tr><td>Искусство</td><td>{skillsList?.artistryValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.leadershipValue !== 0 ? (<tr><td>Лидерство</td><td>{skillsList?.leadershipValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.deceptionValue !== 0 ? (<tr><td>Обман</td><td>{skillsList?.deceptionValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.understandingPeopleValue !== 0 ? (<tr><td>Понимание людей</td><td>{skillsList?.understandingPeopleValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.seductionValue !== 0 ? (<tr><td>Соблазнение</td><td>{skillsList?.seductionValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.persuasionValue !== 0 ? (<tr><td>Убеждение</td><td>{skillsList?.persuasionValue + statList?.empathyValue}</td></tr>) : ""}
+            {skillsList?.charismaValue !== 0 ? (<tr><td>Харизма</td><td>{skillsList?.charismaValue + statList?.empathyValue}</td></tr>) : ""}
 
-          {skillsList?.alchemyValue !== 0 ? (<div>Алхимия {skillsList?.alchemyValue + statList?.craftsmanshipValue}</div>) : ""}
-          {skillsList?.lockpickingValue !== 0 ? (<div>Взлом замков {skillsList?.lockpickingValue + statList?.craftsmanshipValue}</div>) : ""}
-          {skillsList?.trapKnowledgeValue !== 0 ? (<div>Знание ловушек {skillsList?.trapKnowledgeValue + statList?.craftsmanshipValue}</div>) : ""}
-          {skillsList?.forgeryValue !== 0 ? (<div>Изготовление {skillsList?.forgeryValue + statList?.craftsmanshipValue}</div>) : ""}
-          {skillsList?.camouflageValue !== 0 ? (<div>Маскировка {skillsList?.camouflageValue + statList?.craftsmanshipValue}</div>) : ""}
-          {skillsList?.firstAidValue !== 0 ? (<div>Первая помощь {skillsList?.firstAidValue + statList?.craftsmanshipValue}</div>) : ""}
-          {skillsList?.manufacturingValue !== 0 ? (<div>Подделывание {skillsList?.manufacturingValue + statList?.craftsmanshipValue}</div>) : ""}
+            {skillsList?.alchemyValue !== 0 ? (<tr><td>Алхимия</td><td>{skillsList?.alchemyValue + statList?.craftsmanshipValue}</td></tr>) : ""}
+            {skillsList?.lockpickingValue !== 0 ? (<tr><td>Взлом замков</td><td>{skillsList?.lockpickingValue + statList?.craftsmanshipValue}</td></tr>) : ""}
+            {skillsList?.trapKnowledgeValue !== 0 ? (<tr><td>Знание ловушек</td><td>{skillsList?.trapKnowledgeValue + statList?.craftsmanshipValue}</td></tr>) : ""}
+            {skillsList?.forgeryValue !== 0 ? (<tr><td>Изготовление</td><td>{skillsList?.forgeryValue + statList?.craftsmanshipValue}</td></tr>) : ""}
+            {skillsList?.camouflageValue !== 0 ? (<tr><td>Маскировка</td><td>{skillsList?.camouflageValue + statList?.craftsmanshipValue}</td></tr>) : ""}
+            {skillsList?.firstAidValue !== 0 ? (<tr><td>Первая помощь</td><td>{skillsList?.firstAidValue + statList?.craftsmanshipValue}</td></tr>) : ""}
+            {skillsList?.manufacturingValue !== 0 ? (<tr><td>Подделывание</td><td>{skillsList?.manufacturingValue + statList?.craftsmanshipValue}</td></tr>) : ""}
 
-          {skillsList?.intimidationValue !== 0 ? (<div>Запугивание {skillsList?.intimidationValue + statList?.willpowerValue}</div>) : ""}
-          {skillsList?.corruptionValue !== 0 ? (<div>Наведение порчи {skillsList?.corruptionValue + statList?.willpowerValue}</div>) : ""}
-          {skillsList?.ritualsValue !== 0 ? (<div>Проведение ритуалов {skillsList?.ritualsValue + statList?.willpowerValue}</div>) : ""}
-          {skillsList?.magicResistanceValue !== 0 ? (<div>Сопротивление магии {skillsList?.magicResistanceValue + statList?.willpowerValue}</div>) : ""}
-          {skillsList?.persuasionResistanceValue !== 0 ? (<div>Сопротивление убеждению {skillsList?.persuasionResistanceValue + statList?.willpowerValue}</div>) : ""}
-          {skillsList?.spellcastingValue !== 0 ? (<div>Сотворение заклинаний {skillsList?.spellcastingValue + statList?.willpowerValue}</div>) : ""}
-          {skillsList?.courageValue !== 0 ? (<div>Храбрость {skillsList?.courageValue + statList?.willpowerValue}</div>) : ""}
-        </div>
+            {skillsList?.intimidationValue !== 0 ? (<tr><td>Запугивание</td><td>{skillsList?.intimidationValue + statList?.willpowerValue}</td></tr>) : ""}
+            {skillsList?.corruptionValue !== 0 ? (<tr><td>Наведение порчи</td><td>{skillsList?.corruptionValue + statList?.willpowerValue}</td></tr>) : ""}
+            {skillsList?.ritualsValue !== 0 ? (<tr><td>Проведение ритуалов</td><td>{skillsList?.ritualsValue + statList?.willpowerValue}</td></tr>) : ""}
+            {skillsList?.magicResistanceValue !== 0 ? (<tr><td>Сопротивление магии</td><td>{skillsList?.magicResistanceValue + statList?.willpowerValue}</td></tr>) : ""}
+            {skillsList?.persuasionResistanceValue !== 0 ? (<tr><td>Сопротивление убеждению</td><td>{skillsList?.persuasionResistanceValue + statList?.willpowerValue}</td></tr>) : ""}
+            {skillsList?.spellcastingValue !== 0 ? (<tr><td>Сотворение заклинаний</td><td>{skillsList?.spellcastingValue + statList?.willpowerValue}</td></tr>) : ""}
+            {skillsList?.courageValue !== 0 ? (<tr><td>Храбрость</td><td>{skillsList?.courageValue + statList?.willpowerValue}</td></tr>) : ""}
+          </tbody>
+        </table>
       )}
     </div>
   );

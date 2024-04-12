@@ -6,6 +6,10 @@ import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ICreature } from "shared/models";
 import { ShowSkills } from "./ShowSkills";
+import { Accordion, AccordionTab } from 'primereact/accordion';
+import "../scss/style.scss";
+import { ShowAttacks } from "./ShowAttacks";
+import { ShowAbilities } from "./ShowAbilities";
 
 interface ICreatureEntity {
   data: ICreature;
@@ -104,7 +108,7 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
         className="p-button-text"
       />
       <div className="card block bg-bluegray-50 mb-4 text-0">
-        <form>
+        <form className="m-2">
           {!isEditMode ? (
             <div
               className="p-2 text-2xl font-semibold"
@@ -153,7 +157,7 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
           </div>
           <div className="flex">
             <div className="flex">
-              <div>
+              <div className="m-2 text-center">
                 <table>
                   <tbody>
                     <tr>
@@ -196,7 +200,7 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
                 </table>
               </div>
 
-              <div>
+              <div  className="m-2 text-center">
                 <table>
                   <tbody>
                     <tr>
@@ -240,6 +244,9 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
               skillsList: data.skillsList,
               isAllSkills: isAllSkills,
             })}
+            <div className="w-12">
+              Изображение, рассчитанное примерно на 50% пространста справа от скиллов???
+            </div>
           </div>
 
           <div className="my-2">
@@ -265,86 +272,26 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
           </div>
 
           <div className="my-2">
-            <p>Атаки</p>
-            <div>
-              {data.creatureAttacks.map((attack, index) => (
-                <div className="flex">
-                  <div>
-                    Наименование
-                    {attack.attack.name}
-                  </div>
-                  <div>
-                    Основа
-                    {attack.attack.baseAttack}
-                  </div>
-                  <div>
-                    Тип
-                    {attack.attack.attackType}
-                  </div>
-                  <div>
-                    Урон
-                    {attack.attack.damage}
-                  </div>
-                  <div>
-                    Надеж
-                    {attack.attack.reliability}
-                  </div>
-                  <div>
-                    Дальн
-                    {attack.attack.distance}
-                  </div>
-                  <div>
-                    Эффекты
-                    {attack.attack.attackEffectList.map((effect, index) => (
-                      <div key={index}>
-                        {effect.effect.name} (
-                        {effect.isDealDamage ? (
-                          effect.damage
-                        ) : (
-                          <div>{effect.chancePercent}%</div>
-                        )}
-                        )
-                      </div>
-                    ))}
-                  </div>
-                  <div>
-                    СА
-                    {attack.attack.attackSpeed}
-                  </div>
-                </div>
-              ))}
-            </div>
+            {ShowAttacks({creatureAttacks: data.creatureAttacks})}
           </div>
 
           <div className="my-2">
-            <p>Способности</p>
-            {data.creatureAbilitys.map((ability, index) => (
-              <div key={index} className="flex">
-                <div>
-                  {ability.ability.name}
-                </div>
-                <div>
-                  {ability.ability.type}
-                </div>
-                <div>
-                  {ability.ability.description}
-                </div>
-              </div>
-            ))}
+            {ShowAbilities({creatureAbilities: data.creatureAbilitys})}
           </div>
 
-          <div>
-            <p>
-              Предрассудки простолюдинов (Образование, Сл {data.educationSkill})
-            </p>
-            {data.superstitionsInformation}
-          </div>
-
-          <div>
-            <p>
-              Экология и поведение (Монстрология, Сл {data.monsterLoreSkill})
-            </p>
-            {data.monsterLoreInformation}
+          <div className="creatureInfo">
+            <Accordion multiple>
+              <AccordionTab header={"Предрассудки простолюдинов (Образование, Сл " + data.educationSkill + ")"}>
+                <p className="m-0 text-0">
+                  {data.superstitionsInformation}
+                </p>
+              </AccordionTab>
+              <AccordionTab header={"Экология и поведение (Монстрология, Сл " + data.monsterLoreSkill + ")"}>
+                <p className="m-0 text-0">
+                  {data.monsterLoreInformation}
+                </p>
+              </AccordionTab>
+            </Accordion>            
           </div>
 
           {footerContent}
