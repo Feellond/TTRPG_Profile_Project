@@ -122,7 +122,7 @@ const ComponentsTypeLoad = async ({ setItems }: OptionsParamsLoad) => {
         console.log("Components responce data:");
         console.log(responce.data);
 
-      const options = responce.data.map((data, index) => ({
+      const options = responce.data.entitys.map((data, index) => ({
         label: data.name,
         value: data,
       }));

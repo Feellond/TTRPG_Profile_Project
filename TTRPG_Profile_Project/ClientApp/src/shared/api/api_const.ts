@@ -5,6 +5,10 @@ export const API_LOGOUT                     = "api/auth/logout"
 export const API_REGISTER                   = "api/auth/register"
 export const API_REFRESH_TOKEN              = "api/auth/refresh-token"
 
+export const API_IMAGELOAD                  = "api/additionals/imageLoad"
+export const API_IMAGEGET                   = "api/additionals/imageGet"
+export const API_IMAGEDELETE                = "api/additionals/imageDelete"
+
 export const NAV_MAIN                       = "/";
 
 export const API_ALCHEMICALITEM             = "api/items/alchemicalitem";

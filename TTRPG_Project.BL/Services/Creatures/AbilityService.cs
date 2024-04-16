@@ -62,7 +62,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 Description = request.Description,
                 Name = request.Name,
                 RaceId = request.RaceId ?? request.Race?.Id,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 Type = request.Type,
             };
 
@@ -79,7 +79,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             abilitiy.Description = request.Description;
             abilitiy.Name = request.Name;
             abilitiy.RaceId = request.RaceId ?? request.Race?.Id;
-            abilitiy.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            abilitiy.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             abilitiy.Type = request.Type;
             abilitiy.UpdateDate = DateTime.Now;
 

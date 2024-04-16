@@ -70,7 +70,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 Distance = request.Distance,
                 Name = request.Name,
                 Reliability = request.Reliability,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 AttackEffectList = request.AttackEffectList.Select(dto => new AttackEffectList
                 {
                     ChancePercent = dto.ChancePercent,
@@ -98,7 +98,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             attack.Distance = request.Distance;
             attack.Name = request.Name;
             attack.Reliability = request.Reliability;
-            attack.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            attack.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             attack.UpdateDate = DateTime.Now;
 
             var aeList = await _dbContext.AttackEffectList.Where(x => x.AttackId == attack.Id).ToListAsync();

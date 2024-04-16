@@ -6,9 +6,9 @@ const SkillOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
     let responce = await bestiaryService.getSkills();
     if (responce && responce.data) {
         console.log("Skill responce data:");
-        console.log(responce.data);
+        console.log(responce.data.skills);
 
-      const options = responce.data.map((data, index) => ({
+      const options = responce.data.skills.map((data, index) => ({
         label: data.name,
         value: data,
       }));

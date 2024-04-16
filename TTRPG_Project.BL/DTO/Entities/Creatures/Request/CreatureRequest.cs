@@ -1,4 +1,6 @@
-﻿using TTRPG_Project.BL.DTO.Base;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
+using TTRPG_Project.BL.DTO.Base;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
 using TTRPG_Project.DAL.Entities.Database.Spells;
 
@@ -34,6 +36,8 @@ namespace TTRPG_Project.BL.DTO.Creatures.Request
         public string HabitatPlace { get; set; } = string.Empty;
         public string Intellect { get; set; } = string.Empty;
         public string GroupSize { get; set; } = string.Empty;
+        public string ImageFileName { get; set; } = string.Empty;
+        //public IFormFile? File { get; set; }
         public List<CreatureAttack> CreatureAttacks { get; set; } = new();
         public List<CreatureAbility> CreatureAbilitys { get; set; } = new();
         public List<CreatureReward> CreatureReward { get; set; } = new();

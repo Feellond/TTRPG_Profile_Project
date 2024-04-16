@@ -11,6 +11,7 @@ using TTRPG_Project.Web.Middlewares;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Users;
 using AspNetCoreRateLimit;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Environment.EnvironmentName = Environments.Development;
@@ -22,7 +23,6 @@ builder.Services.AddServiceConfig(builder.Configuration)
     {
         x.ValueLengthLimit = int.MaxValue;
         x.MultipartBodyLengthLimit = int.MaxValue;
-
     });
 
 builder.Services.AddControllersWithViews();
@@ -132,7 +132,12 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //app.Environment.EnvironmentName = "Production"; // меняем имя окружения
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "Images")),
+    RequestPath = "/Images"
+});
 app.UseRouting();
 
 app.UseAuthentication();

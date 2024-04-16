@@ -8,6 +8,6 @@ namespace TTRPG_Project.BL.DTO.Items.Request
         public int Complexity { get; set; }
         public float TimeSpend { get; set; }
         public int AdditionalPayment { get; set; }
-        public List<BlueprintComponentListDTO> BlueprintComponentList { get; set; } = new();
+        public List<BlueprintComponentListDTO>? BlueprintComponentList { get; set; } = new();
     }
 }

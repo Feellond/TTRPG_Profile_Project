@@ -178,14 +178,14 @@ const ListShow = ({
           toast,
         });
     } else if ("race" in entity) {
-      if (entity.id !== 0)
-        result = await bestiaryService.updateEntity({
-          entity: entity as ICreature,
-        });
-      else
-        result = await bestiaryService.createEntity({
-          entity: entity as ICreature,
-        });
+      // if (entity.id !== 0)
+      //   result = await bestiaryService.updateEntity({
+      //     entity: entity as ICreature,
+      //   });
+      // else
+      //   result = await bestiaryService.createEntity({
+      //     entity: entity as ICreature,
+      //   });
     }
 
     if (result !== false) {

@@ -88,7 +88,7 @@ namespace TTRPG_Project.BL.Services.Spells
                 IsPriestSpell = request.IsPriestSpell,
                 PreparationTime = request.PreparationTime,
                 Name = request.Name,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 SourceType = request.SourceType,
                 SourceTypeDescription = request.SourceTypeDescription,
                 SpellComponentList = request.SpellComponentList.Select(dto => new SpellComponentList
@@ -128,7 +128,7 @@ namespace TTRPG_Project.BL.Services.Spells
             spell.IsPriestSpell = request.IsPriestSpell;
             spell.PreparationTime = request.PreparationTime;
             spell.Name = request.Name;
-            spell.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            spell.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             spell.SourceType = request.SourceType;
             spell.SourceTypeDescription = request.SourceTypeDescription;
             spell.SpellLevel = request.SpellLevel;

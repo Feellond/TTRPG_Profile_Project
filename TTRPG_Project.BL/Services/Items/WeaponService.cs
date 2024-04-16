@@ -27,7 +27,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -67,7 +67,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -102,16 +102,16 @@ namespace TTRPG_Project.BL.Services.Items
                 Description = request.Description,
                 Id = request.Id,
                 ItemType = (ItemType)ItemEntityType.Weapon,
-                ItemBaseEffectList = request.ItemBaseEffectList.Select(dto => new ItemBaseEffectList
+                ItemBaseEffectList = request.ItemBaseEffectList?.Select(dto => new ItemBaseEffectList
                 {
                     ChancePercent = dto.ChancePercent,
                     Damage = dto.Damage,
                     EffectId = dto.Effect?.Id ?? 0,
                     IsDealDamage = dto.IsDealDamage,
-                }).ToList(),
+                }).ToList() ?? new List<ItemBaseEffectList>(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2, 
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2, 
                 Weight = request.Weight,
                 StealthType = request.StealthType,
                 Type = request.Type,
@@ -140,7 +140,7 @@ namespace TTRPG_Project.BL.Services.Items
             weapon.UpdateDate = DateTime.Now;
             weapon.Weight = request.Weight;
             weapon.Price = request.Price;
-            weapon.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            weapon.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             weapon.Description = request.Description;
             weapon.AvailabilityType = request.AvailabilityType;
             weapon.StealthType = request.StealthType;
@@ -158,7 +158,7 @@ namespace TTRPG_Project.BL.Services.Items
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == weapon.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);
 
-            weapon.ItemBaseEffectList = request.ItemBaseEffectList.Select(dto => new ItemBaseEffectList
+            weapon.ItemBaseEffectList = request.ItemBaseEffectList?.Select(dto => new ItemBaseEffectList
             {
                 Id = dto.Id,
                 ItemBaseId = weapon.Id,
@@ -166,7 +166,7 @@ namespace TTRPG_Project.BL.Services.Items
                 Damage = dto.Damage,
                 EffectId = dto.Effect?.Id ?? 0,
                 IsDealDamage = dto.IsDealDamage,
-            }).ToList();
+            }).ToList() ?? new List<ItemBaseEffectList>();
 
             _dbContext.Entry(weapon).State = EntityState.Modified;
             return await SaveAsync();

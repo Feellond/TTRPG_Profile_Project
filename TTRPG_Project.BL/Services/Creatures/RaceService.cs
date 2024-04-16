@@ -58,7 +58,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             {
                 Description = request.Description,
                 Name = request.Name,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
             };
 
             await _dbContext.Races.AddAsync(race);
@@ -73,7 +73,7 @@ namespace TTRPG_Project.BL.Services.Creatures
 
             race.Description = request.Description;
             race.Name = request.Name;
-            race.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            race.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             race.UpdateDate = DateTime.Now;
 
             _dbContext.Entry(race).State = EntityState.Modified;

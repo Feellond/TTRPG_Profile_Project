@@ -3,28 +3,33 @@ import $api from "shared/api/axiosInstance";
 import { CreatureRequestDTO } from "shared/models";
 
 export class BestiaryService {
-    async getSkills() {
-      return await $api.get(API_SKILL);
-    }
-    async getEntitys({params}: CreatureRequestDTO) {
-      return await $api.get(API_CREATURE, {params: params});
-    }
+  async getSkills() {
+    return await $api.get(API_SKILL);
+  }
+  async getEntitys({ params }: CreatureRequestDTO) {
+    return await $api.get(API_CREATURE, { params: params });
+  }
 
-    async getEntity({id}: CreatureRequestDTO) {
-      return await $api.get(API_CREATURE + "/" + String(id));
-    }
+  async getEntity({ id }: CreatureRequestDTO) {
+    return await $api.get(API_CREATURE + "/" + String(id));
+  }
 
-    async createEntity({entity}: CreatureRequestDTO) {
-      return await $api.post(API_CREATURE, entity)
-    }
+  async createEntity({ entity }: CreatureRequestDTO) {
+    return await $api.post(API_CREATURE, entity);
+  }
 
-    async updateEntity({entity}: CreatureRequestDTO) {
-      return await $api.put(API_CREATURE, entity)
-    }
+  async updateEntity({ entity }: CreatureRequestDTO) {
+    return await $api.put(API_CREATURE, entity);
+    // return await $api.put(API_CREATURE, entity, {
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // });
+  }
 
-    async deleteEntity({id}: CreatureRequestDTO) {
-      return await $api.delete(API_CREATURE + "/" + String(id));
-    }
+  async deleteEntity({ id }: CreatureRequestDTO) {
+    return await $api.delete(API_CREATURE + "/" + String(id));
+  }
 }
 
 const bestiaryService = new BestiaryService();

@@ -10,7 +10,7 @@ namespace TTRPG_Project.BL.DTO.Items.Request
         public int Complexity { get; set; }
         public bool IsAlchemical { get; set; }
         public int SubstanceType { get; set; }
-        public List<FormulaSubstanceListDTO> FormulaSubstanceList { get; set; } = new();
-        public List<BlueprintComponentListDTO> BlueprintComponentList { get; set; } = new();
+        public List<FormulaSubstanceListDTO>? FormulaSubstanceList { get; set; } = new();
+        public List<BlueprintComponentListDTO>? BlueprintComponentList { get; set; } = new();
     }
 }

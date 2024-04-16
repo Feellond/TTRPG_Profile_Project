@@ -2226,6 +2226,16 @@ namespace TTRPG_Project.DAL.Data
                 },
             });
 
+            builder.Entity<CreatureReward>().HasData(new CreatureReward[]
+            {
+                new CreatureReward
+                {
+                    Id = 1,
+                    CreatureId = 1,
+                    RewardId = 1,
+                }
+            });
+
             #endregion
 
             #region #Spells Data

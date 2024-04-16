@@ -28,7 +28,7 @@ const BestiaryEntityPage = () => {
 
   return (
     <Card style={{ minHeight: "500px", margin: "0 auto" }}>
-      <CreatureEntity data={data} setData={setData}/>
+      <CreatureEntity data={data} setData={setData} fetchData={fetchData}/>
     </Card>
   );
 };

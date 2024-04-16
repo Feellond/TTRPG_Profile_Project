@@ -16,7 +16,7 @@ namespace TTRPG_Project.Web.Controllers
     [AllowAnonymous]
     [ApiController]
     [Route("api/creatures")]
-    [Produces("application/json")]
+    //[Produces("application/json")]
     public class CreatureController : ControllerBase
     {
         #region Инициализация контроллера
@@ -244,21 +244,31 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newCreature = _mapper.Map<Creature>(request);
-                var result = await _creatureService.CreateAsync(newCreature);
+                var result = await _creatureService.CreateAsync(request);
 
                 return Ok(result);
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
+        //[HttpPut("creature")]
+        //public async Task<IActionResult> EditCreature([FromForm] CreatureRequest request)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        //var result = await _creatureService.UpdateAsync(request);
+
+        //        return Ok(true);
+        //    }
+        //    else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
+        //}
+
         [HttpPut("creature")]
         public async Task<IActionResult> EditCreature([FromBody] CreatureRequest request)
         {
             if (ModelState.IsValid)
             {
-                var creature = _mapper.Map<Creature>(request);
-                var result = await _creatureService.UpdateAsync(creature);
+                var result = await _creatureService.UpdateAsync(request);
 
                 return Ok(result);
             }

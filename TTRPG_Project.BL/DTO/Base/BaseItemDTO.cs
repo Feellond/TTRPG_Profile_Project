@@ -11,7 +11,7 @@ namespace TTRPG_Project.BL.DTO.Base
         public double Weight { get; set; }
         public int Price { get; set; }
         public int ItemType { get; set; }
-        public List<ItemBaseEffectList> ItemBaseEffectList { get; set; } = new();
-        public List<CreatureReward> CreatureRewardList { get; set; } = new();
+        public List<ItemBaseEffectList>? ItemBaseEffectList { get; set; } = new();
+        public List<CreatureReward>? CreatureRewardList { get; set; } = new();
     }
 }

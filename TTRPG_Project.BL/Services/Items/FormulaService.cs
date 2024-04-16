@@ -28,7 +28,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -62,7 +62,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -91,16 +91,16 @@ namespace TTRPG_Project.BL.Services.Items
                 AvailabilityType = request.AvailabilityType,
                 Complexity = request.Complexity,
                 Description = request.Description,
-                FormulaSubstanceList = request.FormulaSubstanceList.Select(dto => new FormulaSubstanceList
+                FormulaSubstanceList = request.FormulaSubstanceList?.Select(dto => new FormulaSubstanceList
                 {
                     SubstanceType = dto.SubstanceType,
                     Amount = dto.Amount,
-                }).ToList(),
+                }).ToList() ?? new List<FormulaSubstanceList>(),
                 Id = request.Id,
                 ItemType = (ItemType)ItemEntityType.Formula,
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 TimeSpend = request.TimeSpend,
                 Weight = request.Weight,
             };
@@ -120,7 +120,7 @@ namespace TTRPG_Project.BL.Services.Items
             formula.TimeSpend = request.TimeSpend;
             formula.Weight = request.Weight;
             formula.Price = request.Price;
-            formula.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            formula.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             formula.AdditionalPayment = request.AdditionalPayment;
             formula.Complexity = request.Complexity;
             formula.Description = request.Description;
@@ -129,13 +129,13 @@ namespace TTRPG_Project.BL.Services.Items
             var fsList = await _dbContext.FormulaComponentList.Where(x => x.FormulaId == formula.Id).ToListAsync();
             _dbContext.FormulaComponentList.RemoveRange(fsList);
 
-            formula.FormulaSubstanceList = request.FormulaSubstanceList.Select(dto => new FormulaSubstanceList
+            formula.FormulaSubstanceList = request.FormulaSubstanceList?.Select(dto => new FormulaSubstanceList
             {
                 Id = dto.Id ?? 0,
                 FormulaId = formula.Id,
                 SubstanceType = dto.SubstanceType,
                 Amount = dto.Amount,
-            }).ToList();
+            }).ToList() ?? new List<FormulaSubstanceList>();
 
             _dbContext.Entry(formula).State = EntityState.Modified;
             return await SaveAsync();

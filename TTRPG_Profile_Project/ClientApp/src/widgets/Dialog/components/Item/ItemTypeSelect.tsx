@@ -118,7 +118,7 @@ const ItemTypeSelect = ({
       default:
         setContent(<div></div>);
     }
-  }, [itemType, isAmmunitionChecked, data, substances, components]);
+  }, [itemType, isAmmunitionChecked, data, substances, components, isAlchemicalChecked]);
 
   const WeaponItem = () => {
     return (
@@ -628,17 +628,30 @@ const ItemTypeSelect = ({
       <div>
         <span className="field">
           <label>Где найти?</label>
-          <Dropdown
+          {/* <Controller
+            name="whereToFind"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  showClear
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  options={whereToFindOptions}
+                  placeholder="Выберите тип субстанции"
+                />
+              </>
+            )}
+          /> */}
+          <InputText
             value={data.whereToFind}
-            showClear
-            onChange={(e) => {
-              register("whereToFind", { value: e.value });
-
-              //setValue("isAmmunition", e.checked);
-              //console.log(getValues());
-            }}
-            options={whereToFindOptions}
-            placeholder="Выберите где"
+            min={0}
+            max={999}
+            placeholder="Где найти?"
+            {...register("amount")}
           />
         </span>
         <span className="field">
@@ -660,6 +673,7 @@ const ItemTypeSelect = ({
             placeholder="Число сложности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
               register("complexity", { value: e.target.value });
+              setValue("complexity",  e.target.value)
             }}
           />
         </span>
@@ -667,7 +681,8 @@ const ItemTypeSelect = ({
           <Checkbox
             onChange={(e) => {
               setIsAlchemicalChecked(e.checked);
-              register("isAlchemical", { value: e.checked });
+              //register("isAlchemical", { value: e.checked });
+              setValue("isAlchemical",  e.checked)
             }}
             checked={isAlchemicalChecked}
           />
@@ -675,17 +690,23 @@ const ItemTypeSelect = ({
         </div>
         <span className="field">
           <label>Тип субстанции</label>
-          <Dropdown
-            value={data.substanceType}
-            showClear
-            onChange={(e) => {
-              register("substanceType", { value: e.value });
-
-              //setValue("isAmmunition", e.checked);
-              //console.log(getValues());
-            }}
-            options={substanceOptions}
-            placeholder="Выберите тип субстанции"
+          <Controller
+            name="substanceType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  showClear
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  options={substanceOptions}
+                  placeholder="Выберите тип субстанции"
+                />
+              </>
+            )}
           />
         </span>
       </div>

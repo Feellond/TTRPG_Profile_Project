@@ -62,7 +62,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 IsClassSkill = request.IsClassSkill,
                 IsDifficult = request.IsDifficult,
                 Name = request.Name,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 StatId = request.StatId ?? request.Stat?.Id,                
             };
 
@@ -80,7 +80,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             skill.IsClassSkill = request.IsClassSkill;
             skill.IsDifficult = request.IsDifficult;
             skill.Name = request.Name;
-            skill.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            skill.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             skill.StatId = request.StatId ?? request.Stat?.Id;
             skill.UpdateDate = DateTime.Now;
 

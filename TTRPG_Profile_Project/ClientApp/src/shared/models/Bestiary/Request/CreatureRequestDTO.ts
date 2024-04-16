@@ -10,6 +10,6 @@ export interface CreatureRequestDTO {
     params?: any,
 }
 
-export interface CreatureRequest {
-    entity: ICreature
+export interface CreatureRequest extends ICreature {
+    file: any;
 }

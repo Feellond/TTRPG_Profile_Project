@@ -60,7 +60,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                         Id = creature.Id,
                         Name = creature.Name,
                         Description = creature.Description,
-                        Source = (creature.Source != null ? creature.Source.Name : ""),
+                        Source = creature.Source,
                         CreatureAbilitys = creature.CreatureAbilitys,
                         AdditionalInformation = creature.AdditionalInformation,
                         Armor = creature.Armor,
@@ -92,6 +92,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                         StatsListId = creature.StatsListId,
                         SuperstitionsInformation = creature.SuperstitionsInformation,
                         Weight = creature.Weight,
+                        ImageFileName = creature.ImageFileName,
                     })
                     .ToListAsync();
 
@@ -135,7 +136,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                         Id = creature.Id,
                         Name = creature.Name,
                         Description = creature.Description,
-                        Source = (creature.Source != null ? creature.Source.Name : ""),
+                        Source = creature.Source,
                         CreatureAbilitys = creature.CreatureAbilitys,
                         AdditionalInformation = creature.AdditionalInformation,
                         Armor = creature.Armor,
@@ -167,6 +168,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                         StatsListId = creature.StatsListId,
                         SuperstitionsInformation = creature.SuperstitionsInformation,
                         Weight = creature.Weight,
+                        ImageFileName = creature.ImageFileName,
                     })
                 .FirstOrDefaultAsync();
 
@@ -184,108 +186,181 @@ namespace TTRPG_Project.BL.Services.Creatures
 
         public async Task<bool> CreateAsync(CreatureRequest request)
         {
-            Creature creature = new()
+            try
             {
-                CreatureAbilitys = request.CreatureAbilitys.Select(dto => new CreatureAbility
-                {
-                    AbilityId = dto.AbilityId,
-                    CreatureId = dto.CreatureId,
-                }).ToList(),
-                AdditionalInformation = request.AdditionalInformation,
-                Armor = request.Armor,
-                AthleticsBase = request.AthleticsBase,
-                CreatureAttacks = request.CreatureAttacks,
-                BlockBase = request.BlockBase,
-                Complexity = request.Complexity,
-                CreatureReward = request.CreatureReward.Select(dto => new CreatureReward
-                {
-                    CreatureId = dto.CreatureId,
-                    RewardId = dto.RewardId,
-                }).ToList(),
-                Description = request.Description,
-                EducationSkill = request.EducationSkill,
-                EvasionBase = request.EvasionBase,
-                GroupSize = request.GroupSize,
-                HabitatPlace = request.HabitatPlace,
-                Height = request.Height,
-                Intellect = request.Intellect,
-                Resistances = request.Resistances,
-                Immunities = request.Immunities,
-                MoneyReward = request.MoneyReward,
-                Vulnerabilities = request.Vulnerabilities,
-                MonsterLoreInformation = request.MonsterLoreInformation,
-                MonsterLoreSkill = request.MonsterLoreSkill,
-                Name = request.Name,
-                RaceId = request.RaceId ?? request.Race?.Id,
-                Regeneration = request.Regeneration,
-                SkillsListId = request.SkillsListId ?? request.SkillsList?.Id,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
-                SpellResistBase = request.SpellResistBase,
-                StatsListId = request.StatsListId?? request.StatsList?.Id,
-                SuperstitionsInformation = request.SuperstitionsInformation,
-                Weight = request.Weight,
-            };
+                //if (request.File != null)
+                //{
+                //    if (request.File.Length == 0)
+                //        throw new CustomException("Недопустимый размер файла.");
 
-            await _dbContext.Creatures.AddAsync(creature);
-            return await SaveAsync();
+                //    if (request.File.ContentType != "image/jpeg" && request.File.ContentType != "image/png")
+                //        throw new CustomException("Недопустимый формат файла. Допускаются только JPEG и PNG.");
+
+                //    if (request.File.FileName.Contains("/") || request.File.FileName.Contains("\\"))
+                //        throw new CustomException("Недопустимое имя файла.");
+                //}
+
+                Creature creature = new()
+                {
+                    CreatureAbilitys = request.CreatureAbilitys.Select(dto => new CreatureAbility
+                    {
+                        AbilityId = dto.AbilityId,
+                        CreatureId = dto.CreatureId,
+                    }).ToList(),
+                    AdditionalInformation = request.AdditionalInformation,
+                    Armor = request.Armor,
+                    AthleticsBase = request.AthleticsBase,
+                    CreatureAttacks = request.CreatureAttacks,
+                    BlockBase = request.BlockBase,
+                    Complexity = request.Complexity,
+                    CreatureReward = request.CreatureReward.Select(dto => new CreatureReward
+                    {
+                        CreatureId = dto.CreatureId,
+                        RewardId = dto.RewardId,
+                    }).ToList(),
+                    Description = request.Description,
+                    EducationSkill = request.EducationSkill,
+                    EvasionBase = request.EvasionBase,
+                    GroupSize = request.GroupSize,
+                    HabitatPlace = request.HabitatPlace,
+                    Height = request.Height,
+                    Intellect = request.Intellect,
+                    Resistances = request.Resistances,
+                    Immunities = request.Immunities,
+                    MoneyReward = request.MoneyReward,
+                    Vulnerabilities = request.Vulnerabilities,
+                    MonsterLoreInformation = request.MonsterLoreInformation,
+                    MonsterLoreSkill = request.MonsterLoreSkill,
+                    Name = request.Name,
+                    RaceId = request.RaceId ?? request.Race?.Id,
+                    Regeneration = request.Regeneration,
+                    SkillsListId = request.SkillsListId ?? request.SkillsList?.Id,
+                    SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
+                    SpellResistBase = request.SpellResistBase,
+                    StatsListId = request.StatsListId ?? request.StatsList?.Id,
+                    SuperstitionsInformation = request.SuperstitionsInformation,
+                    Weight = request.Weight,
+                    ImageFileName = request.ImageFileName,
+                };
+
+                await _dbContext.Creatures.AddAsync(creature);
+                //await SaveAsync();
+
+                //if (request.File != null)
+                //{
+                //    var filePath = Path.Combine("Images\\Creature", request.File.FileName + "_ID" + creature.Id);
+                //    using (var stream = new FileStream(filePath, FileMode.Create))
+                //    {
+                //        request.File.CopyTo(stream);
+
+                //        creature.ImageFileName = filePath;
+                //        _dbContext.Entry(creature).State = EntityState.Modified;
+                //    }
+                //}
+
+                return await SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new CustomException(ex.Message);
+            }
         }
 
         public async Task<bool> UpdateAsync(CreatureRequest request)
         {
-            var creature = await _dbContext.Creatures.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
-            if (creature is null)
-                throw new CustomException("Существо не найдено!");
-
-            creature.AdditionalInformation = request.AdditionalInformation;
-            creature.Armor = request.Armor;
-            creature.AthleticsBase = request.AthleticsBase;
-            creature.CreatureAttacks = request.CreatureAttacks;
-            creature.BlockBase = request.BlockBase;
-            creature.Complexity = request.Complexity;
-            creature.Description = request.Description;
-            creature.EducationSkill = request.EducationSkill;
-            creature.EvasionBase = request.EvasionBase;
-            creature.GroupSize = request.GroupSize;
-            creature.HabitatPlace = request.HabitatPlace;
-            creature.Height = request.Height;
-            creature.Intellect = request.Intellect;
-            creature.MoneyReward = request.MoneyReward;
-            creature.Resistances = request.Resistances;
-            creature.Immunities = request.Immunities;
-            creature.Vulnerabilities = request.Vulnerabilities;
-            creature.MonsterLoreInformation = request.MonsterLoreInformation;
-            creature.MonsterLoreSkill = request.MonsterLoreSkill;
-            creature.Name = request.Name;
-            creature.RaceId = request.RaceId ?? request.Race?.Id;
-            creature.Regeneration = request.Regeneration;
-            creature.SkillsListId = request.SkillsListId ?? request.SkillsList?.Id;
-            creature.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
-            creature.SpellResistBase = request.SpellResistBase;
-            creature.StatsListId = request.StatsListId ?? request.StatsList?.Id;
-            creature.SuperstitionsInformation = request.SuperstitionsInformation;
-            creature.Weight = request.Weight;
-            creature.UpdateDate = DateTime.Now;
-
-            //var caList = await _dbContext.Abilitiys.Where(x => x.Creature == null ? false : x.Creature.Any(k => k.Id == creature.Id)).ToListAsync();
-            //_dbContext.RemoveRange(caList);
-            creature.CreatureAbilitys = request.CreatureAbilitys.Select(dto => new CreatureAbility
+            try
             {
-                Id = dto.Id,
-                AbilityId = dto.AbilityId,
-                CreatureId = dto.CreatureId,
-            }).ToList();
+                var creature = await _dbContext.Creatures.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
+                if (creature is null)
+                    throw new CustomException("Существо не найдено!");
 
-            //var ccrList = await _dbContext.CreatureRewardList.Where(x => x.CreatureId == creature.Id).ToListAsync();
-            //_dbContext.RemoveRange(ccrList);
-            creature.CreatureReward = request.CreatureReward.Select(dto => new CreatureReward
+                //if (request.File != null)
+                //{
+                //    if (request.File.Length == 0)
+                //        throw new CustomException("Недопустимый размер файла.");
+
+                //    if (request.File.ContentType != "image/jpeg" && request.File.ContentType != "image/png")
+                //        throw new CustomException("Недопустимый формат файла. Допускаются только JPEG и PNG.");
+
+                //    if (request.File.FileName.Contains("/") || request.File.FileName.Contains("\\"))
+                //        throw new CustomException("Недопустимое имя файла.");
+                //}
+
+                creature.AdditionalInformation = request.AdditionalInformation;
+                creature.Armor = request.Armor;
+                creature.AthleticsBase = request.AthleticsBase;
+                creature.CreatureAttacks = request.CreatureAttacks;
+                creature.BlockBase = request.BlockBase;
+                creature.Complexity = request.Complexity;
+                creature.Description = request.Description;
+                creature.EducationSkill = request.EducationSkill;
+                creature.EvasionBase = request.EvasionBase;
+                creature.GroupSize = request.GroupSize;
+                creature.HabitatPlace = request.HabitatPlace;
+                creature.Height = request.Height;
+                creature.Intellect = request.Intellect;
+                creature.MoneyReward = request.MoneyReward;
+                creature.Resistances = request.Resistances;
+                creature.Immunities = request.Immunities;
+                creature.Vulnerabilities = request.Vulnerabilities;
+                creature.MonsterLoreInformation = request.MonsterLoreInformation;
+                creature.MonsterLoreSkill = request.MonsterLoreSkill;
+                creature.Name = request.Name;
+                creature.RaceId = request.RaceId ?? request.Race?.Id;
+                creature.Regeneration = request.Regeneration;
+                creature.SkillsListId = request.SkillsListId ?? request.SkillsList?.Id;
+                creature.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
+                creature.SpellResistBase = request.SpellResistBase;
+                creature.StatsListId = request.StatsListId ?? request.StatsList?.Id;
+                creature.SuperstitionsInformation = request.SuperstitionsInformation;
+                creature.Weight = request.Weight;
+                creature.UpdateDate = DateTime.Now;
+                creature.ImageFileName = request.ImageFileName;
+
+                //var caList = await _dbContext.Abilitiys.Where(x => x.Creature == null ? false : x.Creature.Any(k => k.Id == creature.Id)).ToListAsync();
+                //_dbContext.RemoveRange(caList);
+                creature.CreatureAbilitys = request.CreatureAbilitys.Select(dto => new CreatureAbility
+                {
+                    Id = dto.Id,
+                    AbilityId = dto.AbilityId,
+                    CreatureId = dto.CreatureId,
+                }).ToList();
+
+                //var ccrList = await _dbContext.CreatureRewardList.Where(x => x.CreatureId == creature.Id).ToListAsync();
+                //_dbContext.RemoveRange(ccrList);
+                creature.CreatureReward = request.CreatureReward.Select(dto => new CreatureReward
+                {
+                    Id = dto.Id,
+                    CreatureId = dto.CreatureId,
+                    RewardId = dto.RewardId,
+                }).ToList();
+
+                //if (request.File != null)
+                //{
+                //    var deleteFilePath = creature.ImageFileName;
+                //    if (File.Exists(deleteFilePath))
+                //    {
+                //        File.Delete(deleteFilePath);
+                //    }
+
+                //    //var filePath = Path.Combine(Environment.CurrentDirectory, "Images\\Creature", request.File.FileName);
+                //    var filePath = Path.Combine("Images\\Creature", request.File.FileName);
+                //    using (var stream = new FileStream(filePath, FileMode.Create))
+                //    {
+                //        request.File.CopyTo(stream);
+
+                //        creature.ImageFileName = filePath;
+                //        _dbContext.Entry(creature).State = EntityState.Modified;
+                //    }
+                //}
+
+                _dbContext.Entry(creature).State = EntityState.Modified;
+                return await SaveAsync();
+            }
+            catch (Exception ex)
             {
-                Id = dto.Id,
-                CreatureId = dto.CreatureId,
-                RewardId = dto.RewardId,
-            }).ToList();
-
-            _dbContext.Entry(creature).State = EntityState.Modified;
-            return await SaveAsync();
+                throw new CustomException(ex.Message);
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -294,8 +369,19 @@ namespace TTRPG_Project.BL.Services.Creatures
             if (creature is null)
                 throw new CustomException("Существо не найдено!");
 
+            var deleteFilePath = creature.ImageFileName;
             _dbContext.Remove(creature);
-            return await SaveAsync();
+            var saved = await SaveAsync();
+
+            if (saved)
+            {
+                if (File.Exists(deleteFilePath))
+                {
+                    File.Delete(deleteFilePath);
+                }
+            }
+
+            return saved;
         }
     }
 }

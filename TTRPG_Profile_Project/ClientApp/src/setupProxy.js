@@ -9,6 +9,7 @@ const context = [
   "/API",
   "/weatherforecast",
   "/item",
+  "/Images",
 ];
 
 const onError = (err, req, resp, target) => {

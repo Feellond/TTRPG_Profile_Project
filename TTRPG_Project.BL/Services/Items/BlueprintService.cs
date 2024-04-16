@@ -26,7 +26,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -60,7 +60,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -89,16 +89,16 @@ namespace TTRPG_Project.BL.Services.Items
                 AvailabilityType = request.AvailabilityType,
                 Complexity = request.Complexity,
                 Description = request.Description,
-                BlueprintComponentList = request.BlueprintComponentList.Select(dto => new BlueprintComponentList
+                BlueprintComponentList = request.BlueprintComponentList?.Select(dto => new BlueprintComponentList
                 {
                     ComponentId = dto.Component?.Id ?? 0,
                     Amount = dto.Amount,
-                }).ToList(),
+                }).ToList() ?? new List<BlueprintComponentList>(),
                 Id = request.Id,
                 ItemType = (ItemType)ItemEntityType.Blueprint,
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 TimeSpend = request.TimeSpend,
                 Weight = request.Weight,
             };
@@ -117,7 +117,7 @@ namespace TTRPG_Project.BL.Services.Items
             blueprint.TimeSpend = request.TimeSpend;
             blueprint.Weight = request.Weight;
             blueprint.Price = request.Price;
-            blueprint.SourceId = _dbContext.Sources.Where(x => x.Name == request.Name).FirstOrDefault()?.Id ?? 2;
+            blueprint.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             blueprint.AdditionalPayment = request.AdditionalPayment;
             blueprint.Complexity = request.Complexity;
             blueprint.Description = request.Description;
@@ -126,7 +126,7 @@ namespace TTRPG_Project.BL.Services.Items
             var bcList = await _dbContext.BlueprintComponentList.Where(x => x.BlueprintId == blueprint.Id).ToListAsync();
             _dbContext.BlueprintComponentList.RemoveRange(bcList);
 
-            blueprint.BlueprintComponentList = request.BlueprintComponentList
+            blueprint.BlueprintComponentList = request.BlueprintComponentList?
                 .Where(x => x.Component != null)
                 .Select(dto => new BlueprintComponentList
             {
@@ -134,7 +134,7 @@ namespace TTRPG_Project.BL.Services.Items
                 BlueprintId = blueprint.Id,
                 ComponentId = dto.Component.Id,
                 Amount = dto.Amount,
-            }).ToList();
+            }).ToList() ?? new List<BlueprintComponentList>();
 
             _dbContext.Entry(blueprint).State = EntityState.Modified;
             return await SaveAsync();

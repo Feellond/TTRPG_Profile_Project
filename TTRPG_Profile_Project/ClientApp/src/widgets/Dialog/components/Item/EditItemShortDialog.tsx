@@ -278,7 +278,7 @@ const EditItemShortDialog = ({
           <div className="field flex flex-column col-3">
             <span className="p-float-label">
               <Controller
-                name="sourceId"
+                name="source"
                 control={control}
                 render={({ field }) => (
                   <>

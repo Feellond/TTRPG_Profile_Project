@@ -53,7 +53,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             {
                 Description = request.Description,
                 Name = request.Name,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
             };
 
             await _dbContext.Stats.AddAsync(stat);
@@ -68,7 +68,7 @@ namespace TTRPG_Project.BL.Services.Creatures
 
             stat.Description = request.Description;
             stat.Name = request.Name;
-            stat.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            stat.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             stat.UpdateDate = DateTime.Now;
 
             _dbContext.Entry(stat).State = EntityState.Modified;

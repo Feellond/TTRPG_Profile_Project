@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ICreatureAttack } from "shared/models";
 
 interface IShowAttacks {
@@ -6,24 +6,36 @@ interface IShowAttacks {
 }
 
 export const ShowAttacks = ({ creatureAttacks }: IShowAttacks) => {
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = (event) => {
+      setWidth(event.target.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return creatureAttacks.length > 0 ? (
     <div className="creatureAttacks">
       <p>Атаки:</p>
       <div>
-        <table>
+        <table className="w-full">
           <thead>
-            <th>Наименование</th>
-            <th>Основа</th>
+            <th>{width <= 750 ? ("Наз") : ("Наименование")}</th>
+            <th>{width <= 750 ? ("Осн") : ("Основа")}</th>
             <th>Тип</th>
-            <th>Урон</th>
-            <th>Надеж</th>
-            <th>Дальн</th>
-            <th>Эффекты</th>
+            <th>{width <= 750 ? ("Ур") : ("Урон")}</th>
+            <th>{width <= 750 ? ("Над") : ("Надежность")}</th>
+            <th>{width <= 750 ? ("Дал") : ("Дальность")}</th>
+            <th>{width <= 750 ? ("Эфф") : ("Эффекты")}</th>
             <th>СА</th>
           </thead>
           <tbody>
             {creatureAttacks.map((attack, index) => (
-              <tr>
+              <tr key={index}>
                 <td>{attack.attack.name}</td>
                 <td>{attack.attack.baseAttack}</td>
                 <td>{attack.attack.attackType}</td>
@@ -49,55 +61,6 @@ export const ShowAttacks = ({ creatureAttacks }: IShowAttacks) => {
                 </td>
                 <td>{attack.attack.attackSpeed}</td>
               </tr>
-
-              //   <div className="flex flex-wrap mt-3 border-solid">
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">Наименование</div>
-              //       <div>{attack.attack.name}</div>
-              //     </div>
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">Основа</div>
-              //       <div>{attack.attack.baseAttack}</div>
-              //     </div>
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">Тип</div>
-              //       <div>{attack.attack.attackType}</div>
-              //     </div>
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">Урон</div>
-              //       <div>{attack.attack.damage}</div>
-              //     </div>
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">Надеж</div>
-              //       <div>{attack.attack.reliability}</div>
-              //     </div>
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">Дальн</div>
-              //       <div>{attack.attack.distance}</div>
-              //     </div>
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">Эффекты</div>
-              //       {attack.attack.attackEffectList.length > 0
-              //         ? attack.attack.attackEffectList.map((effect, index) => (
-              //             <div className="flex flex-wrap">
-              //               <div key={index}>
-              //                 {effect.effect.name} (
-              //                 {effect.isDealDamage ? (
-              //                   effect.damage
-              //                 ) : (
-              //                   <div>{effect.chancePercent}%</div>
-              //                 )}
-              //                 )
-              //               </div>
-              //             </div>
-              //           ))
-              //         : "-"}
-              //     </div>
-              //     <div className="m-2 text-center">
-              //       <div className="font-bold">СА</div>
-              //       <div>{attack.attack.attackSpeed}</div>
-              //     </div>
-              //   </div>
             ))}
           </tbody>
         </table>

@@ -1,3 +1,4 @@
+import { CreatureRequest } from "../Request/CreatureRequestDTO";
 import {
   IAbilitiy,
   IAttack,
@@ -88,6 +89,7 @@ export const emptyCreature: ICreature = {
   creatureAttacks: [],
   creatureAbilitys: [],
   creatureReward: [],
+  imageFileName: "",
 };
 
 export const emptyReward: IReward = {

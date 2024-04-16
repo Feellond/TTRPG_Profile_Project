@@ -25,7 +25,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -59,7 +59,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
-                    Source = (item.Source != null ? item.Source.Name : ""),
+                    Source = item.Source,
                     AvailabilityType = item.AvailabilityType,
                     Weight = item.Weight,
                     Price = item.Price,
@@ -89,16 +89,16 @@ namespace TTRPG_Project.BL.Services.Items
                 Description = request.Description,
                 Id = request.Id,
                 ItemType = (ItemType)ItemEntityType.Component,
-                ItemBaseEffectList = request.ItemBaseEffectList.Select(dto => new ItemBaseEffectList
+                ItemBaseEffectList = request.ItemBaseEffectList?.Select(dto => new ItemBaseEffectList
                 {
                     ChancePercent = dto.ChancePercent,
                     Damage = dto.Damage,
                     EffectId = dto.Effect?.Id ?? 0,
                     IsDealDamage = dto.IsDealDamage,
-                }).ToList(),
+                }).ToList() ?? new List<ItemBaseEffectList>(),
                 Name = request.Name,
                 Price = request.Price,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
                 WhereToFind = request.WhereToFind,
                 Amount = request.Amount,
@@ -121,7 +121,7 @@ namespace TTRPG_Project.BL.Services.Items
             component.UpdateDate = DateTime.Now;
             component.Weight = request.Weight;
             component.Price = request.Price;
-            component.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            component.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             component.Description = request.Description;
             component.AvailabilityType = request.AvailabilityType;
             component.WhereToFind = request.WhereToFind;
@@ -133,7 +133,7 @@ namespace TTRPG_Project.BL.Services.Items
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == component.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);
 
-            component.ItemBaseEffectList = request.ItemBaseEffectList.Select(dto => new ItemBaseEffectList
+            component.ItemBaseEffectList = request.ItemBaseEffectList?.Select(dto => new ItemBaseEffectList
             {
                 Id = dto.Id ?? 0,
                 ItemBaseId = component.Id,
@@ -141,7 +141,7 @@ namespace TTRPG_Project.BL.Services.Items
                 Damage = dto.Damage,
                 EffectId = dto.Effect?.Id ?? 0,
                 IsDealDamage = dto.IsDealDamage,
-            }).ToList();
+            }).ToList() ?? new List<ItemBaseEffectList>();
 
             _dbContext.Entry(component).State = EntityState.Modified;
             return await SaveAsync();

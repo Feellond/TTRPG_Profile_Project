@@ -6,19 +6,26 @@ import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ICreature } from "shared/models";
 import { ShowSkills } from "./ShowSkills";
-import { Accordion, AccordionTab } from 'primereact/accordion';
+import { Accordion, AccordionTab } from "primereact/accordion";
 import "../scss/style.scss";
 import { ShowAttacks } from "./ShowAttacks";
 import { ShowAbilities } from "./ShowAbilities";
+import { ShowStats } from "./ShowStats";
+import { ShowBases } from "./ShowBases";
+import { ShowInfoAndReward } from "./ShowInfoAndReward";
+import generalService from "shared/services/general.service";
+import bestiaryService from "shared/services/bestiary.service";
 
 interface ICreatureEntity {
   data: ICreature;
   setData: React.Dispatch<React.SetStateAction<ICreature>>;
+  fetchData: () => Promise<void>;
 }
 
-const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
+const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isAllSkills, setIsAllSkills] = useState<boolean>(false);
+  const [file, setFile] = useState<any>(null);
 
   const {
     register,
@@ -33,7 +40,7 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
     setValues();
   }, [isEditMode, data]);
 
-  useEffect(() => {}, [isEditMode]);
+  useEffect(() => {}, [isEditMode, file]);
 
   const setValues = () => {
     setValue("id", data.id);
@@ -51,6 +58,7 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
     setValue("armor", data.armor);
     setValue("regeneration", data.regeneration);
     setValue("statsList", data.statsList);
+    setValue("skillsList", data.skillsList);
     setValue("evasionBase", data.evasionBase);
     setValue("athleticsBase", data.athleticsBase);
     setValue("blockBase", data.blockBase);
@@ -58,15 +66,133 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
     setValue("height", data.height);
     setValue("weight", data.weight);
     setValue("habitatPlace", data.habitatPlace);
+    setValue("immunities", data.immunities);
+    setValue("resistances", data.resistances);
+    setValue("vulnerabilities", data.vulnerabilities);
     setValue("intellect", data.intellect);
     setValue("groupSize", data.groupSize);
     setValue("creatureAttacks", data.creatureAttacks);
     setValue("creatureAbilitys", data.creatureAbilitys);
     setValue("creatureReward", data.creatureReward);
+    setValue("imageFileName", data.imageFileName);
   };
 
-  const onSave = () => {
+  const SaveChanges = () => {
+    let dialogData = getValues();
+    console.log(dialogData);
+
+    // let formData = new FormData();
+    // formData.append("id", dialogData.id);
+    // formData.append("name", dialogData.name);
+    // formData.append("description", dialogData.description);
+    // formData.append("source", dialogData.source);
+    // formData.append("race", dialogData.race);
+    // formData.append("additionalInformation", dialogData.additionalInformation);
+    // formData.append("educationSkill", dialogData.educationSkill);
+    // formData.append(
+    //   "superstitionsInformation",
+    //   dialogData.superstitionsInformation
+    // );
+    // formData.append("monsterLoreSkill", dialogData.monsterLoreSkill);
+    // formData.append(
+    //   "monsterLoreInformation",
+    //   dialogData.monsterLoreInformation
+    // );
+    // formData.append("complexity", dialogData.complexity);
+    // formData.append("moneyReward", dialogData.moneyReward);
+    // formData.append("armor", dialogData.armor);
+    // formData.append("regeneration", dialogData.regeneration);
+    // formData.append("statsList", dialogData.statsList);
+
+    // Object.keys(dialogData.skillsList).forEach((key) => {
+    //   formData.append(`skillsList.${key}`, dialogData.skillsList[key]);
+    // });
+    // //formData.append("skillsList", JSON.stringify(dialogData.skillsList));
+    // formData.append("evasionBase", dialogData.evasionBase);
+    // formData.append("athleticsBase", dialogData.athleticsBase);
+    // formData.append("blockBase", dialogData.blockBase);
+    // formData.append("spellResistBase", dialogData.spellResistBase);
+    // formData.append("height", dialogData.height);
+    // formData.append("weight", dialogData.weight);
+    // formData.append("habitatPlace", dialogData.habitatPlace);
+    // formData.append("resistances", dialogData.resistances);
+    // formData.append("vulnerabilities", dialogData.vulnerabilities);
+    // formData.append("immunities", dialogData.immunities);
+    // formData.append("intellect", dialogData.intellect);
+    // formData.append("groupSize", dialogData.groupSize);
+    // formData.append("creatureAttacks", dialogData.creatureAttacks);
+    // formData.append("creatureAbilitys", dialogData.creatureAbilitys);
+    // formData.append("creatureReward", dialogData.creatureReward);
+    // formData.append("imageFileName", dialogData.imageFileName);
+    // formData.append("file", file);
+
+    let dataOnSave: ICreature = {
+      id: dialogData.id,
+      name: dialogData.name,
+      description: dialogData.description,
+      source: dialogData.source,
+      race: dialogData.race,
+      additionalInformation: dialogData.additionalInformation,
+      educationSkill: dialogData.educationSkill,
+      superstitionsInformation: dialogData.superstitionsInformation,
+      monsterLoreSkill: dialogData.monsterLoreSkill,
+      monsterLoreInformation: dialogData.monsterLoreInformation,
+      complexity: dialogData.complexity,
+      moneyReward: dialogData.moneyReward,
+      armor: dialogData.armor,
+      regeneration: dialogData.regeneration,
+      statsList: dialogData.statsList,
+      skillsList: dialogData.skillsList,
+      evasionBase: dialogData.evasionBase,
+      athleticsBase: dialogData.athleticsBase,
+      blockBase: dialogData.blockBase,
+      spellResistBase: dialogData.spellResistBase,
+      height: dialogData.height,
+      weight: dialogData.weight,
+      habitatPlace: dialogData.habitatPlace,
+      resistances: dialogData.resistances,
+      vulnerabilities: dialogData.vulnerabilities,
+      immunities: dialogData.immunities,
+      intellect: dialogData.intellect,
+      groupSize: dialogData.groupSize,
+      creatureAttacks: dialogData.creatureAttacks,
+      creatureAbilitys: dialogData.creatureAbilitys,
+      creatureReward: dialogData.creatureReward,
+      imageFileName: dialogData.imageFileName,
+    };
+
+    //dataOnSave.file = file;
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(`${key}:`, value);
+    //}
+    onSave(dataOnSave);
+  };
+
+  const onFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const onSave = async (dataOnSave: ICreature) => {
     setIsEditMode(false);
+
+    if (file != null) {
+      if (dataOnSave.imageFileName !== null)
+        if (dataOnSave.imageFileName !== "")
+          generalService.deleteImage(dataOnSave.imageFileName, "Creature");
+
+      let formData = new FormData();
+      formData.append("file", file);
+      formData.append("folderName", "Creature");
+
+      generalService.loadImage(formData);
+      dataOnSave.imageFileName = file.name;
+    }
+
+    console.log(dataOnSave);
+    bestiaryService.updateEntity({ entity: dataOnSave });
+    fetchData();
+    setFile(null);
+    window.location.reload();
   };
 
   const onCancel = () => {
@@ -89,12 +215,14 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
         visible={isEditMode}
         onClick={() => onCancel()}
         className="p-button-text"
+        type="button"
       />
       <Button
         label="Сохранить"
         icon="pi pi-check"
         visible={isEditMode}
-        onClick={() => onSave()}
+        onClick={() => SaveChanges()}
+        type="button"
         autoFocus
       />
     </div>
@@ -108,7 +236,7 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
         className="p-button-text"
       />
       <div className="card block bg-bluegray-50 mb-4 text-0">
-        <form className="m-2">
+        <form className="p-2 creatureForm">
           {!isEditMode ? (
             <div
               className="p-2 text-2xl font-semibold"
@@ -117,25 +245,28 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
               <div>{data.name}</div>
             </div>
           ) : (
-            <span className="p-float-label mt-4">
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <InputText
-                      id={field.name}
-                      value={field.value}
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                      }}
-                      className="bg-white text-0"
-                    />
-                  </>
-                )}
-              />
-              <label className="text-0">Наименование</label>
-            </span>
+            <div>
+              <span className="p-float-label mt-4">
+                <Controller
+                  name="name"
+                  control={control}
+                  render={({ field }) => (
+                    <>
+                      <InputText
+                        id={field.name}
+                        value={field.value}
+                        onChange={(e) => {
+                          field.onChange(e.target.value);
+                        }}
+                        className="bg-white text-0"
+                      />
+                    </>
+                  )}
+                />
+                <label className="text-0">Наименование</label>
+              </span>
+              {footerContent}
+            </div>
           )}
 
           <ul className="p-2 params">
@@ -145,7 +276,21 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
             </li>
           </ul>
 
-          <div className="flex">
+          <div className="p-2 creatureImage">
+            {data.imageFileName !== null ? (
+              <div className="mb-4">
+                <img
+                  src={"Images/Creature/" + data.imageFileName}
+                  alt="Изображение"
+                />
+              </div>
+            ) : (
+              <div></div>
+            )}
+            <input type="file" onChange={(e) => onFileChange(e)} />
+          </div>
+
+          <div className="pl-2 flex">
             <p>Характеристики</p>
             <div className="ml-2">
               <Checkbox
@@ -155,146 +300,51 @@ const CreatureEntity = ({ data, setData }: ICreatureEntity) => {
               />
             </div>
           </div>
-          <div className="flex">
-            <div className="flex">
-              <div className="m-2 text-center">
-                <table>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Инт</th>
-                      <td>{data.statsList?.intellectValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Реа</th>
-                      <td>{data.statsList?.reactionValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Лвк</th>
-                      <td>{data.statsList?.dexterityValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Тел</th>
-                      <td>{data.statsList?.constitutionValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Скор</th>
-                      <td>{data.statsList?.speedValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Эмп</th>
-                      <td>{data.statsList?.empathyValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Рем</th>
-                      <td>{data.statsList?.craftsmanshipValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Воля</th>
-                      <td>{data.statsList?.willpowerValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Удач</th>
-                      <td>{data.statsList?.luckValue}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
 
-              <div  className="m-2 text-center">
-                <table>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Уст</th>
-                      <td>{data.statsList?.resilienceValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Бег</th>
-                      <td>{data.statsList?.runningValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Прж</th>
-                      <td>{data.statsList?.jumpingValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Вын</th>
-                      <td>{data.statsList?.enduranceValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Вес</th>
-                      <td>{data.statsList?.weightValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Отд</th>
-                      <td>{data.statsList?.restValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Пз</th>
-                      <td>{data.statsList?.healthPointsValue}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Энер</th>
-                      <td>{data.statsList?.energyValue}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            {ShowSkills({
-              statList: data.statsList,
-              skillsList: data.skillsList,
-              isAllSkills: isAllSkills,
-            })}
-            <div className="w-12">
-              Изображение, рассчитанное примерно на 50% пространста справа от скиллов???
-            </div>
+          <div className="flex flex-wrap">
+          {ShowStats({ stats: data.statsList })}
+
+          {ShowSkills({
+            statList: data.statsList,
+            skillsList: data.skillsList,
+            isAllSkills: isAllSkills,
+          })}
           </div>
 
-          <div className="my-2">
-            <div>База блока: {data.blockBase}</div>
-            <div>База уклонения: {data.evasionBase}</div>
-            <div>База атлетики: {data.athleticsBase}</div>
-            <div>База сопротивления магии: {data.spellResistBase}</div>
+          <div className="p-2">{ShowBases({ data: data })}</div>
+
+          <div className="p-2">{ShowInfoAndReward({ data: data })}</div>
+
+          <div className="my-2 p-2 overflow-auto">
+            {ShowAttacks({ creatureAttacks: data.creatureAttacks })}
           </div>
 
-          <div className="my-2">
-            <div>Броня: {data.armor}</div>
-            <div>Регенерация: {data.regeneration}</div>
-            <div>Сопротивления: {data.resistances}</div>
-            <div>Невосприимчивость: {data.immunities}</div>
-            <div>Восприимчивость: {data.vulnerabilities}</div>
-            <div className="flex">
-              Добыча:{" "}
-              {data.creatureReward.map((reward, index) => (
-                <div>{reward.reward.name}, </div>
-              ))}
-            </div>
-            <div>Награда: {data.moneyReward}</div>
+          <div className="my-2 p-2 overflow-auto">
+            {ShowAbilities({ creatureAbilities: data.creatureAbilitys })}
           </div>
 
-          <div className="my-2">
-            {ShowAttacks({creatureAttacks: data.creatureAttacks})}
-          </div>
-
-          <div className="my-2">
-            {ShowAbilities({creatureAbilities: data.creatureAbilitys})}
-          </div>
-
-          <div className="creatureInfo">
+          <div className="creatureInfo p-2">
             <Accordion multiple>
-              <AccordionTab header={"Предрассудки простолюдинов (Образование, Сл " + data.educationSkill + ")"}>
-                <p className="m-0 text-0">
-                  {data.superstitionsInformation}
-                </p>
+              <AccordionTab
+                header={
+                  "Предрассудки простолюдинов (Образование, Сл " +
+                  data.educationSkill +
+                  ")"
+                }
+              >
+                <p className="m-0 text-0">{data.superstitionsInformation}</p>
               </AccordionTab>
-              <AccordionTab header={"Экология и поведение (Монстрология, Сл " + data.monsterLoreSkill + ")"}>
-                <p className="m-0 text-0">
-                  {data.monsterLoreInformation}
-                </p>
+              <AccordionTab
+                header={
+                  "Экология и поведение (Монстрология, Сл " +
+                  data.monsterLoreSkill +
+                  ")"
+                }
+              >
+                <p className="m-0 text-0">{data.monsterLoreInformation}</p>
               </AccordionTab>
-            </Accordion>            
+            </Accordion>
           </div>
-
-          {footerContent}
         </form>
       </div>
     </div>

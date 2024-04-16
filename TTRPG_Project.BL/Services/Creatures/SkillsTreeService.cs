@@ -73,7 +73,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 ThirdRightSkillId = request.ThirdRightSkillId,
                 ThirdRightSkillValue = request.ThirdRightSkillValue,
                 Name = request.Name,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
             };
 
             await _dbContext.SkillsTree.AddAsync(skillsTree);
@@ -108,7 +108,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             skillsTree.ThirdRightSkillId = request.ThirdRightSkillId;
             skillsTree.ThirdRightSkillValue = request.ThirdRightSkillValue;
             skillsTree.Name = request.Name;
-            skillsTree.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            skillsTree.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             skillsTree.UpdateDate = DateTime.Now;
 
 

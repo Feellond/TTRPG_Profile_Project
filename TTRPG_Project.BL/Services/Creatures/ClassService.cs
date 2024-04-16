@@ -60,7 +60,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 Description = request.Description,
                 Energy = request.Energy,
                 Name = request.Name,
-                SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2,
+                SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
             };
 
             await _dbContext.Classes.AddAsync(singleClass);
@@ -77,7 +77,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             singleClass.Description = request.Description;
             singleClass.Energy = request.Energy;
             singleClass.Name = request.Name;
-            singleClass.SourceId = _dbContext.Sources.Where(x => x.Name == request.Source).FirstOrDefault()?.Id ?? 2;
+            singleClass.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             singleClass.UpdateDate = DateTime.Now;
 
             _dbContext.Entry(singleClass).State = EntityState.Modified;
