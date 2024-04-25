@@ -1,5 +1,6 @@
 import { OptionsParamsLoad } from "entities/Interface";
 import { Complexity } from "shared/enums/CreatureEnums";
+import bestiaryService from "shared/services/bestiary.service";
 
 export const ComplexityLoad = ({ setItems }: OptionsParamsLoad) => {
   const complexityKeys = Object.keys(Complexity).filter((v) =>
@@ -10,7 +11,23 @@ export const ComplexityLoad = ({ setItems }: OptionsParamsLoad) => {
     value: Complexity[key],
   }));
   setItems(ITOptions);
-  console.log(ITOptions);
+};
+
+export const RaceLoad = async ({ setItems }: OptionsParamsLoad) => {
+  try {
+    let responce = await bestiaryService.getRaces()
+    if (responce && responce.data) {
+
+      const options = responce.data.races.map((data, index) => ({
+        label: data.name,
+        value: data,
+      }));
+
+      setItems(options);
+    }
+  } catch (error) {
+    console.error("Error fetching skills:", error);
+  }
 };
 
 const ComplexityKeyToRus = (enumValue) => {

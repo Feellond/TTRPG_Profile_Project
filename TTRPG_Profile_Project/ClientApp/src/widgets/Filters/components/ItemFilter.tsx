@@ -19,8 +19,8 @@ const ItemFilter = ({filter, setFilter} : ItemFilterProps) => {
   }, [])
 
   return ( 
-    <div className="grid">
-      <div className="flex flex-column justify-content-center col-4">
+    <div className="flex mb-2 flex-wrap">
+      <div className="flex flex-column justify-content-center mr-3 min-w-full">
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
@@ -31,7 +31,7 @@ const ItemFilter = ({filter, setFilter} : ItemFilterProps) => {
           />
         </span>
       </div>
-      <div className="flex flex-column justify-content-center col-4">
+      <div className="flex flex-column justify-content-center mr-3">
         <ListInput
           id="itemType"
           placeholder="Тип предмета"

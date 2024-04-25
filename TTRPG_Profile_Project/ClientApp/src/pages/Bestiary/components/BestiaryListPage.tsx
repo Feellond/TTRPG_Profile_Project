@@ -29,6 +29,12 @@ const BestiaryListPage = () => {
           if (filter.name) {
             params["name"] = filter.name;
           }
+          if (filter.complexity) {
+            params["complexity"] = filter.complexity;
+          }
+          if (filter.race) {
+            params["race"] = filter.race.name;
+          }
         }
     
         console.log(params);
@@ -37,7 +43,7 @@ const BestiaryListPage = () => {
     
 
     return (
-        <Card style={{minHeight: '500px', width: '1500px', margin: '0 auto' }} >
+        <Card style={{margin: '0 auto' }} >
             <ListShow
                 getParams={getParams}
                 lazyState={lazyState}

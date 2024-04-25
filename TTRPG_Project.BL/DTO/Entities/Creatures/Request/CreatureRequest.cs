@@ -20,16 +20,16 @@ namespace TTRPG_Project.BL.DTO.Creatures.Request
         public int Armor { get; set; } = 0;
         public int Regeneration { get; set; } = 0;
         public int? StatsListId { get; set; }
-        public StatsList? StatsList { get; set; }
+        public StatsList? StatsList { get; set; } = new StatsList();
         public int? SkillsListId { get; set; }
-        public SkillsList? SkillsList { get; set; }
+        public SkillsList? SkillsList { get; set; } = new SkillsList();
         //public List<CreatureEffectListDTO> CreatureEffectList { get; set; } = new();
-        public int EvasionBase { get; set; }
-        public int AthleticsBase { get; set; }
-        public int BlockBase { get; set; }
-        public int SpellResistBase { get; set; }
-        public int Height { get; set; }
-        public float Weight { get; set; }
+        public int EvasionBase { get; set; } = 0;
+        public int AthleticsBase { get; set; } = 0;
+        public int BlockBase { get; set; } = 0;
+        public int SpellResistBase { get; set; } = 0;
+        public int Height { get; set; } = 0;
+        public float Weight { get; set; } = 0;
         public string Vulnerabilities { get; set; } = string.Empty;
         public string Immunities { get; set; } = string.Empty;
         public string Resistances { get; set; } = string.Empty;

@@ -103,10 +103,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("ability")]
-        public async Task<IActionResult> DeleteAbility(int abilityId)
+        [HttpDelete("ability/{Id}")]
+        public async Task<IActionResult> DeleteAbility(int Id)
         {
-            var result = await _abilityService.DeleteAsync(abilityId!);
+            var result = await _abilityService.DeleteAsync(Id!);
             return Ok(result);
         }
 
@@ -156,10 +156,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("attack")]
-        public async Task<IActionResult> DeleteAttack(int attackId)
+        [HttpDelete("attack/{Id}")]
+        public async Task<IActionResult> DeleteAttack(int Id)
         {
-            var result = await _attackService.DeleteAsync(attackId!);
+            var result = await _attackService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -208,10 +208,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("class")]
-        public async Task<IActionResult> DeleteClass(int classId)
+        [HttpDelete("class/{Id}")]
+        public async Task<IActionResult> DeleteClass(int Id)
         {
-            var result = await _classService.DeleteAsync(classId!);
+            var result = await _classService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -244,9 +244,14 @@ namespace TTRPG_Project.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _creatureService.CreateAsync(request);
+                request.SkillsList ??= new SkillsList();
 
+                request.StatsList ??= new StatsList();
+
+                var result = await _creatureService.CreateAsync(request);
                 return Ok(result);
+
+                //return Ok();
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
@@ -269,16 +274,16 @@ namespace TTRPG_Project.Web.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _creatureService.UpdateAsync(request);
-
                 return Ok(result);
+                //return Ok();
             }
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("creature")]
-        public async Task<IActionResult> DeleteCreature(int creatureId)
+        [HttpDelete("creature/{Id}")]
+        public async Task<IActionResult> DeleteCreature([FromRoute] int Id)
         {
-            var result = await _creatureService.DeleteAsync(creatureId!);
+            var result = await _creatureService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -327,10 +332,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("race")]
-        public async Task<IActionResult> DeleteRace(int raceId)
+        [HttpDelete("race/{Id}")]
+        public async Task<IActionResult> DeleteRace(int Id)
         {
-            var result = await _raceService.DeleteAsync(raceId!);
+            var result = await _raceService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -379,10 +384,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("skill")]
-        public async Task<IActionResult> DeleteSkill(int skillId)
+        [HttpDelete("skill/{Id}")]
+        public async Task<IActionResult> DeleteSkill(int Id)
         {
-            var result = await _skillService.DeleteAsync(skillId!);
+            var result = await _skillService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -431,10 +436,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("skillList")]
-        public async Task<IActionResult> DeleteSkillList(int skillListId)
+        [HttpDelete("skillList/{Id}")]
+        public async Task<IActionResult> DeleteSkillList(int Id)
         {
-            var result = await _skillsListService.DeleteAsync(skillListId!);
+            var result = await _skillsListService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -483,10 +488,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("skillTree")]
-        public async Task<IActionResult> DeleteSkillTree(int skillTreeId)
+        [HttpDelete("skillTree/{Id}")]
+        public async Task<IActionResult> DeleteSkillTree(int Id)
         {
-            var result = await _skillsTreeService.DeleteAsync(skillTreeId!);
+            var result = await _skillsTreeService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -535,10 +540,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("stat")]
-        public async Task<IActionResult> DeleteStat(int statId)
+        [HttpDelete("stat/{Id}")]
+        public async Task<IActionResult> DeleteStat(int Id)
         {
-            var result = await _statService.DeleteAsync(statId!);
+            var result = await _statService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion
@@ -587,10 +592,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete("statList")]
-        public async Task<IActionResult> DeleteStatList(int statListId)
+        [HttpDelete("statList/{Id}")]
+        public async Task<IActionResult> DeleteStatList(int Id)
         {
-            var result = await _statsListService.DeleteAsync(statListId!);
+            var result = await _statsListService.DeleteAsync(Id!);
             return Ok(result);
         }
         #endregion

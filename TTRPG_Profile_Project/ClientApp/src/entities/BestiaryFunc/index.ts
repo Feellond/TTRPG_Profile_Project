@@ -1,4 +1,4 @@
 import { ComplexityValueToString } from './components/DrawCreature/DrawCreatureFunctions';
-import { ComplexityLoad } from './components/OptionsLoad';
+import { ComplexityLoad, RaceLoad } from './components/OptionsLoad';
 
-export {ComplexityLoad, ComplexityValueToString}
+export {ComplexityLoad, ComplexityValueToString, RaceLoad}

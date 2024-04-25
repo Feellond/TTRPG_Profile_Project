@@ -44,6 +44,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             var creatures = await _dbContext.Creatures.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(r => r.Race)
+                    .ThenInclude(r => r.Source)
                 .Include(stats => stats.StatsList)
                 .Include(skills => skills.SkillsList)
                 .Include(a => a.CreatureAttacks)
@@ -184,7 +185,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             return responce;
         }
 
-        public async Task<bool> CreateAsync(CreatureRequest request)
+        public async Task<Creature> CreateAsync(CreatureRequest request)
         {
             try
             {
@@ -234,10 +235,12 @@ namespace TTRPG_Project.BL.Services.Creatures
                     Name = request.Name,
                     RaceId = request.RaceId ?? request.Race?.Id,
                     Regeneration = request.Regeneration,
-                    SkillsListId = request.SkillsListId ?? request.SkillsList?.Id,
+                    //SkillsListId = request.SkillsListId ?? request.SkillsList?.Id,
+                    SkillsList = request.SkillsList,
                     SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                     SpellResistBase = request.SpellResistBase,
-                    StatsListId = request.StatsListId ?? request.StatsList?.Id,
+                    //StatsListId = request.StatsListId ?? request.StatsList?.Id,
+                    StatsList = request.StatsList,
                     SuperstitionsInformation = request.SuperstitionsInformation,
                     Weight = request.Weight,
                     ImageFileName = request.ImageFileName,
@@ -258,7 +261,11 @@ namespace TTRPG_Project.BL.Services.Creatures
                 //    }
                 //}
 
-                return await SaveAsync();
+                var result = await SaveAsync();
+                if (result)
+                    return creature;
+                else
+                    throw new CustomException("Ошибка создания существа!");
             }
             catch (Exception ex)
             {
@@ -369,7 +376,17 @@ namespace TTRPG_Project.BL.Services.Creatures
             if (creature is null)
                 throw new CustomException("Существо не найдено!");
 
+            var skillList = await _dbContext.SkillsList.FindAsync(creature.SkillsListId);
+            if (skillList is null)
+                throw new CustomException("Список способностей не найден!");
+
+            var statList = await _dbContext.StatsList.FindAsync(creature.StatsListId);
+            if (statList is null)
+                throw new CustomException("Список статов не найден!");
+
             var deleteFilePath = creature.ImageFileName;
+            _dbContext.Remove(skillList);
+            _dbContext.Remove(statList);
             _dbContext.Remove(creature);
             var saved = await SaveAsync();
 

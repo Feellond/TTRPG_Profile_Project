@@ -59,3 +59,24 @@ p {
   border-radius: 3px;
 }
 
+.p-onlytext {
+  background-color: transparent;
+  color: var(--color-text-main);
+  border-color: transparent
+}
+
+.p-rounded {
+  border-radius: 50%;
+}
+
+// .p-button {
+//   background-color: transparent;
+//   color: var(--color-text-main);
+//   border-color: transparent;
+// }
+
+.p-button:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px var(--color-border-1);
+}

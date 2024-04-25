@@ -214,7 +214,7 @@ const drawSubstanceType = (substanceType: number, amount: number) => {
 
 const drawArmor = (data: ItemDTO) => {
   return (
-    <li className="stats flex flex-row py-2">
+    <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Тип брони">
         <div>Тип брони</div>
         <div>{drawArmorType(data)}</div>
@@ -241,7 +241,7 @@ const drawArmor = (data: ItemDTO) => {
 
 const drawFormula = (data: ItemDTO) => {
   return (
-    <li className="stats flex flex-row py-2">
+    <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Сложность">
         <div>СЛ</div>
         <div>{data.complexity}</div>
@@ -270,7 +270,7 @@ const drawFormula = (data: ItemDTO) => {
 
 const drawBlueprint = (data: ItemDTO) => {
   return (
-    <li className="stats flex flex-row py-2">
+    <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Сложность">
         <div>СЛ</div>
         <div>{data.complexity}</div>
@@ -303,7 +303,7 @@ const drawBlueprint = (data: ItemDTO) => {
 
 const drawComponent = (data: ItemDTO) => {
   return (
-    <li className="stats flex flex-row py-2">
+    <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Местность">
         <div>Местность</div>
         <div>{data.whereToFind}</div>
@@ -330,7 +330,7 @@ const drawComponent = (data: ItemDTO) => {
 
 const drawItem = (data: ItemDTO) => {
   return (
-    <li className="stats flex flex-row py-2">
+    <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
         <div>{drawStealthType(data)}</div>
@@ -341,7 +341,7 @@ const drawItem = (data: ItemDTO) => {
 
 const drawTool = (data: ItemDTO) => {
   return (
-    <li className="stats flex flex-row py-2">
+    <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
         <div>{drawStealthType(data)}</div>
@@ -352,7 +352,7 @@ const drawTool = (data: ItemDTO) => {
 
 const drawWeapon = (data: ItemDTO) => {
   return (
-    <li className="stats flex flex-row py-2">
+    <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Точность">
         <div>Точ</div>
         <div>{data.accuracy}</div>

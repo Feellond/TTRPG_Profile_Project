@@ -6,6 +6,16 @@ interface IShowBase {
 }
 
 export const ShowBases = ({ data }: IShowBase) => {
+  /*
+  tooltip={
+    "Текущее значение: " +
+    String(getValues("statsList.intellectValue")) +
+    " + " +
+     String(getValues("skillsList.educationValue")) +
+     " = " +
+     String(getValues("statsList.intellectValue") + getValues("skillsList.educationValue"))
+    }
+  */
   return (
     <div className="my-2">
       <div>База блока: {data.blockBase}</div>

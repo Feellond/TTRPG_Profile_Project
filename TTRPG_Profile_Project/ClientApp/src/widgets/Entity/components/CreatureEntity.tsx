@@ -1,4 +1,8 @@
-import { ComplexityValueToString } from "entities/BestiaryFunc";
+import {
+  ComplexityLoad,
+  ComplexityValueToString,
+  RaceLoad,
+} from "entities/BestiaryFunc";
 import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
@@ -15,6 +19,14 @@ import { ShowBases } from "./ShowBases";
 import { ShowInfoAndReward } from "./ShowInfoAndReward";
 import generalService from "shared/services/general.service";
 import bestiaryService from "shared/services/bestiary.service";
+import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import { SelectItem } from "primereact/selectitem";
+import { SourceOptionsLoad } from "entities/GeneralFunc";
+import { Editor, EditorTextChangeEvent } from "primereact/editor";
+import {
+  InputNumber,
+  InputNumberValueChangeEvent,
+} from "primereact/inputnumber";
 
 interface ICreatureEntity {
   data: ICreature;
@@ -24,8 +36,16 @@ interface ICreatureEntity {
 
 const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [isEducationEdit, setIsEducationEdit] = useState<boolean>(false);
+  const [isMonsterLoreEdit, setIsMonsterLoreEdit] = useState<boolean>(false);
+  const [activeIndex, setActiveIndex] = useState<number | number[]>();
+
   const [isAllSkills, setIsAllSkills] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
+
+  const [complexityOptions, setComplexityOptions] = useState<SelectItem[]>([]);
+  const [raceOptions, setRaceOptions] = useState<SelectItem[]>([]);
+  const [sourceOptions, setSourceOptions] = useState<SelectItem[]>([]);
 
   const {
     register,
@@ -35,6 +55,12 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  useEffect(() => {
+    ComplexityLoad({ setItems: setComplexityOptions });
+    RaceLoad({ setItems: setRaceOptions });
+    SourceOptionsLoad({ setItems: setSourceOptions });
+  }, []);
 
   useEffect(() => {
     setValues();
@@ -80,51 +106,6 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   const SaveChanges = () => {
     let dialogData = getValues();
     console.log(dialogData);
-
-    // let formData = new FormData();
-    // formData.append("id", dialogData.id);
-    // formData.append("name", dialogData.name);
-    // formData.append("description", dialogData.description);
-    // formData.append("source", dialogData.source);
-    // formData.append("race", dialogData.race);
-    // formData.append("additionalInformation", dialogData.additionalInformation);
-    // formData.append("educationSkill", dialogData.educationSkill);
-    // formData.append(
-    //   "superstitionsInformation",
-    //   dialogData.superstitionsInformation
-    // );
-    // formData.append("monsterLoreSkill", dialogData.monsterLoreSkill);
-    // formData.append(
-    //   "monsterLoreInformation",
-    //   dialogData.monsterLoreInformation
-    // );
-    // formData.append("complexity", dialogData.complexity);
-    // formData.append("moneyReward", dialogData.moneyReward);
-    // formData.append("armor", dialogData.armor);
-    // formData.append("regeneration", dialogData.regeneration);
-    // formData.append("statsList", dialogData.statsList);
-
-    // Object.keys(dialogData.skillsList).forEach((key) => {
-    //   formData.append(`skillsList.${key}`, dialogData.skillsList[key]);
-    // });
-    // //formData.append("skillsList", JSON.stringify(dialogData.skillsList));
-    // formData.append("evasionBase", dialogData.evasionBase);
-    // formData.append("athleticsBase", dialogData.athleticsBase);
-    // formData.append("blockBase", dialogData.blockBase);
-    // formData.append("spellResistBase", dialogData.spellResistBase);
-    // formData.append("height", dialogData.height);
-    // formData.append("weight", dialogData.weight);
-    // formData.append("habitatPlace", dialogData.habitatPlace);
-    // formData.append("resistances", dialogData.resistances);
-    // formData.append("vulnerabilities", dialogData.vulnerabilities);
-    // formData.append("immunities", dialogData.immunities);
-    // formData.append("intellect", dialogData.intellect);
-    // formData.append("groupSize", dialogData.groupSize);
-    // formData.append("creatureAttacks", dialogData.creatureAttacks);
-    // formData.append("creatureAbilitys", dialogData.creatureAbilitys);
-    // formData.append("creatureReward", dialogData.creatureReward);
-    // formData.append("imageFileName", dialogData.imageFileName);
-    // formData.append("file", file);
 
     let dataOnSave: ICreature = {
       id: dialogData.id,
@@ -197,6 +178,10 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
   const onCancel = () => {
     setIsEditMode(false);
+
+    ///Для отладки
+    let dialogData = getValues();
+    console.log(dialogData);
   };
 
   const handleChange = (e) => {
@@ -230,11 +215,15 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
   return (
     <div className="w-full" style={{ marginTop: "-20px" }}>
-      <Button
-        label="Изменить"
-        onClick={() => setIsEditMode(!isEditMode)}
-        className="p-button-text"
-      />
+      <div className="flex">
+        <Button
+          label="Изменить"
+          onClick={() => setIsEditMode(!isEditMode)}
+          className="p-button-text p-button-site"
+          visible={!isEditMode}
+        />
+        {footerContent}
+      </div>
       <div className="card block bg-bluegray-50 mb-4 text-0">
         <form className="p-2 creatureForm">
           {!isEditMode ? (
@@ -265,20 +254,68 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                 />
                 <label className="text-0">Наименование</label>
               </span>
-              {footerContent}
             </div>
           )}
 
           <ul className="p-2 params">
-            <li>
-              <i>{data.race?.name}, </i>
-              <i>{ComplexityValueToString(data.complexity)}</i>
-            </li>
+            {!isEditMode ? (
+              <li>
+                <i>{data.race?.name}, </i>
+                <i>{ComplexityValueToString(data.complexity)}</i>
+              </li>
+            ) : (
+              <div className="flex flex-wrap mt-3">
+                <div className="field flex flex-column mr-3">
+                  <span className="p-float-label">
+                    <Controller
+                      name="race"
+                      control={control}
+                      render={({ field }) => (
+                        <>
+                          <Dropdown
+                            id={field.name}
+                            value={field.value}
+                            onChange={(e: DropdownChangeEvent) => {
+                              field.onChange(e.value);
+                            }}
+                            optionLabel="label"
+                            options={raceOptions}
+                          />
+                        </>
+                      )}
+                    />
+                    <label className="text-0">Раса</label>
+                  </span>
+                </div>
+                <div className="field flex flex-column mr-3">
+                  <span className="p-float-label">
+                    <Controller
+                      name="complexity"
+                      control={control}
+                      render={({ field }) => (
+                        <>
+                          <Dropdown
+                            id={field.name}
+                            value={field.value}
+                            onChange={(e: DropdownChangeEvent) => {
+                              field.onChange(e.value);
+                            }}
+                            optionLabel="label"
+                            options={complexityOptions}
+                          />
+                        </>
+                      )}
+                    />
+                    <label className="text-0">Сложность</label>
+                  </span>
+                </div>
+              </div>
+            )}
           </ul>
 
           <div className="p-2 creatureImage">
-            {data.imageFileName !== null ? (
-              <div className="mb-4">
+            {data.imageFileName !== null && data.imageFileName !== "" ? (
+              <div className="mb-2">
                 <img
                   src={"Images/Creature/" + data.imageFileName}
                   alt="Изображение"
@@ -287,7 +324,11 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
             ) : (
               <div></div>
             )}
-            <input type="file" onChange={(e) => onFileChange(e)} />
+            {!isEditMode ? (
+              <div></div>
+            ) : (
+              <input type="file" onChange={(e) => onFileChange(e)} />
+            )}
           </div>
 
           <div className="pl-2 flex">
@@ -302,13 +343,13 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
           </div>
 
           <div className="flex flex-wrap">
-          {ShowStats({ stats: data.statsList })}
+            {ShowStats({ stats: data.statsList })}
 
-          {ShowSkills({
-            statList: data.statsList,
-            skillsList: data.skillsList,
-            isAllSkills: isAllSkills,
-          })}
+            {ShowSkills({
+              statList: data.statsList,
+              skillsList: data.skillsList,
+              isAllSkills: isAllSkills,
+            })}
           </div>
 
           <div className="p-2">{ShowBases({ data: data })}</div>
@@ -323,25 +364,134 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
             {ShowAbilities({ creatureAbilities: data.creatureAbilitys })}
           </div>
 
+          <div>
+            <Button
+              icon="pi pi-pencil"
+              className="ml-auto p-onlytext p-rounded"
+              onClick={(e) => {
+                setIsEducationEdit(!isEducationEdit);
+                setIsMonsterLoreEdit(!isMonsterLoreEdit);
+
+                if (!isEducationEdit) setActiveIndex([0, 1]);
+                else setActiveIndex([]);
+
+                console.log(activeIndex);
+              }}
+              type="button"
+            />
+            {isEducationEdit ? (
+              <Controller
+                name="educationSkill"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <InputNumber
+                      id={field.name}
+                      value={field.value}
+                      onValueChange={(e: InputNumberValueChangeEvent) => {
+                        field.onChange(e.value);
+                      }}
+                      minFractionDigits={0}
+                      maxFractionDigits={0}
+                      min={0}
+                      max={9999}
+                    />
+                  </>
+                )}
+              />
+            ) : (
+              <div></div>
+            )}
+
+            {isMonsterLoreEdit ? (
+              <Controller
+                name="monsterLoreSkill"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <InputNumber
+                      id={field.name}
+                      value={field.value}
+                      onValueChange={(e: InputNumberValueChangeEvent) => {
+                        field.onChange(e.value);
+                      }}
+                      minFractionDigits={0}
+                      maxFractionDigits={0}
+                      min={0}
+                      max={9999}
+                    />
+                  </>
+                )}
+              />
+            ) : (
+              <div></div>
+            )}
+          </div>
+
+
           <div className="creatureInfo p-2">
-            <Accordion multiple>
-              <AccordionTab
+            <Accordion
+              multiple
+              activeIndex={activeIndex}
+              onTabChange={(e) => {
+                setActiveIndex(e.index);
+              }}
+            >
+              <AccordionTab disabled={isEducationEdit}
                 header={
-                  "Предрассудки простолюдинов (Образование, Сл " +
-                  data.educationSkill +
-                  ")"
+                  <span className="flex align-items-center gap-2 w-full">
+                    Предрассудки простолюдинов (Образование, Сл{" "}
+                    {data.educationSkill})
+                  </span>
                 }
               >
-                <p className="m-0 text-0">{data.superstitionsInformation}</p>
+                {!isEducationEdit ? (
+                  <p className="m-0 text-0">{data.superstitionsInformation}</p>
+                ) : (
+                  <Controller
+                    name="superstitionsInformation"
+                    control={control}
+                    render={({ field }) => (
+                      <>
+                        <Editor
+                          id={field.name}
+                          value={field.value}
+                          onTextChange={(e: EditorTextChangeEvent) =>
+                            field.onChange(e.htmlValue)
+                          }
+                        />
+                      </>
+                    )}
+                  />
+                )}
               </AccordionTab>
-              <AccordionTab
+              <AccordionTab disabled={isMonsterLoreEdit}
                 header={
-                  "Экология и поведение (Монстрология, Сл " +
-                  data.monsterLoreSkill +
-                  ")"
+                  <span className="flex align-items-center gap-2 w-full">
+                    Экология и поведение (Монстрология, Сл{" "}
+                    {data.monsterLoreSkill})
+                  </span>
                 }
               >
-                <p className="m-0 text-0">{data.monsterLoreInformation}</p>
+                {!isMonsterLoreEdit ? (
+                  <p className="m-0 text-0">{data.monsterLoreInformation}</p>
+                ) : (
+                  <Controller
+                    name="monsterLoreInformation"
+                    control={control}
+                    render={({ field }) => (
+                      <>
+                        <Editor
+                          id={field.name}
+                          value={field.value}
+                          onTextChange={(e: EditorTextChangeEvent) =>
+                            field.onChange(e.htmlValue)
+                          }
+                        />
+                      </>
+                    )}
+                  />
+                )}
               </AccordionTab>
             </Accordion>
           </div>

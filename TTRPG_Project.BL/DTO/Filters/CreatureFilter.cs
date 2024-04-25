@@ -18,6 +18,8 @@ namespace TTRPG_Project.BL.DTO.Filters
         public int PageSize { get; set; }
 
         public string? Name { get; set; }
+        public int? Complexity { get; set; }
+        public string? Race { get; set; }
         public SortOrder Order { get; set; } = SortOrder.Descending; //Enum
 
         public void InitFilter()
@@ -26,6 +28,22 @@ namespace TTRPG_Project.BL.DTO.Filters
             {
                 Expression<Func<CreatureDTO, bool>> filter = entity =>
                     entity.Name.ToLower().Contains(Name.ToLower());
+
+                whereExpression.Add(filter);
+            }
+
+            if (Complexity != null)
+            {
+                Expression<Func<CreatureDTO, bool>> filter = entity =>
+                    entity.Complexity.Equals(Complexity);
+
+                whereExpression.Add(filter);
+            }
+
+            if (Race != null)
+            {
+                Expression<Func<CreatureDTO, bool>> filter = entity =>
+                    entity.Race.Name.Equals(Race);
 
                 whereExpression.Add(filter);
             }

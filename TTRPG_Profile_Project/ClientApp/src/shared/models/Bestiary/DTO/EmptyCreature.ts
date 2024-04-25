@@ -60,7 +60,7 @@ export const emptyClass: IClass = {
 export const emptyCreature: ICreature = {
   id: 0,
   name: null,
-  description: null,
+  description: "",
   source: null,
   race: null,
   additionalInformation: "",

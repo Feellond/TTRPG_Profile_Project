@@ -11,8 +11,12 @@ interface DeleteItemShortDialogProps {
   onHide: () => void;
 }
 
-const DeleteItemDialog = ({ data, visible, deleteItem, onHide }: DeleteItemShortDialogProps) => {
-
+const DeleteItemDialog = ({
+  data,
+  visible,
+  deleteItem,
+  onHide,
+}: DeleteItemShortDialogProps) => {
   const deleteFooter = (id: number, itemType: number) => {
     return (
       <div>
@@ -42,8 +46,8 @@ const DeleteItemDialog = ({ data, visible, deleteItem, onHide }: DeleteItemShort
         footer={deleteFooter(data.id, data.itemType)}
       >
         <p>
-          Вы уверены, что хотите удалить предмет {drawItemEntityType(data)} с id ={" "}
-          {data.id}?
+          Вы уверены, что хотите удалить предмет {drawItemEntityType(data)} с id
+          = {data.id}?
         </p>
       </Dialog>
     </div>

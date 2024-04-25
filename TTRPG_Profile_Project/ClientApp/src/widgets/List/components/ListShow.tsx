@@ -58,7 +58,6 @@ const ListShow = ({
   setFilter,
 }: IListShow) => {
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
-
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
   const [editDialogHeader, setEditDialogHeader] = useState<string>("");
 
@@ -66,23 +65,17 @@ const ListShow = ({
     if ("itemType" in data) {
       // Переменная data имеет тип ItemDTO
       return (
-        <div>
           <ShowItem data={data} />
-        </div>
       );
     } else if ("spellLevel" in data) {
       // Переменная data имеет тип SpellDTO
       return (
-        <div>
           <ShowSpell />
-        </div>
       );
     } else {
       // Переменная data имеет тип BestiaryDTO
       return (
-        <div>
           <ShowBestiary data={data}/>
-        </div>
       );
     }
   };
@@ -119,8 +112,18 @@ const ListShow = ({
       // Переменная data имеет тип BestiaryDTO
       return (
         <div>
-          <DeleteBestiaryDialog />
-          <EditBestiaryDialog />
+          <DeleteBestiaryDialog 
+          data={entity}
+          visible={deleteDialogVisible}
+          deleteCreature={deleteEntity}
+          onHide={hideDialog}
+          />
+          <EditBestiaryDialog 
+          data={entity}
+          header={editDialogHeader}
+          visible={editDialogVisible}
+          onSave={fetchData}
+          onHide={hideDialog}/>
         </div>
       );
     }
@@ -256,7 +259,11 @@ const ListShow = ({
       <Toast ref={toast} />
       {showDialogs()}
       <div>
-        <Button label="Создать предмет" onClick={(e) => showCreateDialog()} />
+        <Button
+          label="Создать предмет"
+          className="p-button-site"
+          onClick={(e) => showCreateDialog()}
+        />
       </div>
       <ShowFilter filter={filter} setFilter={setFilter} />
       {entityList !== null && entityList !== undefined ? (
@@ -272,14 +279,22 @@ const ListShow = ({
                       <Button
                         label="Редактировать предмет"
                         onClick={(e) => showEditDialog(it.id)}
+                        className="p-button-site"
                       />
                       <Button
                         label="Удалить предмет"
                         onClick={(e) => showDeleteDialog(it.id)}
+                        className="p-button-site"
                       />
                     </div>
                   ) : (
-                    <div></div>
+                    <div>
+                      <Button
+                        label="Удалить предмет"
+                        onClick={(e) => showDeleteDialog(it.id)}
+                        className="p-button-site"
+                      />
+                    </div>
                   )}
                 </div>
               </div>

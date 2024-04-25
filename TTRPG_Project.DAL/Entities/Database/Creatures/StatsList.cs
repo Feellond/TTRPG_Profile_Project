@@ -6,61 +6,61 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     [Table("StatsList")]
     public class StatsList : EntityBase
     {
-        public int IntellectId { get; set; }
-        public int IntellectValue { get; set; }
+        public int IntellectId { get; set; } = 1;
+        public int IntellectValue { get; set; } = 0;
 
-        public int ReactionId { get; set; }
-        public int ReactionValue { get; set; }
+        public int ReactionId { get; set; } = 2;
+        public int ReactionValue { get; set; } = 0;
 
-        public int DexterityId { get; set; }
-        public int DexterityValue { get; set; }
+        public int DexterityId { get; set; } = 3;
+        public int DexterityValue { get; set; } = 0;
 
-        public int ConstitutionId { get; set; }
-        public int ConstitutionValue { get; set; }
+        public int ConstitutionId { get; set; } = 4;
+        public int ConstitutionValue { get; set; } = 0;
 
-        public int SpeedId { get; set; }
-        public int SpeedValue { get; set; }
+        public int SpeedId { get; set; } = 5;
+        public int SpeedValue { get; set; } = 0;
 
-        public int EmpathyId { get; set; }
-        public int EmpathyValue { get; set; }
+        public int EmpathyId { get; set; } = 6;
+        public int EmpathyValue { get; set; } = 0;
 
-        public int CraftsmanshipId { get; set; }
-        public int CraftsmanshipValue { get; set; }
+        public int CraftsmanshipId { get; set; } = 7;
+        public int CraftsmanshipValue { get; set; } = 0;
 
-        public int WillpowerId { get; set; }
-        public int WillpowerValue { get; set; }
+        public int WillpowerId { get; set; } = 8;
+        public int WillpowerValue { get; set; } = 0;
 
-        public int LuckId { get; set; }
-        public int LuckValue { get; set; }
+        public int LuckId { get; set; } = 9;
+        public int LuckValue { get; set; } = 0;
 
-        public int EnergyId { get; set; }
-        public int EnergyValue { get; set; }
+        public int EnergyId { get; set; } = 10;
+        public int EnergyValue { get; set; } = 0;
 
-        public int ResilienceId { get; set; }
-        public int ResilienceValue { get; set; }
+        public int ResilienceId { get; set; } = 11;
+        public int ResilienceValue { get; set; } = 0;
 
-        public int RunningId { get; set; }
-        public int RunningValue { get; set; }
+        public int RunningId { get; set; } = 12;
+        public int RunningValue { get; set; } = 0;
 
-        public int JumpingId { get; set; }
-        public int JumpingValue { get; set; }
+        public int JumpingId { get; set; } = 13;
+        public int JumpingValue { get; set; } = 0;
 
-        public int HealthPointsId { get; set; }
-        public int HealthPointsValue { get; set; }
+        public int HealthPointsId { get; set; } = 14;
+        public int HealthPointsValue { get; set; } = 0;
 
-        public int EnduranceId { get; set; }
-        public int EnduranceValue { get; set; }
+        public int EnduranceId { get; set; } = 15;
+        public int EnduranceValue { get; set; } = 0;
 
-        public int WeightId { get; set; }
-        public int WeightValue { get; set; }
+        public int WeightId { get; set; } = 16;
+        public int WeightValue { get; set; } = 0;
 
-        public int RestId { get; set; }
-        public int RestValue { get; set; }
+        public int RestId { get; set; } = 17;
+        public int RestValue { get; set; } = 0;
 
-        public int HandStrikeId { get; set; }
-        public int HandStrikeValue { get; set; }
+        public int HandStrikeId { get; set; } = 18;
+        public int HandStrikeValue { get; set; } = 0;
 
-        public int KickId { get; set; }
-        public int KickValue { get; set; }
+        public int KickId { get; set; } = 19;
+        public int KickValue { get; set; } = 0;
     }
 }

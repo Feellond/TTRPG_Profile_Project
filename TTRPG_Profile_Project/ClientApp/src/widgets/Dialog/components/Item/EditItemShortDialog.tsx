@@ -299,7 +299,6 @@ const EditItemShortDialog = ({
           </div>
           <div className="field flex flex-column col-3">
             <span className="p-float-label">
-              <label>Выберите тип предмета</label>
               <Controller
                 name="itemType"
                 control={control}
