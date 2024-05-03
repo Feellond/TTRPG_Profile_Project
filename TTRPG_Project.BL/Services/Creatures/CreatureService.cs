@@ -121,6 +121,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Where(x => x.Id == id)
                 .Include(s => s.Source)
                 .Include(r => r.Race)
+                    .ThenInclude(s => s.Source)
                 .Include(stats => stats.StatsList)
                 .Include(skills => skills.SkillsList)
                 .Include(a => a.CreatureAttacks)

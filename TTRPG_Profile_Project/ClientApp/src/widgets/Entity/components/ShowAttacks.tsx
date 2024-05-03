@@ -1,36 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { ICreatureAttack } from "shared/models";
+import { Control, FieldValues, UseFormGetValues } from "react-hook-form";
+import { ICreature, ICreatureAttack, ISkillsList, IStatsList } from "shared/models";
 
 interface IShowAttacks {
-  creatureAttacks: ICreatureAttack[];
+  //creatureAttacks: ICreatureAttack[];
+  statList: IStatsList | null;
+  skillsList: ISkillsList | null;
+  data: ICreature | null;
+  control: Control<FieldValues, any>;
+  getValues: UseFormGetValues<FieldValues>;
+  isEditMode: boolean;  
 }
 
-export const ShowAttacks = ({ creatureAttacks }: IShowAttacks) => {
+export const ShowAttacks = ({
+  statList,
+  skillsList,
+  data,
+  control,
+  getValues,
+  isEditMode,
+}: IShowAttacks) => {
   const [width, setWidth] = useState(window.innerWidth);
+  const [creatureAttacks, setCreatureAttacks] = useState<ICreatureAttack[]>([]);
+
+  const fetchData = () => {
+    let getCreatureAttacks = getValues("creatureAttacks");
+    setCreatureAttacks(getCreatureAttacks);
+  }
 
   useEffect(() => {
     const handleResize = (event) => {
       setWidth(event.target.innerWidth);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  return creatureAttacks.length > 0 ? (
+  useEffect(() => {
+    fetchData();
+  }, [data])
+
+  return creatureAttacks?.length > 0 ? (
     <div className="creatureAttacks">
       <p>Атаки:</p>
       <div>
         <table className="w-full">
           <thead>
-            <th>{width <= 750 ? ("Наз") : ("Наименование")}</th>
-            <th>{width <= 750 ? ("Осн") : ("Основа")}</th>
+            <th>{width <= 750 ? "Наз" : "Наименование"}</th>
+            <th>{width <= 750 ? "Осн" : "Основа"}</th>
             <th>Тип</th>
-            <th>{width <= 750 ? ("Ур") : ("Урон")}</th>
-            <th>{width <= 750 ? ("Над") : ("Надежность")}</th>
-            <th>{width <= 750 ? ("Дал") : ("Дальность")}</th>
-            <th>{width <= 750 ? ("Эфф") : ("Эффекты")}</th>
+            <th>{width <= 750 ? "Ур" : "Урон"}</th>
+            <th>{width <= 750 ? "Над" : "Надежность"}</th>
+            <th>{width <= 750 ? "Дал" : "Дальность"}</th>
+            <th>{width <= 750 ? "Эфф" : "Эффекты"}</th>
             <th>СА</th>
           </thead>
           <tbody>

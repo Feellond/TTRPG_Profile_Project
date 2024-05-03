@@ -42,16 +42,15 @@ const SourceOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
     try {
         let responce = await generalService.sourceListLoad();
         if (responce && responce.data) {
-            console.log("Source responce data:");
-            console.log(responce.data);
+            // console.log("Source responce data:");
+            // console.log(responce.data);
     
           const options = responce.data.map((data, index) => ({
             label: data.name,
             value: data,
           }));
     
-          console.log("Source options:");
-          console.log(options);
+          console.log("Source options:", options);
     
           setItems(options);
         }

@@ -23,6 +23,7 @@ export const RaceLoad = async ({ setItems }: OptionsParamsLoad) => {
         value: data,
       }));
 
+      console.log("race options:", options);
       setItems(options);
     }
   } catch (error) {

@@ -1,12 +1,40 @@
-import React from "react";
-import { ICreatureAbilitys } from "shared/models";
+import React, { useEffect, useState } from "react";
+import { Control, FieldValues, UseFormGetValues } from "react-hook-form";
+import { ICreature, ICreatureAbilitys, ISkillsList, IStatsList } from "shared/models";
 
 interface IShowAbilities {
-  creatureAbilities: ICreatureAbilitys[];
+  //creatureAbilities: ICreatureAbilitys[];
+  statList: IStatsList | null;
+  skillsList: ISkillsList | null;
+  data: ICreature | null;
+  control: Control<FieldValues, any>;
+  getValues: UseFormGetValues<FieldValues>;
+  isEditMode: boolean;  
 }
 
-export const ShowAbilities = ({ creatureAbilities }: IShowAbilities) => {
-  return creatureAbilities.length > 0 ? (
+export const ShowAbilities = ({
+  statList,
+  skillsList,
+  data,
+  control,
+  getValues,
+  isEditMode,
+}: IShowAbilities) => {
+  const [creatureAbilities, setCreatureAbilities] = useState<
+    ICreatureAbilitys[]
+  >([]);
+
+  const fetchData = () => {
+    let getCreatureAbilities: ICreatureAbilitys[] =
+      getValues("creatureAbilities");
+    setCreatureAbilities(getCreatureAbilities);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [data]);
+
+  return creatureAbilities?.length > 0 ? (
     <div className="creatureSkills">
       <p>Способности:</p>
       <table className="w-full">

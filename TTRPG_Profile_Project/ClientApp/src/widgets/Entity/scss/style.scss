@@ -28,38 +28,41 @@
     background-color: white;
 }
 
-.creatureAttacks, .creatureSkills, .showSkills {
-    table {
-        table-layout: fixed;
-        //width: 100%;
-        border-collapse: collapse;
-        border: 1px solid black;
-      }
+.creatureAttacks,
+.creatureSkills,
+.showSkills {
+  table {
+    table-layout: fixed;
+    //width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+  }
 
-      thead th {
-        text-align: center;
-      }
-      
-      thead th:nth-child(1) {
-        width: 20%;
-      }
-      
-      th,
-      td {
-        padding: 5px;
-      }
+  thead th {
+    text-align: center;
+  }
 
-      tbody td {
-        text-align: center;
-      }
+  thead th:nth-child(1) {
+    width: 20%;
+  }
 
-      tbody tr:nth-child(odd) {
-        background-color: var(--bluegray-100);;
-      }
-      
-      tbody tr:nth-child(even) {
-        //background-color: #e495e4;
-      }
+  th,
+  td {
+    padding: 5px;
+  }
+
+  tbody td {
+    text-align: center;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: var(--bluegray-100);
+    ;
+  }
+
+  tbody tr:nth-child(even) {
+    //background-color: #e495e4;
+  }
 }
 
 .creatureAttacks {
@@ -94,5 +97,12 @@
     @media (max-width: 400px) {
       max-width: 200px;
     }
+  }
+}
+
+.statList, .skillsList, .baseList, .infoAndRewardList {
+  input {
+    padding: 2px;
+    width: 35px;
   }
 }

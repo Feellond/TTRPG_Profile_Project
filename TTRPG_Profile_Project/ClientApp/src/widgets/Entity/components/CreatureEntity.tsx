@@ -8,8 +8,8 @@ import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ICreature } from "shared/models";
-import { ShowSkills } from "./ShowSkills";
+import { ICreature, ISkillsList, IStatsList } from "shared/models";
+import { ShowSkills } from "./ShowSkills/ShowSkills";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import "../scss/style.scss";
 import { ShowAttacks } from "./ShowAttacks";
@@ -39,6 +39,9 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   const [isEducationEdit, setIsEducationEdit] = useState<boolean>(false);
   const [isMonsterLoreEdit, setIsMonsterLoreEdit] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number | number[]>();
+
+  const [statList, setStatList] = useState<IStatsList>(null);
+  const [skillsList, setSkillsList] = useState<ISkillsList>(null);
 
   const [isAllSkills, setIsAllSkills] = useState<boolean>(false);
   const [file, setFile] = useState<any>(null);
@@ -101,6 +104,11 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
     setValue("creatureAbilitys", data.creatureAbilitys);
     setValue("creatureReward", data.creatureReward);
     setValue("imageFileName", data.imageFileName);
+
+    console.log("getValues:", getValues());
+
+    setStatList(data.statsList);
+    setSkillsList(data.skillsList);
   };
 
   const SaveChanges = () => {
@@ -178,10 +186,6 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
   const onCancel = () => {
     setIsEditMode(false);
-
-    ///Для отладки
-    let dialogData = getValues();
-    console.log(dialogData);
   };
 
   const handleChange = (e) => {
@@ -343,25 +347,67 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
           </div>
 
           <div className="flex flex-wrap">
-            {ShowStats({ stats: data.statsList })}
+            <ShowStats
+              statList={statList}
+              setStatList={setStatList}
+              data={data}
+              isEditMode={isEditMode}
+              control={control}
+              getValues={getValues}
+            />
 
-            {ShowSkills({
-              statList: data.statsList,
-              skillsList: data.skillsList,
-              isAllSkills: isAllSkills,
-            })}
+            <ShowSkills
+              statList={statList}
+              skillsList={skillsList}
+              setSkillsList={setSkillsList}
+              data={data}
+              isAllSkills={isAllSkills}
+              control={control}
+              getValues={getValues}
+              isEditMode={isEditMode}
+            />
           </div>
 
-          <div className="p-2">{ShowBases({ data: data })}</div>
+          <div className="p-2">
+            <ShowBases
+              statList={statList}
+              skillsList={skillsList}
+              data={data}
+              control={control}
+              getValues={getValues}
+              isEditMode={isEditMode}
+            />
+          </div>
 
-          <div className="p-2">{ShowInfoAndReward({ data: data })}</div>
-
-          <div className="my-2 p-2 overflow-auto">
-            {ShowAttacks({ creatureAttacks: data.creatureAttacks })}
+          <div className="p-2">
+            <ShowInfoAndReward
+              data={data}
+              control={control}
+              getValues={getValues}
+              isEditMode={isEditMode}
+            />
           </div>
 
           <div className="my-2 p-2 overflow-auto">
-            {ShowAbilities({ creatureAbilities: data.creatureAbilitys })}
+            <ShowAttacks
+              skillsList={skillsList}
+              statList={statList}
+              data={data}
+              control={control}
+              getValues={getValues}
+              isEditMode={isEditMode}
+            />
+          </div>
+
+          <div className="my-2 p-2 overflow-auto">
+            <ShowAbilities
+              skillsList={skillsList}
+              statList={statList}
+              data={data}
+              control={control}
+              getValues={getValues}
+              isEditMode={isEditMode}
+            />
           </div>
 
           <div>
@@ -380,54 +426,63 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               type="button"
             />
             {isEducationEdit ? (
-              <Controller
-                name="educationSkill"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <InputNumber
-                      id={field.name}
-                      value={field.value}
-                      onValueChange={(e: InputNumberValueChangeEvent) => {
-                        field.onChange(e.value);
-                      }}
-                      minFractionDigits={0}
-                      maxFractionDigits={0}
-                      min={0}
-                      max={9999}
-                    />
-                  </>
-                )}
-              />
+              <div>
+                <span className="p-float-label">
+                  <Controller
+                    name="educationSkill"
+                    control={control}
+                    render={({ field }) => (
+                      <>
+                        <InputNumber
+                          id={field.name}
+                          value={field.value}
+                          onValueChange={(e: InputNumberValueChangeEvent) => {
+                            field.onChange(e.value);
+                          }}
+                          minFractionDigits={0}
+                          maxFractionDigits={0}
+                          min={0}
+                          max={9999}
+                        />
+                      </>
+                    )}
+                  />
+                  <label className="text-0">Сложность образования</label>
+                </span>
+              </div>
             ) : (
               <div></div>
             )}
 
             {isMonsterLoreEdit ? (
-              <Controller
-                name="monsterLoreSkill"
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <InputNumber
-                      id={field.name}
-                      value={field.value}
-                      onValueChange={(e: InputNumberValueChangeEvent) => {
-                        field.onChange(e.value);
-                      }}
-                      minFractionDigits={0}
-                      maxFractionDigits={0}
-                      min={0}
-                      max={9999}
-                    />
-                  </>
-                )}
-              />
+              <div>
+                <span className="p-float-label">
+                  <Controller
+                    name="monsterLoreSkill"
+                    control={control}
+                    render={({ field }) => (
+                      <>
+                        <InputNumber
+                          id={field.name}
+                          value={field.value}
+                          onValueChange={(e: InputNumberValueChangeEvent) => {
+                            field.onChange(e.value);
+                          }}
+                          minFractionDigits={0}
+                          maxFractionDigits={0}
+                          min={0}
+                          max={9999}
+                        />
+                      </>
+                    )}
+                  />
+                  <label className="text-0">Сложность монстрологии</label>
+                </span>
+              </div>
             ) : (
               <div></div>
             )}
           </div>
-
 
           <div className="creatureInfo p-2">
             <Accordion
@@ -437,7 +492,8 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                 setActiveIndex(e.index);
               }}
             >
-              <AccordionTab disabled={isEducationEdit}
+              <AccordionTab
+                disabled={isEducationEdit}
                 header={
                   <span className="flex align-items-center gap-2 w-full">
                     Предрассудки простолюдинов (Образование, Сл{" "}
@@ -465,7 +521,8 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                   />
                 )}
               </AccordionTab>
-              <AccordionTab disabled={isMonsterLoreEdit}
+              <AccordionTab
+                disabled={isMonsterLoreEdit}
                 header={
                   <span className="flex align-items-center gap-2 w-full">
                     Экология и поведение (Монстрология, Сл{" "}

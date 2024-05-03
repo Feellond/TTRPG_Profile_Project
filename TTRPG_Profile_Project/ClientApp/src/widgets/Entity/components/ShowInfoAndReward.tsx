@@ -1,30 +1,68 @@
-import React from "react";
-import { ICreature } from "shared/models";
+import React, { useEffect, useState } from "react";
+import { Control, FieldValues, UseFormGetValues } from "react-hook-form";
+import { ICreature, ICreatureReward } from "shared/models";
 
 interface IShowInfoAndReward {
-  data: ICreature;
+  data: ICreature | null;
+  control: Control<FieldValues, any>;
+  getValues: UseFormGetValues<FieldValues>;
+  isEditMode: boolean;
 }
 
-export const ShowInfoAndReward = ({ data }: IShowInfoAndReward) => {
+export const ShowInfoAndReward = ({data, control, getValues, isEditMode }: IShowInfoAndReward) => {
+  const [armor, setArmor] = useState<number>(null);
+  const [regeneration, setRegeneration] = useState<number>(null);
+  const [resistances, setResistances] = useState<number>(null);
+  const [immunities, setImmunities] = useState<number>(null);
+  const [vulnerabilities, setVulnerabilities] = useState<number>(null);
+  const [creatureReward, setCreatureReward] = useState<ICreatureReward[]>([]);
+  const [moneyReward, setMoneyReward] = useState<number>(null);
+  const [height, setHeight] = useState<number>(null);
+  const [weight, setWeight] = useState<number>(null);
+  const [habitatPlace, setHabitatPlace] = useState<number>(null);
+  const [intellect, setIntellect] = useState<number>(null);
+  const [groupSize, setGroupSize] = useState<number>(null);
+
+  const fetchData = () => {
+    let values = getValues();
+
+    setArmor(values.armor);
+    setRegeneration(values.regeneration);
+    setResistances(values.resistances);
+    setImmunities(values.immunities);
+    setVulnerabilities(values.vulnerabilities);
+    setCreatureReward(values.creatureReward);
+    setMoneyReward(values.moneyReward);
+    setHeight(values.height);
+    setWeight(values.weight);
+    setHabitatPlace(values.habitatPlace);
+    setIntellect(values.intellect);
+    setGroupSize(values.groupSize);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [data])
+
   return (
-    <div className="my-2">
-      <div>Броня: {data.armor}</div>
-      <div>Регенерация: {data.regeneration}</div>
-      <div>Сопротивления: {data.resistances}</div>
-      <div>Невосприимчивость: {data.immunities}</div>
-      <div>Восприимчивость: {data.vulnerabilities}</div>
+    <div className="my-2 infoAndRewardList">
+      <div>Броня: {armor}</div>
+      <div>Регенерация: {regeneration}</div>
+      <div>Сопротивления: {resistances}</div>
+      <div>Невосприимчивость: {immunities}</div>
+      <div>Восприимчивость: {vulnerabilities}</div>
       <div className="flex">
         Добыча:{" "}
-        {data.creatureReward.map((reward, index) => (
+        {creatureReward.map((reward, index) => (
           <div key={index}>{reward.reward.name}, </div>
         ))}
       </div>
-      <div>Награда: {data.moneyReward}</div>
-      <div>Высота: {data.height}</div>
-      <div>Вес: {data.weight}</div>
-      <div>Место проживания: {data.habitatPlace}</div>
-      <div>Интеллект: {data.intellect}</div>
-      <div>Размер группы: {data.groupSize}</div>
+      <div>Награда: {moneyReward}</div>
+      <div>Высота: {height}</div>
+      <div>Вес: {weight}</div>
+      <div>Место проживания: {habitatPlace}</div>
+      <div>Интеллект: {intellect}</div>
+      <div>Размер группы: {groupSize}</div>
     </div>
   );
 };
