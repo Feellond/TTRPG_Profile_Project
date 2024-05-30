@@ -40,6 +40,7 @@ import {
   ShowManufacturingValue,
   ShowMeleeCombatValue,
   ShowMonsterologyValue,
+  ShowPersuasionResistanceValue,
   ShowPersuasionValue,
   ShowPoleWeaponMasteryValue,
   ShowPublicSpeakingValue,
@@ -628,7 +629,7 @@ export const ShowSkills = ({
             </div>
             <div>
               <span>Сопротивление убеждению </span>
-              <ShowPersuasionValue
+              <ShowPersuasionResistanceValue
                 control={control}
                 isEditMode={isEditMode}
                 skillsList={skillsList}
@@ -1456,7 +1457,7 @@ export const ShowSkills = ({
               <tr>
                 <td>Сопротивление убеждению</td>
                 <td>
-                  <ShowPersuasionValue
+                  <ShowPersuasionResistanceValue
                     control={control}
                     isEditMode={isEditMode}
                     skillsList={skillsList}

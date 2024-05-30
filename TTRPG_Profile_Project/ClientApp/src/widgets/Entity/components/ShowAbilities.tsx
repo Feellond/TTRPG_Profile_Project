@@ -55,6 +55,6 @@ export const ShowAbilities = ({
       </table>
     </div>
   ) : (
-    ""
+    <div></div>
   );
 };

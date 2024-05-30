@@ -11,6 +11,7 @@ using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.BL.DTO.Creatures.Request;
 using TTRPG_Project.DAL.Entities.Database.Spells;
 using TTRPG_Project.BL.DTO.Entities.Spells.Request;
+using TTRPG_Project.BL.DTO.Filters;
 
 namespace TTRPG_Project.Web.Controllers
 {
@@ -34,9 +35,11 @@ namespace TTRPG_Project.Web.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetSpells()
+        public async Task<IActionResult> GetSpells([FromQuery] SpellFilter filter)
         {
-            var responce = await _spellService.GetAllAsync();
+            filter.InitFilter();
+            var responce = await _spellService.GetAllAsync(filter);
+
             return Ok(responce);
         }
 
@@ -47,6 +50,9 @@ namespace TTRPG_Project.Web.Controllers
         public async Task<IActionResult> GetSpell([FromRoute] int id)
         {
             var responce = await _spellService.GetByIdAsync(id);
+            if (responce is null)
+                return NotFound(new ErrorResponse { Message = "Сущность не найдена!" });
+
             return Ok(responce);
         }
 
@@ -74,10 +80,10 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteSpell(int spellId)
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteSpell([FromRoute] int Id)
         {
-            var result = await _spellService.DeleteAsync(spellId!);
+            var result = await _spellService.DeleteAsync(Id!);
             return Ok(result);
         }
     }

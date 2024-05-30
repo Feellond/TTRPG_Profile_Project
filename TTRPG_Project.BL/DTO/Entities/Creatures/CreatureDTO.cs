@@ -28,9 +28,10 @@ namespace TTRPG_Project.BL.DTO.Entities.Creatures
         public int SpellResistBase { get; set; }
         public int Height { get; set; }
         public float Weight { get; set; }
-        public string Vulnerabilities { get; set; } = string.Empty;
-        public string Immunities { get; set; } = string.Empty;
-        public string Resistances { get; set; } = string.Empty;
+        //public string Vulnerabilities { get; set; } = string.Empty;
+        //public string Immunities { get; set; } = string.Empty;
+        //public string Resistances { get; set; } = string.Empty;
+        public List<CreatureEffect> CreatureEffects { get; set; } = new();
         public string HabitatPlace { get; set; } = string.Empty;
         public string Intellect { get; set; } = string.Empty;
         public string GroupSize { get; set; } = string.Empty;
@@ -39,5 +40,7 @@ namespace TTRPG_Project.BL.DTO.Entities.Creatures
         public List<CreatureAbility> CreatureAbilitys { get; set; } = new();
         public List<CreatureReward> CreatureReward { get; set; } = new();
         public List<Spell> Spells { get; set; } = new();
+        public Mutagen? Mutagen { get; set; }
+        public Trophy? Trophy { get; set; }
     }
 }

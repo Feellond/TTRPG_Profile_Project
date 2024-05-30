@@ -7,8 +7,8 @@ import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 import React, { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { ICreature, ISkillsList, IStatsList } from "shared/models";
+import { Controller, set, useForm } from "react-hook-form";
+import { ICreature, ICreatureEffect, ISkillsList, IStatsList } from "shared/models";
 import { ShowSkills } from "./ShowSkills/ShowSkills";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import "../scss/style.scss";
@@ -27,6 +27,7 @@ import {
   InputNumber,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
+import { CreatureEffectType } from "shared/enums/CreatureEnums";
 
 interface ICreatureEntity {
   data: ICreature;
@@ -95,15 +96,41 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
     setValue("height", data.height);
     setValue("weight", data.weight);
     setValue("habitatPlace", data.habitatPlace);
-    setValue("immunities", data.immunities);
-    setValue("resistances", data.resistances);
-    setValue("vulnerabilities", data.vulnerabilities);
+    // setValue("immunities", data.immunities);
+    // setValue("resistances", data.resistances);
+    // setValue("vulnerabilities", data.vulnerabilities);
     setValue("intellect", data.intellect);
     setValue("groupSize", data.groupSize);
+    setValue("creatureEffects", data.creatureEffects);
     setValue("creatureAttacks", data.creatureAttacks);
     setValue("creatureAbilitys", data.creatureAbilitys);
     setValue("creatureReward", data.creatureReward);
     setValue("imageFileName", data.imageFileName);
+    setValue("mutagen", data.mutagen);
+    setValue("trophy", data.trophy);
+
+    if (data.creatureEffects) {
+      const resistanceEffects = data.creatureEffects.filter(
+        (effect) => effect.type === CreatureEffectType.Resistance
+      );
+      const immunityEffects = data.creatureEffects.filter(
+        (effect) => effect.type === CreatureEffectType.Immunity
+      );
+      const vulnerabilityEffects = data.creatureEffects.filter(
+        (effect) => effect.type === CreatureEffectType.Vulnerability
+      );
+
+      // const mapEffectsToSelectItems = (effects: ICreatureEffect[]) => {
+      //   return effects.map((effect) => ({
+      //     label: effect.name, // Assuming the name of the effect is stored in effect.name
+      //     value: effect,
+      //   }));
+      // };
+
+      setValue("immunities", immunityEffects);
+      setValue("resistances", resistanceEffects);
+      setValue("vulnerabilities", vulnerabilityEffects);
+    }
 
     console.log("getValues:", getValues());
 
@@ -139,16 +166,21 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
       height: dialogData.height,
       weight: dialogData.weight,
       habitatPlace: dialogData.habitatPlace,
-      resistances: dialogData.resistances,
-      vulnerabilities: dialogData.vulnerabilities,
-      immunities: dialogData.immunities,
+      // resistances: dialogData.resistances,
+      // vulnerabilities: dialogData.vulnerabilities,
+      // immunities: dialogData.immunities,
       intellect: dialogData.intellect,
       groupSize: dialogData.groupSize,
+      creatureEffects: [...dialogData.resistances, ...dialogData.immunities, ...dialogData.vulnerabilities], //dialogData.creatureEffects,
       creatureAttacks: dialogData.creatureAttacks,
       creatureAbilitys: dialogData.creatureAbilitys,
       creatureReward: dialogData.creatureReward,
       imageFileName: dialogData.imageFileName,
+      mutagen: dialogData.mutagen,
+      trophy: dialogData.trophy,
     };
+
+    //dataOnSave.creatureEffects = [...dialogData.resistances, ...dialogData.immunities, ...dialogData.vulnerabilities];
 
     //dataOnSave.file = file;
     // for (let [key, value] of formData.entries()) {
@@ -230,6 +262,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
       </div>
       <div className="card block bg-bluegray-50 mb-4 text-0">
         <form className="p-2 creatureForm">
+          {/* name */}
           {!isEditMode ? (
             <div
               className="p-2 text-2xl font-semibold"
@@ -313,6 +346,28 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                     <label className="text-0">Сложность</label>
                   </span>
                 </div>
+                <div className="field flex flex-column mr-3">
+                  <span className="p-float-label">
+                    <Controller
+                      name="source"
+                      control={control}
+                      render={({ field }) => (
+                        <>
+                          <Dropdown
+                            id={field.name}
+                            value={field.value}
+                            onChange={(e: DropdownChangeEvent) => {
+                              field.onChange(e.value);
+                            }}
+                            optionLabel="label"
+                            options={sourceOptions}
+                          />
+                        </>
+                      )}
+                    />
+                    <label className="text-0">Источник</label>
+                  </span>
+                </div>
               </div>
             )}
           </ul>
@@ -381,9 +436,12 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
           <div className="p-2">
             <ShowInfoAndReward
+              statList={statList}
+              skillsList={skillsList}
               data={data}
               control={control}
               getValues={getValues}
+              register={register}
               isEditMode={isEditMode}
             />
           </div>

@@ -1,5 +1,9 @@
 import { OptionsParamsLoad } from "entities/Interface";
-import { ItemStealthType, SubstanceType, WhereToFindEnum } from "shared/enums/ItemEnums";
+import {
+  ItemStealthType,
+  SubstanceType,
+  WhereToFindEnum,
+} from "shared/enums/ItemEnums";
 import generalService from "shared/services/general.service";
 
 const SubstanceOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
@@ -39,24 +43,50 @@ const StealthOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
 };
 
 const SourceOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
-    try {
-        let responce = await generalService.sourceListLoad();
-        if (responce && responce.data) {
-            // console.log("Source responce data:");
-            // console.log(responce.data);
-    
-          const options = responce.data.map((data, index) => ({
-            label: data.name,
-            value: data,
-          }));
-    
-          console.log("Source options:", options);
-    
-          setItems(options);
-        }
-      } catch (error) {
-        console.error("Error fetching skills:", error);
-      }
-  };
+  try {
+    let responce = await generalService.sourceListLoad();
+    if (responce && responce.data) {
+      // console.log("Source responce data:");
+      // console.log(responce.data);
 
-  export {WhereToFindOptionsLoad, StealthOptionsLoad, SourceOptionsLoad}
+      const options = responce.data.map((data, index) => ({
+        label: data.name,
+        value: data,
+      }));
+
+      console.log("Source options:", options);
+
+      setItems(options);
+    }
+  } catch (error) {
+    console.error("Error fetching skills:", error);
+  }
+};
+
+const EffectOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
+  try {
+    let responce = await generalService.effectListLoad();
+    if (responce && responce.data) {
+      // console.log("Source responce data:");
+      //console.log("Effects:", responce.data);
+
+      const options = responce.data.effects.map((data, index) => ({
+        label: data.name,
+        value: data,
+      }));
+
+      console.log("Source options:", options);
+
+      setItems(options);
+    }
+  } catch (error) {
+    console.error("Error fetching skills:", error);
+  }
+};
+
+export {
+  WhereToFindOptionsLoad,
+  StealthOptionsLoad,
+  SourceOptionsLoad,
+  EffectOptionsLoad,
+};

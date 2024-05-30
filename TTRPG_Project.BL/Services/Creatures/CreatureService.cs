@@ -54,7 +54,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(ab => ab.CreatureAbilitys)
                     .ThenInclude(r => r.Ability)
                 .Include(crl => crl.CreatureReward)
-                    .ThenInclude(reward => reward.Reward)
+                    //.ThenInclude(reward => reward.Reward)
                         .ThenInclude(item => item.ItemBase)
                     .Select(creature => new CreatureDTO
                     {
@@ -74,12 +74,13 @@ namespace TTRPG_Project.BL.Services.Creatures
                         EvasionBase = creature.EvasionBase,
                         GroupSize = creature.GroupSize,
                         HabitatPlace = creature.HabitatPlace,
-                        Resistances = creature.Resistances,
+                        //Resistances = creature.Resistances,
                         Height = creature.Height,
                         Intellect = creature.Intellect,
                         MoneyReward = creature.MoneyReward,
-                        Immunities = creature.Immunities,
-                        Vulnerabilities = creature.Vulnerabilities,
+                        //Immunities = creature.Immunities,
+                        //Vulnerabilities = creature.Vulnerabilities,
+                        CreatureEffects = creature.CreatureEffects,
                         MonsterLoreInformation = creature.MonsterLoreInformation,
                         MonsterLoreSkill = creature.MonsterLoreSkill,
                         Race = creature.Race,
@@ -94,6 +95,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                         SuperstitionsInformation = creature.SuperstitionsInformation,
                         Weight = creature.Weight,
                         ImageFileName = creature.ImageFileName,
+                        Mutagen = creature.Mutagen,
+                        Trophy = creature.Trophy,
                     })
                     .ToListAsync();
 
@@ -131,7 +134,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(ab => ab.CreatureAbilitys)
                     .ThenInclude(r => r.Ability)
                 .Include(crl => crl.CreatureReward)
-                    .ThenInclude(reward => reward.Reward)
+                    //.ThenInclude(reward => reward.Reward)
                         .ThenInclude(item => item.ItemBase)
                     .Select(creature => new CreatureDTO
                     {
@@ -151,12 +154,13 @@ namespace TTRPG_Project.BL.Services.Creatures
                         EvasionBase = creature.EvasionBase,
                         GroupSize = creature.GroupSize,
                         HabitatPlace = creature.HabitatPlace,
-                        Immunities = creature.Immunities,
+                        //Immunities = creature.Immunities,
                         Height = creature.Height,
                         Intellect = creature.Intellect,
                         MoneyReward = creature.MoneyReward,
-                        Resistances = creature.Resistances,
-                        Vulnerabilities = creature.Vulnerabilities,
+                        //Resistances = creature.Resistances,
+                        //Vulnerabilities = creature.Vulnerabilities,
+                        CreatureEffects = creature.CreatureEffects,
                         MonsterLoreInformation = creature.MonsterLoreInformation,
                         MonsterLoreSkill = creature.MonsterLoreSkill,
                         Race = creature.Race,
@@ -171,6 +175,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                         SuperstitionsInformation = creature.SuperstitionsInformation,
                         Weight = creature.Weight,
                         ImageFileName = creature.ImageFileName,
+                        Mutagen = creature.Mutagen,
+                        Trophy = creature.Trophy,
                     })
                 .FirstOrDefaultAsync();
 
@@ -218,7 +224,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                     CreatureReward = request.CreatureReward.Select(dto => new CreatureReward
                     {
                         CreatureId = dto.CreatureId,
-                        RewardId = dto.RewardId,
+                        //RewardId = dto.RewardId,
+                        ItemBaseId = dto.ItemBaseId,
                     }).ToList(),
                     Description = request.Description,
                     EducationSkill = request.EducationSkill,
@@ -227,10 +234,11 @@ namespace TTRPG_Project.BL.Services.Creatures
                     HabitatPlace = request.HabitatPlace,
                     Height = request.Height,
                     Intellect = request.Intellect,
-                    Resistances = request.Resistances,
-                    Immunities = request.Immunities,
+                    //Resistances = request.Resistances,
+                    //Immunities = request.Immunities,
                     MoneyReward = request.MoneyReward,
-                    Vulnerabilities = request.Vulnerabilities,
+                    //Vulnerabilities = request.Vulnerabilities,
+                    CreatureEffects = request.CreatureEffects,
                     MonsterLoreInformation = request.MonsterLoreInformation,
                     MonsterLoreSkill = request.MonsterLoreSkill,
                     Name = request.Name,
@@ -245,6 +253,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                     SuperstitionsInformation = request.SuperstitionsInformation,
                     Weight = request.Weight,
                     ImageFileName = request.ImageFileName,
+                    Mutagen = request.Mutagen,
+                    Trophy = request.Trophy,
                 };
 
                 await _dbContext.Creatures.AddAsync(creature);
@@ -308,9 +318,10 @@ namespace TTRPG_Project.BL.Services.Creatures
                 creature.Height = request.Height;
                 creature.Intellect = request.Intellect;
                 creature.MoneyReward = request.MoneyReward;
-                creature.Resistances = request.Resistances;
-                creature.Immunities = request.Immunities;
-                creature.Vulnerabilities = request.Vulnerabilities;
+                //creature.Resistances = request.Resistances;
+                //creature.Immunities = request.Immunities;
+                //creature.Vulnerabilities = request.Vulnerabilities;
+                creature.CreatureEffects = request.CreatureEffects;
                 creature.MonsterLoreInformation = request.MonsterLoreInformation;
                 creature.MonsterLoreSkill = request.MonsterLoreSkill;
                 creature.Name = request.Name;
@@ -324,6 +335,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                 creature.Weight = request.Weight;
                 creature.UpdateDate = DateTime.Now;
                 creature.ImageFileName = request.ImageFileName;
+                creature.Mutagen = request.Mutagen;
+                creature.Trophy = request.Trophy;
 
                 //var caList = await _dbContext.Abilitiys.Where(x => x.Creature == null ? false : x.Creature.Any(k => k.Id == creature.Id)).ToListAsync();
                 //_dbContext.RemoveRange(caList);
@@ -340,7 +353,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                 {
                     Id = dto.Id,
                     CreatureId = dto.CreatureId,
-                    RewardId = dto.RewardId,
+                    ItemBaseId = dto.ItemBaseId,
+                    //RewardId = dto.RewardId,
                 }).ToList();
 
                 //if (request.File != null)

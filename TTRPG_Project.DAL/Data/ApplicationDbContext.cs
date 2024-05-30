@@ -402,6 +402,10 @@ namespace TTRPG_Project.DAL.Data
                 new Effect{Id = 51, Name = "Точность+1", SourceId = 1},
                 new Effect{Id = 52, Name = "Точность+2", SourceId = 1},
                 new Effect{Id = 53, Name = "Точность+3", SourceId = 1},
+
+                new Effect{Id = 54, Name = "Колющий", SourceId = 1},
+                new Effect{Id = 55, Name = "Дробящий", SourceId = 1},
+                new Effect{Id = 56, Name = "Режущий", SourceId = 1},
             });
 
             //ВСЕ НИЖЕ ДЛЯ ТЕСТА, ПОСЛЕ НАДО БД ПЕРЕСОБРАТЬ!!!
@@ -2186,9 +2190,9 @@ namespace TTRPG_Project.DAL.Data
                     EvasionBase = 10,
                     GroupSize = "Банда из 3-15 разбойников",
                     HabitatPlace = "Часто рядом с городами и на трактах",
-                    Resistances = "",
-                    Immunities = "",
-                    Vulnerabilities = "",
+                    //Resistances = "",
+                    //Immunities = "",
+                    //Vulnerabilities = "",
                     Height = 180,
                     Intellect = "Человеческий",
                     MoneyReward = 10,
@@ -2232,72 +2236,83 @@ namespace TTRPG_Project.DAL.Data
                 {
                     Id = 1,
                     CreatureId = 1,
-                    RewardId = 1,
+                    //RewardId = 1,
+                    ItemBaseId = 90,
                 }
+            });
+
+            builder.Entity<CreatureEffect>().HasData(new CreatureEffect[]
+            {
+                new CreatureEffect {Id = 1, CreatureId = 1, Description = "Бей его", Name = "Урон", Type = (int)CreatureEffectType.Vulnerability}
             });
 
             #endregion
 
             #region #Spells Data
 
+            builder.Entity<Spell>().HasData(new Spell[]
+            {
+                new Spell
+                {
+                    Id = 1,
+                    Name = "Слепящая пыль",
+                    Description = "Слепящая пыль позволяет направить в глаза цели горсть магической пыли, которая ослепит её на время действия заклинания.",
+                    CheckDC = -1,
+                    ConcetrationEnduranceCost = 0,
+                    DangerInfo = "",
+                    Distance = 4,
+                    Duration = "1к10 раундов",
+                    EnduranceCost = 3,
+                    IsConcetration = false,
+                    IsDruidSpell = false,
+                    IsPriestSpell = false,
+                    PreparationTime = 0,
+                    SourceId = 1,
+                    SourceType = (int)SpellSource.Mixed,
+                    SourceTypeDescription = "",
+                    SpellLevel = 1,
+                    //SpellSkillProtectionList = spellSkillProtectionList.ToList(),
+                    SpellType = (int)SpellType.Spell,
+                    SpellTypeDescription = "",
+                    WithdrawalCondition = "",
+                },
+            });
+
             var spellSkillProtectionList = new SpellSkillProtectionList[]
             {
                 new SpellSkillProtectionList
                 {
                     Id = 1,
+                    SpellId = 1,
                     SkillId = 14,
                 },
                 new SpellSkillProtectionList
                 {
                     Id = 2,
+                    SpellId = 1,
                     SkillId = 17,
                 },
                 new SpellSkillProtectionList
                 {
                     Id = 3,
+                    SpellId = 1,
                     SkillId = 18,
                 },
                 new SpellSkillProtectionList
                 {
                     Id = 4,
+                    SpellId = 1,
                     SkillId = 19,
                 },
                 new SpellSkillProtectionList
                 {
                     Id = 5,
+                    SpellId = 1,
                     SkillId = 21,
                 },
             };
 
             builder.Entity<SpellSkillProtectionList>().HasData(spellSkillProtectionList);
-
-            //builder.Entity<Spell>().HasData(new Spell[]
-            //{
-            //    new Spell
-            //    {
-            //        Id = 1,
-            //        Name = "Слепящая пыль",
-            //        Description = "Слепящая пыль позволяет направить в глаза цели горсть магической пыли, которая ослепит её на время действия заклинания.",
-            //        CheckDC = -1,
-            //        ConcetrationEnduranceCost = 0,
-            //        DangerInfo = "",
-            //        Distance = 4,
-            //        Duration = "1к10 раундов",
-            //        EnduranceCost = 3,
-            //        IsConcetration = false,
-            //        IsDruidSpell = false,
-            //        IsPriestSpell = false,
-            //        PreparationTime = 0,
-            //        SourceId = 1,
-            //        SourceType = (int)SpellSource.Mixed,
-            //        SourceTypeDescription = "",
-            //        SpellLevel = 1,
-            //        SpellSkillProtectionList = spellSkillProtectionList.ToList(),
-            //        SpellType = (int)SpellType.Spell,
-            //        SpellTypeDescription = "",
-            //        WithdrawalCondition = "",
-            //    },
-            //});
 
             #endregion
         }

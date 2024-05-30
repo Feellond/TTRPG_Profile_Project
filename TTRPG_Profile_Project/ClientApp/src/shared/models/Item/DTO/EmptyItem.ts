@@ -9,7 +9,7 @@ const emptyItem: ItemDTO = {
   weight: null,
   price: null,
   itemBaseEffectList: null,
-  creatureRewardList: null,
+  //creatureRewardList: null,
   //sourceId: 0,
   itemType: 0,
   accuracy: null,

@@ -235,6 +235,22 @@ const drawArmor = (data: ItemDTO) => {
         <div>Создатель</div>
         <div>{drawItemOriginType(data)}</div>
       </div>
+      <div className="stat" title="Свойства">
+        <div>
+          <div>Свойства</div>
+          {data.itemBaseEffectList.length > 0 ? (
+            <div>
+              {data.itemBaseEffectList.map((effect, index) => (
+                <a key={index}>
+                  {effect.effect.name}({effect.chancePercent}%);{" "}
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div>-</div>
+          )}
+        </div>
+      </div>
     </li>
   );
 };
@@ -412,7 +428,26 @@ const drawItemFromType = (data: ItemDTO) => {
     case 2:
       return drawTool(data);
     case 3:
-      return <div></div>;
+      return (
+        <div>
+          <div className="stat" title="Свойства">
+            <div>
+              <div>Свойства</div>
+              {data.itemBaseEffectList.length > 0 ? (
+                <div>
+                  {data.itemBaseEffectList.map((effect, index) => (
+                    <a key={index}>
+                      {effect.effect.name}({effect.chancePercent}%);{" "}
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div>-</div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
     case 4:
       return drawArmor(data);
     case 5:

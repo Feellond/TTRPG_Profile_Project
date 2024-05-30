@@ -10,13 +10,16 @@ import type {
   ICreature,
   ICreatureAbilitys,
   ICreatureAttack,
+  ICreatureEffect,
   ICreatureReward,
+  IMutagen,
   IRace,
   ISkill,
   ISkillsList,
   ISkillsTree,
   IStat,
   IStatsList,
+  ITrophy,
 } from "./Bestiary/DTO/BestiaryDTO";
 import {
   emptyAbilitiy,
@@ -75,6 +78,7 @@ export {
   IAttackEffectList,
   IClass,
   ICreature,
+  ICreatureEffect,
   ICreatureAbilitys,
   ICreatureAttack,
   ICreatureReward,
@@ -100,4 +104,6 @@ export {
   SpellFilterDTO,
   CreatureRequest,
   CreatureRequestDTO,
+  IMutagen,
+  ITrophy,
 };

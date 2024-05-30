@@ -20,7 +20,7 @@ namespace TTRPG_Project.BL.Services.Additional
 
             EffectResponce responce = new()
             {
-                Count = 1,
+                Count = effects.Count,
                 Effects = effects,
             };
 

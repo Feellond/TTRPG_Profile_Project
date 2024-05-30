@@ -17,7 +17,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { SelectItem } from "primereact/selectitem";
 import { SkillOptionsLoad } from "entities/BestiaryOptions";
-import { StealthOptionsLoad } from "entities/GeneralFunc";
+import { EffectOptionsLoad, StealthOptionsLoad } from "entities/GeneralFunc";
 import {
   ArmorEquipmentTypeLoad,
   ArmorTypeLoad,
@@ -26,6 +26,7 @@ import {
   SubstanceTypeLoad,
   WhereToFindTypeLoad,
 } from "entities/ItemFunc/components/OptionsLoad";
+import { Effect } from "shared/models/Additional";
 
 interface ItemTypeSelectProps {
   data: ItemDTO;
@@ -58,6 +59,8 @@ const ItemTypeSelect = ({
   const [whereToFindOptions, setWhereToFindOptions] = useState<SelectItem[]>(
     []
   );
+
+  const [effectOptions, setEffectOptions] = useState<SelectItem[]>([]);
   const [substanceOptions, setSubstanceOptions] = useState<SelectItem[]>([]);
   const [armorEquipmentOptions, setArmorEquipmentOptions] = useState<
     SelectItem[]
@@ -70,6 +73,7 @@ const ItemTypeSelect = ({
   const [components, setComponents] = useState(
     data.blueprintComponentList || []
   );
+  const [effects, setEffects] = useState(data.itemBaseEffectList || []);
 
   useEffect(() => {
     ComponentsTypeLoad({setItems: setComponentsOptions});
@@ -79,12 +83,54 @@ const ItemTypeSelect = ({
     ArmorTypeLoad({ setItems: setArmorOptions });
     ArmorEquipmentTypeLoad({ setItems: setArmorEquipmentOptions });
     WhereToFindTypeLoad({setItems: setWhereToFindOptions});
-    SubstanceTypeLoad({setItems: setSubstanceOptions})
+    SubstanceTypeLoad({setItems: setSubstanceOptions});
+    EffectOptionsLoad({setItems: setEffectOptions});
 
-    console.log(itemType);
-    console.log(isAmmunitionChecked);
+    setSubstances(data.formulaSubstanceList);
+    setComponents(data.blueprintComponentList);
+    setEffects(data.itemBaseEffectList);
+
     console.log(getValues());
   }, [visible]);
+
+  useEffect(() => {
+    console.log(effects);
+    register("itemBaseEffectList", { value: effects });
+  }, [effects]);
+
+  const handleAddEffect = () => {
+    setEffects(effects => [...effects, { id: 0, chancePercent: 0, damage: "", effect: null, isDealDamage: false}]);
+  };
+
+  const handleRemoveEffect = (index: number) => {
+    const newEffects = [...effects];
+    newEffects.splice(index, 1);
+    setEffects(newEffects);
+  };
+
+  const handleEffectPercentChange = (index: number, percent: number) => {
+    const newEffects = [...effects];
+    newEffects[index].chancePercent = percent;
+    setEffects(newEffects);
+  };
+
+  const handleEffectDamageChange = (index: number, damage: string) => {
+    const newEffects = [...effects];
+    newEffects[index].damage = damage;
+    setEffects(newEffects);
+  };
+
+  const handleEffectTypeChange = (index: number, effect: Effect) => {
+    const newEffects = [...effects];
+    newEffects[index].effect = effect;
+    setEffects(newEffects);
+  };
+
+  const handleEffectIsDealDamageChange = (index: number, isDealDamage: boolean) => {
+    const newEffects = [...effects];
+    newEffects[index].isDealDamage = isDealDamage;
+    setEffects(newEffects);
+  };
 
   useEffect(() => {
     switch (itemType) {
@@ -241,6 +287,80 @@ const ItemTypeSelect = ({
             )}
           />
         </span>
+        <div>
+          <span className="field">
+            <label>Список эффектов:</label>
+            <div>
+              {effects ? (
+                effects.map((effect, index) => (
+                  <div key={index}>
+                    <span className="field">
+                      <label>Эффект:</label>
+                      <Dropdown
+                        value={effect.effect}
+                        onChange={(e) =>
+                          handleEffectTypeChange(index, e.target.value)
+                        }
+                        optionLabel="label"
+                        options={effectOptions}
+                        placeholder="Выберите тип субстанции"
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Наносит урон?:</label>
+                      <input
+                        type="checkbox"
+                        checked={effect.isDealDamage}
+                        onChange={(e) =>
+                          handleEffectIsDealDamageChange(
+                            index,
+                            e.target.checked
+                          )
+                        }
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Проценты:</label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={effect.chancePercent}
+                        onChange={(e) =>
+                          handleEffectPercentChange(
+                            index,
+                            parseInt(e.target.value)
+                          )
+                        }
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Урон:</label>
+                      <input
+                        type="text"
+                        value={effect.damage}
+                        onChange={(e) =>
+                          handleEffectDamageChange(index, e.target.value)
+                        }
+                      />
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveEffect(index)}
+                    >
+                      Убрать эффект
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div></div>
+              )}
+              <button type="button" onClick={handleAddEffect}>
+                Добавить эффект
+              </button>
+            </div>
+          </span>
+        </div>
       </div>
     );
   };
@@ -347,6 +467,80 @@ const ItemTypeSelect = ({
             )}
           />
         </span>
+        <div>
+          <span className="field">
+            <label>Список эффектов:</label>
+            <div>
+              {effects ? (
+                effects.map((effect, index) => (
+                  <div key={index}>
+                    <span className="field">
+                      <label>Эффект:</label>
+                      <Dropdown
+                        value={effect.effect}
+                        onChange={(e) =>
+                          handleEffectTypeChange(index, e.target.value)
+                        }
+                        optionLabel="label"
+                        options={effectOptions}
+                        placeholder="Выберите тип субстанции"
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Наносит урон?:</label>
+                      <input
+                        type="checkbox"
+                        checked={effect.isDealDamage}
+                        onChange={(e) =>
+                          handleEffectIsDealDamageChange(
+                            index,
+                            e.target.checked
+                          )
+                        }
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Проценты:</label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={effect.chancePercent}
+                        onChange={(e) =>
+                          handleEffectPercentChange(
+                            index,
+                            parseInt(e.target.value)
+                          )
+                        }
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Урон:</label>
+                      <input
+                        type="text"
+                        value={effect.damage}
+                        onChange={(e) =>
+                          handleEffectDamageChange(index, e.target.value)
+                        }
+                      />
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveEffect(index)}
+                    >
+                      Убрать эффект
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div></div>
+              )}
+              <button type="button" onClick={handleAddEffect}>
+                Добавить эффект
+              </button>
+            </div>
+          </span>
+        </div>
       </div>
     );
   };
@@ -380,7 +574,84 @@ const ItemTypeSelect = ({
   };
 
   const AlchemicalItem = () => {
-    return <div></div>;
+    return (
+      <div>
+        <div>
+          <span className="field">
+            <label>Список эффектов:</label>
+            <div>
+              {effects ? (
+                effects.map((effect, index) => (
+                  <div key={index}>
+                    <span className="field">
+                      <label>Эффект:</label>
+                      <Dropdown
+                        value={effect.effect}
+                        onChange={(e) =>
+                          handleEffectTypeChange(index, e.target.value)
+                        }
+                        optionLabel="label"
+                        options={effectOptions}
+                        placeholder="Выберите тип субстанции"
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Наносит урон?:</label>
+                      <input
+                        type="checkbox"
+                        checked={effect.isDealDamage}
+                        onChange={(e) =>
+                          handleEffectIsDealDamageChange(
+                            index,
+                            e.target.checked
+                          )
+                        }
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Проценты:</label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={effect.chancePercent}
+                        onChange={(e) =>
+                          handleEffectPercentChange(
+                            index,
+                            parseInt(e.target.value)
+                          )
+                        }
+                      />
+                    </span>
+                    <span className="field">
+                      <label>Урон:</label>
+                      <input
+                        type="text"
+                        value={effect.damage}
+                        onChange={(e) =>
+                          handleEffectDamageChange(index, e.target.value)
+                        }
+                      />
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveEffect(index)}
+                    >
+                      Убрать эффект
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div></div>
+              )}
+              <button type="button" onClick={handleAddEffect}>
+                Добавить эффект
+              </button>
+            </div>
+          </span>
+        </div>
+      </div>
+    );
   };
 
   const BaseItem = () => {

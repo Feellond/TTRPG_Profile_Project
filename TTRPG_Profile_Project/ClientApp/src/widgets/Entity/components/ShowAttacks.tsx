@@ -40,7 +40,7 @@ export const ShowAttacks = ({
 
   useEffect(() => {
     fetchData();
-  }, [data])
+  }, [data, statList, skillsList])
 
   return creatureAttacks?.length > 0 ? (
     <div className="creatureAttacks">
@@ -91,6 +91,6 @@ export const ShowAttacks = ({
       </div>
     </div>
   ) : (
-    ""
+    <div></div>
   );
 };

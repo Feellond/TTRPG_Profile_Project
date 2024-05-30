@@ -70,7 +70,7 @@ const ListShow = ({
     } else if ("spellLevel" in data) {
       // Переменная data имеет тип SpellDTO
       return (
-          <ShowSpell />
+          <ShowSpell data={data}/>
       );
     } else {
       // Переменная data имеет тип BestiaryDTO

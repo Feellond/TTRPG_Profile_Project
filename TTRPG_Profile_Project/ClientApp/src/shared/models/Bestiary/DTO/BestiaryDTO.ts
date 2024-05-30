@@ -1,6 +1,6 @@
 import { Effect } from "shared/models/Additional";
 import { EntityBase, EntityDescriptionBase } from "shared/models/Base";
-import { ItemShortDTO } from "shared/models/Item/DTO/ItemsDTO";
+import { ItemDTO, ItemShortDTO } from "shared/models/Item/DTO/ItemsDTO";
 
 export interface IAbilitiy extends EntityDescriptionBase {
   creature: ICreature | null;
@@ -44,9 +44,9 @@ export interface ICreature extends EntityDescriptionBase {
   moneyReward: number;
   armor: number;
   regeneration: number;
-  resistances: string;
-  immunities: string;
-  vulnerabilities: string;
+  // resistances: string;
+  // immunities: string;
+  // vulnerabilities: string;
   statsList: IStatsList | null;
   skillsList: ISkillsList | null;
   evasionBase: number;
@@ -58,16 +58,20 @@ export interface ICreature extends EntityDescriptionBase {
   habitatPlace: string;
   intellect: string;
   groupSize: string;
+  creatureEffects: ICreatureEffect[] | null;
   creatureAttacks: ICreatureAttack[] | null;
   creatureAbilitys: ICreatureAbilitys[];
   creatureReward: ICreatureReward[] | null;
   imageFileName: string | null;
   //Spells: Spell[];
+  mutagen: IMutagen | null;
+  trophy: ITrophy | null;
 }
 
 export interface ICreatureReward {
   id: number | null;
-  reward: IReward;
+  //reward: IReward;
+  itemBase: ItemShortDTO;
 }
 
 export interface ICreatureAttack {
@@ -80,10 +84,22 @@ export interface ICreatureAbilitys {
   ability: IAbilitiy;
 }
 
+export interface ICreatureEffect extends EntityBase {
+  name: string | null;
+  description: string | null;
+  type: number;
+}
+
+export interface IMutagen extends EntityDescriptionBase {
+  complexity: number;
+  effect: string;
+  mutation: string;
+}
+
 export interface IRace extends EntityDescriptionBase {}
 
 export interface IReward extends EntityDescriptionBase {
-  item?: ItemShortDTO | null;
+  itemBase?: ItemDTO | null;
   amount: string;
 }
 
@@ -341,3 +357,5 @@ export interface IStatsList extends EntityBase {
   kickId: number;
   kickValue: number;
 }
+
+export interface ITrophy extends EntityDescriptionBase {}

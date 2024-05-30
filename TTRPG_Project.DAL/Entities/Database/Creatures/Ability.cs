@@ -10,5 +10,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public int? RaceId { get; set; }
         public Race? Race { get; set; }
         public int Type { get; set; }
+        //public bool IsVulnerability { get; set; } = false;
     }
 }

@@ -50,7 +50,7 @@ const EditItemShortDialog = ({
     data.weight = dialogData.weight;
     data.price = dialogData.price;
     data.itemBaseEffectList = dialogData.itemBaseEffectList;
-    data.creatureRewardList = dialogData.creatureRewardList;
+    //data.creatureRewardList = dialogData.creatureRewardList;
     data.source = dialogData.source;
     data.itemType = dialogData.itemType;
     data.accuracy = dialogData.accuracy;
@@ -84,7 +84,7 @@ const EditItemShortDialog = ({
     setValue("weight", data.weight);
     setValue("price", data.price);
     setValue("itemBaseEffectList", data.itemBaseEffectList);
-    setValue("creatureRewardList", data.creatureRewardList);
+    //setValue("creatureRewardList", data.creatureRewardList);
     setValue("source", data.source);
     setValue("itemType", data.itemType);
     setValue("accuracy", data.accuracy);

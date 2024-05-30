@@ -81,15 +81,18 @@ export const emptyCreature: ICreature = {
   height: 0,
   weight: 0,
   habitatPlace: "",
-  immunities: "",
-  resistances: "",
-  vulnerabilities: "",
+  // immunities: "",
+  // resistances: "",
+  // vulnerabilities: "",
   intellect: "",
   groupSize: "",
+  creatureEffects: [],
   creatureAttacks: [],
   creatureAbilitys: [],
   creatureReward: [],
   imageFileName: "",
+  mutagen: null,
+  trophy: null,
 };
 
 export const emptyReward: IReward = {
@@ -97,7 +100,7 @@ export const emptyReward: IReward = {
   name: null,
   description: null,
   source: null,
-  item: null,
+  itemBase: null,
   amount: "",
 };
 

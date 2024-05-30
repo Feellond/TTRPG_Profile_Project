@@ -38,7 +38,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
 
   useEffect(() => {
     fetchData();
-  }, [data]);
+  }, [data, statList, skillsList]);
 
   /*
   tooltip={
@@ -88,7 +88,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{blockBase}</div>
         )}
       </div>
-      <div>
+      <div className="flex">
         <span>База уклонения: </span>
         {isEditMode ? (
           <div>
@@ -127,7 +127,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{evasionBase}</div>
         )}
       </div>
-      <div>
+      <div className="flex">
         <span>База атлетики: </span>
         {isEditMode ? (
           <div>
@@ -166,7 +166,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{athleticsBase}</div>
         )}
       </div>
-      <div>
+      <div className="flex">
         <span>База сопротивления магии: </span>
         {isEditMode ? (
           <div>
