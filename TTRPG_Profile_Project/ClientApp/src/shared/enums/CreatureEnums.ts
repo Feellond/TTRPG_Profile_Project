@@ -16,8 +16,8 @@ enum AttackType {
 }
 
 enum CreatureEffectType {
-  Resistance = 1,
-  Immunity = 2,
+  Immunity = 1,
+  Resistance = 2,
   Vulnerability = 3,
 }
 

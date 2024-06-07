@@ -7,8 +7,8 @@ import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
 import React, { useEffect, useState } from "react";
-import { Controller, set, useForm } from "react-hook-form";
-import { ICreature, ICreatureEffect, ISkillsList, IStatsList } from "shared/models";
+import { Controller, useForm } from "react-hook-form";
+import { ICreature, ISkillsList, IStatsList } from "shared/models";
 import { ShowSkills } from "./ShowSkills/ShowSkills";
 import { Accordion, AccordionTab } from "primereact/accordion";
 import "../scss/style.scss";
@@ -28,6 +28,8 @@ import {
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
 import { CreatureEffectType } from "shared/enums/CreatureEnums";
+import { ShowMutagen } from "./ShowMutagen";
+import { ShowTrophy } from "./ShowTrophy";
 
 interface ICreatureEntity {
   data: ICreature;
@@ -39,6 +41,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [isEducationEdit, setIsEducationEdit] = useState<boolean>(false);
   const [isMonsterLoreEdit, setIsMonsterLoreEdit] = useState<boolean>(false);
+  const [isTableEdit, setIsTableEdit] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number | number[]>();
 
   const [statList, setStatList] = useState<IStatsList>(null);
@@ -171,7 +174,11 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
       // immunities: dialogData.immunities,
       intellect: dialogData.intellect,
       groupSize: dialogData.groupSize,
-      creatureEffects: [...dialogData.resistances, ...dialogData.immunities, ...dialogData.vulnerabilities], //dialogData.creatureEffects,
+      creatureEffects: [
+        ...dialogData.resistances,
+        ...dialogData.immunities,
+        ...dialogData.vulnerabilities,
+      ], //dialogData.creatureEffects,
       creatureAttacks: dialogData.creatureAttacks,
       creatureAbilitys: dialogData.creatureAbilitys,
       creatureReward: dialogData.creatureReward,
@@ -298,7 +305,8 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
             {!isEditMode ? (
               <li>
                 <i>{data.race?.name}, </i>
-                <i>{ComplexityValueToString(data.complexity)}</i>
+                <i>{ComplexityValueToString(data.complexity)}, </i>
+                <i>{data.source?.name}</i>
               </li>
             ) : (
               <div className="flex flex-wrap mt-3">
@@ -446,6 +454,39 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
             />
           </div>
 
+          <div>
+            <ShowMutagen
+              skillsList={skillsList}
+              statList={statList}
+              data={data}
+              control={control}
+              getValues={getValues}
+              register={register}
+              isEditMode={isEditMode}
+            />
+          </div>
+
+          <div>
+            <ShowTrophy
+              skillsList={skillsList}
+              statList={statList}
+              data={data}
+              control={control}
+              getValues={getValues}
+              register={register}
+              isEditMode={isEditMode}
+            />
+          </div>
+
+          <Button
+            icon="pi pi-pencil"
+            className="ml-auto p-onlytext p-rounded"
+            onClick={(e) => {
+              setIsTableEdit(!isTableEdit);
+            }}
+            type="button"
+          />
+
           <div className="my-2 p-2 overflow-auto">
             <ShowAttacks
               skillsList={skillsList}
@@ -453,7 +494,8 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               data={data}
               control={control}
               getValues={getValues}
-              isEditMode={isEditMode}
+              register={register}
+              isEditMode={isTableEdit}
             />
           </div>
 
@@ -464,7 +506,8 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               data={data}
               control={control}
               getValues={getValues}
-              isEditMode={isEditMode}
+              register={register}
+              isEditMode={isTableEdit}
             />
           </div>
 
@@ -479,12 +522,13 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                 if (!isEducationEdit) setActiveIndex([0, 1]);
                 else setActiveIndex([]);
 
-                console.log(activeIndex);
+                console.log("Values: ", getValues());
               }}
               type="button"
             />
             {isEducationEdit ? (
               <div>
+                <label className="text-0">Сложность образования</label>
                 <span className="p-float-label">
                   <Controller
                     name="educationSkill"
@@ -505,7 +549,6 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                       </>
                     )}
                   />
-                  <label className="text-0">Сложность образования</label>
                 </span>
               </div>
             ) : (
@@ -514,6 +557,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
             {isMonsterLoreEdit ? (
               <div>
+                <label className="text-0">Сложность монстрологии</label>
                 <span className="p-float-label">
                   <Controller
                     name="monsterLoreSkill"
@@ -534,7 +578,6 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                       </>
                     )}
                   />
-                  <label className="text-0">Сложность монстрологии</label>
                 </span>
               </div>
             ) : (
@@ -570,9 +613,13 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                         <Editor
                           id={field.name}
                           value={field.value}
-                          onTextChange={(e: EditorTextChangeEvent) =>
-                            field.onChange(e.htmlValue)
-                          }
+                          onTextChange={(e: EditorTextChangeEvent) => {
+                            field.onChange(e.htmlValue);
+                            field.value = e.htmlValue;
+                            register("superstitionsInformation", {
+                              value: e.htmlValue,
+                            });
+                          }}
                         />
                       </>
                     )}
@@ -599,9 +646,13 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                         <Editor
                           id={field.name}
                           value={field.value}
-                          onTextChange={(e: EditorTextChangeEvent) =>
-                            field.onChange(e.htmlValue)
-                          }
+                          onTextChange={(e: EditorTextChangeEvent) => {
+                            field.onChange(e.htmlValue);
+                            field.value = e.htmlValue;
+                            register("monsterLoreInformation", {
+                              value: e.htmlValue,
+                            });
+                          }}
                         />
                       </>
                     )}

@@ -13,5 +13,6 @@ namespace TTRPG_Project.DAL.Entities.Database.Spells
         public Spell? Spell { get; set; }
         public int? SkillId { get; set; }
         public Skill? Skill { get; set; }
+        public string MoreInfo { get; set; } = string.Empty;
     }
 }

@@ -1,11 +1,10 @@
-import { Component } from "shared/models";
-import { Effect } from "shared/models/Additional";
+import { Component, ISkill } from "shared/models";
 import { EntityDescriptionBase } from "shared/models/Base";
 
 export interface ISpell extends EntityDescriptionBase {
     enduranceCost: number;
     distance: number;
-    duration: number;
+    duration: string;
     spellSkillProtectionList: ISpellSkillProtectionList[] | null;
     isConcentration: boolean;
     concentrationEnduranceCost: number;
@@ -25,7 +24,8 @@ export interface ISpell extends EntityDescriptionBase {
 
 export interface ISpellSkillProtectionList {
     id: number | null;
-    effect: Effect;
+    skill: ISkill;
+    moreInfo: string;
 }
 
 export interface ISpellComponentList {

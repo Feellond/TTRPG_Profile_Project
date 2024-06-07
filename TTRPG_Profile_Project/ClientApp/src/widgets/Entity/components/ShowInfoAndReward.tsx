@@ -1,11 +1,9 @@
-import { EffectOptionsLoad } from "entities/GeneralFunc";
 import {
   InputNumber,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
-import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
-import { MultiSelect, MultiSelectChangeEvent } from "primereact/multiselect";
+import { MultiSelect } from "primereact/multiselect";
 import { SelectItem } from "primereact/selectitem";
 import { Tooltip } from "primereact/tooltip";
 import React, { useEffect, useState } from "react";
@@ -17,7 +15,6 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { CreatureEffectType } from "shared/enums/CreatureEnums";
-import { ItemEntityType } from "shared/enums/ItemEnums";
 import {
   ICreature,
   ICreatureEffect,
@@ -196,11 +193,11 @@ export const ShowInfoAndReward = ({
     } else if (type === CreatureEffectType.Resistance) {
       const newResistances = [...resistances];
       newResistances[index].description = description;
-      setImmunities(newResistances);
+      setResistances(newResistances);
     } else if (type === CreatureEffectType.Vulnerability) {
       const newVulnerability = [...vulnerabilities];
       newVulnerability[index].description = description;
-      setImmunities(newVulnerability);
+      setVulnerabilities(newVulnerability);
     }
   };
 

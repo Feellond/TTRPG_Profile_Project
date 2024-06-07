@@ -27,6 +27,7 @@ import { ShowSpell } from "./ShowSpell";
 import { ShowBestiary } from "./ShowBestiary";
 import itemService from "shared/services/item.service";
 import bestiaryService from "shared/services/bestiary.service";
+import spellService from "shared/services/spell.service";
 
 interface IListShow {
   getParams: () => {};
@@ -221,8 +222,13 @@ const ListShow = ({
           toast: toast,
           params: getParams(),
         });
-      } else {
+      } else if ("race" in entity) {
         result = await bestiaryService.getEntitys({
+          params: getParams(),
+        });
+      }
+      else {
+        result = await spellService.getEntitys({
           params: getParams(),
         });
       }

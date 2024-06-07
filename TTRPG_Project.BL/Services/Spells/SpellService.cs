@@ -31,10 +31,48 @@ namespace TTRPG_Project.BL.Services.Spells
         {
             var spells = await _dbContext.Spells.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(x => x.SpellSkillProtectionList)
-                    .ThenInclude(x => x.Skill)
-                .Include(x => x.SpellComponentList)
-                    .ThenInclude(x => x.Component).ToListAsync();
+                .Select(c => new Spell
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    CheckDC = c.CheckDC,
+                    ConcentrationEnduranceCost = c.ConcentrationEnduranceCost,
+                    DangerInfo = c.DangerInfo,
+                    Distance = c.Distance,
+                    Duration = c.Duration,
+                    EnduranceCost = c.EnduranceCost,
+                    IsConcentration = c.IsConcentration,
+                    IsDruidSpell = c.IsDruidSpell,
+                    IsPriestSpell = c.IsPriestSpell,
+                    PreparationTime = c.PreparationTime,
+                    Source = c.Source,
+                    SourceType = c.SourceType,
+                    SourceTypeDescription = c.SourceTypeDescription,
+                    SpellLevel = c.SpellLevel,
+                    SpellType = c.SpellType,
+                    SpellTypeDescription = c.SpellTypeDescription,
+                    WithdrawalCondition = c.WithdrawalCondition,
+
+                    SpellComponentList = c.SpellComponentList.Select(e => new SpellComponentList
+                    {
+                        Id = e.Id,
+                        Amount = e.Amount,
+                        Component = e.Component
+                    }).ToList(),
+
+                    SpellSkillProtectionList = c.SpellSkillProtectionList.Select(e => new SpellSkillProtectionList
+                    {
+                        Id = e.Id,
+                        Skill = e.Skill,
+                        MoreInfo = e.MoreInfo,
+                    }).ToList(),
+                }).ToListAsync();
+
+            //.Include(x => x.SpellSkillProtectionList)
+            //    .ThenInclude(x => x.Skill)
+            //.Include(x => x.SpellComponentList)
+            //    .ThenInclude(x => x.Component).ToListAsync();
 
             foreach (var expression in filter.whereExpression)
             {
@@ -58,10 +96,43 @@ namespace TTRPG_Project.BL.Services.Spells
         {
             var spell = await _dbContext.Spells.AsNoTracking()
                 .Include(s => s.Source)
-                .Include(x => x.SpellSkillProtectionList)
-                    .ThenInclude(x => x.Skill)
-                .Include(x => x.SpellComponentList)
-                    .ThenInclude(x => x.Component).FirstOrDefaultAsync();
+                .Select(c => new Spell
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description,
+                    CheckDC = c.CheckDC,
+                    ConcentrationEnduranceCost = c.ConcentrationEnduranceCost,
+                    DangerInfo = c.DangerInfo,
+                    Distance = c.Distance,
+                    Duration = c.Duration,
+                    EnduranceCost = c.EnduranceCost,
+                    IsConcentration = c.IsConcentration,
+                    IsDruidSpell = c.IsDruidSpell,
+                    IsPriestSpell = c.IsPriestSpell,
+                    PreparationTime = c.PreparationTime,
+                    Source = c.Source,
+                    SourceType = c.SourceType,
+                    SourceTypeDescription = c.SourceTypeDescription,
+                    SpellLevel = c.SpellLevel,
+                    SpellType = c.SpellType,
+                    SpellTypeDescription = c.SpellTypeDescription,
+                    WithdrawalCondition = c.WithdrawalCondition,
+
+                    SpellComponentList = c.SpellComponentList.Select(e => new SpellComponentList
+                    {
+                        Id = e.Id,
+                        Amount = e.Amount,
+                        Component = e.Component
+                    }).ToList(),
+
+                    SpellSkillProtectionList = c.SpellSkillProtectionList.Select(e => new SpellSkillProtectionList
+                    {
+                        Id = e.Id,
+                        Skill = e.Skill,
+                        MoreInfo = e.MoreInfo,
+                    }).ToList(),
+                }).Where(x => x.Id == id).FirstOrDefaultAsync();
 
             SpellResponce responce = new()
             {
@@ -77,13 +148,13 @@ namespace TTRPG_Project.BL.Services.Spells
             Spell spell = new()
             {
                 CheckDC = request.CheckDC,
-                ConcetrationEnduranceCost = request.ConcetrationEnduranceCost,
+                ConcentrationEnduranceCost = request.ConcetrationEnduranceCost,
                 DangerInfo = request.DangerInfo,
                 Description = request.Description,
                 Distance = request.Distance,
                 Duration = request.Duration,
                 EnduranceCost = request.EnduranceCost,
-                IsConcetration = request.IsConcetration,
+                IsConcentration = request.IsConcetration,
                 IsDruidSpell = request.IsDruidSpell,
                 IsPriestSpell = request.IsPriestSpell,
                 PreparationTime = request.PreparationTime,
@@ -117,13 +188,13 @@ namespace TTRPG_Project.BL.Services.Spells
                 throw new CustomException("Существо не найдено!");
 
             spell.CheckDC = request.CheckDC;
-            spell.ConcetrationEnduranceCost = request.ConcetrationEnduranceCost;
+            spell.ConcentrationEnduranceCost = request.ConcetrationEnduranceCost;
             spell.DangerInfo = request.DangerInfo;
             spell.Description = request.Description;
             spell.Distance = request.Distance;
             spell.Duration = request.Duration;
             spell.EnduranceCost = request.EnduranceCost;
-            spell.IsConcetration = request.IsConcetration;
+            spell.IsConcentration = request.IsConcetration;
             spell.IsDruidSpell = request.IsDruidSpell;
             spell.IsPriestSpell = request.IsPriestSpell;
             spell.PreparationTime = request.PreparationTime;

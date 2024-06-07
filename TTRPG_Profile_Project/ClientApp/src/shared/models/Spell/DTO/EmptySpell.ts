@@ -7,7 +7,7 @@ const emptySpell: ISpell = {
     source: null,
     enduranceCost: 0,
     distance: 0,
-    duration: 0,
+    duration: "",
     spellSkillProtectionList: null,
     isConcentration: false,
     concentrationEnduranceCost: 0,

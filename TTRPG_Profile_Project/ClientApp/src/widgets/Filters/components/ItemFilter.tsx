@@ -20,7 +20,7 @@ const ItemFilter = ({filter, setFilter} : ItemFilterProps) => {
 
   return ( 
     <div className="flex mb-2 flex-wrap">
-      <div className="flex flex-column justify-content-center mr-3 min-w-full">
+      <div className="flex flex-column justify-content-center mr-3">
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText

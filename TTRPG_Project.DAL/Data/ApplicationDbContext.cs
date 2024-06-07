@@ -2257,13 +2257,13 @@ namespace TTRPG_Project.DAL.Data
                     Id = 1,
                     Name = "Слепящая пыль",
                     Description = "Слепящая пыль позволяет направить в глаза цели горсть магической пыли, которая ослепит её на время действия заклинания.",
-                    CheckDC = -1,
-                    ConcetrationEnduranceCost = 0,
+                    CheckDC = 0,
+                    ConcentrationEnduranceCost = 0,
                     DangerInfo = "",
                     Distance = 4,
                     Duration = "1к10 раундов",
                     EnduranceCost = 3,
-                    IsConcetration = false,
+                    IsConcentration = false,
                     IsDruidSpell = false,
                     IsPriestSpell = false,
                     PreparationTime = 0,
@@ -2275,6 +2275,117 @@ namespace TTRPG_Project.DAL.Data
                     SpellType = (int)SpellType.Spell,
                     SpellTypeDescription = "",
                     WithdrawalCondition = "",
+                },
+                new Spell
+                {
+                    Id = 2,
+                    Name = "Кипящая кровь",
+                    Description = "Кипящая кровь заставляет животное или неразумное чудовище в пределах дистанции заклинания разозлиться на цель." +
+                    " Это существо будет пытаться напасть на цель, пока действие заклинания не закончится.",
+                    CheckDC = 0,
+                    ConcentrationEnduranceCost = 0,
+                    DangerInfo = "",
+                    Distance = 8,
+                    Duration = "1к10 раундов",
+                    EnduranceCost = 3,
+                    IsConcentration = false,
+                    IsDruidSpell = false,
+                    IsPriestSpell = true,
+                    PreparationTime = 0,
+                    SourceId = 1,
+                    SourceType = (int)SpellSource.Mixed,
+                    SourceTypeDescription = "",
+                    SpellLevel = 1,
+                    //SpellSkillProtectionList = spellSkillProtectionList.ToList(),
+                    SpellType = (int)SpellType.Invocation,
+                    SpellTypeDescription = "",
+                    WithdrawalCondition = "",
+                },
+                new Spell
+                {
+                    Id = 3,
+                    Name = "Квен",
+                    Description = "Квен создаёт щит с 5 ПЗ за каждое очко Вын, потраченное на защиту." +
+                    " Если вы не смогли (или не захотели) защититься от атаки или наносящего урон эффекта, урон сначала применяется к щиту Квен." +
+                    " Смертельный и несмертельный урон одинаковым образом уменьшают ПЗ щита Квен." +
+                    " Когда ПЗ щита снижаются до 0, оставшийся урон применяется к укрывшемуся за ним персонажу." +
+                    " Чтобы повлиять на ваши ПЗ или Вын, урон должен сначала преодолеть ПБ и сопротивление урону, как при любой атаке." +
+                    " Квен можно применять против любых заклинаний, которые поддаются блокированию, но против остальных заклинаний он бессилен." +
+                    " Также Квен не действует на уже имеющийся урон от отравления, болезней или удушения от нехватки кислорода в воздухе." +
+                    " Квен нельзя сотворить снова, пока действует предыдущий такой же знак.",
+                    CheckDC = 0,
+                    ConcentrationEnduranceCost = 0,
+                    DangerInfo = "",
+                    Distance = 0,
+                    Duration = "10 раундов или пока не истрачен",
+                    EnduranceCost = 1,
+                    IsConcentration = false,
+                    IsDruidSpell = false,
+                    IsPriestSpell = false,
+                    PreparationTime = 0,
+                    SourceId = 1,
+                    SourceType = (int)SpellSource.Earth,
+                    SourceTypeDescription = "",
+                    SpellLevel = 1,
+                    //SpellSkillProtectionList = spellSkillProtectionList.ToList(),
+                    SpellType = (int)SpellType.Sign,
+                    SpellTypeDescription = "",
+                    WithdrawalCondition = "",
+                },
+                new Spell
+                {
+                    Id = 4,
+                    Name = "Пиромантия",
+                    Description = "Пиромантия позволяет заглянуть в пламя и увидеть происходящие события." +
+                    " Пиромантия несколько опаснее Гидромантии — её тяжелее поддерживать, к тому же огонь не позволяет смотреть в прошлое." +
+                    " Зато разглядеть события, происходящие в данный момент, куда проще. Как и в случае с Гидромантией, маг,за которым наблюдает заклинатель," +
+                    " может почувствовать слежку, совершив проверку Магических познаний со СЛ, равной результату проверки Проведения ритуалов",
+                    CheckDC = 15,
+                    ConcentrationEnduranceCost = 5,
+                    DangerInfo = "",
+                    Distance = 0,
+                    Duration = "активный",
+                    EnduranceCost = 4,
+                    IsConcentration = true,
+                    IsDruidSpell = false,
+                    IsPriestSpell = false,
+                    PreparationTime = 0,
+                    SourceId = 1,
+                    SourceType = (int)SpellSource.Mixed,
+                    SourceTypeDescription = "",
+                    SpellLevel = 1,
+                    //SpellSkillProtectionList = spellSkillProtectionList.ToList(),
+                    SpellType = (int)SpellType.Ritual,
+                    SpellTypeDescription = "",
+                    WithdrawalCondition = "",
+
+                },
+                new Spell
+                {
+                    Id = 5,
+                    Name = "Вечный зуд",
+                    Description = "На гениталиях жертвы высыпают воспалённые зудящие прыщи. Вечный зуд не наносит урона, но причиняет жертве постоянный дискомфорт," +
+                    " что даёт штраф -1 к любым действиям. Также жертва получает штраф -5 к Соблазнению, когда доходит до раздевания.",
+                    CheckDC = 0,
+                    ConcentrationEnduranceCost = 0,
+                    DangerInfo = "",
+                    Distance = 0,
+                    Duration = "",
+                    EnduranceCost = 5,
+                    IsConcentration = false,
+                    IsDruidSpell = false,
+                    IsPriestSpell = false,
+                    PreparationTime = 0,
+                    SourceId = 1,
+                    SourceType = (int)SpellSource.Mixed,
+                    SourceTypeDescription = "",
+                    SpellLevel = 1,
+                    //SpellSkillProtectionList = spellSkillProtectionList.ToList(),
+                    SpellType = (int)SpellType.Hex,
+                    SpellTypeDescription = "",
+                    WithdrawalCondition = "Жертва должна взять единицу склеродерма, немного собачьей петрушки и переступня," +
+                    " затем развести костёр и связать травы в пучок. Как только всё будет готово," +
+                    " травы нужно поджечь и пеплом посыпать пострадавший от порчи участок тела, произнося при этом магические слова",
                 },
             });
 
@@ -2310,9 +2421,28 @@ namespace TTRPG_Project.DAL.Data
                     SpellId = 1,
                     SkillId = 21,
                 },
+                new SpellSkillProtectionList
+                {
+                    Id = 6,
+                    SpellId = 2,
+                    MoreInfo = "Воля существа x3"
+                },
             };
 
             builder.Entity<SpellSkillProtectionList>().HasData(spellSkillProtectionList);
+
+            var spellComponentList = new SpellComponentList[]
+            {
+                new SpellComponentList
+                {
+                    Id = 1,
+                    SpellId = 4,
+                    ComponentId = 15,
+                    Amount = 2
+                }
+            };
+
+            builder.Entity<SpellComponentList>().HasData(spellComponentList);
 
             #endregion
         }

@@ -9,6 +9,7 @@ using TTRPG_Project.BL.Services.Users;
 using TTRPG_Project.BL.Services.Items;
 using TTRPG_Project.BL.Services.Additional;
 using TTRPG_Project.BL.Services.Creatures;
+using TTRPG_Project.BL.Services.Spells;
 
 namespace TTRPG_Project.BL.Extensions
 {
@@ -64,6 +65,8 @@ namespace TTRPG_Project.BL.Extensions
 
             services.AddScoped<LogService>();
             services.AddScoped<HeadlineService>();
+
+            services.AddScoped<SpellService>();
 
             return services;
         }

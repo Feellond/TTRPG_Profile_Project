@@ -1,3 +1,5 @@
+import { Source } from "./Source";
+
 interface EntityBase {
   id: number;
 }
@@ -5,7 +7,7 @@ interface EntityBase {
 interface EntityDescriptionBase extends EntityBase {
   name: string | null;
   description: string | null;
-  source: string | null;
+  source: Source | null;
 }
 
 interface EntityItemBase extends EntityDescriptionBase {
