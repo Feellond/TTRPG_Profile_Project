@@ -1,3 +1,8 @@
+import { DeleteIcon, EditIcon, SaveIcon } from "img";
+import { Button } from "primereact/button";
+import { InputNumber } from "primereact/inputnumber";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 import React, { useEffect, useState } from "react";
 import {
   Control,
@@ -53,6 +58,10 @@ export const ShowAbilities = ({
   };
 
   useEffect(() => {
+    if (!isEditMode) setEditIndex(null);
+  }, [isEditMode]);
+
+  useEffect(() => {
     fetchData();
   }, [data, statList, skillsList]);
 
@@ -74,7 +83,7 @@ export const ShowAbilities = ({
             <tr key={index}>
               <td>
                 {editIndex === index ? (
-                  <input
+                  <InputText
                     value={editValues.name}
                     onChange={(e) =>
                       setEditValues({ ...editValues, name: e.target.value })
@@ -86,11 +95,14 @@ export const ShowAbilities = ({
               </td>
               <td>
                 {editIndex === index ? (
-                  <input
+                  <InputNumber
                     type="number"
                     value={editValues.type}
                     onChange={(e) =>
-                      setEditValues({ ...editValues, type: parseInt(e.target.value) })
+                      setEditValues({
+                        ...editValues,
+                        type: e.value,
+                      })
                     }
                   />
                 ) : (
@@ -99,20 +111,26 @@ export const ShowAbilities = ({
               </td>
               <td>
                 {editIndex === index ? (
-                  <input
+                  <InputTextarea
+                    autoResize
                     value={editValues.description}
                     onChange={(e) =>
-                      setEditValues({ ...editValues, description: e.target.value })
+                      setEditValues({
+                        ...editValues,
+                        description: e.target.value,
+                      })
                     }
                   />
                 ) : (
                   ability.ability.description
                 )}
               </td>
-              <td>
+              <td className="flex flex-wrap">
                 {editIndex === index ? (
-                  <button
-                    onClick={() => {
+                  <Button
+                    icon="pi pi-check"
+                    onClick={(e) => {
+                      e.preventDefault();
                       const updatedAbilities = [...creatureAbilities];
                       updatedAbilities[index] = {
                         ...updatedAbilities[index],
@@ -121,33 +139,33 @@ export const ShowAbilities = ({
                       setCreatureAbilities(updatedAbilities);
                       setEditIndex(null);
                     }}
-                  >
-                    Сохранить
-                  </button>
+                  />
                 ) : (
-                  <button onClick={() => handleEdit(index)}>
-                    Редактирование
-                  </button>
-                )}
-                <td>
-                  <button
+                  <Button
+                    icon="pi pi-pencil"
                     onClick={(e) => {
                       e.preventDefault();
-                      const updatedAbilities = [...creatureAbilities];
-                      updatedAbilities.splice(index, 1); // Удаляем элемент по индексу index
-                      setCreatureAbilities(updatedAbilities);
+                      handleEdit(index);
                     }}
-                  >
-                    Удалить
-                  </button>
-                </td>
+                  />
+                )}
+                <Button
+                  icon="pi pi-trash"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const updatedAbilities = [...creatureAbilities];
+                    updatedAbilities.splice(index, 1); // Удаляем элемент по индексу index
+                    setCreatureAbilities(updatedAbilities);
+                  }}
+                />
               </td>
             </tr>
           ))}
           {isEditMode ? (
             <tr>
               <td>
-                <button
+                <Button
+                  label="Добавить"
                   onClick={(e) => {
                     e.preventDefault();
                     const newAbility: ICreatureAbilitys = {
@@ -165,9 +183,7 @@ export const ShowAbilities = ({
                     };
                     setCreatureAbilities([...creatureAbilities, newAbility]); // Добавляем новую атаку в конец массива
                   }}
-                >
-                  Добавить
-                </button>
+                />
               </td>
             </tr>
           ) : (

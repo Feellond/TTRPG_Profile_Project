@@ -187,7 +187,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
                     max={9999}
                     tooltip={
                       "Текущее значение: " +
-                      String(getValues("statsList.willValue")) +
+                      String(getValues("statsList.willpowerValue")) +
                       "(Воля) + " +
                       String(getValues("skillsList.magicResistanceValue")) +
                       "(Сопротивление заклинаниям) = " +

@@ -1,5 +1,12 @@
+import { AttackTypeToShortString } from "entities/BestiaryFunc";
+import { AttackTypeOptionsLoad } from "entities/BestiaryFunc/components/OptionsLoad";
 import { EffectOptionsLoad } from "entities/GeneralFunc";
+import { DeleteIcon, EditIcon, PlusIcon, SaveIcon } from "img";
+import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
+import { InputNumber } from "primereact/inputnumber";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 import { SelectItem } from "primereact/selectitem";
 import React, { useEffect, useState } from "react";
 import {
@@ -43,6 +50,7 @@ export const ShowAttacks = ({
   const [editValues, setEditValues] = useState<IAttack>(null);
 
   const [effectOptions, setEffectOptions] = useState<SelectItem[]>([]);
+  const [attackTypeOptions, setAttackTypeOptions] = useState<SelectItem[]>([]);
 
   const fetchData = () => {
     let getCreatureAttacks = getValues("creatureAttacks");
@@ -58,6 +66,7 @@ export const ShowAttacks = ({
 
   useEffect(() => {
     EffectOptionsLoad({ setItems: setEffectOptions });
+    AttackTypeOptionsLoad({setItems: setAttackTypeOptions});
 
     const handleResize = (event) => {
       setWidth(event.target.innerWidth);
@@ -67,6 +76,10 @@ export const ShowAttacks = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isEditMode) setEditIndex(null);
+  }, [isEditMode]);
 
   useEffect(() => {
     fetchData();
@@ -85,10 +98,19 @@ export const ShowAttacks = ({
             <th>{width <= 750 ? "Наз" : "Наименование"}</th>
             <th>{width <= 750 ? "Осн" : "Основа"}</th>
             <th>Тип</th>
-            <th>{width <= 750 ? "Ур" : "Урон"}</th>
+            <th className="w-1">{width <= 750 ? "Ур" : "Урон"}</th>
             <th>{width <= 750 ? "Над" : "Надежность"}</th>
             <th>{width <= 750 ? "Дал" : "Дальность"}</th>
-            <th>{width <= 750 ? "Эфф" : "Эффекты"}</th>
+            <th
+              style={{
+                width:
+                  editValues && editValues.attackEffectList.length > 0
+                    ? "15rem"
+                    : "auto",
+              }}
+            >
+              {width <= 750 ? "Эфф" : "Эффекты"}
+            </th>
             <th>СА</th>
           </thead>
           <tbody>
@@ -96,11 +118,13 @@ export const ShowAttacks = ({
               <tr key={index}>
                 <td>
                   {editIndex === index ? (
-                    <input
+                    <InputTextarea
+                      autoResize
                       value={editValues.name}
                       onChange={(e) =>
                         setEditValues({ ...editValues, name: e.target.value })
                       }
+                      rows={4}
                     />
                   ) : (
                     attack.attack.name
@@ -108,11 +132,10 @@ export const ShowAttacks = ({
                 </td>
                 <td>
                   {editIndex === index ? (
-                    <input
-                      type="number"
+                    <InputNumber
                       value={editValues.baseAttack}
                       onChange={(e) =>
-                        setEditValues({ ...editValues, baseAttack: parseInt(e.target.value) })
+                        setEditValues({ ...editValues, baseAttack: e.value })
                       }
                     />
                   ) : (
@@ -121,20 +144,26 @@ export const ShowAttacks = ({
                 </td>
                 <td>
                   {editIndex === index ? ( //Переделать под options
-                    <input
-                      type="number"
+                    <Dropdown
+                      value={editValues.attackType}
+                      options={attackTypeOptions}
+                      onChange={(e) => {
+                        setEditValues({...editValues, attackType: e.value})
+                      }}
+                    />
+                    /**<InputNumber
                       value={editValues.attackType}
                       onChange={(e) =>
-                        setEditValues({ ...editValues, attackType: parseInt(e.target.value) })
+                        setEditValues({ ...editValues, attackType: e.value })
                       }
-                    />
+                    /> */
                   ) : (
-                    attack.attack.attackType
+                    AttackTypeToShortString(attack.attack.attackType)
                   )}
                 </td>
                 <td>
                   {editIndex === index ? (
-                    <input
+                    <InputText
                       value={editValues.damage}
                       onChange={(e) =>
                         setEditValues({ ...editValues, damage: e.target.value })
@@ -146,11 +175,10 @@ export const ShowAttacks = ({
                 </td>
                 <td>
                   {editIndex === index ? (
-                    <input
-                      type="number"
+                    <InputNumber
                       value={editValues.reliability}
                       onChange={(e) =>
-                        setEditValues({ ...editValues, reliability: parseInt(e.target.value) })
+                        setEditValues({ ...editValues, reliability: e.value })
                       }
                     />
                   ) : (
@@ -159,11 +187,10 @@ export const ShowAttacks = ({
                 </td>
                 <td>
                   {editIndex === index ? (
-                    <input
-                      type="number"
+                    <InputNumber
                       value={editValues.distance}
                       onChange={(e) =>
-                        setEditValues({ ...editValues, distance: parseInt(e.target.value) })
+                        setEditValues({ ...editValues, distance: e.value })
                       }
                     />
                   ) : (
@@ -197,7 +224,7 @@ export const ShowAttacks = ({
                                 }
                                 optionLabel="label"
                                 options={effectOptions}
-                                placeholder="Выберите тип субстанции"
+                                placeholder="Тип субстанции"
                               />
                             </span>
                             <span className="field">
@@ -274,25 +301,19 @@ export const ShowAttacks = ({
                               type="button"
                               onClick={(e) => {
                                 e.preventDefault();
-                                const updatedAttacks = [...creatureAttacks];
-                                const updatedAttack = {
-                                  ...updatedAttacks[index],
-                                };
-                                const updatedEffects = [
-                                  ...updatedAttack.attack.attackEffectList,
+                                let updatedAttack = editValues;
+                                let updatedEffects = [
+                                  ...updatedAttack.attackEffectList,
                                 ];
 
                                 updatedEffects.splice(index2, 1);
-                                updatedAttacks[index] = {
-                                  ...updatedAttacks[index],
-                                  attack: {
-                                    ...editValues,
-                                    attackEffectList: updatedEffects,
-                                  },
+                                updatedAttack = {
+                                  ...updatedAttack,
+                                  attackEffectList: updatedEffects,
                                 };
 
-                                setCreatureAttacks(updatedAttacks);
-                                setEditIndex(null);
+                                setEditValues(updatedAttack);
+                                //setEditIndex(null);
                               }}
                             >
                               Убрать эффект
@@ -302,7 +323,8 @@ export const ShowAttacks = ({
                       ) : (
                         <div></div>
                       )}
-                      <button
+                      <Button
+                        icon="pi pi-plus"
                         type="button"
                         onClick={(e) => {
                           e.preventDefault();
@@ -321,9 +343,7 @@ export const ShowAttacks = ({
                             ],
                           })); // Добавляем новый эффект в конец массива
                         }}
-                      >
-                        Добавить эффект
-                      </button>
+                      />
                     </div>
                   ) : (
                     <div>
@@ -349,11 +369,10 @@ export const ShowAttacks = ({
                 </td>
                 <td>
                   {editIndex === index ? (
-                    <input
-                      type="number"
+                    <InputNumber
                       value={editValues.attackSpeed}
                       onChange={(e) =>
-                        setEditValues({ ...editValues, name: e.target.value })
+                        setEditValues({ ...editValues, attackSpeed: e.value })
                       }
                     />
                   ) : (
@@ -361,9 +380,10 @@ export const ShowAttacks = ({
                   )}
                 </td>
                 {isEditMode ? (
-                  <td>
+                  <td className="flex flex-wrap w-min">
                     {editIndex === index ? (
-                      <button
+                      <Button
+                        icon="pi pi-check"
                         onClick={(e) => {
                           e.preventDefault();
                           const updatedAttacks = [...creatureAttacks];
@@ -374,31 +394,25 @@ export const ShowAttacks = ({
                           setCreatureAttacks(updatedAttacks);
                           setEditIndex(null);
                         }}
-                      >
-                        Сохранить
-                      </button>
+                      />
                     ) : (
-                      <button
+                      <Button
+                        icon="pi pi-pencil"
                         onClick={(e) => {
                           e.preventDefault();
                           handleEdit(index);
                         }}
-                      >
-                        Редактировать
-                      </button>
+                      />
                     )}
-                    <td>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const updatedAttacks = [...creatureAttacks];
-                          updatedAttacks.splice(index, 1); // Удаляем элемент по индексу index
-                          setCreatureAttacks(updatedAttacks);
-                        }}
-                      >
-                        Удалить
-                      </button>
-                    </td>
+                    <Button
+                      icon="pi pi-trash"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const updatedAttacks = [...creatureAttacks];
+                        updatedAttacks.splice(index, 1); // Удаляем элемент по индексу index
+                        setCreatureAttacks(updatedAttacks);
+                      }}
+                    />
                   </td>
                 ) : (
                   ""
@@ -408,7 +422,8 @@ export const ShowAttacks = ({
             {isEditMode ? (
               <tr>
                 <td>
-                  <button
+                  <Button
+                    label="Добавить"
                     onClick={(e) => {
                       e.preventDefault();
                       const newAttack: ICreatureAttack = {
@@ -431,9 +446,7 @@ export const ShowAttacks = ({
                       };
                       setCreatureAttacks([...creatureAttacks, newAttack]); // Добавляем новую атаку в конец массива
                     }}
-                  >
-                    Добавить
-                  </button>
+                  />
                 </td>
               </tr>
             ) : (

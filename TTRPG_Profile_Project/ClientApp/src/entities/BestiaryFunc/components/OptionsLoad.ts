@@ -1,6 +1,7 @@
 import { OptionsParamsLoad } from "entities/Interface";
-import { Complexity } from "shared/enums/CreatureEnums";
+import { AttackType, Complexity } from "shared/enums/CreatureEnums";
 import bestiaryService from "shared/services/bestiary.service";
+import { AttackTypeToString } from "..";
 
 export const ComplexityLoad = ({ setItems }: OptionsParamsLoad) => {
   const complexityKeys = Object.keys(Complexity).filter((v) =>
@@ -9,6 +10,17 @@ export const ComplexityLoad = ({ setItems }: OptionsParamsLoad) => {
   const ITOptions = complexityKeys.map((key) => ({
     label: ComplexityKeyToRus(key) + String(" [" + Complexity[key] + "]"),
     value: Complexity[key],
+  }));
+  setItems(ITOptions);
+};
+
+export const AttackTypeOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
+  const attackTypeKeys = Object.keys(AttackType).filter((v) =>
+    isNaN(Number(v))
+  );
+  const ITOptions = attackTypeKeys.map((key) => ({
+    label: AttackTypeToString(AttackType[key]),
+    value: AttackType[key],
   }));
   setItems(ITOptions);
 };

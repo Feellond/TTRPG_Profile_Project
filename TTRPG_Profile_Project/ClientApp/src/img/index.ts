@@ -1,3 +1,4 @@
+import { PlusIcon, EditIcon, DeleteIcon, SaveIcon } from './components/GeneralIconsReturn';
 import {
   CaelumSVG,
   HydragenumSVG,
@@ -8,7 +9,7 @@ import {
   SolSVG,
   FulgurSVG,
   AetherSVG,
-} from "./SubstancesReturn";
+} from "./components/SubstancesReturn";
 
 export {
   CaelumSVG,
@@ -20,4 +21,9 @@ export {
   SolSVG,
   FulgurSVG,
   AetherSVG,
+
+  PlusIcon,
+  EditIcon,
+  DeleteIcon,
+  SaveIcon,
 };

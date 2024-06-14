@@ -20,12 +20,12 @@
   }
 }
 
-.creatureInfo .p-accordion .p-accordion-header .p-accordion-header-link{
-    background-color: white;
+.creatureInfo .p-accordion .p-accordion-header .p-accordion-header-link {
+  background-color: white;
 }
 
 .creatureInfo .p-accordion .p-accordion-content {
-    background-color: white;
+  background-color: white;
 }
 
 .creatureAttacks,
@@ -36,6 +36,7 @@
     //width: 100%;
     border-collapse: collapse;
     border: 1px solid black;
+    
   }
 
   thead th {
@@ -48,7 +49,8 @@
 
   th,
   td {
-    padding: 5px;
+    width: min-content;
+    padding: 3px;
   }
 
   tbody td {
@@ -62,6 +64,15 @@
 
   tbody tr:nth-child(even) {
     //background-color: #e495e4;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  input {
+    padding: 2px;
+    width: 100%;
   }
 }
 
@@ -89,7 +100,7 @@
     @media (max-width: 800px) {
       max-width: 300px;
     }
-    
+
     @media (max-width: 400px) {
       max-width: 250px;
     }
@@ -100,9 +111,27 @@
   }
 }
 
-.statList, .skillsList, .baseList, .infoAndRewardList {
+.statList,
+.skillsList,
+.baseList,
+.infoAndRewardList {
   input {
     padding: 2px;
     width: 35px;
+  }
+}
+
+.input-text {
+  width: 200px !important;
+}
+
+.showInfo {
+  display: flex;
+  align-items: center;
+
+  .controller {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    margin-left: 0.25rem !important;
   }
 }

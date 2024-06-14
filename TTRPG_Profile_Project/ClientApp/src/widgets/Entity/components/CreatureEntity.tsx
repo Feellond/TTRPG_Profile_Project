@@ -269,7 +269,6 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
       </div>
       <div className="card block bg-bluegray-50 mb-4 text-0">
         <form className="p-2 creatureForm">
-          {/* name */}
           {!isEditMode ? (
             <div
               className="p-2 text-2xl font-semibold"
@@ -479,6 +478,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
           </div>
 
           <Button
+            visible={isEditMode}
             icon="pi pi-pencil"
             className="ml-auto p-onlytext p-rounded"
             onClick={(e) => {
@@ -513,6 +513,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
           <div>
             <Button
+              visible={isEditMode}
               icon="pi pi-pencil"
               className="ml-auto p-onlytext p-rounded"
               onClick={(e) => {
@@ -609,19 +610,19 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                     name="superstitionsInformation"
                     control={control}
                     render={({ field }) => (
-                      <>
-                        <Editor
-                          id={field.name}
-                          value={field.value}
-                          onTextChange={(e: EditorTextChangeEvent) => {
-                            field.onChange(e.htmlValue);
-                            field.value = e.htmlValue;
-                            register("superstitionsInformation", {
-                              value: e.htmlValue,
-                            });
-                          }}
-                        />
-                      </>
+                      <Editor
+                        id={field.name}
+                        value={field.value}
+                        onLoad={() => {
+                          console.log('start: ', field.value);
+                        }}
+                        onTextChange={(e: EditorTextChangeEvent) => {
+                          field.onChange(e.htmlValue);
+                          // register("superstitionsInformation", {
+                          //   value: e.htmlValue,
+                          // });
+                        }}
+                      />
                     )}
                   />
                 )}
@@ -642,19 +643,16 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                     name="monsterLoreInformation"
                     control={control}
                     render={({ field }) => (
-                      <>
-                        <Editor
-                          id={field.name}
-                          value={field.value}
-                          onTextChange={(e: EditorTextChangeEvent) => {
-                            field.onChange(e.htmlValue);
-                            field.value = e.htmlValue;
-                            register("monsterLoreInformation", {
-                              value: e.htmlValue,
-                            });
-                          }}
-                        />
-                      </>
+                      <Editor
+                        id={field.name}
+                        value={field.value}
+                        onTextChange={(e: EditorTextChangeEvent) => {
+                          field.onChange(e.htmlValue);
+                          // register("monsterLoreInformation", {
+                          //   value: e.htmlValue,
+                          // });
+                        }}
+                      />
                     )}
                   />
                 )}

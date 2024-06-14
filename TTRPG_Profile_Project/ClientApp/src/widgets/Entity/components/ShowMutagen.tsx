@@ -112,6 +112,13 @@ export const ShowMutagen = ({
                 <div className="ml-1">{mutagen.mutation}</div>
               )}
             </div>
+            <div>
+              <button type="button" onClick={() => {
+                setMutagen(null);
+              }}>
+                Убрать мутаген
+              </button>
+            </div>
           </div>
         </div>
       ) : (

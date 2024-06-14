@@ -65,19 +65,13 @@ const ListShow = ({
   const showContentFunc = ({ data }) => {
     if ("itemType" in data) {
       // Переменная data имеет тип ItemDTO
-      return (
-          <ShowItem data={data} />
-      );
+      return <ShowItem data={data} />;
     } else if ("spellLevel" in data) {
       // Переменная data имеет тип SpellDTO
-      return (
-          <ShowSpell data={data}/>
-      );
+      return <ShowSpell data={data} />;
     } else {
       // Переменная data имеет тип BestiaryDTO
-      return (
-          <ShowBestiary data={data}/>
-      );
+      return <ShowBestiary data={data} />;
     }
   };
 
@@ -105,26 +99,38 @@ const ListShow = ({
       // Переменная data имеет тип SpellDTO
       return (
         <div>
-          <DeleteSpellDialog />
-          <EditSpellDialog />
+          <DeleteSpellDialog
+            data={entity}
+            visible={deleteDialogVisible}
+            deleteSpell={deleteEntity}
+            onHide={hideDialog}
+          />
+          <EditSpellDialog
+            data={entity}
+            header={editDialogHeader}
+            visible={editDialogVisible}
+            onHide={hideDialog}
+            onSave={saveEntity}
+          />
         </div>
       );
     } else {
       // Переменная data имеет тип BestiaryDTO
       return (
         <div>
-          <DeleteBestiaryDialog 
-          data={entity}
-          visible={deleteDialogVisible}
-          deleteCreature={deleteEntity}
-          onHide={hideDialog}
+          <DeleteBestiaryDialog
+            data={entity}
+            visible={deleteDialogVisible}
+            deleteCreature={deleteEntity}
+            onHide={hideDialog}
           />
-          <EditBestiaryDialog 
-          data={entity}
-          header={editDialogHeader}
-          visible={editDialogVisible}
-          onSave={fetchData}
-          onHide={hideDialog}/>
+          <EditBestiaryDialog
+            data={entity}
+            header={editDialogHeader}
+            visible={editDialogVisible}
+            onSave={fetchData}
+            onHide={hideDialog}
+          />
         </div>
       );
     }
@@ -205,6 +211,8 @@ const ListShow = ({
       result = await itemService.deleteEntity({ id, itemType, toast });
     else if ("race" in entity)
       result = await bestiaryService.deleteEntity({ id });
+    else if ("spellLevel" in entity)
+      result = await spellService.deleteEntity({ id });
 
     if (result !== false) {
       hideDialog();
@@ -226,8 +234,7 @@ const ListShow = ({
         result = await bestiaryService.getEntitys({
           params: getParams(),
         });
-      }
-      else {
+      } else {
         result = await spellService.getEntitys({
           params: getParams(),
         });

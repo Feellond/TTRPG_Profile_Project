@@ -1,4 +1,4 @@
-import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
 import React, { useEffect, useState } from "react";
 import {
   Control,
@@ -58,7 +58,8 @@ export const ShowTrophy = ({
               <span>Эффект:</span>
               {isEditMode ? (
                 <div>
-                  <InputText
+                  <InputTextarea
+                    autoResize
                     value={trophy.description}
                     onChange={(e) => {
                       trophy.description = e.target.value; //Не уверен, что работает
@@ -68,6 +69,13 @@ export const ShowTrophy = ({
               ) : (
                 <div className="ml-1">{trophy.description}</div>
               )}
+            </div>
+            <div>
+              <button type="button" onClick={() => {
+                setTrophy(null);
+              }}>
+                Убрать трофей
+              </button>
             </div>
           </div>
         </div>
