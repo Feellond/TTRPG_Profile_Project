@@ -1,5 +1,5 @@
 import { ShowFilter } from "widgets/Filters";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../scss/style.scss";
 import { Button } from "primereact/button";
 import {
@@ -14,12 +14,16 @@ import { Toast } from "primereact/toast";
 import { FindIndexById } from "entities/GeneralFunc";
 import { ShowItem } from "./ShowItem";
 import {
+  ClassFilterDTO,
   CreatureFilterDTO,
+  IClass,
   ICreature,
+  IRace,
   ISpell,
   ItemDTO,
   ItemFilterDTO,
   LazyState,
+  RaceFilterDTO,
   SpellFilterDTO,
 } from "shared/models";
 import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
@@ -28,21 +32,39 @@ import { ShowBestiary } from "./ShowBestiary";
 import itemService from "shared/services/item.service";
 import bestiaryService from "shared/services/bestiary.service";
 import spellService from "shared/services/spell.service";
+import { Context } from "index";
+import { ShowClass } from "./ShowClass";
+import { ShowRace } from "./ShowRace";
 
 interface IListShow {
   getParams: () => {};
   lazyState: LazyState;
-  entityList: ItemDTO[] | ICreature[] | ISpell[];
+  entityList: ItemDTO[] | ICreature[] | ISpell[] | IClass[] | IRace[];
   setEntityList: React.Dispatch<
-    React.SetStateAction<ItemDTO[] | ICreature[] | ISpell[]>
+    React.SetStateAction<
+      ItemDTO[] | ICreature[] | ISpell[] | IClass[] | IRace[]
+    >
   >;
-  entity: ItemDTO | ICreature | ISpell;
-  setEntity: React.Dispatch<React.SetStateAction<ItemDTO | ICreature | ISpell>>;
-  emptyEntity: ItemDTO | ICreature | ISpell;
+  entity: ItemDTO | ICreature | ISpell | IClass | IRace;
+  setEntity: React.Dispatch<
+    React.SetStateAction<ItemDTO | ICreature | ISpell | IClass | IRace>
+  >;
+  emptyEntity: ItemDTO | ICreature | ISpell | IClass | IRace;
   toast: React.MutableRefObject<Toast>;
-  filter: ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO;
+  filter:
+    | ItemFilterDTO
+    | CreatureFilterDTO
+    | SpellFilterDTO
+    | RaceFilterDTO
+    | ClassFilterDTO;
   setFilter: React.Dispatch<
-    React.SetStateAction<ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO>
+    React.SetStateAction<
+      | ItemFilterDTO
+      | CreatureFilterDTO
+      | SpellFilterDTO
+      | RaceFilterDTO
+      | ClassFilterDTO
+    >
   >;
 }
 
@@ -62,6 +84,8 @@ const ListShow = ({
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
   const [editDialogHeader, setEditDialogHeader] = useState<string>("");
 
+  const { store } = useContext(Context);
+
   const showContentFunc = ({ data }) => {
     if ("itemType" in data) {
       // Переменная data имеет тип ItemDTO
@@ -69,9 +93,15 @@ const ListShow = ({
     } else if ("spellLevel" in data) {
       // Переменная data имеет тип SpellDTO
       return <ShowSpell data={data} />;
-    } else {
+    } else if ("blockBase" in data) {
       // Переменная data имеет тип BestiaryDTO
       return <ShowBestiary data={data} />;
+    }
+    else if ("energy" in entity) {
+      return <ShowClass data={data} />
+    }
+    else {
+      return <ShowRace data={data} />
     }
   };
 
@@ -114,7 +144,7 @@ const ListShow = ({
           />
         </div>
       );
-    } else {
+    } else if ("blockBase" in entity) {
       // Переменная data имеет тип BestiaryDTO
       return (
         <div>
@@ -187,15 +217,15 @@ const ListShow = ({
           entity: entity as ItemDTO,
           toast,
         });
-    } else if ("race" in entity) {
-      // if (entity.id !== 0)
-      //   result = await bestiaryService.updateEntity({
-      //     entity: entity as ICreature,
-      //   });
-      // else
-      //   result = await bestiaryService.createEntity({
-      //     entity: entity as ICreature,
-      //   });
+    } else if ("spellType" in entity) {
+      if (entity.id !== 0)
+        result = await spellService.updateEntity({
+          entity: entity as ISpell,
+        });
+      else
+        result = await spellService.createEntity({
+          entity: entity as ISpell,
+        });
     }
 
     if (result !== false) {
@@ -230,12 +260,22 @@ const ListShow = ({
           toast: toast,
           params: getParams(),
         });
-      } else if ("race" in entity) {
+      } else if ("blockBase" in entity) {
         result = await bestiaryService.getEntitys({
           params: getParams(),
         });
-      } else {
+      } else if ("spellType" in entity) {
         result = await spellService.getEntitys({
+          params: getParams(),
+        });
+      }
+      else if ("energy" in entity) {
+        result = await bestiaryService.getClasses({
+          params: getParams(),
+        });
+      }
+      else {
+        result = await bestiaryService.getRaces({
           params: getParams(),
         });
       }
@@ -286,7 +326,8 @@ const ListShow = ({
               <div className="flex flex-column text-0">
                 <div>
                   {showContentFunc({ data: it })}
-                  {"itemType" in entity ? (
+                  {store.isAuth ? "" : ""}
+                  {"itemType" in entity || "spellType" in entity ? (
                     <div>
                       Footer
                       <Button

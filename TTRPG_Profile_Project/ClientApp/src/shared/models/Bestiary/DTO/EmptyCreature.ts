@@ -1,4 +1,3 @@
-import { CreatureRequest } from "../Request/CreatureRequestDTO";
 import {
   IAbilitiy,
   IAttack,
@@ -55,6 +54,7 @@ export const emptyClass: IClass = {
   source: null,
   energy: 0,
   defaultMagicAbilities: "",
+  skillsTree: null,
 };
 
 export const emptyCreature: ICreature = {

@@ -11,9 +11,9 @@ namespace TTRPG_Project.BL.DTO.Filters
         public List<Expression<Func<ItemBaseInfo, bool>>> whereExpression = new List<Expression<Func<ItemBaseInfo, bool>>>();
         public List<Func<IQueryable<ItemBaseInfo>, IIncludableQueryable<ItemBaseInfo, object>>> includeExpression = new();
 
-        public int First { get; set; }
-        public int Page { get; set; }
-        public int PageSize { get; set; }
+        public int First { get; set; } = 0;
+        public int Page { get; set; } = 0;
+        public int PageSize { get; set; } = 9999;
 
         public string? Name { get; set; }
         public List<int>? ItemType { get; set; }

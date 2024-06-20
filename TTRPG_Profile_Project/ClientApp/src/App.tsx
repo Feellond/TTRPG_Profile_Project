@@ -30,13 +30,13 @@ export const App = () => {
 
   useEffect(() => {
     (async () => {
-      //await store.checkAuth();
+      await store.checkAuth();
     })();
   }, [])
 
-  if (store.isLoading) {
-    return <div>Загрузка...</div> //Loader
-  }
+  // if (store.isLoading) {
+  //   return <div>Загрузка...</div> //Loader
+  // }
 
   return (
     <Context.Provider value={{

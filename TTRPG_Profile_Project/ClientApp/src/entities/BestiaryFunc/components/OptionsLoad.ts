@@ -27,7 +27,7 @@ export const AttackTypeOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
 
 export const RaceLoad = async ({ setItems }: OptionsParamsLoad) => {
   try {
-    let responce = await bestiaryService.getRaces()
+    let responce = await bestiaryService.getRaces({params: {}})
     if (responce && responce.data) {
 
       const options = responce.data.races.map((data, index) => ({

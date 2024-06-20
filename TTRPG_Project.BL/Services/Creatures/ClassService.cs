@@ -22,12 +22,13 @@ namespace TTRPG_Project.BL.Services.Creatures
         {
             var classes = await _dbContext.Classes.AsNoTracking()
                 .Include(s => s.Source)
+                .Include(s => s.SkillsTree)
                 .ToListAsync();
 
             ClassResponce responce = new()
             {
                 Count = classes.Count(),
-                Classes = classes,
+                Entitys = classes,
             };
 
             return responce;
@@ -46,7 +47,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             ClassResponce responce = new()
             {
                 Count = 1,
-                Classes = new List<Class>() { singleClass },
+                Entitys = new List<Class>() { singleClass },
             };
 
             return responce;

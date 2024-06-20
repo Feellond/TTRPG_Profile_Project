@@ -15,7 +15,6 @@ const SubstanceOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
     value: SubstanceType[key],
   }));
   setItems(ITOptions);
-  console.log(ITOptions);
 };
 
 const WhereToFindOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
@@ -27,7 +26,6 @@ const WhereToFindOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
     value: WhereToFindEnum[key],
   }));
   setItems(ITOptions);
-  console.log(ITOptions);
 };
 
 const StealthOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
@@ -39,7 +37,6 @@ const StealthOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
     value: ItemStealthType[key],
   }));
   setItems(ITOptions);
-  console.log(ITOptions);
 };
 
 const SourceOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
@@ -53,8 +50,6 @@ const SourceOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
         label: data.name,
         value: data,
       }));
-
-      console.log("Source options:", options);
 
       setItems(options);
     }
@@ -74,8 +69,6 @@ const EffectOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
         label: data.name,
         value: data,
       }));
-
-      console.log("Source options:", options);
 
       setItems(options);
     }

@@ -1,14 +1,16 @@
 import React, { FC } from "react";
 import {
+  ClassFilterDTO,
   CreatureFilterDTO,
   ItemFilterDTO,
+  RaceFilterDTO,
   SpellFilterDTO,
 } from "shared/models";
 import { ItemFilter } from "./ItemFilter";
 import { BestiaryFilter, SpellFilter } from "..";
 
 type Props = {
-  filter: ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO;
+  filter: ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO | RaceFilterDTO | ClassFilterDTO;
   setFilter: React.Dispatch<
     React.SetStateAction<ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO>
   >;
@@ -31,7 +33,7 @@ const ShowFilter: FC<Props> = ({ filter, setFilter }) => {
         <SpellFilter filter={filter as SpellFilterDTO} setFilter={setFilter} />
       </div>
     );
-  } else {
+  } else if ("blockBase" in filter) {
     // Переменная data имеет тип BestiaryDTO
     console.log("filter: ", filter);
     content = (

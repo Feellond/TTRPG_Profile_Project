@@ -38,6 +38,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
           ) : (
             ""
           )}
+          <i>, {data.source?.name}</i>
         </li>
         <li>
           <div>

@@ -8,12 +8,14 @@ import { SourceOptionsLoad } from "entities/GeneralFunc";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
+import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { SelectItem } from "primereact/selectitem";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ISpell } from "shared/models";
+import { SpellTypeSelect } from "./SpellTypeSelect";
 
 interface IEditSpellDialog {
   data: ISpell;
@@ -30,15 +32,13 @@ const EditSpellDialog = ({
   onHide,
   onSave,
 }: IEditSpellDialog) => {
-  const [spellSourceOptions, setSpellSourceOptions] = useState<SelectItem[]>(
-    []
-  );
-  const [spellLevelOptions, setSpellLevelOptions] = useState<SelectItem[]>([]);
-  const [spellTypeOptions, setSpellTypeOptions] = useState<SelectItem[]>([]);
-  const [spellCategoryOptions, setSpellCategoryOptions] = useState<
-    SelectItem[]
-  >([]);
   const [sourceOptions, setSourceOptions] = useState<SelectItem[]>([]);
+  const [spellTypeOptions, setSpellTypeOptions] = useState<SelectItem[]>([]);
+
+  const [spellTypeSelectVisible, setSpellTypeSelectVisible] =
+    useState<boolean>(false);
+
+  const [spellType, setSpellType] = useState<number>(undefined);
 
   const {
     register,
@@ -101,6 +101,10 @@ const EditSpellDialog = ({
     setValue("sourceTypeDescription", data.sourceTypeDescription);
     setValue("isPriestSpell", data.isPriestSpell);
     setValue("isDruidSpell", data.isDruidSpell);
+
+    setSpellType(data.spellType);
+    if (getValues("spellType") !== undefined) setSpellTypeSelectVisible(true);
+    else setSpellTypeSelectVisible(false);
   };
 
   const footerContent = (
@@ -121,10 +125,7 @@ const EditSpellDialog = ({
   );
 
   useEffect(() => {
-    SpellSourceOptionsLoad({ setItems: setSpellSourceOptions });
-    SpellLevelOptionsLoad({ setItems: setSpellLevelOptions });
     SpellTypeOptionsLoad({ setItems: setSpellTypeOptions });
-    SpellCategotyOptionsLoad({ setItems: setSpellCategoryOptions });
     SourceOptionsLoad({ setItems: setSourceOptions });
   }, []);
 
@@ -143,8 +144,8 @@ const EditSpellDialog = ({
       className="p-fluid w-auto w-8"
     >
       <form>
-        <div className="align-items-center mt-3">
-          <div className="field flex flex-column col-3">
+        <div className="align-items-center mt-4">
+          <div className="field flex flex-column">
             <span className="p-float-label">
               <Controller
                 name="name"
@@ -164,7 +165,7 @@ const EditSpellDialog = ({
               <label>Наименование</label>
             </span>
           </div>
-          <div className="field flex flex-column col-3">
+          <div className="field flex flex-column">
             <span className="p-float-label">
               <Controller
                 name="spellType"
@@ -176,6 +177,10 @@ const EditSpellDialog = ({
                       value={field.value}
                       onChange={(e: DropdownChangeEvent) => {
                         field.onChange(e.value);
+                        setSpellType(e.value);
+                        if (getValues("spellType") !== undefined)
+                          setSpellTypeSelectVisible(true);
+                        else setSpellTypeSelectVisible(false);
                       }}
                       optionLabel="label"
                       options={spellTypeOptions}
@@ -183,10 +188,10 @@ const EditSpellDialog = ({
                   </>
                 )}
               />
-              <label>Доступность</label>
+              <label>Тип заклинания</label>
             </span>
           </div>
-          <div className="field flex flex-column col-3">
+          <div className="field flex flex-column">
             <span className="p-float-label">
               <Controller
                 name="source"
@@ -208,7 +213,21 @@ const EditSpellDialog = ({
               <label>Источник</label>
             </span>
           </div>
-          <div className="field flex flex-column col-12">
+          <div className="field flex flex-column">
+          <span className="p-float-label">
+            <InputNumber
+              value={data.enduranceCost}
+              min={0}
+              max={999}
+              placeholder="ВЫН"
+              onValueChange={(e) => {
+                register("enduranceCost", { value: e.target.value });
+              }}
+            />
+            <label>Затраты ВЫН</label>
+          </span>
+          </div>
+          <div className="field flex flex-column">
             <span className="p-float-label">
               <Controller
                 name="description"
@@ -227,8 +246,20 @@ const EditSpellDialog = ({
                   </>
                 )}
               />
-              <label>Описание</label>
+              <label>Эффект</label>
             </span>
+          </div>
+          <div className="field flex flex-column">
+            <SpellTypeSelect
+              data={data}
+              visible={spellTypeSelectVisible}
+              //itemType={getValues("itemType")}
+              spellType={spellType}
+              control={control}
+              register={register}
+              getValues={getValues}
+              setValue={setValue}
+            />
           </div>
         </div>
       </form>

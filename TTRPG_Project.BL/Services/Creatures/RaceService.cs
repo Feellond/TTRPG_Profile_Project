@@ -27,7 +27,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             RaceResponce responce = new()
             {
                 Count = races.Count(),
-                Races = races,
+                Entitys = races,
             };
 
             return responce;
@@ -46,7 +46,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             RaceResponce responce = new()
             {
                 Count = 1,
-                Races = new List<Race>() { race },
+                Entitys = new List<Race>() { race },
             };
 
             return responce;

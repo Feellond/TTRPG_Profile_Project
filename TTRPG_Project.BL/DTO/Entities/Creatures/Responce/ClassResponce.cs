@@ -5,6 +5,6 @@ namespace TTRPG_Project.BL.DTO.Entities.Creatures.Responce
     public class ClassResponce
     {
         public int Count { get; set; }
-        public List<Class>? Classes { get; set; }
+        public List<Class>? Entitys { get; set; }
     }
 }

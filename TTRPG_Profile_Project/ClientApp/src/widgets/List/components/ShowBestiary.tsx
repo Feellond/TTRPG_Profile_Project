@@ -23,7 +23,8 @@ const ShowBestiary = ({ data }: ShowBestiaryProps) => {
       <ul className="p-2 params">
         <li>
           <i>{data.race.name}, </i>
-          <i>{ComplexityValueToString(data.complexity)}</i>
+          <i>{ComplexityValueToString(data.complexity)}, </i>
+          <i>{data.source?.name}</i>
         </li>
         {/*<li className="my-2">
           <div>{data.description}</div>

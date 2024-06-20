@@ -51,6 +51,8 @@ const ItemTypeSelect = ({
     useState<boolean>(false);
   const [isAlchemicalChecked, setIsAlchemicalChecked] =
     useState<boolean>(false);
+
+    
   const [componentsOptions, setComponentsOptions] = useState<SelectItem[]>([]);
   const [skillOptions, setSkillOptions] = useState<SelectItem[]>([]);
   const [stealthOptions, setStealthOptions] = useState<SelectItem[]>([]);
@@ -99,7 +101,8 @@ const ItemTypeSelect = ({
   }, [effects]);
 
   const handleAddEffect = () => {
-    setEffects(effects => [...effects, { id: 0, chancePercent: 0, damage: "", effect: null, isDealDamage: false}]);
+    const initialEffects = effects || [];
+    setEffects(effects => [...initialEffects, { id: 0, chancePercent: 0, damage: "", effect: null, isDealDamage: false}]);
   };
 
   const handleRemoveEffect = (index: number) => {
@@ -164,7 +167,7 @@ const ItemTypeSelect = ({
       default:
         setContent(<div></div>);
     }
-  }, [itemType, isAmmunitionChecked, data, substances, components, isAlchemicalChecked]);
+  }, [itemType, isAmmunitionChecked, data, substances, components, effects, isAlchemicalChecked]);
 
   const WeaponItem = () => {
     return (
@@ -664,7 +667,8 @@ const ItemTypeSelect = ({
   }, [substances]);
 
   const handleAddSubstance = () => {
-    setSubstances(substances => [...substances, { id: 0, substanceType: 1, amount: 0 }]);
+    const initialSubstances = substances || [];
+    setSubstances(substances => [...initialSubstances, { id: 0, substanceType: 1, amount: 0 }]);
   };
 
   const handleRemoveSubstance = (index: number) => {
@@ -786,7 +790,8 @@ const ItemTypeSelect = ({
   }, [components]);
 
   const handleAddComponent = () => {
-    setComponents([...components, { id: 0, component: null, amount: 0 }]);
+    const initialComponents = components || [];
+    setComponents(components => [...initialComponents, { id: 0, component: null, amount: 0 }]);
   };
 
   const handleRemoveComponent = (index: number) => {

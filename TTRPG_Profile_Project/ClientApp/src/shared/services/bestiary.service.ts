@@ -1,10 +1,14 @@
-import { API_CREATURE, API_RACE, API_SKILL } from "shared/api/api_const";
+import { API_CLASS, API_CREATURE, API_RACE, API_SKILL } from "shared/api/api_const";
 import $api from "shared/api/axiosInstance";
 import { CreatureRequestDTO } from "shared/models";
 
 export class BestiaryService {
-  async getRaces() {
-    return await $api.get(API_RACE);
+  async getClasses({ params }) {
+    return await $api.get(API_CLASS, { params: params });
+  }
+
+  async getRaces({ params }) {
+    return await $api.get(API_RACE, { params: params });
   }
 
   async getSkills() {

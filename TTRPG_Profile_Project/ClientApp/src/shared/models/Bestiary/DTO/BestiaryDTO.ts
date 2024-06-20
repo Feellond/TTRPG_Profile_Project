@@ -31,6 +31,7 @@ export interface IAttackEffectList {
 export interface IClass extends EntityDescriptionBase {
   energy: number;
   defaultMagicAbilities: string;
+  skillsTree: ISkillsTree;
 }
 
 export interface ICreature extends EntityDescriptionBase {

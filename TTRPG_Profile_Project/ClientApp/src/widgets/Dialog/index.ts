@@ -4,6 +4,7 @@ import { DeleteSpellDialog } from "./components/Spell/DeleteSpellDialog";
 import { EditSpellDialog } from "./components/Spell/EditSpellDialog";
 import { DeleteBestiaryDialog } from "./components/Bestiary/DeleteBestiaryDialog";
 import { EditBestiaryDialog } from "./components/Bestiary/EditBestiaryDialog";
+import { SpellTypeSelect } from "./components/Spell/SpellTypeSelect";
 
 export {
   EditItemShortDialog,
@@ -12,4 +13,5 @@ export {
   DeleteItemDialog,
   DeleteSpellDialog,
   DeleteBestiaryDialog,
+  SpellTypeSelect,
 };

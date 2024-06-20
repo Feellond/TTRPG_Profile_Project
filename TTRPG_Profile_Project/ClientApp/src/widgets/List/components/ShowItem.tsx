@@ -32,6 +32,7 @@ const ShowItem = ({ data }: ShowItemProps) => {
             {drawAvailabilityType(data)}
             {drawWeaponEquipmentType(data)}
             {drawArmorEquipmentType(data)}
+            , {data.source?.name}
           </i>
         </li>
         <li>

@@ -6,7 +6,7 @@ import {
 import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { InputText } from "primereact/inputtext";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ICreature, ISkillsList, IStatsList } from "shared/models";
 import { ShowSkills } from "./ShowSkills/ShowSkills";
@@ -30,6 +30,7 @@ import {
 import { CreatureEffectType } from "shared/enums/CreatureEnums";
 import { ShowMutagen } from "./ShowMutagen";
 import { ShowTrophy } from "./ShowTrophy";
+import { Context } from "index";
 
 interface ICreatureEntity {
   data: ICreature;
@@ -53,6 +54,8 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   const [complexityOptions, setComplexityOptions] = useState<SelectItem[]>([]);
   const [raceOptions, setRaceOptions] = useState<SelectItem[]>([]);
   const [sourceOptions, setSourceOptions] = useState<SelectItem[]>([]);
+
+  const { store } = useContext(Context);
 
   const {
     register,
@@ -259,6 +262,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   return (
     <div className="w-full" style={{ marginTop: "-20px" }}>
       <div className="flex">
+        {store.isAuth ? ("") : ("")}
         <Button
           label="Изменить"
           onClick={() => setIsEditMode(!isEditMode)}

@@ -54,6 +54,8 @@ import type {
   ISpellComponentList,
   ISpellSkillProtectionList,
 } from "./Spell/DTO/SpellDTO";
+import type { ClassFilterDTO } from './Bestiary/Request/ClassFilterDTO';
+import type { RaceFilterDTO } from './Bestiary/Request/RaceFilterDTO';
 
 export {
   ILoginDTO,
@@ -66,13 +68,13 @@ export {
   Component,
   Formula,
   Blueprint,
-  ItemFilterDTO,
   LazyState,
   emptyItem,
   ISpell,
   ISpellSkillProtectionList,
   ISpellComponentList,
   emptySpell,
+  
   IAbilitiy,
   IAttack,
   IAttackEffectList,
@@ -88,7 +90,6 @@ export {
   ISkillsTree,
   IStat,
   IStatsList,
-  CreatureFilterDTO,
   emptyAbilitiy,
   emptyAttack,
   emptyAttackEffectList,
@@ -101,9 +102,14 @@ export {
   emptySkillsTree,
   emptyStat,
   emptyStatsList,
-  SpellFilterDTO,
   CreatureRequest,
   CreatureRequestDTO,
   IMutagen,
   ITrophy,
+
+  ItemFilterDTO,
+  CreatureFilterDTO,
+  SpellFilterDTO,
+  ClassFilterDTO,
+  RaceFilterDTO,
 };
