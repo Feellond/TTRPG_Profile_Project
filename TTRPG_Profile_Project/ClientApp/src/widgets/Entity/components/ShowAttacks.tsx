@@ -89,7 +89,7 @@ export const ShowAttacks = ({
     register("creatureAttacks", { value: creatureAttacks });
   }, [creatureAttacks]);
 
-  return creatureAttacks?.length > 0 ? (
+  return creatureAttacks?.length > 0 || isEditMode ? (
     <div className="creatureAttacks">
       <p>Атаки:</p>
       <div>

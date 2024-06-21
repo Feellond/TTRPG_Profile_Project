@@ -30,7 +30,7 @@ export const RaceLoad = async ({ setItems }: OptionsParamsLoad) => {
     let responce = await bestiaryService.getRaces({params: {}})
     if (responce && responce.data) {
 
-      const options = responce.data.races.map((data, index) => ({
+      const options = responce.data.entitys.map((data, index) => ({
         label: data.name,
         value: data,
       }));

@@ -36,7 +36,12 @@
     //width: 100%;
     border-collapse: collapse;
     border: 1px solid black;
-    
+    min-width: 410px;
+    z-index: 3;
+
+    .p-inputtext, .p-inputnumber, .p-dropdown, .p-multiselect {
+      width: -webkit-fill-available;
+    }
   }
 
   thead th {
@@ -72,14 +77,7 @@
 
   input {
     padding: 2px;
-    width: 100%;
-  }
-}
-
-.creatureAttacks {
-  table {
-    min-width: 410px;
-    z-index: 3;
+    //width: 100%;
   }
 }
 
