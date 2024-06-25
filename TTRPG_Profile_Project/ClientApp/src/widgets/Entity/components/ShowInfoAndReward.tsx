@@ -290,7 +290,7 @@ export const ShowInfoAndReward = ({
           <div className="my-2">
             {resistances ? (
               resistances.map((resistance, index) => (
-                <div key={index} className="flex text-center align-items-center">
+                <div key={index} className="flex flex-wrap text-center align-items-center">
                   <span className="field">
                     <label>Наименование:</label>
                     <input
@@ -341,7 +341,7 @@ export const ShowInfoAndReward = ({
           <div className="my-2">
             {immunities ? (
               immunities.map((immunity, index) => (
-                <div key={index} className="flex text-center align-items-center">
+                <div key={index} className="flex flex-wrap text-center align-items-center">
                   <span className="field">
                     <label>Наименование:</label>
                     <input
@@ -392,7 +392,7 @@ export const ShowInfoAndReward = ({
           <div className="my-2">
             {vulnerabilities ? (
               vulnerabilities.map((vulnerability, index) => (
-                <div key={index} className="flex text-center align-items-center">
+                <div key={index} className="flex flex-wrap text-center align-items-center">
                   <span className="field">
                     <label>Наименование:</label>
                     <input

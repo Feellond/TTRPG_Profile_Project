@@ -18,7 +18,7 @@ const LayoutCommon = () => {
         >
           <div className="flex flex-row">
             <h3 className="layout-header__text mx-4">
-              <a href="/">witcher.su</a>
+              <a href="/">thewitcher-su.ru</a>
             </h3>
           </div>
         </div>

@@ -29,6 +29,18 @@
 }
 
 .creatureAttacks,
+.creatureSkills {
+  table {
+    min-width: 410px;
+
+    .p-inputtext, .p-inputnumber, .p-dropdown, .p-multiselect {
+      width: -webkit-fill-available;
+      width: 100%;
+    }
+  }
+}
+
+.creatureAttacks,
 .creatureSkills,
 .showSkills {
   table {
@@ -36,12 +48,7 @@
     //width: 100%;
     border-collapse: collapse;
     border: 1px solid black;
-    min-width: 410px;
     z-index: 3;
-
-    .p-inputtext, .p-inputnumber, .p-dropdown, .p-multiselect {
-      width: -webkit-fill-available;
-    }
   }
 
   thead th {

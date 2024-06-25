@@ -33,11 +33,26 @@ const StealthOptionsLoad = ({ setItems }: OptionsParamsLoad) => {
     isNaN(Number(v))
   );
   const ITOptions = availabilityTypeKeys.map((key) => ({
-    label: key,
+    label: StealthOptionsToString(key),
     value: ItemStealthType[key],
   }));
   setItems(ITOptions);
 };
+
+const StealthOptionsToString = (enumKey: string) => {
+  switch(enumKey) {
+    case "CantHide":
+      return "(Н/С) Невозможно спрятать";
+    case "Tiny":
+      return "(М) Маленькое";
+    case "Small":
+      return "(Н) Небольшое";
+    case "Large":
+      return "(К) Крупное";
+    default:
+      return enumKey;
+  }
+}
 
 const SourceOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
   try {
@@ -54,7 +69,7 @@ const SourceOptionsLoad = async ({ setItems }: OptionsParamsLoad) => {
       setItems(options);
     }
   } catch (error) {
-    console.error("Error fetching skills:", error);
+    console.error("Error fetching source:", error);
   }
 };
 
@@ -82,4 +97,6 @@ export {
   StealthOptionsLoad,
   SourceOptionsLoad,
   EffectOptionsLoad,
+
+  StealthOptionsToString,
 };

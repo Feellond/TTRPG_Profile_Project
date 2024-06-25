@@ -93,7 +93,7 @@ export const ShowAttacks = ({
     <div className="creatureAttacks">
       <p>Атаки:</p>
       <div>
-        <table className="w-full">
+        <table>
           <thead>
             <th>{width <= 750 ? "Наз" : "Наименование"}</th>
             <th>{width <= 750 ? "Осн" : "Основа"}</th>

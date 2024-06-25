@@ -11,6 +11,7 @@ import {
   VermilionSVG,
   VitriolSVG,
 } from "img";
+import { AttackTypeToShortString, AttackTypeToString } from "entities/BestiaryFunc";
 
 const drawWeaponEquipmentType = (data: ItemDTO) => {
   switch (data.equipmentType) {
@@ -89,13 +90,26 @@ const drawStealthType = (data: ItemDTO) => {
     case 1:
       return "Н/С";
     case 2:
-      return "Б";
+      return "М";
     case 3:
-      return "С";
-    case 4:
       return "Н";
+    case 4:
+      return "К";
   }
 };
+
+const StealthTypeTooltip = (stealthType: number) => {
+  switch (stealthType) {
+    case 1:
+      return "(Не спрятать) Невозможно спрятать под одеждой";
+    case 2:
+      return "(Маленькое) Можно спрятать в кармане";
+    case 3:
+      return "(Небольшое) Можно спрятать под курткой";
+    case 4:
+      return "(Крупное) Можно спрятать под плащом";
+  }
+}
 
 const drawAvailabilityType = (data: ItemDTO) => {
   switch (data.availabilityType) {
@@ -109,6 +123,19 @@ const drawAvailabilityType = (data: ItemDTO) => {
       return ", Уникальное";
   }
 };
+
+const AvailabilityTypeTooltip = (availabilityType : number) => {
+  switch (availabilityType) {
+    case 1:
+      return "Можно найти даже в небольших поселках";
+    case 2:
+      return "Можно найти на рынках большинства городов";
+    case 3:
+      return "Оружие для армии или изготавливаемое в определенных местах";
+    case 4:
+      return "Очень трудно найти, обычно продается только в одном месте у определенных торговцев";
+  }
+}
 
 const drawItemEntityType = (data: ItemDTO) => {
   switch (data.itemType) {
@@ -241,7 +268,7 @@ const drawArmor = (data: ItemDTO) => {
           {data.itemBaseEffectList.length > 0 ? (
             <div>
               {data.itemBaseEffectList.map((effect, index) => (
-                <a key={index}>
+                <a key={index} title={effect.effect.description}>
                   {effect.effect.name}({effect.chancePercent}%);{" "}
                 </a>
               ))}
@@ -349,7 +376,7 @@ const drawItem = (data: ItemDTO) => {
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
-        <div>{drawStealthType(data)}</div>
+        <div title={StealthTypeTooltip(data.stealthType)}>{drawStealthType(data)}</div>
       </div>
     </li>
   );
@@ -360,7 +387,7 @@ const drawTool = (data: ItemDTO) => {
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
-        <div>{drawStealthType(data)}</div>
+        <div title={StealthTypeTooltip(data.stealthType)}>{drawStealthType(data)}</div>
       </div>
     </li>
   );
@@ -369,6 +396,10 @@ const drawTool = (data: ItemDTO) => {
 const drawWeapon = (data: ItemDTO) => {
   return (
     <li className="stats flex flex-row py-2 flex-wrap">
+      <div className="stat" title="Точность">
+        <div>Тип</div>
+        <div title={AttackTypeToString(data.type)}>{AttackTypeToShortString(data.type)}</div>
+      </div>
       <div className="stat" title="Точность">
         <div>Точ</div>
         <div>{data.accuracy}</div>
@@ -391,7 +422,7 @@ const drawWeapon = (data: ItemDTO) => {
       </div>
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
-        <div>{drawStealthType(data)}</div>
+        <div title={StealthTypeTooltip(data.stealthType)}>{drawStealthType(data)}</div>
       </div>
       <div className="stat" title="Количество улучшений">
         <div>Улуч</div>
@@ -407,7 +438,7 @@ const drawWeapon = (data: ItemDTO) => {
           {data.itemBaseEffectList.length > 0 ? (
             <div>
               {data.itemBaseEffectList.map((effect, index) => (
-                <a key={index}>
+                <a key={index} title={effect.effect.description}>
                   {effect.effect.name}({effect.chancePercent}%);{" "}
                 </a>
               ))}
@@ -429,15 +460,17 @@ const drawItemFromType = (data: ItemDTO) => {
       return drawTool(data);
     case 3:
       return (
-        <div>
+        <li className="stats flex flex-row py-2 flex-wrap">
           <div className="stat" title="Свойства">
             <div>
               <div>Свойства</div>
               {data.itemBaseEffectList.length > 0 ? (
                 <div>
                   {data.itemBaseEffectList.map((effect, index) => (
-                    <a key={index}>
-                      {effect.effect.name}({effect.chancePercent}%);{" "}
+                    <a key={index} title={effect.effect.description}>
+                      {effect.effect.name}(
+                        {effect.chancePercent && effect.chancePercent !== 0 ? (effect.chancePercent + "%") : (effect.damage)}
+                        );{" "}
                     </a>
                   ))}
                 </div>
@@ -446,7 +479,7 @@ const drawItemFromType = (data: ItemDTO) => {
               )}
             </div>
           </div>
-        </div>
+        </li>
       );
     case 4:
       return drawArmor(data);
@@ -480,4 +513,7 @@ export {
   drawWeapon,
   drawWeaponEquipmentType,
   drawSubstanceType,
+
+  StealthTypeTooltip,
+  AvailabilityTypeTooltip,
 };

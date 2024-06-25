@@ -1,5 +1,15 @@
 import { FindIndexById } from "./components/FindIndexById";
-import { EffectOptionsLoad, SourceOptionsLoad } from "./components/OptionsParamsLoad";
+import {
+  EffectOptionsLoad,
+  SourceOptionsLoad,
+  StealthOptionsToString,
+} from "./components/OptionsParamsLoad";
 import { StealthOptionsLoad } from "./components/OptionsParamsLoad";
 
-export {FindIndexById, SourceOptionsLoad, StealthOptionsLoad, EffectOptionsLoad}
+export {
+  FindIndexById,
+  SourceOptionsLoad,
+  StealthOptionsLoad,
+  EffectOptionsLoad,
+  StealthOptionsToString,
+};

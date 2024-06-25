@@ -20,7 +20,7 @@ namespace TTRPG_Project.BL.Services.Creatures
 
         public async Task<StatResponce> GetAllAsync()
         {
-            var stats = await _dbContext.Stats.AsNoTracking().ToListAsync();
+            var stats = await _dbContext.Stats.AsNoTracking().Include(s => s.Source).ToListAsync();
 
             StatResponce responce = new()
             {
@@ -33,7 +33,7 @@ namespace TTRPG_Project.BL.Services.Creatures
 
         public async Task<StatResponce> GetByIdAsync(int id)
         {
-            var stat = await _dbContext.Stats.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var stat = await _dbContext.Stats.AsNoTracking().Where(x => x.Id == id).Include(s => s.Source).FirstOrDefaultAsync();
 
             if (stat is null)
                 throw new CustomException("Существа с таким id не существует");

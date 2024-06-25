@@ -20,7 +20,7 @@ namespace TTRPG_Project.BL.Services.Creatures
 
         public async Task<SkillsTreeResponce> GetAllAsync()
         {
-            var skillsTrees = await _dbContext.SkillsTree.AsNoTracking().ToListAsync();
+            var skillsTrees = await _dbContext.SkillsTree.AsNoTracking().Include(s => s.Source).ToListAsync();
 
             SkillsTreeResponce responce = new()
             {
@@ -33,7 +33,7 @@ namespace TTRPG_Project.BL.Services.Creatures
 
         public async Task<SkillsTreeResponce> GetByIdAsync(int id)
         {
-            var skillsTree = await _dbContext.SkillsTree.AsNoTracking().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var skillsTree = await _dbContext.SkillsTree.AsNoTracking().Where(x => x.Id == id).Include(s => s.Source).FirstOrDefaultAsync();
 
             if (skillsTree is null)
                 throw new CustomException("Существа с таким id не существует");

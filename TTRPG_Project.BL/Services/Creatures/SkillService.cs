@@ -23,6 +23,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             var skills = await _dbContext.Skills.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(s => s.Stat)
+                    .ThenInclude(s => s.Source)
                 .ToListAsync();
 
             SkillResponce responce = new()
@@ -40,6 +41,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Where(x => x.Id == id)
                 .Include(s => s.Source)
                 .Include(s => s.Stat)
+                    .ThenInclude(s => s.Source)
                 .FirstOrDefaultAsync();
 
             if (skill is null)

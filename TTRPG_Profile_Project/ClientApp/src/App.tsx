@@ -10,6 +10,7 @@ import { Toast } from 'primereact/toast';
 import { Context } from '.';
 import { router } from 'shared/routes/Routes';
 import Store from 'shared/store/store';
+import { Helmet } from "react-helmet"
 
 export type IContextProps ={
   globalToast?:RefObject<Toast>

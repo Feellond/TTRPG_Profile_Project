@@ -26,6 +26,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(s => s.Source)
                 .Include(e => e.AttackEffectList)
                     .ThenInclude(e => e.Effect)
+                        .ThenInclude(s => s.Source)
                 .ToListAsync();
 
             AttackResponce responce = new()
@@ -44,6 +45,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(s => s.Source)
                 .Include(e => e.AttackEffectList)
                     .ThenInclude(e => e.Effect)
+                        .ThenInclude(s => s.Source)
                 .FirstOrDefaultAsync();
 
             if (attack is null)

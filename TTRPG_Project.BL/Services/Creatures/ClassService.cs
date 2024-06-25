@@ -23,6 +23,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             var classes = await _dbContext.Classes.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(s => s.SkillsTree)
+                    .ThenInclude(s => s.Source)
                 .ToListAsync();
 
             ClassResponce responce = new()
@@ -39,6 +40,8 @@ namespace TTRPG_Project.BL.Services.Creatures
             var singleClass = await _dbContext.Classes.AsNoTracking()
                 .Where(x => x.Id == id)
                 .Include(s => s.Source)
+                .Include(s => s.SkillsTree)
+                    .ThenInclude(s => s.Source)
                 .FirstOrDefaultAsync();
 
             if (singleClass is null)

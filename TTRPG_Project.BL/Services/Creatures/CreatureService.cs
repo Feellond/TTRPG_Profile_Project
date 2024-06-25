@@ -51,11 +51,13 @@ namespace TTRPG_Project.BL.Services.Creatures
                     .ThenInclude(x => x.Attack)
                         .ThenInclude(ael => ael.AttackEffectList)
                             .ThenInclude(e => e.Effect)
+                                .ThenInclude(s => s.Source)
                 .Include(ab => ab.CreatureAbilitys)
                     .ThenInclude(r => r.Ability)
+                        .ThenInclude(s => s.Source)
                 .Include(crl => crl.CreatureReward)
-                    //.ThenInclude(reward => reward.Reward)
-                        .ThenInclude(item => item.ItemBase)
+                    .ThenInclude(item => item.ItemBase)
+                        .ThenInclude(s => s.Source)
                     .Select(creature => new CreatureDTO
                     {
                         Id = creature.Id,

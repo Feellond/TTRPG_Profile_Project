@@ -24,6 +24,7 @@ import {
   ComponentsTypeLoad,
   ItemOriginTypeLoad,
   SubstanceTypeLoad,
+  WeaponAttackTypeLoad,
   WhereToFindTypeLoad,
 } from "entities/ItemFunc/components/OptionsLoad";
 import { Effect } from "shared/models/Additional";
@@ -61,6 +62,7 @@ const ItemTypeSelect = ({
   const [whereToFindOptions, setWhereToFindOptions] = useState<SelectItem[]>(
     []
   );
+  const [weaponTypeOptions, setWeaponTypeOptions] = useState<SelectItem[]>([]);
 
   const [effectOptions, setEffectOptions] = useState<SelectItem[]>([]);
   const [substanceOptions, setSubstanceOptions] = useState<SelectItem[]>([]);
@@ -87,16 +89,14 @@ const ItemTypeSelect = ({
     WhereToFindTypeLoad({setItems: setWhereToFindOptions});
     SubstanceTypeLoad({setItems: setSubstanceOptions});
     EffectOptionsLoad({setItems: setEffectOptions});
+    WeaponAttackTypeLoad({setItems: setWeaponTypeOptions});
 
     setSubstances(data.formulaSubstanceList);
     setComponents(data.blueprintComponentList);
     setEffects(data.itemBaseEffectList);
-
-    console.log(getValues());
   }, [visible]);
 
   useEffect(() => {
-    console.log(effects);
     register("itemBaseEffectList", { value: effects });
   }, [effects]);
 
@@ -138,7 +138,7 @@ const ItemTypeSelect = ({
   useEffect(() => {
     switch (itemType) {
       case 1:
-        setContent(BaseItem());
+        setContent(<div></div>);
         break;
       case 2:
         setContent(ToolItem());
@@ -162,12 +162,31 @@ const ItemTypeSelect = ({
         setContent(ComponentItem());
         break;
       case 9:
-        setContent(<div></div>);
+        setContent(Item());
         break;
       default:
         setContent(<div></div>);
     }
-  }, [itemType, isAmmunitionChecked, data, substances, components, effects, isAlchemicalChecked]);
+  }, [
+    itemType,
+    isAmmunitionChecked,
+    data,
+    substances,
+    components,
+    effects,
+    isAlchemicalChecked,
+
+    componentsOptions,
+    skillOptions,
+    stealthOptions,
+    itemOriginOptions,
+    armorOptions,
+    whereToFindOptions,
+    weaponTypeOptions,
+    effectOptions,
+    substanceOptions,
+    armorEquipmentOptions,
+  ]);
 
   const WeaponItem = () => {
     return (
@@ -183,6 +202,27 @@ const ItemTypeSelect = ({
           />
           <label className="ml-2">Боеприпас?</label>
         </div>
+        <span className="field">
+          <label>Тип оружия</label>
+          <Controller
+            name="type"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={weaponTypeOptions}
+                  placeholder="Выберите тип урона оружия"
+                />
+              </>
+            )}
+          />
+        </span>
         <span className="field">
           <label>Точность</label>
           <InputNumber
@@ -306,7 +346,7 @@ const ItemTypeSelect = ({
                         }
                         optionLabel="label"
                         options={effectOptions}
-                        placeholder="Выберите тип субстанции"
+                        placeholder="Выберите эффект"
                       />
                     </span>
                     <span className="field">
@@ -657,12 +697,35 @@ const ItemTypeSelect = ({
     );
   };
 
-  const BaseItem = () => {
-    return <div></div>;
+  const Item = () => {
+    return (
+      <div>
+        <span className="field">
+          <label>Тип скрытности</label>
+          <Controller
+            name="stealthType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={stealthOptions}
+                  placeholder="Выберите тип скрытности"
+                />
+              </>
+            )}
+          />
+        </span>
+      </div>
+    );
   };
 
   useEffect(() => {
-    console.log(substances);
     register("formulaSubstanceList", { value: substances });
   }, [substances]);
 
@@ -785,7 +848,6 @@ const ItemTypeSelect = ({
   };
 
   useEffect(() => {
-    console.log(components);
     register("blueprintComponentList", { value: components });
   }, [components]);
 

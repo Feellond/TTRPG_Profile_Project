@@ -21,6 +21,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
+                        .ThenInclude(s => s.Source)
                 .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,
@@ -52,6 +53,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
+                        .ThenInclude(s => s.Source)
                 .Select(item => new ItemBaseInfo
                 {
                     Id = item.Id,

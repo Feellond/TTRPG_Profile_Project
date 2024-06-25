@@ -20,7 +20,6 @@ export const Context = createContext<State>({
 });
 
 root.render(
-
   <App />
 );
 

@@ -20,6 +20,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
+                        .ThenInclude(s => s.Source)
                 .Include(fcl => fcl.BlueprintComponentList)
                 .Select(item => new ItemBaseInfo
                 {
@@ -54,6 +55,7 @@ namespace TTRPG_Project.BL.Services.Items
                 .Include(s => s.Source)
                 .Include(ibe => ibe.ItemBaseEffectList)
                     .ThenInclude(eff => eff.Effect)
+                        .ThenInclude(s => s.Source)
                 .Include(fcl => fcl.BlueprintComponentList)
                 .Select(item => new ItemBaseInfo
                 {

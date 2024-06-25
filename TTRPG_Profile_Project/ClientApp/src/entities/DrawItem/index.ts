@@ -15,6 +15,8 @@ import {
     drawWeapon,
     drawWeaponEquipmentType,
     drawSubstanceType,
+    StealthTypeTooltip,
+    AvailabilityTypeTooltip,
   } from "./components/DrawItemFunctions";
   
   export {
@@ -34,4 +36,7 @@ import {
     drawWeapon,
     drawWeaponEquipmentType,
     drawSubstanceType,
+
+    StealthTypeTooltip,
+    AvailabilityTypeTooltip,
   };

@@ -24,6 +24,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             var abilitiys = await _dbContext.Abilitiys.AsNoTracking()
                 .Include(s => s.Source)
                 .Include(r => r.Race)
+                    .ThenInclude(s => s.Source)
                 .ToListAsync();
 
             AbilityResponce responce = new()
@@ -41,6 +42,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Where(x => x.Id == id)
                 .Include(s => s.Source)
                 .Include(r => r.Race)
+                    .ThenInclude(s => s.Source)
                 .FirstOrDefaultAsync();
 
             if (abilitiy is null)

@@ -74,6 +74,12 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
   useEffect(() => {
     setValues();
+
+    if (!isEditMode) {
+      setIsTableEdit(false);
+      setIsEducationEdit(false);
+      setIsMonsterLoreEdit(false);
+    }
   }, [isEditMode, data]);
 
   useEffect(() => {}, [isEditMode, file]);
@@ -223,7 +229,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
     bestiaryService.updateEntity({ entity: dataOnSave });
     fetchData();
     setFile(null);
-    window.location.reload();
+    //window.location.reload();
   };
 
   const onCancel = () => {
