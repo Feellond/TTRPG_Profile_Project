@@ -43,7 +43,7 @@ const RacesPage = () => {
   };
 
   return (
-    <Card style={{ minHeight: "500px", width: "1500px", margin: "0 auto" }}>
+    <Card style={{ minHeight: "500px", margin: "0 auto" }}>
       <ListShow
         getParams={getParams}
         lazyState={lazyState}

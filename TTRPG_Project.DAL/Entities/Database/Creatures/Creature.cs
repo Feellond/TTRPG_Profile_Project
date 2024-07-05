@@ -43,7 +43,9 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
         public List<CreatureAbility> CreatureAbilitys { get; set; } = new();
         public List<CreatureReward> CreatureReward { get; set; } = new();
         public List<Spell> Spells { get; set; } = new();
+        public int? MutagenId { get; set; }
         public Mutagen? Mutagen { get; set; }
+        public int? TrophyId { get; set; }
         public Trophy? Trophy { get; set; }
     }
 }

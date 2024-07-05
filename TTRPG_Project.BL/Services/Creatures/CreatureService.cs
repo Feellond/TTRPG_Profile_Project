@@ -58,6 +58,10 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(crl => crl.CreatureReward)
                     .ThenInclude(item => item.ItemBase)
                         .ThenInclude(s => s.Source)
+                .Include(m => m.Mutagen)
+                    .ThenInclude(m => m.Source)
+                .Include(t => t.Trophy)
+                    .ThenInclude(t => t.Source)
                     .Select(creature => new CreatureDTO
                     {
                         Id = creature.Id,
@@ -70,7 +74,37 @@ namespace TTRPG_Project.BL.Services.Creatures
                         AthleticsBase = creature.AthleticsBase,
                         BlockBase = creature.BlockBase,
                         Complexity = creature.Complexity,
-                        CreatureAttacks = creature.CreatureAttacks,
+                        CreatureAttacks = creature.CreatureAttacks.Select(e => new CreatureAttack
+                        {
+                            Id = e.Id,
+                            AttackId = e.AttackId,
+                            Attack = e.Attack == null ? null : new Attack
+                            {
+                                Id = e.Attack.Id,
+                                AttackSpeed = e.Attack.AttackSpeed,
+                                AttackType = e.Attack.AttackType,
+                                BaseAttack = e.Attack.BaseAttack,
+                                Damage = e.Attack.Damage,
+                                Description = e.Attack.Description,
+                                Distance = e.Attack.Distance,
+                                Name = e.Attack.Name,
+                                Reliability = e.Attack.Reliability,
+                                SourceId = e.Attack.SourceId,
+                                Source = e.Attack.Source,
+                                CreateDate = e.Attack.CreateDate,
+                                UpdateDate = e.Attack.UpdateDate,
+                                Enabled = e.Attack.Enabled,
+                                AttackEffectList = e.Attack.AttackEffectList.Select(e => new AttackEffectList
+                                {
+                                    Id = e.Id,
+                                    ChancePercent = e.ChancePercent,
+                                    Damage = e.Damage,
+                                    EffectId = e.EffectId,
+                                    Effect = e.Effect,
+                                    IsDealDamage = e.IsDealDamage,
+                                }).ToList(),
+                            }
+                        }).ToList(),
                         CreatureReward = creature.CreatureReward,
                         EducationSkill = creature.EducationSkill,
                         EvasionBase = creature.EvasionBase,
@@ -136,8 +170,12 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(ab => ab.CreatureAbilitys)
                     .ThenInclude(r => r.Ability)
                 .Include(crl => crl.CreatureReward)
-                    //.ThenInclude(reward => reward.Reward)
+                        //.ThenInclude(reward => reward.Reward)
                         .ThenInclude(item => item.ItemBase)
+                .Include(m => m.Mutagen)
+                    .ThenInclude(m => m.Source)
+                .Include(t => t.Trophy)
+                    .ThenInclude(t => t.Source)
                     .Select(creature => new CreatureDTO
                     {
                         Id = creature.Id,
@@ -150,7 +188,37 @@ namespace TTRPG_Project.BL.Services.Creatures
                         AthleticsBase = creature.AthleticsBase,
                         BlockBase = creature.BlockBase,
                         Complexity = creature.Complexity,
-                        CreatureAttacks = creature.CreatureAttacks,
+                        CreatureAttacks = creature.CreatureAttacks.Select(e => new CreatureAttack
+                        {
+                            Id = e.Id,
+                            AttackId = e.AttackId,
+                            Attack = e.Attack == null ? null : new Attack
+                            {
+                                Id = e.Attack.Id,
+                                AttackSpeed = e.Attack.AttackSpeed,
+                                AttackType = e.Attack.AttackType,
+                                BaseAttack = e.Attack.BaseAttack,
+                                Damage = e.Attack.Damage,
+                                Description = e.Attack.Description,
+                                Distance = e.Attack.Distance,
+                                Name = e.Attack.Name,
+                                Reliability = e.Attack.Reliability,
+                                SourceId = e.Attack.SourceId,
+                                Source = e.Attack.Source,
+                                CreateDate = e.Attack.CreateDate,
+                                UpdateDate = e.Attack.UpdateDate,
+                                Enabled = e.Attack.Enabled,
+                                AttackEffectList = e.Attack.AttackEffectList.Select(e => new AttackEffectList
+                                {
+                                    Id = e.Id,
+                                    ChancePercent = e.ChancePercent,
+                                    Damage = e.Damage,
+                                    EffectId = e.EffectId,
+                                    Effect = e.Effect,
+                                    IsDealDamage = e.IsDealDamage,
+                                }).ToList(),
+                            }
+                        }).ToList(),
                         CreatureReward = creature.CreatureReward,
                         EducationSkill = creature.EducationSkill,
                         EvasionBase = creature.EvasionBase,
@@ -228,6 +296,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                         CreatureId = dto.CreatureId,
                         //RewardId = dto.RewardId,
                         ItemBaseId = dto.ItemBaseId,
+                        Amount = dto.Amount,
                     }).ToList(),
                     Description = request.Description,
                     EducationSkill = request.EducationSkill,
@@ -356,6 +425,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                     Id = dto.Id,
                     CreatureId = dto.CreatureId,
                     ItemBaseId = dto.ItemBaseId,
+                    Amount = dto.Amount,
                     //RewardId = dto.RewardId,
                 }).ToList();
 

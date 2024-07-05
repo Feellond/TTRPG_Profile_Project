@@ -18,6 +18,7 @@ type Props = {
 
 const ShowFilter: FC<Props> = ({ filter, setFilter }) => {
   let content: JSX.Element;
+  console.log("filter: ", filter)
 
   if ("itemType" in filter) {
     // Переменная data имеет тип ItemDTO
@@ -33,7 +34,7 @@ const ShowFilter: FC<Props> = ({ filter, setFilter }) => {
         <SpellFilter filter={filter as SpellFilterDTO} setFilter={setFilter} />
       </div>
     );
-  } else if ("blockBase" in filter) {
+  } else if ("race" in filter) {
     // Переменная data имеет тип BestiaryDTO
     console.log("filter: ", filter);
     content = (

@@ -55,10 +55,10 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
   */
   return (
     <div className="my-2 baseList">
-      <div className="flex">
-        <span>База блока: </span>
+      <div className="showInfo">
+        <span className="showInfo__name">База блока: </span>
         {isEditMode ? (
-          <div>
+          <div className="baseList__controller">
             <Controller
               name="blockBase"
               control={control}
@@ -88,10 +88,10 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{blockBase}</div>
         )}
       </div>
-      <div className="flex">
-        <span>База уклонения: </span>
+      <div className="showInfo">
+        <span className="showInfo__name">База уклонения: </span>
         {isEditMode ? (
-          <div>
+          <div className="baseList__controller">
             <Controller
               name="evasionBase"
               control={control}
@@ -127,10 +127,10 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{evasionBase}</div>
         )}
       </div>
-      <div className="flex">
-        <span>База атлетики: </span>
+      <div className="showInfo">
+        <span className="showInfo__name">База атлетики: </span>
         {isEditMode ? (
-          <div>
+          <div className="baseList__controller">
             <Controller
               name="athleticsBase"
               control={control}
@@ -166,10 +166,10 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{athleticsBase}</div>
         )}
       </div>
-      <div className="flex">
-        <span>База сопротивления магии: </span>
+      <div className="showInfo">
+        <span className="showInfo__name">База сопротивления магии: </span>
         {isEditMode ? (
-          <div>
+          <div className="baseList__controller">
             <Controller
               name="spellResistBase"
               control={control}

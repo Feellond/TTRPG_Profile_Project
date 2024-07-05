@@ -229,9 +229,9 @@ export const ShowInfoAndReward = ({
   return (
     <div className="my-2 baseList">
       <div className="showInfo">
-        <span>Броня: </span>
+        <span className="showInfo__name">Броня: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <Controller
               name="armor"
               control={control}
@@ -257,9 +257,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Регенерация: </span>
+        <span className="showInfo__name">Регенерация: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <Controller
               name="regeneration"
               control={control}
@@ -285,12 +285,15 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Сопротивления: </span>
+        <span className="showInfo__name">Сопротивления: </span>
         {isEditMode ? (
           <div className="my-2">
             {resistances ? (
               resistances.map((resistance, index) => (
-                <div key={index} className="flex flex-wrap text-center align-items-center">
+                <div
+                  key={index}
+                  className="flex flex-wrap text-center align-items-center"
+                >
                   <span className="field">
                     <label>Наименование:</label>
                     <input
@@ -328,20 +331,37 @@ export const ShowInfoAndReward = ({
         ) : (
           <div className="ml-1">
             {resistances
-              ? resistances.map((item, index) =>
-                  index ? `, ${item.name}` : item.name
-                )
+              ? resistances.map((item, index) => (
+                  <span key={index}>
+                    {index !== 0 && ", "}
+                    <Tooltip
+                      target={`.tooltip-${index}`}
+                      position="top"
+                      mouseTrack
+                      mouseTrackLeft={2}
+                    ></Tooltip>
+                    <span
+                      className={`tooltip-${index}`}
+                      data-pr-tooltip={item.description}
+                    >
+                      {item.name}
+                    </span>
+                  </span>
+                ))
               : ""}
           </div>
         )}
       </div>
       <div className="showInfo">
-        <span>Иммунитеты: </span>
+        <span className="showInfo__name">Иммунитеты: </span>
         {isEditMode ? (
           <div className="my-2">
             {immunities ? (
               immunities.map((immunity, index) => (
-                <div key={index} className="flex flex-wrap text-center align-items-center">
+                <div
+                  key={index}
+                  className="flex flex-wrap text-center align-items-center"
+                >
                   <span className="field">
                     <label>Наименование:</label>
                     <input
@@ -379,24 +399,41 @@ export const ShowInfoAndReward = ({
         ) : (
           <div className="ml-1">
             {immunities
-              ? immunities.map((item, index) =>
-                  index ? `, ${item.name}` : item.name
-                )
+              ? immunities.map((item, index) => (
+                  <span key={index}>
+                    {index !== 0 && ", "}
+                    <Tooltip
+                      target={`.tooltip-${index}`}
+                      position="top"
+                      mouseTrack
+                      mouseTrackLeft={2}
+                    ></Tooltip>
+                    <span
+                      className={`tooltip-${index}`}
+                      data-pr-tooltip={item.description}
+                    >
+                      {item.name}
+                    </span>
+                  </span>
+                ))
               : ""}
           </div>
         )}
       </div>
       <div className="showInfo">
-        <span>Уязвимости: </span>
+        <span className="showInfo__name">Уязвимости: </span>
         {isEditMode ? (
           <div className="my-2">
             {vulnerabilities ? (
               vulnerabilities.map((vulnerability, index) => (
-                <div key={index} className="flex flex-wrap text-center align-items-center">
+                <div
+                  key={index}
+                  className="flex flex-wrap text-center align-items-center"
+                >
                   <span className="field">
                     <label>Наименование:</label>
                     <input
-                    className="input-text"
+                      className="input-text"
                       type="text"
                       value={vulnerability.name}
                       onChange={(e) =>
@@ -468,9 +505,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Добыча: </span>
+        <span className="showInfo__name">Добыча: </span>
         {isEditMode ? (
-          <div className="text-white controller">
+          <div className="text-white baseList__controller">
             <MultiSelect
               value={rewards}
               options={itemOptions}
@@ -487,9 +524,16 @@ export const ShowInfoAndReward = ({
           <div className="ml-1">
             {creatureReward !== null && creatureReward !== undefined ? (
               creatureReward.map((reward, index) => (
-                <div key={index}>
-                  {reward.itemBase ? reward.itemBase.name : ""}
-                </div>
+                <span key={index}>
+                  {index !== 0 && ", "}
+                  {reward.itemBase ? (
+                    <span>
+                      {reward.itemBase.name} ({reward.amount})
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </span>
               ))
             ) : (
               <div></div>
@@ -498,9 +542,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Награда: </span>
+        <span className="showInfo__name">Награда: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <Controller
               name="moneyReward"
               control={control}
@@ -526,9 +570,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Высота: </span>
+        <span className="showInfo__name">Высота: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <Controller
               name="height"
               control={control}
@@ -554,9 +598,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Вес: </span>
+        <span className="showInfo__name">Вес: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <Controller
               name="weight"
               control={control}
@@ -582,9 +626,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Место проживания: </span>
+        <span className="showInfo__name">Место проживания: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <span className="p-float-label">
               <Controller
                 name="habitatPlace"
@@ -611,9 +655,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Интеллект: </span>
+        <span className="showInfo__name">Интеллект: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <span className="p-float-label">
               <Controller
                 name="intellect"
@@ -640,9 +684,9 @@ export const ShowInfoAndReward = ({
         )}
       </div>
       <div className="showInfo">
-        <span>Размер группы: </span>
+        <span className="showInfo__name">Размер группы: </span>
         {isEditMode ? (
-          <div className="controller">
+          <div className="baseList__controller">
             <span className="p-float-label">
               <Controller
                 name="groupSize"

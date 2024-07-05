@@ -66,7 +66,7 @@ export const ShowAttacks = ({
 
   useEffect(() => {
     EffectOptionsLoad({ setItems: setEffectOptions });
-    AttackTypeOptionsLoad({setItems: setAttackTypeOptions});
+    AttackTypeOptionsLoad({ setItems: setAttackTypeOptions });
 
     const handleResize = (event) => {
       setWidth(event.target.innerWidth);
@@ -148,16 +148,16 @@ export const ShowAttacks = ({
                       value={editValues.attackType}
                       options={attackTypeOptions}
                       onChange={(e) => {
-                        setEditValues({...editValues, attackType: e.value})
+                        setEditValues({ ...editValues, attackType: e.value });
                       }}
                     />
+                  ) : (
                     /**<InputNumber
                       value={editValues.attackType}
                       onChange={(e) =>
                         setEditValues({ ...editValues, attackType: e.value })
                       }
                     /> */
-                  ) : (
                     AttackTypeToShortString(attack.attack.attackType)
                   )}
                 </td>
@@ -352,13 +352,19 @@ export const ShowAttacks = ({
                             (effect, index) => (
                               <div className="flex flex-wrap">
                                 <div key={index}>
-                                  {effect.effect.name} (
-                                  {effect.isDealDamage ? (
-                                    effect.damage
+                                  {effect.effect.name}{" "}
+                                  {effect.chancePercent !== 0 &&
+                                  effect.damage !== "" ? (
+                                    <span>
+                                      {effect.isDealDamage ? (
+                                        effect.damage
+                                      ) : (
+                                        <span>{effect.chancePercent}%</span>
+                                      )}
+                                    </span>
                                   ) : (
-                                    <div>{effect.chancePercent}%</div>
+                                    ""
                                   )}
-                                  )
                                 </div>
                               </div>
                             )

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { InputText } from "primereact/inputtext";
 import { SelectItem } from "primereact/selectitem";
 import { ListInput } from "features/inputs/listInput";
 import { Button } from 'primereact/button';
 import { ItemEntityTypeLoad } from "entities/ItemFunc";
 import { ItemFilterDTO } from "shared/models";
+import { IconField } from 'primereact/iconfield';
+import { InputIcon } from 'primereact/inputicon';
+import { useDebounce } from "entities/GeneralFunc";
 
 interface ItemFilterProps {
   filter: ItemFilterDTO,
@@ -13,31 +16,40 @@ interface ItemFilterProps {
 
 const ItemFilter = ({filter, setFilter} : ItemFilterProps) => {
   const [itemTypeOptions, setItemTypeOptions] = useState<SelectItem[]>([]);
+  const [localFilter, setLocalFilter] = useState(filter);
+
+  const debouncedSetFilter = useDebounce(setFilter, 300);
+
+  const handleFilterChange = useCallback((newFilter: Partial<ItemFilterDTO>) => {
+    const updatedFilter = { ...localFilter, ...newFilter };
+    setLocalFilter(updatedFilter);
+    debouncedSetFilter(updatedFilter);
+  }, [localFilter, debouncedSetFilter]);
 
   useEffect(() => {
     ItemEntityTypeLoad({setItems: setItemTypeOptions});
-  }, [])
+  }, []);
 
   return ( 
     <div className="flex mb-2 flex-wrap">
       <div className="flex flex-column justify-content-center mr-3">
-        <span className="p-input-icon-left">
-          <i className="pi pi-search" />
+        <IconField iconPosition="left" className="p-input-icon-left">
+          <InputIcon className="pi pi-search"/>
           <InputText
             className="w-full"
-            value={filter.name}
+            value={localFilter.name}
             placeholder="Наименование"
-            onChange={(e) => setFilter({ ...filter, name: e.target.value })}
+            onChange={(e) => handleFilterChange({ name: e.target.value })}
           />
-        </span>
+        </IconField>
       </div>
       <div className="flex flex-column justify-content-center mr-3">
         <ListInput
           id="itemType"
           placeholder="Тип предмета"
-          value={filter.itemType}
+          value={localFilter.itemType}
           data={itemTypeOptions}
-          onChange={(e) => setFilter({ ...filter, itemType: e.value })}
+          onChange={(e) => handleFilterChange({ itemType: e.value })}
         />
       </div>
       <div className="flex flex-column justify-content-center">

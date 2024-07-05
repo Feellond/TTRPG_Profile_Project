@@ -30,6 +30,7 @@ namespace TTRPG_Project.DAL.Const
         Immunity = 1,
         Resistance = 2,
         Vulnerability = 3,
+        Passive = 4,
     }
 
     public enum Complexity

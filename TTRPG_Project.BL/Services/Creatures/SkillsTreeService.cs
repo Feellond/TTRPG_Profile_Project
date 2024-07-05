@@ -20,7 +20,57 @@ namespace TTRPG_Project.BL.Services.Creatures
 
         public async Task<SkillsTreeResponce> GetAllAsync()
         {
-            var skillsTrees = await _dbContext.SkillsTree.AsNoTracking().Include(s => s.Source).ToListAsync();
+            var skillsTrees = await _dbContext.SkillsTree.AsNoTracking()
+                .Include(s => s.Source)
+                .Select(x => new SkillsTreeResponceDTO
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    CreateDate = x.CreateDate,
+                    Description = x.Description,
+                    Enabled = x.Enabled,
+                    Source = x.Source,
+                    SourceId = x.SourceId,
+                    UpdateDate = x.UpdateDate,
+                    FirstLeftSkillId = x.FirstLeftSkillId,
+                    FirstLeftSkillValue = x.FirstLeftSkillValue,
+                    FirstMiddleSkillId = x.FirstMiddleSkillId,
+                    FirstMiddleSkillValue = x.FirstMiddleSkillValue,
+                    FirstRightSkillId = x.FirstRightSkillId,
+                    FirstRightSkillValue = x.FirstRightSkillValue,
+                    MainSkillId = x.MainSkillId,
+                    MainSkillValue = x.MainSkillValue,
+                    SecondLeftSkillId = x.SecondLeftSkillId,
+                    SecondLeftSkillValue = x.SecondLeftSkillValue,
+                    SecondMiddleSkillId = x.SecondMiddleSkillId,
+                    SecondMiddleSkillValue = x.SecondMiddleSkillValue,
+                    SecondRightSkillId = x.SecondRightSkillId,
+                    SecondRightSkillValue = x.SecondRightSkillValue,
+                    ThirdLeftSkillId = x.ThirdLeftSkillId,
+                    ThirdLeftSkillValue = x.ThirdLeftSkillValue,
+                    ThirdMiddleSkillId = x.ThirdMiddleSkillId,
+                    ThirdMiddleSkillValue = x.ThirdMiddleSkillValue,
+                    ThirdRightSkillId = x.ThirdRightSkillId,
+                    ThirdRightSkillValue = x.ThirdRightSkillValue,
+                })
+                .ToListAsync();
+
+            foreach(var tree in skillsTrees)
+            {
+                tree.MainSkill = await _dbContext.Skills.Where(x => x.Id == tree.MainSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+
+                tree.FirstLeftSkill = await _dbContext.Skills.Where(x => x.Id == tree.FirstLeftSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+                tree.SecondLeftSkill = await _dbContext.Skills.Where(x => x.Id == tree.SecondLeftSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+                tree.ThirdLeftSkill = await _dbContext.Skills.Where(x => x.Id == tree.ThirdLeftSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+
+                tree.FirstMiddleSkill = await _dbContext.Skills.Where(x => x.Id == tree.FirstMiddleSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+                tree.SecondMiddleSkill = await _dbContext.Skills.Where(x => x.Id == tree.SecondMiddleSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+                tree.ThirdMiddleSkill = await _dbContext.Skills.Where(x => x.Id == tree.ThirdMiddleSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+
+                tree.FirstRightSkill = await _dbContext.Skills.Where(x => x.Id == tree.FirstRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+                tree.SecondRightSkill = await _dbContext.Skills.Where(x => x.Id == tree.SecondRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+                tree.ThirdRightSkill = await _dbContext.Skills.Where(x => x.Id == tree.ThirdRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+            }
 
             SkillsTreeResponce responce = new()
             {
@@ -32,16 +82,69 @@ namespace TTRPG_Project.BL.Services.Creatures
         }
 
         public async Task<SkillsTreeResponce> GetByIdAsync(int id)
-        {
-            var skillsTree = await _dbContext.SkillsTree.AsNoTracking().Where(x => x.Id == id).Include(s => s.Source).FirstOrDefaultAsync();
+        {           
+            var skillsTree = await _dbContext.SkillsTree.AsNoTracking()
+               .Where(x => x.Id == id)
+               .Include(s => s.Source)
+               .Select(x => new SkillsTreeResponceDTO
+               {
+                   Id = x.Id,
+                   Name = x.Name,
+                   CreateDate = x.CreateDate,
+                   Description = x.Description,
+                   Enabled = x.Enabled,
+                   Source = x.Source,
+                   SourceId = x.SourceId,
+                   UpdateDate = x.UpdateDate,
+
+                   LeftBranchName = x.LeftBranchName,
+                   MiddleBranchName = x.MiddleBranchName,
+                   RightBranchName = x.RightBranchName,
+
+                   FirstLeftSkillId = x.FirstLeftSkillId,
+                   FirstLeftSkillValue = x.FirstLeftSkillValue,
+                   FirstMiddleSkillId = x.FirstMiddleSkillId,
+                   FirstMiddleSkillValue = x.FirstMiddleSkillValue,
+                   FirstRightSkillId = x.FirstRightSkillId,
+                   FirstRightSkillValue = x.FirstRightSkillValue,
+                   MainSkillId = x.MainSkillId,
+                   MainSkillValue = x.MainSkillValue,
+                   SecondLeftSkillId = x.SecondLeftSkillId,
+                   SecondLeftSkillValue = x.SecondLeftSkillValue,
+                   SecondMiddleSkillId = x.SecondMiddleSkillId,
+                   SecondMiddleSkillValue = x.SecondMiddleSkillValue,
+                   SecondRightSkillId = x.SecondRightSkillId,
+                   SecondRightSkillValue = x.SecondRightSkillValue,
+                   ThirdLeftSkillId = x.ThirdLeftSkillId,
+                   ThirdLeftSkillValue = x.ThirdLeftSkillValue,
+                   ThirdMiddleSkillId = x.ThirdMiddleSkillId,
+                   ThirdMiddleSkillValue = x.ThirdMiddleSkillValue,
+                   ThirdRightSkillId = x.ThirdRightSkillId,
+                   ThirdRightSkillValue = x.ThirdRightSkillValue,
+               })
+               .FirstOrDefaultAsync();
 
             if (skillsTree is null)
-                throw new CustomException("Существа с таким id не существует");
+                throw new CustomException("Дерева талантов с таким id не существует");
+
+            skillsTree.MainSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.MainSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+
+            skillsTree.FirstLeftSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.FirstLeftSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+            skillsTree.SecondLeftSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.SecondLeftSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+            skillsTree.ThirdLeftSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.ThirdLeftSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+
+            skillsTree.FirstMiddleSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.FirstMiddleSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+            skillsTree.SecondMiddleSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.SecondMiddleSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+            skillsTree.ThirdMiddleSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.ThirdMiddleSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+
+            skillsTree.FirstRightSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.FirstRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+            skillsTree.SecondRightSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.SecondRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
+            skillsTree.ThirdRightSkill = await _dbContext.Skills.Where(x => x.Id == skillsTree.ThirdRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
 
             SkillsTreeResponce responce = new()
             {
                 Count = 1,
-                SkillsTrees = new List<SkillsTree>() { skillsTree },
+                SkillsTrees = new List<SkillsTreeResponceDTO>() { skillsTree },
             };
 
             return responce;

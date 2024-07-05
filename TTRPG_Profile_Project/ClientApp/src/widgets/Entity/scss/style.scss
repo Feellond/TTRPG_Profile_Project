@@ -3,6 +3,10 @@
 
   @media (max-width: 500px) {
     font-size: 13px;
+
+    span {
+      font-size: 13px;
+    }
   }
 }
 
@@ -32,6 +36,7 @@
 .creatureSkills {
   table {
     min-width: 410px;
+    line-height: 1.5;
 
     .p-inputtext, .p-inputnumber, .p-dropdown, .p-multiselect {
       width: -webkit-fill-available;
@@ -124,6 +129,12 @@
     padding: 2px;
     width: 35px;
   }
+
+  &__controller {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+    margin-left: 0.25rem !important;
+  }
 }
 
 .input-text {
@@ -134,9 +145,7 @@
   display: flex;
   align-items: center;
 
-  .controller {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-    margin-left: 0.25rem !important;
+  &__name {
+    font-weight: 700;
   }
 }

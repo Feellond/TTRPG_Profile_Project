@@ -7,7 +7,6 @@ import { InputTextarea } from "primereact/inputtextarea";
 import React, { useEffect, useState } from "react";
 import {
   Control,
-  Controller,
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
@@ -112,13 +111,13 @@ export const ShowMutagen = ({
                 <div className="ml-1">{mutagen.mutation}</div>
               )}
             </div>
-            <div>
+            {isEditMode ? (<div>
               <button type="button" onClick={() => {
                 setMutagen(null);
               }}>
                 Убрать мутаген
               </button>
-            </div>
+            </div>) : ""}
           </div>
         </div>
       ) : (

@@ -165,72 +165,72 @@ const drawSubstanceType = (substanceType: number, amount: number) => {
     case 1:
       return (
         <div className="flex m-auto">
-          Аэр
-          {CaelumSVG()}
+          <span>Аэр</span>
+          <div className="ml-1">{CaelumSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 2:
       return (
         <div className="flex m-auto">
-          Гидраген
-          {HydragenumSVG()}
+          <span>Гидраген</span>
+          <div className="ml-1">{HydragenumSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 3:
       return (
         <div className="flex m-auto">
-          Квебрит
-          {QuebrithSVG()}
+          <span>Квебрит</span>
+          <div className="ml-1">{QuebrithSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 4:
       return (
         <div className="flex m-auto">
-          Киноварь
-          {VermilionSVG()}
+          <span>Киноварь</span>
+          <div className="ml-1">{VermilionSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 5:
       return (
         <div className="flex m-auto">
-          Купорос
-          {VitriolSVG()}
+          <span>Купорос</span>
+          <div className="ml-1">{VitriolSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 6:
       return (
         <div className="flex m-auto">
-          Рэбис
-          {RebisSVG()}
+          <span>Рэбис</span>
+          <div className="ml-1">{RebisSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 7:
       return (
         <div className="flex m-auto">
-          Солнце
-          {SolSVG()}
+          <span>Солнце</span>
+          <div className="ml-1">{SolSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 8:
       return (
         <div className="flex m-auto">
-          Фульгор
-          {FulgurSVG()}
+          <span>Фульгор</span>
+          <div className="ml-1">{FulgurSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );
     case 9:
       return (
         <div className="flex m-auto">
-          Эфир
-          {AetherSVG()}
+          <span>Эфир</span>
+          <div className="ml-1">{AetherSVG()}</div>
           {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
         </div>
       );

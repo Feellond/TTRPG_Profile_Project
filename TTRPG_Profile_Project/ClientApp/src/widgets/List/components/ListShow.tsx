@@ -329,7 +329,6 @@ const ListShow = ({
                   {store.isAuth ? "" : ""}
                   {"itemType" in entity || "spellType" in entity ? (
                     <div>
-                      Footer
                       <Button
                         label="Редактировать предмет"
                         onClick={(e) => showEditDialog(it.id)}

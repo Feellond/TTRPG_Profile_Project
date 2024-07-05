@@ -72,6 +72,7 @@ export interface ICreature extends EntityDescriptionBase {
 export interface ICreatureReward {
   id: number | null;
   //reward: IReward;
+  amount: string;
   itemBase: ItemShortDTO;
 }
 
@@ -274,28 +275,42 @@ export interface ISkillsList {
 export interface ISkillsTree extends EntityBase {
   class?: IClass;
 
+  leftBranchName: string,
+  middleBranchName: string,
+  rightBranchName: string,
+
+  mainSkill: ISkill;
   mainSkillId: number;
   mainSkillValue: number;
 
+  firstLeftSkill: ISkill;
   firstLeftSkillId: number;
-  secondLeftSkillId: number;
-  thirdLeftSkillId: number;
   firstLeftSkillValue: number;
+  secondLeftSkill: ISkill;
+  secondLeftSkillId: number;
   secondLeftSkillValue: number;
+  thirdLeftSkill: ISkill;
+  thirdLeftSkillId: number;
   thirdLeftSkillValue: number;
 
+  firstMiddleSkill: ISkill;
   firstMiddleSkillId: number;
-  secondMiddleSkillId: number;
-  thirdMiddleSkillId: number;
   firstMiddleSkillValue: number;
+  secondMiddleSkill: ISkill;
+  secondMiddleSkillId: number;
   secondMiddleSkillValue: number;
+  thirdMiddleSkill: ISkill;
+  thirdMiddleSkillId: number;
   thirdMiddleSkillValue: number;
 
+  firstRightSkill: ISkill;
   firstRightSkillId: number;
-  secondRightSkillId: number;
-  thirdRightSkillId: number;
   firstRightSkillValue: number;
+  secondRightSkill: ISkill;
+  secondRightSkillId: number;
   secondRightSkillValue: number;
+  thirdRightSkill: ISkill;
+  thirdRightSkillId: number;
   thirdRightSkillValue: number;
 }
 

@@ -5,6 +5,7 @@ import {
   StealthOptionsToString,
 } from "./components/OptionsParamsLoad";
 import { StealthOptionsLoad } from "./components/OptionsParamsLoad";
+import { useDebounce } from "./components/UseDebounce";
 
 export {
   FindIndexById,
@@ -12,4 +13,6 @@ export {
   StealthOptionsLoad,
   EffectOptionsLoad,
   StealthOptionsToString,
+
+  useDebounce,
 };

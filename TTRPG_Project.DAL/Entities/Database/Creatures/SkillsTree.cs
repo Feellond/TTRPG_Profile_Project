@@ -6,6 +6,10 @@ namespace TTRPG_Project.DAL.Entities.Database.Creatures
     [Table("SkillsTree")]
     public class SkillsTree : EntityDescriptionBase
     {
+        public string LeftBranchName { get; set; } = string.Empty;
+        public string MiddleBranchName { get; set; } = string.Empty;
+        public string RightBranchName { get; set; } = string.Empty;
+
         public int MainSkillId { get; set; }
         public int MainSkillValue { get; set; } = 0;
 

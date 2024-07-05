@@ -19,6 +19,7 @@ enum CreatureEffectType {
   Immunity = 1,
   Resistance = 2,
   Vulnerability = 3,
+  Passive = 4,
 }
 
 enum Complexity {

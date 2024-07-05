@@ -76,13 +76,13 @@
     justify-content: flex-start;
     align-items: flex-start;
     margin: 0 auto;
-    padding: 0 8px;
+    padding: 0 4px;
 }
 
 .layout__left {
     padding: 8px 4px;
-    flex: 0 0 238px;
-    width: 238px;
+    flex: 0 0 240px;
+    width: 240px;
     position: relative;
     z-index: 3;
     -webkit-user-select: none;
@@ -97,14 +97,14 @@
             display: block;
             font-size: 22px;
             font-weight: 600;
-            line-height: 1.2;
+            line-height: 1.5;
             margin-bottom: 4px;
 
             &-link {
                 display: flex;
                 align-items: center;
                 padding: 4px 8px;
-                border: 1px solid var(--gray-700);
+                border: 2px solid var(--gray-700);
                 border-radius: 2px;
                 background-color: var(--gray-800);
                 position: relative;

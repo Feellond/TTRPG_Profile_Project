@@ -389,7 +389,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
             )}
           </ul>
 
-          <div className="p-2 creatureImage">
+          <div className="creatureImage">
             {data.imageFileName !== null && data.imageFileName !== "" ? (
               <div className="mb-2">
                 <img
