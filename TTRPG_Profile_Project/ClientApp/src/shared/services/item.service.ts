@@ -2,6 +2,7 @@ import {
   API_ALCHEMICALITEM,
   API_ARMOR,
   API_BASEITEM,
+  API_BASEITEMSIMPLE,
   API_BLUEPRINT,
   API_COMPONENT,
   API_FORMULA,
@@ -14,6 +15,10 @@ import { CommandEnum } from "shared/enums/GeneralEnums";
 import { ItemRequestDTO } from "shared/models";
 
 export class ItemService {
+  async getItemsSimple() {
+    return await $api.get(API_BASEITEMSIMPLE);
+  }
+
   async getEntitys({ itemType, toast, params }: ItemRequestDTO) {
     return await this.execute({
       itemType: itemType,
@@ -102,10 +107,11 @@ export class ItemService {
         apiString = API_BLUEPRINT;
         break;
       case 8:
-        apiString = API_COMPONENT;
+        apiString = API_ITEM;
         break;
       case 9:
-        apiString = API_ITEM;
+      case 10:
+        apiString = API_COMPONENT;
         break;
       default:
         toast.current.show({
@@ -115,9 +121,6 @@ export class ItemService {
         }); // Отображаем сообщение об ошибке в Toast
         return false;
     }
-    console.log("executed")
-    console.log(apiString)
-    console.log(entity)
 
     if (command === CommandEnum.GetList) {
       return await $api.get(apiString, { params: params });

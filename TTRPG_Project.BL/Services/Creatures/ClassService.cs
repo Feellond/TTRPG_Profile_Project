@@ -11,6 +11,7 @@ using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
+using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.BL.Services.Creatures
 {
@@ -38,6 +39,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                         Source = x.Source,
                         SourceId = x.SourceId,
                         UpdateDate = x.UpdateDate,
+                        ImageFileName = x.ImageFileName,
                     })
                     .ToListAsync();
 
@@ -132,6 +134,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                         Source = x.Source,
                         SourceId = x.SourceId,
                         UpdateDate = x.UpdateDate,
+                        ImageFileName = x.ImageFileName,
                     })
                 .FirstOrDefaultAsync();
 
@@ -206,6 +209,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 Energy = request.Energy,
                 Name = request.Name,
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Classes.AddAsync(singleClass);
@@ -224,6 +228,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             singleClass.Name = request.Name;
             singleClass.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             singleClass.UpdateDate = DateTime.Now;
+            singleClass.ImageFileName = request.ImageFileName;
 
             _dbContext.Entry(singleClass).State = EntityState.Modified;
             return await SaveAsync();

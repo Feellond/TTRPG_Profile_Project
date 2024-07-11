@@ -1,9 +1,5 @@
 import { SkillOptionsLoad } from "entities/BestiaryOptions";
-import {
-  SpellCategotyOptionsLoad,
-  SpellLevelOptionsLoad,
-  SpellSourceOptionsLoad,
-} from "entities/DrawItem/components/SpellOptions";
+import { SpellLevelOptionsLoad, SpellSourceTypeOptionsLoad } from "entities/SpellFunc";
 import { Checkbox } from "primereact/checkbox";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
@@ -48,9 +44,6 @@ export const SpellTypeSelect = ({
     []
   );
   const [spellLevelOptions, setSpellLevelOptions] = useState<SelectItem[]>([]);
-  const [spellCategoryOptions, setSpellCategoryOptions] = useState<
-    SelectItem[]
-  >([]);
 
   const [isConcentrationChecked, setIsConcentrationChecked] =
     useState<boolean>(false);
@@ -72,7 +65,7 @@ export const SpellTypeSelect = ({
   const LoadComponents = async () => {
     try {
       let result = await itemService.getEntitys({
-        itemType: ItemEntityType.Component, //ItemEntityType.BaseItem
+        itemType: ItemEntityType.ComponentRem, //ItemEntityType.BaseItem
         toast: null,
         params: { pageSize: 99999 },
       });
@@ -95,17 +88,14 @@ export const SpellTypeSelect = ({
   };
 
   useEffect(() => {
-    SpellSourceOptionsLoad({ setItems: setSpellSourceOptions });
+    SpellSourceTypeOptionsLoad({ setItems: setSpellSourceOptions });
     SpellLevelOptionsLoad({ setItems: setSpellLevelOptions });
-    SpellCategotyOptionsLoad({ setItems: setSpellCategoryOptions });
 
     SkillOptionsLoad({ setItems: setSkillOptions });
     LoadComponents();
   }, []);
 
   useEffect(() => {
-    console.log("data: ", data);
-    console.log("spellType: ", spellType);
     switch (spellType) {
       case 1: //Заклинание, Инвокация, Знак
       case 2:
@@ -133,7 +123,6 @@ export const SpellTypeSelect = ({
   ]);
 
   useEffect(() => {
-    console.log(spellSkills);
     register("spellSkillProtectionList", { value: spellSkills });
   }, [spellSkills]);
 
@@ -318,7 +307,6 @@ export const SpellTypeSelect = ({
   };
 
   useEffect(() => {
-    console.log(spellComponents);
     register("spellComponentList", { value: spellComponents });
   }, [spellComponents]);
 

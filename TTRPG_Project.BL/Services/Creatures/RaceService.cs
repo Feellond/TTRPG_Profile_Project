@@ -11,6 +11,7 @@ using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
+using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.BL.Services.Creatures
 {
@@ -22,6 +23,7 @@ namespace TTRPG_Project.BL.Services.Creatures
         {
             var races = await _dbContext.Races.AsNoTracking()
                 .Include(s => s.Source)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             RaceResponce responce = new()
@@ -38,6 +40,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             var race = await _dbContext.Races.AsNoTracking()
                 .Where(x => x.Id == id)
                 .Include(s => s.Source)
+                .OrderBy(x => x.Name)
                 .FirstOrDefaultAsync();
 
             if (race is null)
@@ -59,6 +62,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 Description = request.Description,
                 Name = request.Name,
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Races.AddAsync(race);
@@ -75,6 +79,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             race.Name = request.Name;
             race.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             race.UpdateDate = DateTime.Now;
+            race.ImageFileName = request.ImageFileName;
 
             _dbContext.Entry(race).State = EntityState.Modified;
             return await SaveAsync();

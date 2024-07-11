@@ -35,6 +35,7 @@ const emptyItem: ItemDTO = {
   skill: null,
   equipmentType: null,
   itemOriginType: null,
+  imageFileName: null,
 };
 
 export { emptyItem };

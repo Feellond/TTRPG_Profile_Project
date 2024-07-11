@@ -1,4 +1,6 @@
 export interface SpellFilterDTO {
-    name: string,
-    spellLevel: number,
+    name: string | null,
+    spellLevel: number | null,
+    sourceType: number | null,
+    spellType: number | null,
 }

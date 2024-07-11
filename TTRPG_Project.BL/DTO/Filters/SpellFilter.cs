@@ -16,6 +16,9 @@ namespace TTRPG_Project.BL.DTO.Filters
         public int PageSize { get; set; } = 9999;
 
         public string? Name { get; set; }
+        public int? SpellLevel { get; set; }
+        public int? SpellType { get; set; }
+        public int? SourceType { get; set; }
         public SortOrder Order { get; set; } = SortOrder.Descending; //Enum
 
         public void InitFilter()
@@ -27,6 +30,31 @@ namespace TTRPG_Project.BL.DTO.Filters
 
                 whereExpression.Add(filter);
             }
+
+            if (SpellLevel != null)
+            {
+                Expression<Func<Spell, bool>> filter = entity =>
+                    entity.SpellLevel.Equals(SpellLevel);
+
+                whereExpression.Add(filter);
+            }
+
+            if (SpellType != null)
+            {
+                Expression<Func<Spell, bool>> filter = entity =>
+                    entity.SpellType.Equals(SpellType);
+
+                whereExpression.Add(filter);
+            }
+
+            if (SourceType != null)
+            {
+                Expression<Func<Spell, bool>> filter = entity =>
+                    entity.SourceType.Equals(SourceType);
+
+                whereExpression.Add(filter);
+            }
+
         }
     }
 }

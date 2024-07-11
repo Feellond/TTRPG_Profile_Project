@@ -1,14 +1,22 @@
 import { Card } from "primereact/card";
 import { Toast } from "primereact/toast";
 import React, { useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { emptySpell, ISpell, LazyState, SpellFilterDTO } from "shared/models";
 import { ListShow } from "widgets/List";
 
 const SpellsListPage = () => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);  
+  const name = params.get('name') || null;
+
   const [itemList, setItemList] = useState<ISpell[]>([]);
   const [item, setItem] = useState<ISpell>(emptySpell);
   const [filter, setFilter] = useState<SpellFilterDTO>({
-    spellLevel: 0,
+    name: name,
+    spellLevel: null,
+    spellType: null,
+    sourceType: null,
   } as SpellFilterDTO);
 
   const toast = useRef<Toast>(null);
@@ -32,6 +40,15 @@ const SpellsListPage = () => {
       }
       if (filter.spellLevel) {
         params["spellLevel"] = filter.spellLevel;
+      }
+      if (filter.spellLevel) {
+        params["spellLevel"] = filter.spellLevel;
+      }
+      if (filter.spellType) {
+        params["spellType"] = filter.spellType;
+      }
+      if (filter.sourceType) {
+        params["sourceType"] = filter.sourceType;
       }
     }
 

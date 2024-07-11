@@ -33,6 +33,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Price = item.Price,
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.AlchemicalItem,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -63,6 +64,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Price = item.Price,
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.AlchemicalItem,
+                    ImageFileName = item.ImageFileName,
                 }).FirstOrDefault();
 
             ItemBaseResponce responce = new()
@@ -93,6 +95,7 @@ namespace TTRPG_Project.BL.Services.Items
                 Price = request.Price,
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.AlchemicalItems.AddAsync(newAlchemicalItem);
@@ -112,6 +115,7 @@ namespace TTRPG_Project.BL.Services.Items
             alcItem.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             alcItem.Description = request.Description;
             alcItem.AvailabilityType = request.AvailabilityType;
+            alcItem.ImageFileName = request.ImageFileName;
 
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == alcItem.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);

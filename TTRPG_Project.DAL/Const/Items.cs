@@ -11,8 +11,8 @@ namespace TTRPG_Project.DAL.Const
         Weapon = 5,
         Formula = 6,
         Blueprint = 7,
-        Component = 8,
-        Item = 9,
+        Item = 8,
+        Component = 9,
     }
 
     public enum ItemAvailabilityType

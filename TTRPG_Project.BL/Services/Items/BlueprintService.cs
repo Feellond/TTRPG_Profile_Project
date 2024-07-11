@@ -37,6 +37,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     BlueprintComponentList = item.BlueprintComponentList,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -72,6 +73,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     BlueprintComponentList = item.BlueprintComponentList,
+                    ImageFileName = item.ImageFileName,
                 }).FirstOrDefault();
 
             ItemBaseResponce responce = new()
@@ -103,6 +105,7 @@ namespace TTRPG_Project.BL.Services.Items
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 TimeSpend = request.TimeSpend,
                 Weight = request.Weight,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Blueprints.AddAsync(newBlueprint);
@@ -124,6 +127,7 @@ namespace TTRPG_Project.BL.Services.Items
             blueprint.Complexity = request.Complexity;
             blueprint.Description = request.Description;
             blueprint.AvailabilityType = request.AvailabilityType;
+            blueprint.ImageFileName = request.ImageFileName;
 
             var bcList = await _dbContext.BlueprintComponentList.Where(x => x.BlueprintId == blueprint.Id).ToListAsync();
             _dbContext.BlueprintComponentList.RemoveRange(bcList);

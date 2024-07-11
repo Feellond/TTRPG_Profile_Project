@@ -1,4 +1,5 @@
 import { FindIndexById } from "./components/FindIndexById";
+import { FindItemById } from "./components/FindItemById";
 import {
   EffectOptionsLoad,
   SourceOptionsLoad,
@@ -15,4 +16,5 @@ export {
   StealthOptionsToString,
 
   useDebounce,
+  FindItemById,
 };

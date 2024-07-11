@@ -1,9 +1,3 @@
-import {
-  SpellCategotyOptionsLoad,
-  SpellLevelOptionsLoad,
-  SpellSourceOptionsLoad,
-  SpellTypeOptionsLoad,
-} from "entities/DrawItem/components/SpellOptions";
 import { SourceOptionsLoad } from "entities/GeneralFunc";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
@@ -16,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ISpell } from "shared/models";
 import { SpellTypeSelect } from "./SpellTypeSelect";
+import { SpellTypeOptionsLoad } from "entities/SpellFunc";
 
 interface IEditSpellDialog {
   data: ISpell;

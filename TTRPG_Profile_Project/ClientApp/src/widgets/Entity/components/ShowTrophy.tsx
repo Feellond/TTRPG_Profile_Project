@@ -1,3 +1,4 @@
+import { Button } from "primereact/button";
 import { InputTextarea } from "primereact/inputtextarea";
 import React, { useEffect, useState } from "react";
 import {
@@ -5,6 +6,7 @@ import {
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 import { ICreature, ISkillsList, IStatsList, ITrophy } from "shared/models";
 
@@ -14,6 +16,7 @@ interface IShowTrophy {
   data: ICreature | null;
   control: Control<FieldValues, any>;
   getValues: UseFormGetValues<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   register: UseFormRegister<FieldValues>;
   isEditMode: boolean;
 }
@@ -24,6 +27,7 @@ export const ShowTrophy = ({
   data,
   control,
   getValues,
+  setValue,
   register,
   isEditMode,
 }: IShowTrophy) => {
@@ -35,7 +39,7 @@ export const ShowTrophy = ({
     setTrophy(values.trophy);
 
     if (trophy){
-      if (trophy.id === 0 || trophy.name === "")
+      if (trophy.id === 0)
         setTrophy(null);
     }
   };
@@ -45,24 +49,29 @@ export const ShowTrophy = ({
   }, [data, control, statList, skillsList, isEditMode]);
 
   useEffect(() => {
-    register("trophy", { value: trophy });
-  }, [trophy]);
+    setValue("trophy", trophy)
+  }, [trophy, register]);
 
   return (
-    <div>
+    <div className="p-2">
       {trophy ? (
-        <div>
-          <span>Трофей:</span>
-          <div>
-            <div className="flex">
-              <span>Эффект:</span>
+        <div className="showInfo">
+          <span className="showInfo__name">Трофей:</span>
+          <div className="flex flex-wrap">
+            <div className="flex flex-column mx-2 justify-content-center">
+              <span className="font-medium">Эффект:</span>
               {isEditMode ? (
                 <div>
                   <InputTextarea
                     autoResize
                     value={trophy.description}
                     onChange={(e) => {
-                      trophy.description = e.target.value; //Не уверен, что работает
+                      setTrophy((prevTrophy) => {
+                        return {
+                          ...prevTrophy,
+                          description: e.target.value
+                        }
+                      })
                     }}
                   />
                 </div>
@@ -70,13 +79,13 @@ export const ShowTrophy = ({
                 <div className="ml-1">{trophy.description}</div>
               )}
             </div>
-            <div>
-              <button type="button" onClick={() => {
+            {isEditMode ? (<div>
+              <Button onClick={() => {
                 setTrophy(null);
               }}>
                 Убрать трофей
-              </button>
-            </div>
+              </Button>
+            </div>) : ""}
           </div>
         </div>
       ) : (
@@ -92,6 +101,7 @@ export const ShowTrophy = ({
                 description: "",
                 name: "",
                 source: null,
+                imageFileName: null,
               });
             }}
           >

@@ -41,6 +41,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Price = item.Price,
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.AlchemicalItem,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var armors = await _dbContext.Armors.AsNoTracking()
@@ -62,6 +63,9 @@ namespace TTRPG_Project.BL.Services.Items
                     Reliability = item.Reliability,
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     Stiffness = item.Stiffness,
+                    ItemOriginType = item.ItemOriginType,
+                    Type = item.Type,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var blueprints = await _dbContext.Blueprints.AsNoTracking()
@@ -87,6 +91,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     BlueprintComponentList = item.BlueprintComponentList,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var components = await _dbContext.Components.AsNoTracking()
@@ -110,6 +115,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Complexity = item.Complexity,
                     IsAlchemical = item.IsAlchemical,
                     SubstanceType = item.SubstanceType,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var formulas = await _dbContext.Formulas.AsNoTracking()
@@ -133,6 +139,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     FormulaSubstanceList = item.FormulaSubstanceList,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var items = await _dbContext.Items.AsNoTracking()
@@ -153,6 +160,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemType = (int)ItemEntityType.Item,
                     StealthType = item.StealthType,
                     Type = item.Type,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var tools = await _dbContext.Tools.AsNoTracking()
@@ -172,6 +180,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Tool,
                     StealthType = item.StealthType,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var weapons = await _dbContext.Weapons.AsNoTracking()
@@ -201,6 +210,7 @@ namespace TTRPG_Project.BL.Services.Items
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     IsAmmunition = item.IsAmmunition,
                     Skill = item.Skill,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             var allItemsQuery = alchemicalItems
@@ -225,6 +235,20 @@ namespace TTRPG_Project.BL.Services.Items
             {
                 Count = count,
                 Entitys = allItems,
+            };
+
+            return responce;
+        }
+
+        public async Task<ItemBaseShortResponce> GetAllSimpleAsync()
+        {
+            var baseItems = await _dbContext.ItemBases.AsNoTracking().ToListAsync();
+
+            var count = baseItems.Count();
+            ItemBaseShortResponce responce = new()
+            {
+                Count = count,
+                Entitys = baseItems,
             };
 
             return responce;

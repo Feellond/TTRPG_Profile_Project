@@ -397,7 +397,6 @@ namespace TTRPG_Project.Web.Controllers
         }
         #endregion
 
-
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Items* Предметы
@@ -587,6 +586,15 @@ namespace TTRPG_Project.Web.Controllers
         {
             filter.InitFilter();
             var result = await _itemBaseService.GetAllAsync(filter);
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("baseSimple")]
+        public async Task<IActionResult> GetBaseItemsSimple()
+        {
+            var result = await _itemBaseService.GetAllSimpleAsync();
 
             return Ok(result);
         }

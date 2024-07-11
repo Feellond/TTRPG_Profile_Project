@@ -1,3 +1,4 @@
+import { Button } from "primereact/button";
 import {
   InputNumber,
   InputNumberValueChangeEvent,
@@ -10,6 +11,7 @@ import {
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 import { ICreature, IMutagen, ISkillsList, IStatsList } from "shared/models";
 
@@ -19,6 +21,7 @@ interface IShowMutagen {
   data: ICreature | null;
   control: Control<FieldValues, any>;
   getValues: UseFormGetValues<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   register: UseFormRegister<FieldValues>;
   isEditMode: boolean;
 }
@@ -29,6 +32,7 @@ export const ShowMutagen = ({
   data,
   control,
   getValues,
+  setValue,
   register,
   isEditMode,
 }: IShowMutagen) => {
@@ -40,7 +44,7 @@ export const ShowMutagen = ({
     setMutagen(values.mutagen);
 
     if (mutagen){
-      if (mutagen.id === 0 || mutagen.name === "")
+      if (mutagen.id === 0)
         setMutagen(null);
     }
   };
@@ -50,23 +54,28 @@ export const ShowMutagen = ({
   }, [data, control, statList, skillsList, isEditMode]);
 
   useEffect(() => {
-    register("mutagen", { value: mutagen });
+    setValue("mutagen", mutagen);
   }, [mutagen]);
 
   return (
-    <div>
+    <div className="p-2">
       {mutagen ? (
-        <div>
-          <span>Мутаген:</span>
-          <div className="flex">
-            <div>
-              <span>СЛ:</span>
+        <div className="showInfo">
+          <span className="showInfo__name">Мутаген:</span>
+          <div className="flex flex-wrap">
+            <div className="flex flex-column mx-2 justify-content-center">
+              <span className="font-medium">СЛ:</span>
               {isEditMode ? (
                 <div>
                   <InputNumber
                     value={mutagen.complexity}
                     onValueChange={(e: InputNumberValueChangeEvent) => {
-                      mutagen.complexity = e.value; //Не уверен, что работает
+                      setMutagen((prevMutagen) => {
+                        return {
+                          ...prevMutagen,
+                          complexity: e.value
+                        };
+                      })
                     }}
                     minFractionDigits={0}
                     maxFractionDigits={0}
@@ -75,48 +84,58 @@ export const ShowMutagen = ({
                   />
                 </div>
               ) : (
-                <div className="ml-1">{mutagen.complexity}</div>
+                <div>{mutagen.complexity}</div>
               )}
             </div>
-            <div>
-              <span>Эффект</span>
+            <div className="flex flex-column mr-2 justify-content-center">
+              <span className="font-medium">Эффект:</span>
               {isEditMode ? (
                 <div>
                   <InputText
                     value={mutagen.effect}
                     onChange={(e) => {
-                      mutagen.effect = e.target.value; //Не уверен, что работает
+                      setMutagen((prevMutagen) => {
+                        return {
+                          ...prevMutagen,
+                          effect: e.target.value
+                        };
+                      })
                     }}
                   />
                 </div>
               ) : (
-                <div className="ml-1">{mutagen.effect}</div>
+                <div>{mutagen.effect}</div>
               )}
             </div>
-            <div>
-              <span>Малая мутация</span>
+            <div className="flex flex-column mr-2 justify-content-center">
+              <span className="font-medium">Малая мутация:</span>
               {isEditMode ? (
                 <div>
                   <InputTextarea
                     autoResize
                     value={mutagen.mutation}
                     onChange={(e) => {
-                      mutagen.mutation = e.target.value; //Не уверен, что работает
+                      setMutagen((prevMutagen) => {
+                        return {
+                          ...prevMutagen,
+                          mutation: e.target.value
+                        };
+                      })
                     }}
                     rows={5}
                     cols={30}
                   />
                 </div>
               ) : (
-                <div className="ml-1">{mutagen.mutation}</div>
+                <div>{mutagen.mutation}</div>
               )}
             </div>
             {isEditMode ? (<div>
-              <button type="button" onClick={() => {
+              <Button onClick={() => {
                 setMutagen(null);
               }}>
                 Убрать мутаген
-              </button>
+              </Button>
             </div>) : ""}
           </div>
         </div>
@@ -136,6 +155,7 @@ export const ShowMutagen = ({
                 mutation: "",
                 name: "",
                 source: null,
+                imageFileName: null,
               });
             }}
           >

@@ -11,7 +11,12 @@ import {
   VermilionSVG,
   VitriolSVG,
 } from "img";
-import { AttackTypeToShortString, AttackTypeToString } from "entities/BestiaryFunc";
+import {
+  AttackTypeToShortString,
+  AttackTypeToString,
+} from "entities/BestiaryFunc";
+import { WEBSITE } from "shared/api/api_const";
+import { ItemEntityType } from "shared/enums/ItemEnums";
 
 const drawWeaponEquipmentType = (data: ItemDTO) => {
   switch (data.equipmentType) {
@@ -95,6 +100,8 @@ const drawStealthType = (data: ItemDTO) => {
       return "Н";
     case 4:
       return "К";
+    default:
+      return "-";
   }
 };
 
@@ -109,7 +116,7 @@ const StealthTypeTooltip = (stealthType: number) => {
     case 4:
       return "(Крупное) Можно спрятать под плащом";
   }
-}
+};
 
 const drawAvailabilityType = (data: ItemDTO) => {
   switch (data.availabilityType) {
@@ -124,7 +131,7 @@ const drawAvailabilityType = (data: ItemDTO) => {
   }
 };
 
-const AvailabilityTypeTooltip = (availabilityType : number) => {
+const AvailabilityTypeTooltip = (availabilityType: number) => {
   switch (availabilityType) {
     case 1:
       return "Можно найти даже в небольших поселках";
@@ -135,7 +142,7 @@ const AvailabilityTypeTooltip = (availabilityType : number) => {
     case 4:
       return "Очень трудно найти, обычно продается только в одном месте у определенных торговцев";
   }
-}
+};
 
 const drawItemEntityType = (data: ItemDTO) => {
   switch (data.itemType) {
@@ -160,78 +167,109 @@ const drawItemEntityType = (data: ItemDTO) => {
   }
 };
 
-const drawSubstanceType = (substanceType: number, amount: number) => {
+const drawSubstanceType = (
+  substanceType: number,
+  amount: number,
+  itemType: number
+) => {
+  let alccomponent_href =
+    //WEBSITE +
+    "listitem?itemType=" +
+    String(ItemEntityType.ComponentAlc) +
+    "&substanceType=" +
+    String(substanceType);
+
+  let amountContent = amount !== 0 ? <span>(x{amount})</span> : <span></span>;
+
   switch (substanceType) {
     case 1:
       return (
-        <div className="flex m-auto">
-          <span>Аэр</span>
-          <div className="ml-1">{CaelumSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Аэр</span>
+            <div className="ml-1">{CaelumSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 2:
       return (
-        <div className="flex m-auto">
-          <span>Гидраген</span>
-          <div className="ml-1">{HydragenumSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Гидраген</span>
+            <div className="ml-1">{HydragenumSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 3:
       return (
-        <div className="flex m-auto">
-          <span>Квебрит</span>
-          <div className="ml-1">{QuebrithSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Квебрит</span>
+            <div className="ml-1">{QuebrithSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 4:
       return (
-        <div className="flex m-auto">
-          <span>Киноварь</span>
-          <div className="ml-1">{VermilionSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Киноварь</span>
+            <div className="ml-1">{VermilionSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 5:
       return (
-        <div className="flex m-auto">
-          <span>Купорос</span>
-          <div className="ml-1">{VitriolSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Купорос</span>
+            <div className="ml-1">{VitriolSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 6:
       return (
-        <div className="flex m-auto">
-          <span>Рэбис</span>
-          <div className="ml-1">{RebisSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Рэбис</span>
+            <div className="ml-1">{RebisSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 7:
       return (
-        <div className="flex m-auto">
-          <span>Солнце</span>
-          <div className="ml-1">{SolSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Солнце</span>
+            <div className="ml-1">{SolSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 8:
       return (
-        <div className="flex m-auto">
-          <span>Фульгор</span>
-          <div className="ml-1">{FulgurSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Фульгор</span>
+            <div className="ml-1">{FulgurSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
     case 9:
       return (
-        <div className="flex m-auto">
-          <span>Эфир</span>
-          <div className="ml-1">{AetherSVG()}</div>
-          {amount !== 0 ? <p>(x{amount});</p> : <p></p>}
+        <div className="flex m-auto line-height-3">
+          <a href={alccomponent_href} className="flex" target="_blank" rel="noreferrer">
+            <span>Эфир</span>
+            <div className="ml-1">{AetherSVG()}</div>
+            {amountContent}
+          </a>
         </div>
       );
   }
@@ -263,20 +301,16 @@ const drawArmor = (data: ItemDTO) => {
         <div>{drawItemOriginType(data)}</div>
       </div>
       <div className="stat" title="Свойства">
-        <div>
-          <div>Свойства</div>
-          {data.itemBaseEffectList.length > 0 ? (
-            <div>
-              {data.itemBaseEffectList.map((effect, index) => (
-                <a key={index} title={effect.effect.description}>
-                  {effect.effect.name}({effect.chancePercent}%);{" "}
-                </a>
-              ))}
+        <div>Свойства</div>
+        {data.itemBaseEffectList.length > 0 ? (
+          data.itemBaseEffectList.map((effect, index) => (
+            <div key={index} title={effect.effect.description}>
+              {effect.effect.name}({effect.chancePercent}%);{" "}
             </div>
-          ) : (
-            <div>-</div>
-          )}
-        </div>
+          ))
+        ) : (
+          <div>-</div>
+        )}
       </div>
     </li>
   );
@@ -301,7 +335,7 @@ const drawFormula = (data: ItemDTO) => {
         <div>Компоненты</div>
         {data.formulaSubstanceList.length > 0 ? (
           data.formulaSubstanceList.map((item, index) =>
-            drawSubstanceType(item.substanceType, item.amount)
+            drawSubstanceType(item.substanceType, item.amount, data.itemType)
           )
         ) : (
           <div>-</div>
@@ -312,6 +346,10 @@ const drawFormula = (data: ItemDTO) => {
 };
 
 const drawBlueprint = (data: ItemDTO) => {
+  let component_href = 
+  //WEBSITE + 
+  "listitem?name=";
+
   return (
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Сложность">
@@ -329,10 +367,10 @@ const drawBlueprint = (data: ItemDTO) => {
       <div className="stat" title="Компоненты">
         <div>Компоненты</div>
         {data.blueprintComponentList.length > 0 ? (
-          <div>
+          <div className="flex flex-column">
             {data.blueprintComponentList.map((item, index) => (
-              <a key={index}>
-                {item.component.name}(x{item.amount});{" "}
+              <a key={index} className="line-height-3" href={component_href + item.component.name}>
+                {item.component.name}(x{item.amount})
               </a>
             ))}
           </div>
@@ -353,7 +391,7 @@ const drawComponent = (data: ItemDTO) => {
       </div>
       <div className="stat" title="Количество">
         <div>Количество</div>
-        <div>{data.amount}</div>
+        <div>{data.amount === "" ? "-" : data.amount}</div>
       </div>
       <div className="stat" title="Сложность">
         <div>СЛ</div>
@@ -362,7 +400,7 @@ const drawComponent = (data: ItemDTO) => {
       {data.isAlchemical ? (
         <div className="stat" title="Тип субстанции">
           <div>Тип субстанции</div>
-          {drawSubstanceType(data.substanceType, 0)}
+          {drawSubstanceType(data.substanceType, 0, data.itemType)}
         </div>
       ) : (
         <div></div>
@@ -376,7 +414,9 @@ const drawItem = (data: ItemDTO) => {
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
-        <div title={StealthTypeTooltip(data.stealthType)}>{drawStealthType(data)}</div>
+        <div title={StealthTypeTooltip(data.stealthType)}>
+          {drawStealthType(data)}
+        </div>
       </div>
     </li>
   );
@@ -387,7 +427,9 @@ const drawTool = (data: ItemDTO) => {
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
-        <div title={StealthTypeTooltip(data.stealthType)}>{drawStealthType(data)}</div>
+        <div title={StealthTypeTooltip(data.stealthType)}>
+          {drawStealthType(data)}
+        </div>
       </div>
     </li>
   );
@@ -398,7 +440,9 @@ const drawWeapon = (data: ItemDTO) => {
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Точность">
         <div>Тип</div>
-        <div title={AttackTypeToString(data.type)}>{AttackTypeToShortString(data.type)}</div>
+        <div title={AttackTypeToString(data.type)}>
+          {AttackTypeToShortString(data.type)}
+        </div>
       </div>
       <div className="stat" title="Точность">
         <div>Точ</div>
@@ -422,7 +466,9 @@ const drawWeapon = (data: ItemDTO) => {
       </div>
       <div className="stat" title="Скрытность">
         <div>Скрыт</div>
-        <div title={StealthTypeTooltip(data.stealthType)}>{drawStealthType(data)}</div>
+        <div title={StealthTypeTooltip(data.stealthType)}>
+          {drawStealthType(data)}
+        </div>
       </div>
       <div className="stat" title="Количество улучшений">
         <div>Улуч</div>
@@ -433,20 +479,16 @@ const drawWeapon = (data: ItemDTO) => {
         <div>{drawItemOriginType(data)}</div>
       </div>
       <div className="stat" title="Свойства">
-        <div>
-          <div>Свойства</div>
-          {data.itemBaseEffectList.length > 0 ? (
-            <div>
-              {data.itemBaseEffectList.map((effect, index) => (
-                <a key={index} title={effect.effect.description}>
-                  {effect.effect.name}({effect.chancePercent}%);{" "}
-                </a>
-              ))}
+        <div>Свойства</div>
+        {data.itemBaseEffectList.length > 0 ? (
+          data.itemBaseEffectList.map((effect, index) => (
+            <div key={index} title={effect.effect.description}>
+              {effect.effect.name}({effect.chancePercent}%);{" "}
             </div>
-          ) : (
-            <div>-</div>
-          )}
-        </div>
+          ))
+        ) : (
+          <div>-</div>
+        )}
       </div>
     </li>
   );
@@ -462,22 +504,20 @@ const drawItemFromType = (data: ItemDTO) => {
       return (
         <li className="stats flex flex-row py-2 flex-wrap">
           <div className="stat" title="Свойства">
-            <div>
-              <div>Свойства</div>
-              {data.itemBaseEffectList.length > 0 ? (
-                <div>
-                  {data.itemBaseEffectList.map((effect, index) => (
-                    <a key={index} title={effect.effect.description}>
-                      {effect.effect.name}(
-                        {effect.chancePercent && effect.chancePercent !== 0 ? (effect.chancePercent + "%") : (effect.damage)}
-                        );{" "}
-                    </a>
-                  ))}
+            <div>Свойства</div>
+            {data.itemBaseEffectList.length > 0 ? (
+              data.itemBaseEffectList.map((effect, index) => (
+                <div key={index} title={effect.effect.description}>
+                  {effect.effect.name}(
+                  {effect.chancePercent && effect.chancePercent !== 0
+                    ? effect.chancePercent + "%"
+                    : effect.damage}
+                  );{" "}
                 </div>
-              ) : (
-                <div>-</div>
-              )}
-            </div>
+              ))
+            ) : (
+              <div>-</div>
+            )}
           </div>
         </li>
       );
@@ -490,9 +530,10 @@ const drawItemFromType = (data: ItemDTO) => {
     case 7:
       return drawBlueprint(data);
     case 8:
-      return drawComponent(data);
-    case 9:
       return drawItem(data);
+    case 9:
+    case 10:
+      return drawComponent(data);
   }
 };
 
@@ -513,7 +554,6 @@ export {
   drawWeapon,
   drawWeaponEquipmentType,
   drawSubstanceType,
-
   StealthTypeTooltip,
   AvailabilityTypeTooltip,
 };

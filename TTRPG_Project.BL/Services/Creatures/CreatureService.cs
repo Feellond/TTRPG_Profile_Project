@@ -170,8 +170,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                 .Include(ab => ab.CreatureAbilitys)
                     .ThenInclude(r => r.Ability)
                 .Include(crl => crl.CreatureReward)
-                        //.ThenInclude(reward => reward.Reward)
-                        .ThenInclude(item => item.ItemBase)
+                    .ThenInclude(item => item.ItemBase)
+                        .ThenInclude(s => s.Source)
                 .Include(m => m.Mutagen)
                     .ThenInclude(m => m.Source)
                 .Include(t => t.Trophy)
@@ -359,7 +359,17 @@ namespace TTRPG_Project.BL.Services.Creatures
         {
             try
             {
-                var creature = await _dbContext.Creatures.Where(x => x.Id == request.Id).FirstOrDefaultAsync();
+                var creature = await _dbContext.Creatures.Where(x => x.Id == request.Id)
+                    //.Include(s => s.Source)
+                    //.Include(r => r.Race)
+                    //.Include(stats => stats.StatsList)
+                    //.Include(skills => skills.SkillsList)
+                    //.Include(a => a.CreatureAttacks)
+                    //.Include(ab => ab.CreatureAbilitys)
+                    //.Include(crl => crl.CreatureReward)
+                    //.Include(m => m.Mutagen)
+                    //.Include(t => t.Trophy)
+                    .FirstOrDefaultAsync();
                 if (creature is null)
                     throw new CustomException("Существо не найдено!");
 
@@ -378,7 +388,6 @@ namespace TTRPG_Project.BL.Services.Creatures
                 creature.AdditionalInformation = request.AdditionalInformation;
                 creature.Armor = request.Armor;
                 creature.AthleticsBase = request.AthleticsBase;
-                creature.CreatureAttacks = request.CreatureAttacks;
                 creature.BlockBase = request.BlockBase;
                 creature.Complexity = request.Complexity;
                 creature.Description = request.Description;
@@ -392,7 +401,6 @@ namespace TTRPG_Project.BL.Services.Creatures
                 //creature.Resistances = request.Resistances;
                 //creature.Immunities = request.Immunities;
                 //creature.Vulnerabilities = request.Vulnerabilities;
-                creature.CreatureEffects = request.CreatureEffects;
                 creature.MonsterLoreInformation = request.MonsterLoreInformation;
                 creature.MonsterLoreSkill = request.MonsterLoreSkill;
                 creature.Name = request.Name;
@@ -406,11 +414,40 @@ namespace TTRPG_Project.BL.Services.Creatures
                 creature.Weight = request.Weight;
                 creature.UpdateDate = DateTime.Now;
                 creature.ImageFileName = request.ImageFileName;
-                creature.Mutagen = request.Mutagen;
-                creature.Trophy = request.Trophy;
+                creature.MutagenId = request.Mutagen is null ? null : request.Mutagen.Id;
+                creature.Mutagen = request.Mutagen is null ? null : new Mutagen
+                {
+                    Complexity = request.Mutagen.Complexity,
+                    CreateDate = request.Mutagen.CreateDate,
+                    Description = request.Mutagen.Description,
+                    Effect = request.Mutagen.Effect,
+                    Id = request.Mutagen.Id,
+                    Mutation = request.Mutagen.Mutation,
+                    Name = request.Mutagen.Name,
+                    SourceId = request.Mutagen.SourceId ?? 2,
+                    UpdateDate = DateTime.Now,
+                };
+                creature.TrophyId = request.Trophy is null ? null : request.Trophy.Id;
+                creature.Trophy = request.Trophy is null ? null : new Trophy
+                {
+                    CreateDate = request.Trophy.CreateDate,
+                    UpdateDate = DateTime.Now,
+                    Description = request.Trophy.Description,
+                    Id = request.Trophy.Id,
+                    Name = request.Trophy.Name,
+                    SourceId = request.Trophy.SourceId ?? 2,
+                };
 
                 //var caList = await _dbContext.Abilitiys.Where(x => x.Creature == null ? false : x.Creature.Any(k => k.Id == creature.Id)).ToListAsync();
                 //_dbContext.RemoveRange(caList);
+
+                creature.CreatureAttacks = request.CreatureAttacks.Select(dto => new CreatureAttack
+                {
+                    Id = dto.Id,
+                    AttackId = dto.AttackId,
+                    CreatureId = dto.CreatureId,
+                }).ToList();
+
                 creature.CreatureAbilitys = request.CreatureAbilitys.Select(dto => new CreatureAbility
                 {
                     Id = dto.Id,
@@ -427,6 +464,17 @@ namespace TTRPG_Project.BL.Services.Creatures
                     ItemBaseId = dto.ItemBaseId,
                     Amount = dto.Amount,
                     //RewardId = dto.RewardId,
+                }).ToList();
+
+                creature.CreatureEffects = request.CreatureEffects.Select(dto => new CreatureEffect 
+                {
+                    Id = dto.Id,
+                    CreatureId = dto.CreatureId,
+                    EffectId = dto.EffectId,
+                    Description = dto.Description,
+                    Name = dto.Name,
+                    Type = dto.Type,
+                    UpdateDate = DateTime.Now,
                 }).ToList();
 
                 //if (request.File != null)

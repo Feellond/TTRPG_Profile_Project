@@ -39,7 +39,8 @@ namespace TTRPG_Project.BL.Services.Items
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     Stiffness = item.Stiffness,
                     ItemOriginType = item.ItemOriginType,
-                    
+                    ImageFileName = item.ImageFileName,
+
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -75,6 +76,7 @@ namespace TTRPG_Project.BL.Services.Items
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     Stiffness = item.Stiffness,
                     ItemOriginType = item.ItemOriginType,
+                    ImageFileName = item.ImageFileName,
 
                 }).FirstOrDefault();
 
@@ -111,6 +113,7 @@ namespace TTRPG_Project.BL.Services.Items
                 AmountOfEnhancements = request.AmountOfEnhancements,
                 Stiffness = request.Stiffness,
                 ItemOriginType = request.ItemOriginType,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Armors.AddAsync(newAlchemicalItem);
@@ -135,6 +138,7 @@ namespace TTRPG_Project.BL.Services.Items
             armor.AmountOfEnhancements = request.AmountOfEnhancements;
             armor.Stiffness = request.Stiffness;
             armor.ItemOriginType = request.ItemOriginType;
+            armor.ImageFileName = request.ImageFileName;
 
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == armor.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);

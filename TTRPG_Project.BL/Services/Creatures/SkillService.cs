@@ -11,6 +11,7 @@ using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
+using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.BL.Services.Creatures
 {
@@ -65,7 +66,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                 IsDifficult = request.IsDifficult,
                 Name = request.Name,
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
-                StatId = request.StatId ?? request.Stat?.Id,                
+                StatId = request.StatId ?? request.Stat?.Id,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Skills.AddAsync(skill);
@@ -85,6 +87,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             skill.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             skill.StatId = request.StatId ?? request.Stat?.Id;
             skill.UpdateDate = DateTime.Now;
+            skill.ImageFileName = request.ImageFileName;
 
             _dbContext.Entry(skill).State = EntityState.Modified;
             return await SaveAsync();

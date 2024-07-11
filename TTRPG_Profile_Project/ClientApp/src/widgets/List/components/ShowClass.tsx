@@ -53,11 +53,11 @@ export const ShowClass = ({ data }: IShowClass) => {
           <i>{data.source.name}</i>
         </li>
         <li>
-          <span>Энергия: {data.energy}</span>
+          <span><strong>Энергия:</strong> {data.energy}</span>
         </li>
         <li>
-          <div className="flex flex-wrap">
-            <span>Дерево навыков:</span>
+          <div className="flex flex-wrap flex-column">
+            <span><strong>Дерево навыков:</strong></span>
             <div>
               <div
                 className="text-center mb-2 cursor-pointer"
@@ -65,7 +65,7 @@ export const ShowClass = ({ data }: IShowClass) => {
               >
                 {data.skillsTree.mainSkill.name}
               </div>
-              <div className="flex text-center">
+              <div className="flex text-center flex-wrap justify-content-center line-height-3">
                 <div className="flex flex-column">
                   <span className="text-center font-semibold underline">
                     {data.skillsTree.leftBranchName}
@@ -95,7 +95,7 @@ export const ShowClass = ({ data }: IShowClass) => {
                     {data.skillsTree.thirdLeftSkill.stat ? (<span>({data.skillsTree.thirdLeftSkill.stat.name})</span>) : ""}
                   </div>
                 </div>
-                <div className="flex flex-column ml-3">
+                <div className="flex flex-column">
                   <span className="text-center font-semibold underline">
                     {data.skillsTree.middleBranchName}
                   </span>
@@ -124,7 +124,7 @@ export const ShowClass = ({ data }: IShowClass) => {
                     {data.skillsTree.thirdMiddleSkill.stat ? (<span>({data.skillsTree.thirdMiddleSkill.stat.name})</span>) : ""}
                   </div>
                 </div>
-                <div className="flex flex-column ml-3">
+                <div className="flex flex-column">
                   <span className="text-center font-semibold underline">
                     {data.skillsTree.rightBranchName}
                   </span>
@@ -158,7 +158,7 @@ export const ShowClass = ({ data }: IShowClass) => {
           </div>
         </li>
         <li>
-          <span>Описание: {data.description}</span>
+          <span><strong>Описание:</strong> {data.description}</span>
         </li>
       </ul>
     </div>

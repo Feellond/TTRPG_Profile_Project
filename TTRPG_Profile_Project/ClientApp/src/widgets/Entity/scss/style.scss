@@ -1,13 +1,13 @@
 .creatureForm {
   z-index: 3;
 
-  @media (max-width: 500px) {
-    font-size: 13px;
+  // @media (max-width: 500px) {
+  //   font-size: 16px;
 
-    span {
-      font-size: 13px;
-    }
-  }
+  //   span {
+  //     font-size: 16px;
+  //   }
+  // }
 }
 
 .statsTable {
@@ -91,6 +91,20 @@
     padding: 2px;
     //width: 100%;
   }
+
+  &__skill {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 375px) {
+    
+    td {
+      padding: 3px !important;
+    }
+  }
 }
 
 .creatureImage {
@@ -121,13 +135,19 @@
   }
 }
 
+.skillsList {
+  input {
+    padding: 2px;
+    width: 30px;
+  }
+}
+
 .statList,
-.skillsList,
 .baseList,
 .infoAndRewardList {
   input {
     padding: 2px;
-    width: 35px;
+    width: 60px;
   }
 
   &__controller {
@@ -138,14 +158,24 @@
 }
 
 .input-text {
-  width: 200px !important;
+  width: 220px !important;
 }
 
 .showInfo {
   display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
   align-items: center;
 
   &__name {
     font-weight: 700;
+  }
+
+  
+}
+
+.showInfoMedia {
+  @media (max-width: 700px) {
+    flex-direction: column;
   }
 }

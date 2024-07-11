@@ -1,6 +1,9 @@
+import { RaceLoad } from "entities/BestiaryFunc";
 import { Card } from "primereact/card";
+import { SelectItem } from "primereact/selectitem";
 import { Toast } from "primereact/toast";
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation} from "react-router-dom";
 import {
   CreatureFilterDTO,
   emptyCreature,
@@ -11,9 +14,14 @@ import {
 import { ListShow } from "widgets/List";
 
 const BestiaryListPage = () => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);  
+  const name = params.get('name') || null;
+
   const [creatureList, setCreatureList] = useState<ICreature[]>([]);
   const [creature, setCreature] = useState<ICreature>(emptyCreature);
   const [filter, setFilter] = useState<CreatureFilterDTO>({
+    name: name,
     race: null,
   } as CreatureFilterDTO);
 
@@ -44,7 +52,7 @@ const BestiaryListPage = () => {
       }
     }
 
-    console.log(params);
+    console.log("params: ", params);
     return params;
   };
 

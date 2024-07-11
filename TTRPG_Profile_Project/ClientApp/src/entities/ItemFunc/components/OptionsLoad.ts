@@ -60,6 +60,8 @@ const AvailabilityTypeLoad = ({ setItems }: OptionsParamsLoad) => {
 
 const AvailabilityTypeToString = (enumKey: string) => {
   switch(enumKey) {
+    case "None":
+      return "Без сложности";
     case "Everywhere":
       return "Повсеместное";
     case "Common":
@@ -100,6 +102,10 @@ const EntityTypeKeyToRus = (enumKey: string) => {
       return "Чертеж";
     case "Component":
       return "Компонент";
+    case "ComponentRem":
+      return "Компонент ремесла"
+    case "ComponentAlc":
+      return "Компонент алхимии"
     case "Item":
       return "Обычный предмет";
     default:

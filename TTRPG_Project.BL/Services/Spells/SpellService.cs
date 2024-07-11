@@ -19,6 +19,7 @@ using TTRPG_Project.DAL.Const;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
+using TTRPG_Project.DAL.Entities.Database.Items;
 using TTRPG_Project.DAL.Entities.Database.Spells;
 
 namespace TTRPG_Project.BL.Services.Spells
@@ -53,6 +54,7 @@ namespace TTRPG_Project.BL.Services.Spells
                     SpellType = c.SpellType,
                     SpellTypeDescription = c.SpellTypeDescription,
                     WithdrawalCondition = c.WithdrawalCondition,
+                    ImageFileName = c.ImageFileName,
 
                     SpellComponentList = c.SpellComponentList.Select(e => new SpellComponentList
                     {
@@ -118,6 +120,7 @@ namespace TTRPG_Project.BL.Services.Spells
                     SpellType = c.SpellType,
                     SpellTypeDescription = c.SpellTypeDescription,
                     WithdrawalCondition = c.WithdrawalCondition,
+                    ImageFileName = c.ImageFileName,
 
                     SpellComponentList = c.SpellComponentList.Select(e => new SpellComponentList
                     {
@@ -174,7 +177,8 @@ namespace TTRPG_Project.BL.Services.Spells
                 }).ToList(),
                 SpellType = request.SpellType,
                 SpellTypeDescription = request.SpellTypeDescription,
-                WithdrawalCondition = request.WithdrawalCondition
+                WithdrawalCondition = request.WithdrawalCondition,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Spells.AddAsync(spell);
@@ -207,6 +211,7 @@ namespace TTRPG_Project.BL.Services.Spells
             spell.SpellTypeDescription = request.SpellTypeDescription;
             spell.WithdrawalCondition = request.WithdrawalCondition;
             spell.UpdateDate = DateTime.Now;
+            spell.ImageFileName = request.ImageFileName;
 
             var scList = await _dbContext.SpellComponentList.Where(x => x.SpellId == spell.Id).ToListAsync();
             _dbContext.RemoveRange(scList);

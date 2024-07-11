@@ -170,7 +170,6 @@ const ListShow = ({
     lazyState.first = event.first;
     lazyState.rows = event.rows;
     fetchData();
-    console.log(lazyState);
   };
 
   const showEditDialog = (id: number) => {
@@ -280,12 +279,9 @@ const ListShow = ({
         });
       }
 
-      console.log(result);
-
       if (result && result.data) {
         lazyState.totalRecords = result.data.count;
         const entitys = result.data.entitys;
-        console.log(entitys);
         setEntityList(entitys);
       }
     } catch (error) {
@@ -328,22 +324,22 @@ const ListShow = ({
                   {showContentFunc({ data: it })}
                   {store.isAuth ? "" : ""}
                   {"itemType" in entity || "spellType" in entity ? (
-                    <div>
+                    <div className="edit-buttons">
                       <Button
-                        label="Редактировать предмет"
+                        icon="pi pi-pencil"
                         onClick={(e) => showEditDialog(it.id)}
                         className="p-button-site"
                       />
                       <Button
-                        label="Удалить предмет"
+                        icon="pi pi-trash"
                         onClick={(e) => showDeleteDialog(it.id)}
-                        className="p-button-site"
+                        className="ml-3 p-button-site"
                       />
                     </div>
                   ) : (
                     <div>
                       <Button
-                        label="Удалить предмет"
+                        icon="pi pi-trash"
                         onClick={(e) => showDeleteDialog(it.id)}
                         className="p-button-site"
                       />

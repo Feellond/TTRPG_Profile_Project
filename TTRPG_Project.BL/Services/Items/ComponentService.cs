@@ -37,6 +37,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Complexity = item.Complexity,
                     IsAlchemical = item.IsAlchemical,
                     SubstanceType = item.SubstanceType,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -72,6 +73,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Complexity = item.Complexity,
                     IsAlchemical = item.IsAlchemical,
                     SubstanceType = item.SubstanceType,
+                    ImageFileName = item.ImageFileName,
                 }).FirstOrDefault();
 
             ItemBaseResponce responce = new()
@@ -107,6 +109,7 @@ namespace TTRPG_Project.BL.Services.Items
                 Complexity = request.Complexity,
                 IsAlchemical = request.IsAlchemical,
                 SubstanceType = request.SubstanceType,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Components.AddAsync(newComponent);
@@ -131,6 +134,7 @@ namespace TTRPG_Project.BL.Services.Items
             component.Complexity = request.Complexity;
             component.IsAlchemical = request.IsAlchemical;
             component.SubstanceType = request.SubstanceType;
+            component.ImageFileName = request.ImageFileName;
 
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == component.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);

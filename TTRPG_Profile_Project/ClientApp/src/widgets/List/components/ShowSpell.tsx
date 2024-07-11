@@ -4,7 +4,8 @@ import {
   drawSpellSourceType,
   drawSpellType,
 } from "entities/DrawSpell";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { WEBSITE } from "shared/api/api_const";
 import { SpellCategory, SpellType } from "shared/enums/SpellEnums";
 import { ISpell } from "shared/models";
 
@@ -13,6 +14,24 @@ interface IShowSpellProps {
 }
 
 const ShowSpell = ({ data }: IShowSpellProps) => {
+  let name_href = WEBSITE + "spells?name=" + String(data.name);
+
+  const fadeRef = useRef(null);
+  const linkRef = useRef(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (event) => {
+    navigator.clipboard.writeText(linkRef.current.dataset.href).then(() => {
+      setCopied(true);
+      fadeRef.current.classList.add("copied-indicator-fade"); // Добавление класса для плавного исчезновения
+      setTimeout(() => {
+        setCopied(false);
+        fadeRef.current.classList.remove("copied-indicator-fade"); // Удаление класса после задержки
+      }, 1500); // Через 1.5 секунды сбросить состояние
+    });
+  };
+
+
   useEffect(() => {}, [data]);
 
   return (
@@ -21,7 +40,24 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
         className="p-2 text-2xl font-semibold cursor-pointer"
         style={{ marginBottom: "-10px" }}
       >
-        <a>{data.name}</a>
+        <span
+          className="cursor-pointer targetName"
+          ref={linkRef}
+          onClick={(e) => handleCopy(e)}
+          data-href={name_href}
+        >
+          {data.name}
+        </span>
+        <span ref={fadeRef} className="copied-indicator">
+          {copied && (
+            <span
+              className="text-base font-normal"
+              style={{ marginLeft: "1rem" }}
+            >
+              <i>Скопировано</i>
+            </span>
+          )}
+        </span>
       </div>
       <ul className="p-2 params">
         <li>
@@ -42,12 +78,12 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
         </li>
         <li>
           <div>
-            <span>Затраты вын: {data.enduranceCost}</span>
+            <span><strong>Затраты вын:</strong> {data.enduranceCost}</span>
           </div>
         </li>
         <li className="my-2">
           <div>
-            <span>Эффект: {data.description}</span>
+            <span><strong>Эффект:</strong> {data.description}</span>
           </div>
         </li>
         {data.spellType !== SpellType.Ritual &&
@@ -55,7 +91,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
           <li>
             <div>
               <span>
-                Дистанция: {data.distance === 0 ? "на себя" : data.distance}
+                <strong>Дистанция:</strong> {data.distance === 0 ? "на себя" : data.distance}
               </span>
             </div>
           </li>
@@ -66,7 +102,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
           <li>
             <div>
               <span>
-                Длительность: {data.duration}{" "}
+                <strong>Длительность:</strong> {data.duration}{" "}
                 {data.isConcentration ? (
                   <span>({data.concentrationEnduranceCost} Вын)</span>
                 ) : (
@@ -81,7 +117,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
         {data.spellType === SpellType.Ritual ? (
           <li>
             <div>
-              <span>Время подготовки: {data.preparationTime}</span>
+              <span><strong>Время подготовки:</strong> {data.preparationTime}</span>
             </div>
           </li>
         ) : (
@@ -90,7 +126,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
         {data.spellType === SpellType.Ritual ? (
           <li>
             <div>
-              <span>СЛ проверки: {data.checkDC}</span>
+              <span><strong>СЛ проверки:</strong> {data.checkDC}</span>
             </div>
           </li>
         ) : (
@@ -100,7 +136,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
           <li>
             <div>
               <span>
-                Ингредиенты:{" "}
+                <strong>Ингредиенты:</strong>{" "}
                 {data.spellComponentList.map((component, index) => (
                   <span>
                     {index !== 0 ? ", " : ""}
@@ -118,7 +154,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
           <li>
             <div>
               <span>
-                Защита:{" "}
+                <strong>Защита:</strong>{" "}
                 {data.spellSkillProtectionList.length > 0 ? (
                   <span>
                     {data.spellSkillProtectionList.map((skill, index) => (
@@ -140,7 +176,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
         )}
         {data.spellType === SpellType.Hex ? (
           <li>
-            <span>Условия снятия: {data.withdrawalCondition}</span>
+            <span><strong>Условия снятия:</strong> {data.withdrawalCondition}</span>
           </li>
         ) : (
           <div></div>

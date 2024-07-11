@@ -21,6 +21,7 @@ export const emptyAbilitiy: IAbilitiy = {
   creature: null,
   race: null,
   type: null,
+  imageFileName: null,
 };
 
 export const emptyAttack: IAttack = {
@@ -36,6 +37,7 @@ export const emptyAttack: IAttack = {
   distance: 0,
   attackSpeed: 0,
   attackEffectList: [],
+  imageFileName: null,
 };
 
 export const emptyAttackEffectList: IAttackEffectList = {
@@ -55,6 +57,7 @@ export const emptyClass: IClass = {
   energy: 0,
   defaultMagicAbilities: "",
   skillsTree: null,
+  imageFileName: null,
 };
 
 export const emptyCreature: ICreature = {
@@ -102,6 +105,7 @@ export const emptyReward: IReward = {
   source: null,
   itemBase: null,
   amount: "",
+  imageFileName: null,
 };
 
 export const emptyRace: IRace = {
@@ -109,6 +113,7 @@ export const emptyRace: IRace = {
   name: null,
   description: null,
   source: null,
+  imageFileName: null,
 };
 
 export const emptySkill: ISkill = {
@@ -119,6 +124,7 @@ export const emptySkill: ISkill = {
   isDifficult: false,
   isClassSkill: false,
   stat: null,
+  imageFileName: null,
 };
 
 export const emptySkillsList: ISkillsList = {
@@ -275,6 +281,7 @@ export const emptyStat: IStat = {
   name: null,
   description: null,
   source: null,
+  imageFileName: null,
 };
 
 export const emptyStatsList: IStatsList = {

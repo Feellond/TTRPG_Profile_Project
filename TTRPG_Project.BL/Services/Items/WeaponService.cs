@@ -45,6 +45,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Distance = item.Distance,
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     IsAmmunition = item.IsAmmunition,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -87,6 +88,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Distance = item.Distance,
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     IsAmmunition = item.IsAmmunition,
+                    ImageFileName = item.ImageFileName,
                 }).FirstOrDefault();
 
             ItemBaseResponce responce = new()
@@ -128,6 +130,7 @@ namespace TTRPG_Project.BL.Services.Items
                 AmountOfEnhancements = request.AmountOfEnhancements,
                 IsAmmunition = request.IsAmmunition,
                 SkillId = request.SkillId ?? request.Skill?.Id,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Weapons.AddAsync(newWeapon);
@@ -158,6 +161,7 @@ namespace TTRPG_Project.BL.Services.Items
             weapon.AmountOfEnhancements = request.AmountOfEnhancements;
             weapon.IsAmmunition = request.IsAmmunition;
             weapon.SkillId = request.SkillId ?? request.Skill?.Id;
+            weapon.ImageFileName = request.ImageFileName;
 
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == weapon.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);

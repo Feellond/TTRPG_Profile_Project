@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using LinqKit;
 using TTRPG_Project.DAL.Const;
 using TTRPG_Project.BL.DTO.Entities.Items;
+using System.Linq;
 
 namespace TTRPG_Project.BL.DTO.Filters
 {
@@ -17,6 +18,10 @@ namespace TTRPG_Project.BL.DTO.Filters
 
         public string? Name { get; set; }
         public List<int>? ItemType { get; set; }
+        public int? SubstanceType { get; set; }
+        public bool? ComponentIsAlchemical { get; set; }
+        public int? ItemAvailabilityType { get; set; }
+        public string? WhereToFind { get; set; }
         public SortOrder Order { get; set; } = SortOrder.Descending; //Enum
 
         public void InitFilter()
@@ -39,6 +44,41 @@ namespace TTRPG_Project.BL.DTO.Filters
 
                     whereExpression.Add(finalTypeFilter);
                 }
+
+            if (SubstanceType != null)
+            {
+                Expression<Func<ItemBaseInfo, bool>> filter = entity =>
+                    entity.SubstanceType.Equals(SubstanceType);
+
+                whereExpression.Add(filter);
+            }
+
+            if (ComponentIsAlchemical != null && ItemType != null)
+            {
+                if (ItemType.Contains((int)ItemEntityType.Component))
+                {
+                    Expression<Func<ItemBaseInfo, bool>> filter = entity =>
+                    entity.IsAlchemical.Equals(ComponentIsAlchemical);
+
+                    whereExpression.Add(filter);
+                }
+            }
+
+            if (ItemAvailabilityType != null) 
+            {
+                Expression<Func<ItemBaseInfo, bool>> filter = entity =>
+                    entity.AvailabilityType.Equals(ItemAvailabilityType);
+
+                whereExpression.Add(filter);
+            }
+
+            if (!string.IsNullOrEmpty(WhereToFind))
+            {
+                Expression<Func<ItemBaseInfo, bool>> filter = entity =>
+                    entity.WhereToFind.ToLower().Contains(WhereToFind.ToLower());
+
+                whereExpression.Add(filter);
+            }
         }
     }
 }

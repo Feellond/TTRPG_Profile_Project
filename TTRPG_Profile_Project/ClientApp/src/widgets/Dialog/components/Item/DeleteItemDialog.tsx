@@ -41,7 +41,6 @@ const DeleteItemDialog = ({
         header="Подтверждение удаления"
         onHide={() => onHide()}
         visible={visible}
-        style={{ width: "50vw" }}
         modal
         footer={deleteFooter(data.id, data.itemType)}
       >

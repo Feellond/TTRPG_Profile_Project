@@ -229,7 +229,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
     bestiaryService.updateEntity({ entity: dataOnSave });
     fetchData();
     setFile(null);
-    //window.location.reload();
+    window.location.reload();
   };
 
   const onCancel = () => {
@@ -458,6 +458,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               data={data}
               control={control}
               getValues={getValues}
+              setValue={setValue}
               register={register}
               isEditMode={isEditMode}
             />
@@ -470,6 +471,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               data={data}
               control={control}
               getValues={getValues}
+              setValue={setValue}
               register={register}
               isEditMode={isEditMode}
             />
@@ -482,6 +484,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               data={data}
               control={control}
               getValues={getValues}
+              setValue={setValue}
               register={register}
               isEditMode={isEditMode}
             />
@@ -494,6 +497,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
             onClick={(e) => {
               setIsTableEdit(!isTableEdit);
             }}
+            label="Редактировать таблицы"
             type="button"
           />
 
@@ -504,6 +508,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               data={data}
               control={control}
               getValues={getValues}
+              setValue={setValue}
               register={register}
               isEditMode={isTableEdit}
             />
@@ -516,6 +521,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
               data={data}
               control={control}
               getValues={getValues}
+              setValue={setValue}
               register={register}
               isEditMode={isTableEdit}
             />
@@ -535,6 +541,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
 
                 console.log("Values: ", getValues());
               }}
+              label="Редактировать инфо"
               type="button"
             />
             {isEducationEdit ? (

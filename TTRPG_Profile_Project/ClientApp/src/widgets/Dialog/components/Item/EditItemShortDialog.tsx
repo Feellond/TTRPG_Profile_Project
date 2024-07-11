@@ -160,8 +160,8 @@ const EditItemShortDialog = ({
       className="p-fluid w-auto w-8"
     >
       <form>
-        <div className="grid align-items-center mt-3">
-          <div className="field flex flex-column col-3">
+        <div className="grid align-items-center mt-4">
+          <div className="field flex flex-column mr-2">
             <span className="p-float-label">
               <Controller
                 name="name"
@@ -181,7 +181,7 @@ const EditItemShortDialog = ({
               <label>Наименование</label>
             </span>
           </div>
-          <div className="field flex flex-column col-3">
+          <div className="field flex flex-column mr-2">
             <span className="p-float-label">
               <Controller
                 name="availabilityType"
@@ -203,7 +203,7 @@ const EditItemShortDialog = ({
               <label>Доступность</label>
             </span>
           </div>
-          <div className="field flex flex-column col-3">
+          <div className="field flex flex-column mr-2">
             <span className="p-float-label">
               <Controller
                 name="weight"
@@ -228,7 +228,7 @@ const EditItemShortDialog = ({
               <label>Вес</label>
             </span>
           </div>
-          <div className="field flex flex-column col-3">
+          <div className="field flex flex-column mr-2">
             <span className="p-float-label">
               <Controller
                 name="price"
@@ -253,7 +253,7 @@ const EditItemShortDialog = ({
               <label>Цена</label>
             </span>
           </div>
-          <div className="field flex flex-column col-12">
+          <div className="field flex flex-column" style={{width: "-webkit-fill-available"}}>
             <span className="p-float-label">
               <Controller
                 name="description"
@@ -275,7 +275,7 @@ const EditItemShortDialog = ({
               <label>Описание</label>
             </span>
           </div>
-          <div className="field flex flex-column col-3">
+          <div className="field flex flex-column mr-2">
             <span className="p-float-label">
               <Controller
                 name="source"
@@ -297,7 +297,7 @@ const EditItemShortDialog = ({
               <label>Источник</label>
             </span>
           </div>
-          <div className="field flex flex-column col-3">
+          <div className="field flex flex-column mr-2">
             <span className="p-float-label">
               <Controller
                 name="itemType"
@@ -324,7 +324,7 @@ const EditItemShortDialog = ({
               <label>Тип предмета</label>
             </span>
           </div>
-          <div className="field flex flex-column col-12">
+          <div className="field flex flex-column" style={{width: "-webkit-fill-available"}}>
             <ItemTypeSelect
               data={data}
               visible={itemTypeSelectVisible}

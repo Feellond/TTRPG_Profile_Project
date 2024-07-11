@@ -1,6 +1,6 @@
 import { AttackTypeToShortString } from "entities/BestiaryFunc";
 import { AttackTypeOptionsLoad } from "entities/BestiaryFunc/components/OptionsLoad";
-import { EffectOptionsLoad } from "entities/GeneralFunc";
+import { EffectOptionsLoad, FindItemById } from "entities/GeneralFunc";
 import { DeleteIcon, EditIcon, PlusIcon, SaveIcon } from "img";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
@@ -14,6 +14,7 @@ import {
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 import {
   IAttack,
@@ -31,6 +32,7 @@ interface IShowAttacks {
   data: ICreature | null;
   control: Control<FieldValues, any>;
   getValues: UseFormGetValues<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   register: UseFormRegister<FieldValues>;
   isEditMode: boolean;
 }
@@ -41,6 +43,7 @@ export const ShowAttacks = ({
   data,
   control,
   getValues,
+  setValue,
   register,
   isEditMode,
 }: IShowAttacks) => {
@@ -86,14 +89,14 @@ export const ShowAttacks = ({
   }, [data, statList, skillsList]);
 
   useEffect(() => {
-    register("creatureAttacks", { value: creatureAttacks });
+    setValue("creatureAttacks", creatureAttacks);
   }, [creatureAttacks]);
 
   return creatureAttacks?.length > 0 || isEditMode ? (
     <div className="creatureAttacks">
       <p>Атаки:</p>
       <div>
-        <table>
+        <table className="w-full">
           <thead>
             <th>{width <= 750 ? "Наз" : "Наименование"}</th>
             <th>{width <= 750 ? "Осн" : "Основа"}</th>
@@ -101,17 +104,17 @@ export const ShowAttacks = ({
             <th className="w-1">{width <= 750 ? "Ур" : "Урон"}</th>
             <th>{width <= 750 ? "Над" : "Надежность"}</th>
             <th>{width <= 750 ? "Дал" : "Дальность"}</th>
-            <th
-              style={{
-                width:
-                  editValues && editValues.attackEffectList.length > 0
-                    ? "15rem"
-                    : "auto",
-              }}
+            <th className="w-3"
+              // style={{
+              //   width:
+              //     editValues && editValues.attackEffectList.length > 0
+              //       ? "15rem"
+              //       : "auto",
+              // }}
             >
               {width <= 750 ? "Эфф" : "Эффекты"}
             </th>
-            <th>СА</th>
+            <th className="w-1">СА</th>
           </thead>
           <tbody>
             {creatureAttacks.map((attack, index) => (
@@ -206,7 +209,7 @@ export const ShowAttacks = ({
                             <span className="field">
                               <label>Эффект:</label>
                               <Dropdown
-                                value={effect.effect}
+                                value={FindItemById(effectOptions, effect.effect.id)}
                                 onChange={(e) =>
                                   setEditValues((prevEditValues) => ({
                                     ...prevEditValues,
@@ -350,12 +353,13 @@ export const ShowAttacks = ({
                       {attack.attack.attackEffectList.length > 0
                         ? attack.attack.attackEffectList.map(
                             (effect, index) => (
-                              <div className="flex flex-wrap">
-                                <div key={index}>
-                                  {effect.effect.name}{" "}
+                              <div>
+                                <span key={index}>
+                                  {effect.effect.name}
                                   {effect.chancePercent !== 0 &&
                                   effect.damage !== "" ? (
                                     <span>
+                                      {" "}
                                       {effect.isDealDamage ? (
                                         effect.damage
                                       ) : (
@@ -364,8 +368,8 @@ export const ShowAttacks = ({
                                     </span>
                                   ) : (
                                     ""
-                                  )}
-                                </div>
+                                  )};
+                                </span>
                               </div>
                             )
                           )
@@ -448,6 +452,7 @@ export const ShowAttacks = ({
                           name: "Новая атака",
                           reliability: 0,
                           source: null,
+                          imageFileName: null,
                         },
                       };
                       setCreatureAttacks([...creatureAttacks, newAttack]); // Добавляем новую атаку в конец массива

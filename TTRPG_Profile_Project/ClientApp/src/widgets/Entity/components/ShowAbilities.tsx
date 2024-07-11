@@ -1,4 +1,3 @@
-import { DeleteIcon, EditIcon, SaveIcon } from "img";
 import { Button } from "primereact/button";
 import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
@@ -9,6 +8,7 @@ import {
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 import {
   IAbilitiy,
@@ -25,6 +25,7 @@ interface IShowAbilities {
   data: ICreature | null;
   control: Control<FieldValues, any>;
   getValues: UseFormGetValues<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   register: UseFormRegister<FieldValues>;
   isEditMode: boolean;
 }
@@ -35,6 +36,7 @@ export const ShowAbilities = ({
   data,
   control,
   getValues,
+  setValue,
   register,
   isEditMode,
 }: IShowAbilities) => {
@@ -46,8 +48,9 @@ export const ShowAbilities = ({
 
   const fetchData = () => {
     let getCreatureAbilities: ICreatureAbilitys[] =
-      getValues("creatureAbilities");
+      getValues("creatureAbilitys");
     setCreatureAbilities(getCreatureAbilities);
+    console.log("creatureAbilities", creatureAbilities);
   };
 
   const handleEdit = (index) => {
@@ -66,7 +69,7 @@ export const ShowAbilities = ({
   }, [data, statList, skillsList]);
 
   useEffect(() => {
-    register("creatureAbilities", { value: creatureAbilities });
+    setValue("creatureAbilitys", { value: creatureAbilities });
   }, [creatureAbilities]);
 
   return creatureAbilities?.length > 0 || isEditMode ? (
@@ -75,8 +78,10 @@ export const ShowAbilities = ({
       <table className="w-full">
         <thead>
           <th>Наименование</th>
-          <th>Тип</th>
-          <th>Описание</th>
+          <th className="w-2">Тип</th>
+          <th  style={{ maxWidth: "60%" }}>
+            Описание
+          </th>
         </thead>
         <tbody>
           {creatureAbilities.map((ability, index) => (
@@ -122,43 +127,47 @@ export const ShowAbilities = ({
                     }
                   />
                 ) : (
-                  ability.ability.description
+                  <div className="text-justify">{ability.ability.description}</div>
                 )}
               </td>
-              <td className="flex flex-wrap">
-                {editIndex === index ? (
+              {isEditMode ? (
+                <td className="flex flex-wrap">
+                  {editIndex === index ? (
+                    <Button
+                      icon="pi pi-check"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const updatedAbilities = [...creatureAbilities];
+                        updatedAbilities[index] = {
+                          ...updatedAbilities[index],
+                          ability: { ...editValues },
+                        };
+                        setCreatureAbilities(updatedAbilities);
+                        setEditIndex(null);
+                      }}
+                    />
+                  ) : (
+                    <Button
+                      icon="pi pi-pencil"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleEdit(index);
+                      }}
+                    />
+                  )}
                   <Button
-                    icon="pi pi-check"
+                    icon="pi pi-trash"
                     onClick={(e) => {
                       e.preventDefault();
                       const updatedAbilities = [...creatureAbilities];
-                      updatedAbilities[index] = {
-                        ...updatedAbilities[index],
-                        ability: { ...editValues },
-                      };
+                      updatedAbilities.splice(index, 1); // Удаляем элемент по индексу index
                       setCreatureAbilities(updatedAbilities);
-                      setEditIndex(null);
                     }}
                   />
-                ) : (
-                  <Button
-                    icon="pi pi-pencil"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleEdit(index);
-                    }}
-                  />
-                )}
-                <Button
-                  icon="pi pi-trash"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const updatedAbilities = [...creatureAbilities];
-                    updatedAbilities.splice(index, 1); // Удаляем элемент по индексу index
-                    setCreatureAbilities(updatedAbilities);
-                  }}
-                />
-              </td>
+                </td>
+              ) : (
+                ""
+              )}
             </tr>
           ))}
           {isEditMode ? (
@@ -179,6 +188,7 @@ export const ShowAbilities = ({
                         race: null,
                         source: null,
                         type: 0,
+                        imageFileName: null,
                       },
                     };
                     setCreatureAbilities([...creatureAbilities, newAbility]); // Добавляем новую атаку в конец массива

@@ -63,7 +63,6 @@ export interface ICreature extends EntityDescriptionBase {
   creatureAttacks: ICreatureAttack[] | null;
   creatureAbilitys: ICreatureAbilitys[];
   creatureReward: ICreatureReward[] | null;
-  imageFileName: string | null;
   //Spells: Spell[];
   mutagen: IMutagen | null;
   trophy: ITrophy | null;

@@ -116,10 +116,10 @@ export const ShowSkills = ({
     <div className="flex m-2 text-center showSkills skillsList">
       {isAllSkills ? (
         <div className="flex flex-wrap">
-          <div>
+          <div className="m-3">
             <h6>Интеллект</h6>
-            <div>
-              <span>Внимание </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Внимание</div>
               <ShowAttentionValue
                 control={control}
                 isEditMode={isEditMode}
@@ -128,8 +128,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Выживание в дикой природе </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Выживание в дикой природе </div>
               <ShowSurvivalValue
                 control={control}
                 isEditMode={isEditMode}
@@ -138,8 +138,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Дедукция </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Дедукция </div>
               <ShowDeductionValue
                 control={control}
                 isEditMode={isEditMode}
@@ -148,8 +148,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Монстрология </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Монстрология </div>
               <ShowMonsterologyValue
                 control={control}
                 isEditMode={isEditMode}
@@ -158,8 +158,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Образование </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Образование </div>
               <ShowEducationValue
                 control={control}
                 isEditMode={isEditMode}
@@ -168,8 +168,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Ориентирование в городе </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Ориентирование в городе </div>
               <ShowCityOrientationValue
                 control={control}
                 isEditMode={isEditMode}
@@ -178,8 +178,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Передача знаний </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Передача знаний </div>
               <ShowKnowledgeTransferValue
                 control={control}
                 isEditMode={isEditMode}
@@ -188,8 +188,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Тактика </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Тактика </div>
               <ShowTacticsValue
                 control={control}
                 isEditMode={isEditMode}
@@ -198,8 +198,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Торговля </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Торговля </div>
               <ShowTradingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -208,8 +208,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Этикет </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Этикет </div>
               <ShowEtiquetteValue
                 control={control}
                 isEditMode={isEditMode}
@@ -218,8 +218,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Язык: всеобщий </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Язык: всеобщий </div>
               <ShowLanguageGeneralValue
                 control={control}
                 isEditMode={isEditMode}
@@ -228,8 +228,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Язык: Старшая Речь </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Язык: Старшая Речь </div>
               <ShowLanguageHighValue
                 control={control}
                 isEditMode={isEditMode}
@@ -238,8 +238,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Язык: язык краснолюдов </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Язык: язык краснолюдов </div>
               <ShowLanguageDwarfValue
                 control={control}
                 isEditMode={isEditMode}
@@ -249,10 +249,10 @@ export const ShowSkills = ({
               />
             </div>
           </div>
-          <div>
+          <div className="m-3">
             <h6>Реакция</h6>
-            <div>
-              <span>Ближний бой </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Ближний бой </div>
               <ShowMeleeCombatValue
                 control={control}
                 isEditMode={isEditMode}
@@ -261,8 +261,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Борьба </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Борьба </div>
               <ShowWrestlingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -271,8 +271,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Верховая езда </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Верховая езда </div>
               <ShowRidingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -281,8 +281,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Владение древковым оружием </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Владение древковым оружием </div>
               <ShowPoleWeaponMasteryValue
                 control={control}
                 isEditMode={isEditMode}
@@ -291,8 +291,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Владение легкими клинками </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Владение легкими клинками </div>
               <ShowLightBladeMasteryValue
                 control={control}
                 isEditMode={isEditMode}
@@ -301,8 +301,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Владение мечом </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Владение мечом </div>
               <ShowSwordsmanshipValue
                 control={control}
                 isEditMode={isEditMode}
@@ -311,8 +311,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Мореходство </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Мореходство </div>
               <ShowSeamanshipValue
                 control={control}
                 isEditMode={isEditMode}
@@ -321,8 +321,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Уклонение/Изворотливость </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Уклонение/Изворотливость </div>
               <ShowEvasionValue
                 control={control}
                 isEditMode={isEditMode}
@@ -332,10 +332,10 @@ export const ShowSkills = ({
               />
             </div>
           </div>
-          <div>
+          <div className="m-3">
             <h6>Ловкость</h6>
-            <div>
-              <span>Атлетика </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Атлетика </div>
               <ShowAthleticsValue
                 control={control}
                 isEditMode={isEditMode}
@@ -344,8 +344,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Ловкость рук </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Ловкость рук </div>
               <ShowManualDexterityValue
                 control={control}
                 isEditMode={isEditMode}
@@ -354,8 +354,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Скрытность </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Скрытность </div>
               <ShowStealthValue
                 control={control}
                 isEditMode={isEditMode}
@@ -364,8 +364,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Стрельба из арбалета </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Стрельба из арбалета </div>
               <ShowCrossbowMasteryValue
                 control={control}
                 isEditMode={isEditMode}
@@ -374,8 +374,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Стрельба из лука </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Стрельба из лука </div>
               <ShowArcheryValue
                 control={control}
                 isEditMode={isEditMode}
@@ -385,10 +385,10 @@ export const ShowSkills = ({
               />
             </div>
           </div>
-          <div className="mt-2">
+          <div className="m-3">
             <h6>Телосложение</h6>
-            <div>
-              <span>Сила </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Сила </div>
               <ShowStrengthValue
                 control={control}
                 isEditMode={isEditMode}
@@ -397,8 +397,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Стойкость </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Стойкость </div>
               <ShowEnduranceValue
                 control={control}
                 isEditMode={isEditMode}
@@ -409,10 +409,10 @@ export const ShowSkills = ({
             </div>
           </div>
 
-          <div>
+          <div className="m-3">
             <h6>Эмпатия</h6>
-            <div>
-              <span>Азартные игры </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Азартные игры </div>
               <ShowGamblingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -421,8 +421,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Внешний вид </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Внешний вид </div>
               <ShowAppearanceValue
                 control={control}
                 isEditMode={isEditMode}
@@ -431,8 +431,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Выступление </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Выступление </div>
               <ShowPublicSpeakingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -441,8 +441,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Искусство </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Искусство </div>
               <ShowArtistryValue
                 control={control}
                 isEditMode={isEditMode}
@@ -451,8 +451,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Лидерство </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Лидерство </div>
               <ShowLeadershipValue
                 control={control}
                 isEditMode={isEditMode}
@@ -461,8 +461,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Обман </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Обман </div>
               <ShowDeceptionValue
                 control={control}
                 isEditMode={isEditMode}
@@ -471,8 +471,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Понимание людей </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Понимание людей </div>
               <ShowUnderstandingPeopleValue
                 control={control}
                 isEditMode={isEditMode}
@@ -481,8 +481,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Соблазнение </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Соблазнение </div>
               <ShowSeductionValue
                 control={control}
                 isEditMode={isEditMode}
@@ -491,8 +491,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Убеждение </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Убеждение </div>
               <ShowPersuasionValue
                 control={control}
                 isEditMode={isEditMode}
@@ -501,8 +501,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Харизма </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Харизма </div>
               <ShowCharismaValue
                 control={control}
                 isEditMode={isEditMode}
@@ -512,10 +512,10 @@ export const ShowSkills = ({
               />
             </div>
           </div>
-          <div>
+          <div className="m-3">
             <h6>Ремесло</h6>
-            <div>
-              <span>Алхимия </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Алхимия </div>
               <ShowAlchemyValue
                 control={control}
                 isEditMode={isEditMode}
@@ -524,8 +524,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Взлом замков </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Взлом замков </div>
               <ShowLockpickingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -534,8 +534,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Знание ловушек </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Знание ловушек </div>
               <ShowTrapKnowledgeValue
                 control={control}
                 isEditMode={isEditMode}
@@ -544,8 +544,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Изготовление </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Изготовление </div>
               <ShowForgeryValue
                 control={control}
                 isEditMode={isEditMode}
@@ -554,8 +554,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Маскировка </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Маскировка </div>
               <ShowCamouflageValue
                 control={control}
                 isEditMode={isEditMode}
@@ -564,8 +564,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Первая помощь </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Первая помощь </div>
               <ShowFirstAidValue
                 control={control}
                 isEditMode={isEditMode}
@@ -574,8 +574,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Подделывание </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Подделывание </div>
               <ShowManufacturingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -585,10 +585,10 @@ export const ShowSkills = ({
               />
             </div>
           </div>
-          <div>
+          <div className="m-3">
             <h6>Воля</h6>
-            <div>
-              <span>Запугивание </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Запугивание </div>
               <ShowIntimidationValue
                 control={control}
                 isEditMode={isEditMode}
@@ -597,8 +597,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Наведение порчи </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Наведение порчи </div>
               <ShowCorruptionValue
                 control={control}
                 isEditMode={isEditMode}
@@ -607,8 +607,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Проведение ритуалов </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Проведение ритуалов </div>
               <ShowRitualsValue
                 control={control}
                 isEditMode={isEditMode}
@@ -617,8 +617,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Сопротивление магии </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Сопротивление магии </div>
               <ShowMagicResistanceValue
                 control={control}
                 isEditMode={isEditMode}
@@ -627,8 +627,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Сопротивление убеждению </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Сопротивление убеждению </div>
               <ShowPersuasionResistanceValue
                 control={control}
                 isEditMode={isEditMode}
@@ -637,8 +637,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Сотворение заклинаний </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Сотворение заклинаний </div>
               <ShowSpellcastingValue
                 control={control}
                 isEditMode={isEditMode}
@@ -647,8 +647,8 @@ export const ShowSkills = ({
                 statList={statList}
               />
             </div>
-            <div>
-              <span>Храбрость </span>
+            <div className="showSkills__skill">
+              <div className="mr-1">Храбрость </div>
               <ShowCourageValue
                 control={control}
                 isEditMode={isEditMode}

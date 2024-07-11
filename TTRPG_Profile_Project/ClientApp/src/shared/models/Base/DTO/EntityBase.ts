@@ -8,6 +8,7 @@ interface EntityDescriptionBase extends EntityBase {
   name: string | null;
   description: string | null;
   source: Source | null;
+  imageFileName: string | null;
 }
 
 interface EntityItemBase extends EntityDescriptionBase {

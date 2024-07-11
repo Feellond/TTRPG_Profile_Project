@@ -55,7 +55,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
   */
   return (
     <div className="my-2 baseList">
-      <div className="showInfo">
+      <div className="showInfo flex-nowrap">
         <span className="showInfo__name">База блока: </span>
         {isEditMode ? (
           <div className="baseList__controller">
@@ -88,7 +88,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{blockBase}</div>
         )}
       </div>
-      <div className="showInfo">
+      <div className="showInfo flex-nowrap">
         <span className="showInfo__name">База уклонения: </span>
         {isEditMode ? (
           <div className="baseList__controller">
@@ -127,7 +127,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{evasionBase}</div>
         )}
       </div>
-      <div className="showInfo">
+      <div className="showInfo flex-nowrap">
         <span className="showInfo__name">База атлетики: </span>
         {isEditMode ? (
           <div className="baseList__controller">
@@ -166,7 +166,7 @@ export const ShowBases = ({ statList, skillsList, data, control, getValues, isEd
           <div className="ml-1">{athleticsBase}</div>
         )}
       </div>
-      <div className="showInfo">
+      <div className="showInfo flex-nowrap">
         <span className="showInfo__name">База сопротивления магии: </span>
         {isEditMode ? (
           <div className="baseList__controller">

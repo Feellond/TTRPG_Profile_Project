@@ -39,6 +39,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     FormulaSubstanceList = item.FormulaSubstanceList,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -74,6 +75,7 @@ namespace TTRPG_Project.BL.Services.Items
                     TimeSpend = item.TimeSpend,
                     AdditionalPayment = item.AdditionalPayment,
                     FormulaSubstanceList = item.FormulaSubstanceList,
+                    ImageFileName = item.ImageFileName,
                 }).FirstOrDefault();
 
             ItemBaseResponce responce = new()
@@ -105,6 +107,7 @@ namespace TTRPG_Project.BL.Services.Items
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 TimeSpend = request.TimeSpend,
                 Weight = request.Weight,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Formulas.AddAsync(newFormula);
@@ -127,6 +130,7 @@ namespace TTRPG_Project.BL.Services.Items
             formula.Complexity = request.Complexity;
             formula.Description = request.Description;
             formula.AvailabilityType = request.AvailabilityType;
+            formula.ImageFileName = request.ImageFileName;
 
             var fsList = await _dbContext.FormulaComponentList.Where(x => x.FormulaId == formula.Id).ToListAsync();
             _dbContext.FormulaComponentList.RemoveRange(fsList);

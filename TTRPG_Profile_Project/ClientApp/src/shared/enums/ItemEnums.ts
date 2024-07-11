@@ -6,8 +6,9 @@ enum ItemEntityType {
   Weapon = 5,
   Formula = 6,
   Blueprint = 7,
-  Component = 8,
-  Item = 9,
+  Item = 8,
+  ComponentRem = 9, //Все компоненты
+  ComponentAlc = 10,//Заглушка для фронтенда
 }
 
 enum ItemAvailabilityType {

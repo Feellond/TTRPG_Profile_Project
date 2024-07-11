@@ -1,3 +1,4 @@
+export const WEBSITE                        = "thewitcher-su.ru/"
 export const BASE_URL                       = "/"
 
 export const API_LOGIN                      = "api/auth/login"
@@ -17,6 +18,7 @@ export const API_BLUEPRINT                  = "api/items/blueprint";
 export const API_COMPONENT                  = "api/items/component";
 export const API_FORMULA                    = "api/items/formula";
 export const API_BASEITEM                   = "api/items/base";
+export const API_BASEITEMSIMPLE             = "api/items/baseSimple"
 export const API_ITEM                       = "api/items/item";
 export const API_TOOL                       = "api/items/tool";
 export const API_WEAPON                     = "api/items/weapon";

@@ -1,5 +1,5 @@
 import { ComplexityValueToString } from "entities/BestiaryFunc";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ICreature } from "shared/models";
 
 interface ShowBestiaryProps {

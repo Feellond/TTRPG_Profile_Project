@@ -1,7 +1,11 @@
+import { FindItemById } from "entities/GeneralFunc";
+import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
 import {
   InputNumber,
   InputNumberValueChangeEvent,
 } from "primereact/inputnumber";
+import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { MultiSelect } from "primereact/multiselect";
 import { SelectItem } from "primereact/selectitem";
@@ -13,6 +17,7 @@ import {
   FieldValues,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from "react-hook-form";
 import { CreatureEffectType } from "shared/enums/CreatureEnums";
 import {
@@ -33,6 +38,7 @@ interface IShowInfoAndReward {
   data: ICreature | null;
   control: Control<FieldValues, any>;
   getValues: UseFormGetValues<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   register: UseFormRegister<FieldValues>;
   isEditMode: boolean;
 }
@@ -43,12 +49,12 @@ export const ShowInfoAndReward = ({
   data,
   control,
   register,
+  setValue,
   getValues,
   isEditMode,
 }: IShowInfoAndReward) => {
   const [armor, setArmor] = useState<number>(null);
   const [regeneration, setRegeneration] = useState<number>(null);
-  const [creatureReward, setCreatureReward] = useState<ICreatureReward[]>([]);
   const [moneyReward, setMoneyReward] = useState<number>(null);
   const [height, setHeight] = useState<number>(null);
   const [weight, setWeight] = useState<number>(null);
@@ -56,11 +62,12 @@ export const ShowInfoAndReward = ({
   const [intellect, setIntellect] = useState<string>(null);
   const [groupSize, setGroupSize] = useState<string>(null);
 
+  const [creatureReward, setCreatureReward] = useState<ICreatureReward[]>([]);
   const [immunities, setImmunities] = useState<ICreatureEffect[]>([]);
   const [resistances, setResistances] = useState<ICreatureEffect[]>([]);
   const [vulnerabilities, setVulnerabilities] = useState<ICreatureEffect[]>([]);
-  const [rewards, setRewards] = useState<ItemShortDTO[]>([]);
 
+  //const [rewards, setRewards] = useState<ItemShortDTO[]>([]);
   const [itemOptions, setItemOptions] = useState<SelectItem[]>([]);
 
   const fetchData = () => {
@@ -89,30 +96,30 @@ export const ShowInfoAndReward = ({
     fetchData();
   }, [data, control, isEditMode, statList, skillsList]);
 
+  // useEffect(() => {
+  //   if (creatureReward) {
+  //     // Извлечение Item из CreatureReward
+  //     const items = creatureReward.map((reward) => reward.itemBase);
+
+  //     const newItems = items.map((reward) => {
+  //       const foundItem = findItemById(itemOptions, reward.id);
+  //       return foundItem ? foundItem.value : null;
+  //     });
+
+  //     setRewards(newItems);
+  //   }
+  // }, [creatureReward]);
+
   useEffect(() => {
-    if (creatureReward) {
-      // Извлечение Item из CreatureReward
-      const items = creatureReward.map((reward) => reward.itemBase);
+    setValue("immunities", immunities);
+    setValue("resistances", resistances);
+    setValue("vulnerabilities", vulnerabilities);
+    setValue("creatureReward", creatureReward);
+  }, [immunities, resistances, vulnerabilities, creatureReward]);
 
-      const newItems = items.map((reward) => {
-        const foundItem = findItemById(itemOptions, reward.id);
-        return foundItem ? foundItem.value : null;
-      });
+  const handleAdd = (e, type: CreatureEffectType) => {
+    e.preventDefault();
 
-      setRewards(newItems);
-    }
-  }, [creatureReward]);
-
-  useEffect(() => {
-    register("immunities", { value: immunities });
-    register("resistances", { value: resistances });
-    register("vulnerabilities", { value: vulnerabilities });
-  }, [immunities, resistances, vulnerabilities]);
-
-  const findItemById = (items, id) =>
-    items.find((item) => item.value.id === id);
-
-  const handleAdd = (type: CreatureEffectType) => {
     if (type === CreatureEffectType.Immunity)
       setImmunities((immunities) => [
         ...immunities,
@@ -145,7 +152,9 @@ export const ShowInfoAndReward = ({
       ]);
   };
 
-  const handleRemove = (type: CreatureEffectType, index: number) => {
+  const handleRemove = (e, type: CreatureEffectType, index: number) => {
+    e.preventDefault();
+
     if (type === CreatureEffectType.Immunity) {
       const newImmunities = [...immunities];
       newImmunities.splice(index, 1);
@@ -203,14 +212,10 @@ export const ShowInfoAndReward = ({
 
   const LoadItems = async () => {
     try {
-      let result = await itemService.getEntitys({
-        itemType: 1, //ItemEntityType.BaseItem
-        toast: null,
-        params: { pageSize: 99999 },
-      });
+      let result = await itemService.getItemsSimple();
 
       if (result && result.data) {
-        const entitys: ItemDTO[] = result.data.entitys;
+        const entitys = result.data.entitys;
         //setEntityList(entitys);
 
         const options = entitys.map((data, index) => ({
@@ -227,7 +232,7 @@ export const ShowInfoAndReward = ({
   };
 
   return (
-    <div className="my-2 baseList">
+    <div className="baseList">
       <div className="showInfo">
         <span className="showInfo__name">Броня: </span>
         {isEditMode ? (
@@ -284,252 +289,374 @@ export const ShowInfoAndReward = ({
           <div className="ml-1">{regeneration}</div>
         )}
       </div>
-      <div className="showInfo">
-        <span className="showInfo__name">Сопротивления: </span>
-        {isEditMode ? (
-          <div className="my-2">
-            {resistances ? (
-              resistances.map((resistance, index) => (
-                <div
-                  key={index}
-                  className="flex flex-wrap text-center align-items-center"
-                >
-                  <span className="field">
-                    <label>Наименование:</label>
-                    <input
-                      type="text"
-                      value={resistance.name}
-                      onChange={(e) =>
-                        handleNameChange(
-                          CreatureEffectType.Resistance,
-                          index,
-                          e.target.value
-                        )
-                      }
-                    />
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleRemove(CreatureEffectType.Resistance, index)
-                    }
-                  >
-                    Убрать сопротивление
-                  </button>
-                </div>
-              ))
-            ) : (
-              <div></div>
-            )}
-            <button
-              type="button"
-              onClick={() => handleAdd(CreatureEffectType.Resistance)}
-            >
-              Добавить сопротивление
-            </button>
-          </div>
-        ) : (
-          <div className="ml-1">
-            {resistances
-              ? resistances.map((item, index) => (
-                  <span key={index}>
-                    {index !== 0 && ", "}
-                    <Tooltip
-                      target={`.tooltip-${index}`}
-                      position="top"
-                      mouseTrack
-                      mouseTrackLeft={2}
-                    ></Tooltip>
-                    <span
-                      className={`tooltip-${index}`}
-                      data-pr-tooltip={item.description}
+      <div className="flex flex-wrap mb-2 showInfoMedia">
+        {resistances && resistances.length > 0 ? (
+          <div className="flex flex-wrap flex-column mr-3 mb-2">
+            <span className="showInfo__name">Сопротивления: </span>
+            {isEditMode ? (
+              <div className="my-2 flex flex-wrap">
+                {resistances ? (
+                  resistances.map((resistance, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-column flex-wrap text-center align-items-center border-1 mb-2 justify-content-center relative"
                     >
-                      {item.name}
-                    </span>
-                  </span>
-                ))
-              : ""}
-          </div>
-        )}
-      </div>
-      <div className="showInfo">
-        <span className="showInfo__name">Иммунитеты: </span>
-        {isEditMode ? (
-          <div className="my-2">
-            {immunities ? (
-              immunities.map((immunity, index) => (
-                <div
-                  key={index}
-                  className="flex flex-wrap text-center align-items-center"
-                >
-                  <span className="field">
-                    <label>Наименование:</label>
-                    <input
-                      type="text"
-                      value={immunity.name}
-                      onChange={(e) =>
-                        handleNameChange(
-                          CreatureEffectType.Immunity,
-                          index,
-                          e.target.value
-                        )
-                      }
-                    />
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleRemove(CreatureEffectType.Immunity, index)
-                    }
+                      <span className="field flex flex-column mx-1 mt-3">
+                        <label>Наименование {index + 1}:</label>
+                        <InputText
+                          className="input-text"
+                          value={resistance.name}
+                          onChange={(e) =>
+                            handleNameChange(
+                              CreatureEffectType.Resistance,
+                              index,
+                              e.target.value
+                            )
+                          }
+                        />
+                      </span>
+                      <span className="field flex flex-column mx-1">
+                        <label>Описание:</label>
+                        <InputTextarea
+                          autoResize
+                          value={resistance.description}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) =>
+                            handleDescriptionChange(
+                              CreatureEffectType.Resistance,
+                              index,
+                              e.target.value
+                            )
+                          }
+                          rows={5}
+                          cols={30}
+                        />
+                      </span>
+                      <Button
+                        className="absolute top-0 right-0 h-2rem w-1"
+                        icon="pi pi-trash"
+                        onClick={(e) =>
+                          handleRemove(e, CreatureEffectType.Resistance, index)
+                        }
+                      ></Button>
+                    </div>
+                  ))
+                ) : (
+                  <div></div>
+                )}
+                <div className="flex justify-content-center align-items-center">
+                  <Button
+                    onClick={(e) => handleAdd(e, CreatureEffectType.Resistance)}
                   >
-                    Убрать иммунитет
-                  </button>
+                    Добавить сопротивление
+                  </Button>
                 </div>
-              ))
+              </div>
             ) : (
-              <div></div>
+              <div className="flex flex-column">
+                {resistances
+                  ? resistances.map((item, index) => (
+                      <span key={index}>
+                        <Tooltip
+                          target={`.tooltip-${index}`}
+                          position="top"
+                          mouseTrack
+                          mouseTrackLeft={2}
+                        ></Tooltip>
+                        <span
+                          className={`tooltip-${index}`}
+                          data-pr-tooltip={item.description}
+                        >
+                          {item.name}
+                        </span>
+                      </span>
+                    ))
+                  : ""}
+              </div>
             )}
-            <button
-              type="button"
-              onClick={() => handleAdd(CreatureEffectType.Immunity)}
-            >
-              Добавить иммунитет
-            </button>
           </div>
         ) : (
-          <div className="ml-1">
-            {immunities
-              ? immunities.map((item, index) => (
-                  <span key={index}>
-                    {index !== 0 && ", "}
-                    <Tooltip
-                      target={`.tooltip-${index}`}
-                      position="top"
-                      mouseTrack
-                      mouseTrackLeft={2}
-                    ></Tooltip>
-                    <span
-                      className={`tooltip-${index}`}
-                      data-pr-tooltip={item.description}
+          ""
+        )}
+        {immunities && immunities.length > 0 ? (
+          <div className="flex flex-wrap flex-column mr-3 mb-2">
+            <span className="showInfo__name">Иммунитеты: </span>
+            {isEditMode ? (
+              <div className="my-2 flex flex-wrap">
+                {immunities ? (
+                  immunities.map((immunity, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-column flex-wrap text-center align-items-center border-1 mb-2 justify-content-center relative"
                     >
-                      {item.name}
-                    </span>
-                  </span>
-                ))
-              : ""}
-          </div>
-        )}
-      </div>
-      <div className="showInfo">
-        <span className="showInfo__name">Уязвимости: </span>
-        {isEditMode ? (
-          <div className="my-2">
-            {vulnerabilities ? (
-              vulnerabilities.map((vulnerability, index) => (
-                <div
-                  key={index}
-                  className="flex flex-wrap text-center align-items-center"
-                >
-                  <span className="field">
-                    <label>Наименование:</label>
-                    <input
-                      className="input-text"
-                      type="text"
-                      value={vulnerability.name}
-                      onChange={(e) =>
-                        handleNameChange(
-                          CreatureEffectType.Vulnerability,
-                          index,
-                          e.target.value
-                        )
-                      }
-                    />
-                  </span>
-                  <span className="field">
-                    <label>Описание:</label>
-                    <InputTextarea
-                      autoResize
-                      value={vulnerability.description}
-                      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-                        handleDescriptionChange(
-                          CreatureEffectType.Vulnerability,
-                          index,
-                          e.target.value
-                        )
-                      }
-                      rows={5}
-                      cols={30}
-                    />
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleRemove(CreatureEffectType.Vulnerability, index)
-                    }
+                      <span className="field flex flex-column mx-1 mt-3">
+                        <label>Наименование {index + 1}:</label>
+                        <InputText
+                          className="input-text"
+                          value={immunity.name}
+                          onChange={(e) =>
+                            handleNameChange(
+                              CreatureEffectType.Immunity,
+                              index,
+                              e.target.value
+                            )
+                          }
+                        />
+                      </span>
+                      <span className="field flex flex-column mx-1">
+                        <label>Описание:</label>
+                        <InputTextarea
+                          autoResize
+                          value={immunity.description}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) =>
+                            handleDescriptionChange(
+                              CreatureEffectType.Immunity,
+                              index,
+                              e.target.value
+                            )
+                          }
+                          rows={5}
+                          cols={30}
+                        />
+                      </span>
+                      <Button
+                        className="absolute top-0 right-0 h-2rem w-1"
+                        icon="pi pi-trash"
+                        onClick={(e) =>
+                          handleRemove(e, CreatureEffectType.Immunity, index)
+                        }
+                      ></Button>
+                    </div>
+                  ))
+                ) : (
+                  <div></div>
+                )}
+                <div className="flex justify-content-center align-items-center">
+                  <Button
+                    onClick={(e) => handleAdd(e, CreatureEffectType.Immunity)}
                   >
-                    Убрать уязвимость
-                  </button>
+                    Добавить иммунитет
+                  </Button>
                 </div>
-              ))
+              </div>
             ) : (
-              <div></div>
+              <div className="flex flex-column">
+                {immunities
+                  ? immunities.map((item, index) => (
+                      <span key={index}>
+                        <Tooltip
+                          target={`.tooltip-${index}`}
+                          position="top"
+                          mouseTrack
+                          mouseTrackLeft={2}
+                        ></Tooltip>
+                        <span
+                          className={`tooltip-${index}`}
+                          data-pr-tooltip={item.description}
+                        >
+                          {item.name}
+                        </span>
+                      </span>
+                    ))
+                  : ""}
+              </div>
             )}
-            <button
-              type="button"
-              onClick={() => handleAdd(CreatureEffectType.Vulnerability)}
-            >
-              Добавить уязвимость
-            </button>
           </div>
         ) : (
-          <div className="ml-1">
-            {vulnerabilities &&
-              vulnerabilities.map((item, index) => (
-                <span key={index}>
-                  {index !== 0 && ", "}
-                  <Tooltip
-                    target={`.tooltip-${index}`}
-                    position="top"
-                    mouseTrack
-                    mouseTrackLeft={2}
-                  ></Tooltip>
-                  <span
-                    className={`tooltip-${index}`}
-                    data-pr-tooltip={item.description}
+          ""
+        )}
+        {vulnerabilities && vulnerabilities.length > 0 ? (
+          <div className="flex flex-wrap flex-column mr-2 mb-2">
+            <span className="showInfo__name">Уязвимости: </span>
+            {isEditMode ? (
+              <div className="my-2 flex flex-wrap">
+                {vulnerabilities ? (
+                  vulnerabilities.map((vulnerability, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-column flex-wrap text-center align-items-center border-1 mb-2 justify-content-center relative"
+                    >
+                      <span className="field flex flex-column mx-1 mt-3">
+                        <label>Наименование {index + 1}:</label>
+                        <InputText
+                          className="input-text"
+                          type="text"
+                          value={vulnerability.name}
+                          onChange={(e) =>
+                            handleNameChange(
+                              CreatureEffectType.Vulnerability,
+                              index,
+                              e.target.value
+                            )
+                          }
+                        />
+                      </span>
+                      <span className="field flex flex-column mx-1">
+                        <label>Описание:</label>
+                        <InputTextarea
+                          autoResize
+                          value={vulnerability.description}
+                          onChange={(
+                            e: React.ChangeEvent<HTMLTextAreaElement>
+                          ) =>
+                            handleDescriptionChange(
+                              CreatureEffectType.Vulnerability,
+                              index,
+                              e.target.value
+                            )
+                          }
+                          rows={5}
+                          cols={30}
+                        />
+                      </span>
+                      <Button
+                        className="absolute top-0 right-0 h-2rem w-1"
+                        icon="pi pi-trash"
+                        onClick={(e) =>
+                          handleRemove(
+                            e,
+                            CreatureEffectType.Vulnerability,
+                            index
+                          )
+                        }
+                      ></Button>
+                    </div>
+                  ))
+                ) : (
+                  <div></div>
+                )}
+                <div className="flex justify-content-center align-items-center">
+                  <Button
+                    style={{ height: "fit-content" }}
+                    onClick={(e) =>
+                      handleAdd(e, CreatureEffectType.Vulnerability)
+                    }
                   >
-                    {item.name}
-                  </span>
-                </span>
-              ))}
+                    Добавить уязвимость
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-column">
+                {vulnerabilities &&
+                  vulnerabilities.map((item, index) => (
+                    <span key={index}>
+                      <Tooltip
+                        target={`.tooltip-${index}`}
+                        position="top"
+                        mouseTrack
+                        mouseTrackLeft={2}
+                      ></Tooltip>
+                      <span
+                        className={`tooltip-${index}`}
+                        data-pr-tooltip={item.description}
+                      >
+                        {item.name}
+                      </span>
+                    </span>
+                  ))}
+              </div>
+            )}
           </div>
+        ) : (
+          ""
         )}
       </div>
-      <div className="showInfo">
+      <div className="flex flex-wrap flex-column mb-2">
         <span className="showInfo__name">Добыча: </span>
         {isEditMode ? (
-          <div className="text-white baseList__controller">
-            <MultiSelect
-              value={rewards}
-              options={itemOptions}
-              filter
-              onChange={(e) => {
-                setRewards(e.value);
-                console.log("rewardsUpdated: ", rewards);
-              }}
-              className="w-full md:w-20rem"
-              display="chip"
-            />
+          <div className="my-2 flex flex-wrap">
+            {creatureReward &&
+              creatureReward.map((reward, index) => (
+                <div
+                  key={index}
+                  className="flex flex-wrap text-center align-items-center border-1 mb-2 justify-content-center"
+                >
+                  <span className="field flex flex-column mx-1">
+                    <label>Награда {index + 1}:</label>
+                    <Dropdown
+                      filter
+                      value={FindItemById(itemOptions, reward.itemBase?.id)}
+                      onChange={(e) => {
+                        setCreatureReward((prevCreatureReward) => {
+                          const updatedCreatureReward = [...prevCreatureReward];
+                          updatedCreatureReward[index] = {
+                            ...updatedCreatureReward[index],
+                            itemBase: e.target.value,
+                          };
+                          return updatedCreatureReward;
+                        });
+                      }}
+                      optionLabel="label"
+                      options={itemOptions}
+                      placeholder="Предмет"
+                    />
+                  </span>
+                  <span className="field flex flex-column mx-1">
+                    <label>Количество:</label>
+                    <InputText
+                      value={reward.amount}
+                      onChange={(e) => {
+                        setCreatureReward((prevCreatureReward) => {
+                          const updatedCreatureReward = [...prevCreatureReward];
+                          updatedCreatureReward[index] = {
+                            ...updatedCreatureReward[index],
+                            amount: e.target.value,
+                          };
+                          return updatedCreatureReward;
+                        });
+                      }}
+                    />
+                  </span>
+                  <Button
+                    className="mx-2"
+                    icon="pi pi-trash"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const newCreatureRewards = [...creatureReward];
+                      newCreatureRewards.splice(index, 1);
+                      setCreatureReward(newCreatureRewards);
+                    }}
+                  ></Button>
+                </div>
+              ))}
+            <div className="flex justify-content-center align-items-center">
+              <Button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCreatureReward((creatureReward) => [
+                    ...creatureReward,
+                    {
+                      id: 0,
+                      amount: "",
+                      itemBase: null,
+                    },
+                  ]);
+                }}
+              >
+                Добавить награду
+              </Button>
+            </div>
           </div>
         ) : (
-          <div className="ml-1">
+          <div className="flex flex-column">
             {creatureReward !== null && creatureReward !== undefined ? (
               creatureReward.map((reward, index) => (
                 <span key={index}>
-                  {index !== 0 && ", "}
                   {reward.itemBase ? (
-                    <span>
-                      {reward.itemBase.name} ({reward.amount})
-                    </span>
+                    <a href={"listitem?name=" + reward.itemBase.name} target="_blank" rel="noreferrer">
+                      <span>
+                        {reward.itemBase.name}{" "}
+                        {reward.amount !== "" ? (
+                          <span>({reward.amount})</span>
+                        ) : (
+                          ""
+                        )}
+                      </span>
+                    </a>
                   ) : (
                     ""
                   )}

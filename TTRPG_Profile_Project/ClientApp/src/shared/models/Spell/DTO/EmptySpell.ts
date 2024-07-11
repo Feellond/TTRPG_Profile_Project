@@ -22,7 +22,8 @@ const emptySpell: ISpell = {
     sourceType: 0,
     sourceTypeDescription: "",
     isPriestSpell: false,
-    isDruidSpell: false
+    isDruidSpell: false,
+    imageFileName: null,
 };
 
 export {emptySpell}

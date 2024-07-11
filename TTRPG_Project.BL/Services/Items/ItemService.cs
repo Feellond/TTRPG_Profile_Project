@@ -35,6 +35,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemType = (int)ItemEntityType.Item,
                     StealthType = item.StealthType,
                     Type = item.Type,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -67,6 +68,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemType = (int)ItemEntityType.Item,
                     StealthType = item.StealthType,
                     Type = item.Type,
+                    ImageFileName = item.ImageFileName,
                 }).FirstOrDefault();
 
             ItemBaseResponce responce = new()
@@ -99,6 +101,7 @@ namespace TTRPG_Project.BL.Services.Items
                 Weight = request.Weight,
                 StealthType = request.StealthType,
                 Type = request.Type,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Items.AddAsync(newItem);
@@ -120,6 +123,7 @@ namespace TTRPG_Project.BL.Services.Items
             item.AvailabilityType = request.AvailabilityType;
             item.StealthType = request.StealthType; 
             item.Type = request.Type;
+            item.ImageFileName = request.ImageFileName;
 
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == item.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);

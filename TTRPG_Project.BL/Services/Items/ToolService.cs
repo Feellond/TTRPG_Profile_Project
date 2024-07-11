@@ -33,6 +33,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Tool,
                     StealthType = item.StealthType,
+                    ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 
             ItemBaseResponce responce = new()
@@ -64,6 +65,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Tool,
                     StealthType = item.StealthType,
+                    ImageFileName = item.ImageFileName,
                 }).FirstOrDefault();
 
             ItemBaseResponce responce = new()
@@ -95,6 +97,7 @@ namespace TTRPG_Project.BL.Services.Items
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 Weight = request.Weight,
                 StealthType = request.StealthType,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Tools.AddAsync(newTool);
@@ -115,6 +118,7 @@ namespace TTRPG_Project.BL.Services.Items
             tool.Description = request.Description;
             tool.AvailabilityType = request.AvailabilityType;
             tool.StealthType = request.StealthType;
+            tool.ImageFileName = request.ImageFileName;
 
             var tbeList = await _dbContext.ItemBaseEffectList.Where(x => x.ItemBaseId == tool.Id).ToListAsync();
             _dbContext.RemoveRange(tbeList);

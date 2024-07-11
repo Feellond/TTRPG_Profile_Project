@@ -9,5 +9,6 @@ namespace TTRPG_Project.DAL.Entities.Base
         public string Description { get; set; } = string.Empty;
         public int? SourceId { get; set; }
         public Source? Source { get; set; }
+        public string ImageFileName { get; set; } = string.Empty;
     }
 }

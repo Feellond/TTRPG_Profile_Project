@@ -12,6 +12,7 @@ using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Additional;
 using TTRPG_Project.DAL.Entities.Database.Creatures;
+using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.BL.Services.Creatures
 {
@@ -66,6 +67,7 @@ namespace TTRPG_Project.BL.Services.Creatures
                 RaceId = request.RaceId ?? request.Race?.Id,
                 SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2,
                 Type = request.Type,
+                ImageFileName = request.ImageFileName,
             };
 
             await _dbContext.Abilitiys.AddAsync(ability);
@@ -83,6 +85,7 @@ namespace TTRPG_Project.BL.Services.Creatures
             abilitiy.RaceId = request.RaceId ?? request.Race?.Id;
             abilitiy.SourceId = _dbContext.Sources.Where(x => x.Name == (request.Source == null ? "Хоумбрю" : request.Source.Name)).FirstOrDefault()?.Id ?? 2;
             abilitiy.Type = request.Type;
+            abilitiy.ImageFileName = request.ImageFileName;
             abilitiy.UpdateDate = DateTime.Now;
 
             _dbContext.Entry(abilitiy).State = EntityState.Modified;

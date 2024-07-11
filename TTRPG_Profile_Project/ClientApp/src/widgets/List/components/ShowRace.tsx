@@ -20,7 +20,7 @@ export const ShowRace = ({data}: IShowRace) => {
             </li>
             <li>
                 <span>
-                    Описание: {data.description}
+                  <strong>Описание:</strong> {data.description}
                 </span>
             </li>
           </ul>
