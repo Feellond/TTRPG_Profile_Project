@@ -15,7 +15,6 @@ import {
   AttackTypeToShortString,
   AttackTypeToString,
 } from "entities/BestiaryFunc";
-import { WEBSITE } from "shared/api/api_const";
 import { ItemEntityType } from "shared/enums/ItemEnums";
 
 const drawWeaponEquipmentType = (data: ItemDTO) => {
@@ -161,9 +160,13 @@ const drawItemEntityType = (data: ItemDTO) => {
     case 7:
       return "Чертеж";
     case 8:
-      return "Компонент";
-    case 9:
       return "Предмет";
+    case 9:
+    case 10:
+      if (data.isAlchemical)
+        return "Компонент алхимии";
+      else 
+        return "Компонент ремесла";
   }
 };
 
@@ -285,15 +288,15 @@ const drawArmor = (data: ItemDTO) => {
         <div>{drawArmorType(data)}</div>
       </div>
       <div className="stat" title="Надежность">
-        <div>Над</div>
+        <div>Надежность</div>
         <div>{data.reliability}</div>
       </div>
       <div className="stat" title="Количество улучшений">
-        <div>Улуч</div>
+        <div>Улучшения</div>
         <div>{data.amountOfEnhancements}</div>
       </div>
       <div className="stat" title="Скованность движений">
-        <div>СД</div>
+        <div>Скованность движений</div>
         <div>{data.stiffness}</div>
       </div>
       <div className="stat" title="Создатель">
@@ -320,7 +323,7 @@ const drawFormula = (data: ItemDTO) => {
   return (
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Сложность">
-        <div>СЛ</div>
+        <div>Сложность</div>
         <div>{data.complexity}</div>
       </div>
       <div className="stat" title="Количество затрачеваемого времени">
@@ -353,7 +356,7 @@ const drawBlueprint = (data: ItemDTO) => {
   return (
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Сложность">
-        <div>СЛ</div>
+        <div>Сложность</div>
         <div>{data.complexity}</div>
       </div>
       <div className="stat" title="Количество затрачеваемого времени">
@@ -394,7 +397,7 @@ const drawComponent = (data: ItemDTO) => {
         <div>{data.amount === "" ? "-" : data.amount}</div>
       </div>
       <div className="stat" title="Сложность">
-        <div>СЛ</div>
+        <div>Сложность</div>
         <div>{data.complexity}</div>
       </div>
       {data.isAlchemical ? (
@@ -413,7 +416,7 @@ const drawItem = (data: ItemDTO) => {
   return (
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
-        <div>Скрыт</div>
+        <div>Скрытность</div>
         <div title={StealthTypeTooltip(data.stealthType)}>
           {drawStealthType(data)}
         </div>
@@ -426,7 +429,7 @@ const drawTool = (data: ItemDTO) => {
   return (
     <li className="stats flex flex-row py-2 flex-wrap">
       <div className="stat" title="Скрытность">
-        <div>Скрыт</div>
+        <div>Скрытность</div>
         <div title={StealthTypeTooltip(data.stealthType)}>
           {drawStealthType(data)}
         </div>
@@ -445,7 +448,7 @@ const drawWeapon = (data: ItemDTO) => {
         </div>
       </div>
       <div className="stat" title="Точность">
-        <div>Точ</div>
+        <div>Точность</div>
         <div>{data.accuracy}</div>
       </div>
       <div className="stat" title="Урон">
@@ -453,7 +456,7 @@ const drawWeapon = (data: ItemDTO) => {
         <div>{data.damage}</div>
       </div>
       <div className="stat" title="Надежность">
-        <div>Над</div>
+        <div>Надежность</div>
         <div>{data.reliability}</div>
       </div>
       <div className="stat" title="Хват">
@@ -461,17 +464,17 @@ const drawWeapon = (data: ItemDTO) => {
         <div>{data.grip}</div>
       </div>
       <div className="stat" title="Дистанция">
-        <div>Дист</div>
+        <div>Дистанция</div>
         <div>{data.distance}</div>
       </div>
       <div className="stat" title="Скрытность">
-        <div>Скрыт</div>
+        <div>Скрытность</div>
         <div title={StealthTypeTooltip(data.stealthType)}>
           {drawStealthType(data)}
         </div>
       </div>
       <div className="stat" title="Количество улучшений">
-        <div>Улуч</div>
+        <div>Улучшения</div>
         <div>{data.amountOfEnhancements}</div>
       </div>
       <div className="stat" title="Создатель">

@@ -300,8 +300,7 @@ export const ShowAttacks = ({
                                 }
                               />
                             </span>
-                            <button
-                              type="button"
+                            <Button
                               onClick={(e) => {
                                 e.preventDefault();
                                 let updatedAttack = editValues;
@@ -320,7 +319,7 @@ export const ShowAttacks = ({
                               }}
                             >
                               Убрать эффект
-                            </button>
+                            </Button>
                           </div>
                         ))
                       ) : (

@@ -282,6 +282,7 @@ const ListShow = ({
       if (result && result.data) {
         lazyState.totalRecords = result.data.count;
         const entitys = result.data.entitys;
+        console.log("entitys", entitys);
         setEntityList(entitys);
       }
     } catch (error) {
@@ -307,13 +308,20 @@ const ListShow = ({
     <div className="w-full" style={{ marginTop: "-20px" }}>
       <Toast ref={toast} />
       {showDialogs()}
-      <div>
-        <Button
-          label="Создать предмет"
-          className="p-button-site"
-          onClick={(e) => showCreateDialog()}
-        />
-      </div>
+      {"itemType" in entity ||
+      "spellLevel" in entity ||
+      "blockBase" in entity ? (
+        <div>
+          <Button
+            icon="pi pi-plus"
+            label="Создать предмет"
+            className="p-button-site"
+            onClick={(e) => showCreateDialog()}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <ShowFilter filter={filter} setFilter={setFilter} />
       {entityList !== null && entityList !== undefined ? (
         entityList.map((it, index) => (

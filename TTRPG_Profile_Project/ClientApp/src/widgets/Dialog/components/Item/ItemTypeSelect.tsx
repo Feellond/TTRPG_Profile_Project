@@ -17,7 +17,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { SelectItem } from "primereact/selectitem";
 import { SkillOptionsLoad } from "entities/BestiaryOptions";
-import { EffectOptionsLoad, StealthOptionsLoad } from "entities/GeneralFunc";
+import { EffectOptionsLoad, FindItemById, StealthOptionsLoad } from "entities/GeneralFunc";
 import {
   ArmorEquipmentTypeLoad,
   ArmorTypeLoad,
@@ -25,9 +25,11 @@ import {
   ItemOriginTypeLoad,
   SubstanceTypeLoad,
   WeaponAttackTypeLoad,
+  WeaponEquipmentTypeLoad,
   WhereToFindTypeLoad,
 } from "entities/ItemFunc/components/OptionsLoad";
 import { Effect } from "shared/models/Additional";
+import { Button } from "primereact/button";
 
 interface ItemTypeSelectProps {
   data: ItemDTO;
@@ -51,9 +53,8 @@ const ItemTypeSelect = ({
   const [isAmmunitionChecked, setIsAmmunitionChecked] =
     useState<boolean>(false);
   const [isAlchemicalChecked, setIsAlchemicalChecked] =
-    useState<boolean>(false);
+    useState<boolean>(data.isAlchemical);
 
-    
   const [componentsOptions, setComponentsOptions] = useState<SelectItem[]>([]);
   const [skillOptions, setSkillOptions] = useState<SelectItem[]>([]);
   const [stealthOptions, setStealthOptions] = useState<SelectItem[]>([]);
@@ -63,6 +64,7 @@ const ItemTypeSelect = ({
     []
   );
   const [weaponTypeOptions, setWeaponTypeOptions] = useState<SelectItem[]>([]);
+  const [weaponEquipmentOptions, setWeaponEquipmentOptions] = useState<SelectItem[]>([]);
 
   const [effectOptions, setEffectOptions] = useState<SelectItem[]>([]);
   const [substanceOptions, setSubstanceOptions] = useState<SelectItem[]>([]);
@@ -71,25 +73,24 @@ const ItemTypeSelect = ({
   >([]);
   const [Content, setContent] = useState<any>();
 
-  const [substances, setSubstances] = useState(
-    data.formulaSubstanceList || []
-  );
+  const [substances, setSubstances] = useState(data.formulaSubstanceList || []);
   const [components, setComponents] = useState(
     data.blueprintComponentList || []
   );
   const [effects, setEffects] = useState(data.itemBaseEffectList || []);
 
   useEffect(() => {
-    ComponentsTypeLoad({setItems: setComponentsOptions});
+    ComponentsTypeLoad({ setItems: setComponentsOptions });
     SkillOptionsLoad({ setItems: setSkillOptions });
     StealthOptionsLoad({ setItems: setStealthOptions });
     ItemOriginTypeLoad({ setItems: setItemOriginOptions });
     ArmorTypeLoad({ setItems: setArmorOptions });
     ArmorEquipmentTypeLoad({ setItems: setArmorEquipmentOptions });
-    WhereToFindTypeLoad({setItems: setWhereToFindOptions});
-    SubstanceTypeLoad({setItems: setSubstanceOptions});
-    EffectOptionsLoad({setItems: setEffectOptions});
-    WeaponAttackTypeLoad({setItems: setWeaponTypeOptions});
+    WhereToFindTypeLoad({ setItems: setWhereToFindOptions });
+    SubstanceTypeLoad({ setItems: setSubstanceOptions });
+    EffectOptionsLoad({ setItems: setEffectOptions });
+    WeaponAttackTypeLoad({ setItems: setWeaponTypeOptions });
+    WeaponEquipmentTypeLoad({setItems: setWeaponEquipmentOptions})
 
     setSubstances(data.formulaSubstanceList);
     setComponents(data.blueprintComponentList);
@@ -97,12 +98,21 @@ const ItemTypeSelect = ({
   }, [visible]);
 
   useEffect(() => {
-    register("itemBaseEffectList", { value: effects });
+    setValue("itemBaseEffectList", effects);
   }, [effects]);
 
   const handleAddEffect = () => {
     const initialEffects = effects || [];
-    setEffects(effects => [...initialEffects, { id: 0, chancePercent: 0, damage: "", effect: null, isDealDamage: false}]);
+    setEffects((effects) => [
+      ...initialEffects,
+      {
+        id: 0,
+        chancePercent: 0,
+        damage: "",
+        effect: null,
+        isDealDamage: false,
+      },
+    ]);
   };
 
   const handleRemoveEffect = (index: number) => {
@@ -129,7 +139,10 @@ const ItemTypeSelect = ({
     setEffects(newEffects);
   };
 
-  const handleEffectIsDealDamageChange = (index: number, isDealDamage: boolean) => {
+  const handleEffectIsDealDamageChange = (
+    index: number,
+    isDealDamage: boolean
+  ) => {
     const newEffects = [...effects];
     newEffects[index].isDealDamage = isDealDamage;
     setEffects(newEffects);
@@ -159,10 +172,18 @@ const ItemTypeSelect = ({
         setContent(BlueprintItem());
         break;
       case 8:
-        setContent(ComponentItem());
+        setContent(Item());
         break;
       case 9:
-        setContent(Item());
+      case 10:
+        if (itemType === 9) {
+          setIsAlchemicalChecked(false);
+          setValue("isAlchemical", false);
+        } else if (itemType === 10) {
+          setIsAlchemicalChecked(true);
+          setValue("isAlchemical", true);
+        }
+        setContent(ComponentItem());
         break;
       default:
         setContent(<div></div>);
@@ -195,7 +216,7 @@ const ItemTypeSelect = ({
           <Checkbox
             onChange={(e) => {
               setIsAmmunitionChecked(e.checked);
-              register("isAmmunition", { value: e.checked });
+              setValue("isAmmunition", e.checked);
               //setValue("isAmmunition", e.checked);
             }}
             checked={isAmmunitionChecked}
@@ -204,6 +225,27 @@ const ItemTypeSelect = ({
         </div>
         <span className="field">
           <label>Тип оружия</label>
+          <Controller
+            name="equipmentType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={weaponEquipmentOptions}
+                  placeholder="Выберите тип оружия"
+                />
+              </>
+            )}
+          />
+        </span>
+        <span className="field">
+          <label>Тип урона оружия</label>
           <Controller
             name="type"
             control={control}
@@ -231,16 +273,27 @@ const ItemTypeSelect = ({
             placeholder="Число"
             value={data.accuracy}
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("accuracy", { value: e.target.value });
+              setValue("accuracy", e.target.value);
             }}
           />
         </span>
         <span className="field">
           <label>Урон</label>
-          <InputText
-            placeholder="2к4+2"
-            value={data.damage}
-            {...register("damage")}
+          <Controller
+            name="damage"
+            control={control}
+            render={({ field }) => (
+              <>
+                <InputText
+                  placeholder="2к4+2"
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e) => {
+                    field.onChange(e.target.value);
+                  }}
+                />
+              </>
+            )}
           />
         </span>
         <span className="field">
@@ -252,7 +305,7 @@ const ItemTypeSelect = ({
             max={999}
             placeholder="Число"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("reliability", { value: e.target.value });
+              setValue("reliability", e.target.value );
             }}
           />
         </span>
@@ -265,7 +318,7 @@ const ItemTypeSelect = ({
             max={4}
             placeholder="Число"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("grip", { value: e.target.value });
+              setValue("grip",e.target.value );
             }}
           />
         </span>
@@ -276,7 +329,7 @@ const ItemTypeSelect = ({
             value={data.distance}
             placeholder="Число"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("distance", { value: e.target.value });
+              setValue("distance", e.target.value );
               //setValue("distance", e.target.value);
             }}
           ></InputNumber>
@@ -307,6 +360,9 @@ const ItemTypeSelect = ({
           <InputNumber
             value={data.amountOfEnhancements}
             placeholder="Число"
+            onValueChange={(e: InputNumberValueChangeEvent) => {
+              setValue("amountOfEnhancements",e.target.value);
+            }}
           ></InputNumber>
         </span>
         <span className="field">
@@ -318,7 +374,7 @@ const ItemTypeSelect = ({
               <>
                 <Dropdown
                   id={field.name}
-                  value={field.value}
+                  value={FindItemById(skillOptions, field.value?.id)}
                   onChange={(e: DropdownChangeEvent) => {
                     field.onChange(e.value);
                   }}
@@ -330,77 +386,111 @@ const ItemTypeSelect = ({
             )}
           />
         </span>
+        <span className="field">
+          <label>Раса создателя</label>
+          <Controller
+            name="itemOriginType"
+            control={control}
+            render={({ field }) => (
+              <>
+                <Dropdown
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e: DropdownChangeEvent) => {
+                    field.onChange(e.value);
+                  }}
+                  optionLabel="label"
+                  options={itemOriginOptions}
+                  placeholder="Выберите расу создателя"
+                />
+              </>
+            )}
+          />
+        </span>
         <div>
           <span className="field">
             <label>Список эффектов:</label>
             <div>
               {effects ? (
                 effects.map((effect, index) => (
-                  <div key={index}>
-                    <span className="field">
-                      <label>Эффект:</label>
-                      <Dropdown
-                        value={effect.effect}
-                        onChange={(e) =>
-                          handleEffectTypeChange(index, e.target.value)
-                        }
-                        optionLabel="label"
-                        options={effectOptions}
-                        placeholder="Выберите эффект"
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Наносит урон?:</label>
-                      <input
-                        type="checkbox"
-                        checked={effect.isDealDamage}
-                        onChange={(e) =>
-                          handleEffectIsDealDamageChange(
-                            index,
-                            e.target.checked
-                          )
-                        }
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Проценты:</label>
-                      <input
-                        type="number"
-                        min="1"
-                        max="100"
-                        value={effect.chancePercent}
-                        onChange={(e) =>
-                          handleEffectPercentChange(
-                            index,
-                            parseInt(e.target.value)
-                          )
-                        }
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Урон:</label>
-                      <input
-                        type="text"
-                        value={effect.damage}
-                        onChange={(e) =>
-                          handleEffectDamageChange(index, e.target.value)
-                        }
-                      />
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveEffect(index)}
+                  <div key={index} className="border-1 p-2 align-items-center border-1 mb-2 justify-content-center relative">
+                    <div className="field mt-3">
+                      <span className="field">
+                        <label>Эффект {index + 1}:</label>
+                        <Dropdown
+                          value={effect.effect}
+                          onChange={(e) =>
+                            handleEffectTypeChange(index, e.target.value)
+                          }
+                          optionLabel="label"
+                          options={effectOptions}
+                          placeholder="Выберите тип субстанции"
+                        />
+                      </span>
+                    </div>
+                    <div className="flex align-items-center">
+                      <span className="field flex align-items-center">
+                        <label>Наносит урон?:</label>
+                        <Checkbox
+                          className="ml-1"
+                          checked={effect.isDealDamage}
+                          onChange={(e) =>
+                            handleEffectIsDealDamageChange(
+                              index,
+                              e.target.checked
+                            )
+                          }
+                        />
+                      </span>
+                    </div>
+                    {!effect.isDealDamage ? (
+                    <div className="field">
+                      <span className="field">
+                        <label>Проценты:</label>
+                        <InputNumber
+                          value={effect.chancePercent}
+                          onChange={(e) =>
+                            handleEffectPercentChange(index, e.value)
+                          }
+                        />
+                      </span>
+                    </div>
+                    ) : ""}
+                    {effect.isDealDamage ? (
+                    <div className="field">
+                      <span className="field">
+                        <label>Урон:</label>
+                        <InputText
+                          value={effect.damage}
+                          onChange={(e) =>
+                            handleEffectDamageChange(index, e.target.value)
+                          }
+                        />
+                      </span>
+                    </div>) : ""}
+                    <Button
+                      className="max-w-max absolute top-0 right-0 h-2rem w-1"
+                      icon="pi pi-trash"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleRemoveEffect(index);
+                      }}
                     >
-                      Убрать эффект
-                    </button>
+                    </Button>
                   </div>
                 ))
               ) : (
                 <div></div>
               )}
-              <button type="button" onClick={handleAddEffect}>
+              <Button
+                className="max-w-max"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddEffect();
+                }}
+              >
                 Добавить эффект
-              </button>
+              </Button>
             </div>
           </span>
         </div>
@@ -461,7 +551,7 @@ const ItemTypeSelect = ({
             max={999}
             placeholder="Число надежности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("reliability", { value: e.target.value });
+              setValue("reliability", e.target.value);
             }}
           />
         </span>
@@ -473,7 +563,7 @@ const ItemTypeSelect = ({
             max={99}
             placeholder="Число возможных улучшений"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("amountOfEnhancements", { value: e.target.value });
+              setValue("amountOfEnhancements", e.target.value);
             }}
           />
         </span>
@@ -485,7 +575,7 @@ const ItemTypeSelect = ({
             max={99}
             placeholder="Число скованности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("stiffness", { value: e.target.value });
+              setValue("stiffness", e.target.value );
             }}
           />
         </span>
@@ -516,71 +606,84 @@ const ItemTypeSelect = ({
             <div>
               {effects ? (
                 effects.map((effect, index) => (
-                  <div key={index}>
-                    <span className="field">
-                      <label>Эффект:</label>
-                      <Dropdown
-                        value={effect.effect}
-                        onChange={(e) =>
-                          handleEffectTypeChange(index, e.target.value)
-                        }
-                        optionLabel="label"
-                        options={effectOptions}
-                        placeholder="Выберите тип субстанции"
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Наносит урон?:</label>
-                      <input
-                        type="checkbox"
-                        checked={effect.isDealDamage}
-                        onChange={(e) =>
-                          handleEffectIsDealDamageChange(
-                            index,
-                            e.target.checked
-                          )
-                        }
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Проценты:</label>
-                      <input
-                        type="number"
-                        min="1"
-                        max="100"
-                        value={effect.chancePercent}
-                        onChange={(e) =>
-                          handleEffectPercentChange(
-                            index,
-                            parseInt(e.target.value)
-                          )
-                        }
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Урон:</label>
-                      <input
-                        type="text"
-                        value={effect.damage}
-                        onChange={(e) =>
-                          handleEffectDamageChange(index, e.target.value)
-                        }
-                      />
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveEffect(index)}
+                  <div key={index} className="border-1 p-2 align-items-center border-1 mb-2 justify-content-center relative">
+                    <div className="field mt-3">
+                      <span className="field">
+                        <label>Эффект {index + 1}:</label>
+                        <Dropdown
+                          value={effect.effect}
+                          onChange={(e) =>
+                            handleEffectTypeChange(index, e.target.value)
+                          }
+                          optionLabel="label"
+                          options={effectOptions}
+                          placeholder="Выберите тип субстанции"
+                        />
+                      </span>
+                    </div>
+                    <div className="flex align-items-center">
+                      <span className="field flex align-items-center">
+                        <label>Наносит урон?:</label>
+                        <Checkbox
+                          className="ml-1"
+                          checked={effect.isDealDamage}
+                          onChange={(e) =>
+                            handleEffectIsDealDamageChange(
+                              index,
+                              e.target.checked
+                            )
+                          }
+                        />
+                      </span>
+                    </div>
+                    {!effect.isDealDamage ? (
+                    <div className="field">
+                      <span className="field">
+                        <label>Проценты:</label>
+                        <InputNumber
+                          value={effect.chancePercent}
+                          onChange={(e) =>
+                            handleEffectPercentChange(index, e.value)
+                          }
+                        />
+                      </span>
+                    </div>
+                    ) : ""}
+                    {effect.isDealDamage ? (
+                    <div className="field">
+                      <span className="field">
+                        <label>Урон:</label>
+                        <InputText
+                          value={effect.damage}
+                          onChange={(e) =>
+                            handleEffectDamageChange(index, e.target.value)
+                          }
+                        />
+                      </span>
+                    </div>) : ""}
+                    <Button
+                      className="max-w-max absolute top-0 right-0 h-2rem w-1"
+                      icon="pi pi-trash"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleRemoveEffect(index);
+                      }}
                     >
-                      Убрать эффект
-                    </button>
+                    </Button>
                   </div>
                 ))
               ) : (
                 <div></div>
               )}
-              <button type="button" onClick={handleAddEffect}>
+              <Button
+                className="max-w-max"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddEffect();
+                }}
+              >
                 Добавить эффект
-              </button>
+              </Button>
             </div>
           </span>
         </div>
@@ -625,71 +728,84 @@ const ItemTypeSelect = ({
             <div>
               {effects ? (
                 effects.map((effect, index) => (
-                  <div key={index}>
-                    <span className="field">
-                      <label>Эффект:</label>
-                      <Dropdown
-                        value={effect.effect}
-                        onChange={(e) =>
-                          handleEffectTypeChange(index, e.target.value)
-                        }
-                        optionLabel="label"
-                        options={effectOptions}
-                        placeholder="Выберите тип субстанции"
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Наносит урон?:</label>
-                      <input
-                        type="checkbox"
-                        checked={effect.isDealDamage}
-                        onChange={(e) =>
-                          handleEffectIsDealDamageChange(
-                            index,
-                            e.target.checked
-                          )
-                        }
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Проценты:</label>
-                      <input
-                        type="number"
-                        min="1"
-                        max="100"
-                        value={effect.chancePercent}
-                        onChange={(e) =>
-                          handleEffectPercentChange(
-                            index,
-                            parseInt(e.target.value)
-                          )
-                        }
-                      />
-                    </span>
-                    <span className="field">
-                      <label>Урон:</label>
-                      <input
-                        type="text"
-                        value={effect.damage}
-                        onChange={(e) =>
-                          handleEffectDamageChange(index, e.target.value)
-                        }
-                      />
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveEffect(index)}
+                  <div key={index} className="border-1 p-2 align-items-center border-1 mb-2 justify-content-center relative">
+                    <div className="field mt-3">
+                      <span className="field">
+                        <label>Эффект {index + 1}:</label>
+                        <Dropdown
+                          value={effect.effect}
+                          onChange={(e) =>
+                            handleEffectTypeChange(index, e.target.value)
+                          }
+                          optionLabel="label"
+                          options={effectOptions}
+                          placeholder="Выберите тип субстанции"
+                        />
+                      </span>
+                    </div>
+                    <div className="flex align-items-center">
+                      <span className="field flex align-items-center">
+                        <label>Наносит урон?:</label>
+                        <Checkbox
+                          className="ml-1"
+                          checked={effect.isDealDamage}
+                          onChange={(e) =>
+                            handleEffectIsDealDamageChange(
+                              index,
+                              e.target.checked
+                            )
+                          }
+                        />
+                      </span>
+                    </div>
+                    {!effect.isDealDamage ? (
+                    <div className="field">
+                      <span className="field">
+                        <label>Проценты:</label>
+                        <InputNumber
+                          value={effect.chancePercent}
+                          onChange={(e) =>
+                            handleEffectPercentChange(index, e.value)
+                          }
+                        />
+                      </span>
+                    </div>
+                    ) : ""}
+                    {effect.isDealDamage ? (
+                    <div className="field">
+                      <span className="field">
+                        <label>Урон:</label>
+                        <InputText
+                          value={effect.damage}
+                          onChange={(e) =>
+                            handleEffectDamageChange(index, e.target.value)
+                          }
+                        />
+                      </span>
+                    </div>) : ""}
+                    <Button
+                      className="max-w-max absolute top-0 right-0 h-2rem w-1"
+                      icon="pi pi-trash"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleRemoveEffect(index);
+                      }}
                     >
-                      Убрать эффект
-                    </button>
+                    </Button>
                   </div>
                 ))
               ) : (
                 <div></div>
               )}
-              <button type="button" onClick={handleAddEffect}>
+              <Button
+                className="max-w-max"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddEffect();
+                }}
+              >
                 Добавить эффект
-              </button>
+              </Button>
             </div>
           </span>
         </div>
@@ -726,12 +842,15 @@ const ItemTypeSelect = ({
   };
 
   useEffect(() => {
-    register("formulaSubstanceList", { value: substances });
+    setValue("formulaSubstanceList", substances );
   }, [substances]);
 
   const handleAddSubstance = () => {
     const initialSubstances = substances || [];
-    setSubstances(substances => [...initialSubstances, { id: 0, substanceType: 1, amount: 0 }]);
+    setSubstances((substances) => [
+      ...initialSubstances,
+      { id: 0, substanceType: 1, amount: 0 },
+    ]);
   };
 
   const handleRemoveSubstance = (index: number) => {
@@ -764,7 +883,7 @@ const ItemTypeSelect = ({
               max={999}
               placeholder="Число сложности"
               onValueChange={(e: InputNumberValueChangeEvent) => {
-                register("complexity", { value: e.target.value });
+                setValue("complexity", e.target.value );
               }}
             />
           </span>
@@ -778,7 +897,7 @@ const ItemTypeSelect = ({
               max={999999}
               placeholder="Время изготовления"
               onValueChange={(e: InputNumberValueChangeEvent) => {
-                register("timeSpend", { value: e.target.value });
+                setValue("timeSpend", e.target.value );
               }}
             />
           </span>
@@ -792,7 +911,7 @@ const ItemTypeSelect = ({
               max={999999}
               placeholder="Число доплаты"
               onValueChange={(e: InputNumberValueChangeEvent) => {
-                register("additionalPayment", { value: e.target.value });
+                setValue("additionalPayment", e.target.value );
               }}
             />
           </span>
@@ -803,9 +922,9 @@ const ItemTypeSelect = ({
             <div>
               {substances ? (
                 substances.map((substance, index) => (
-                  <div key={index}>
-                    <span className="field">
-                      <label>Тип субстацнии:</label>
+                  <div key={index} className="border-1 p-2 align-items-center border-1 mb-2 justify-content-center relative">
+                    <div className="field mt-3">
+                      <label>Тип субстацнии {index + 1}:</label>
                       <Dropdown
                         value={substance.substanceType}
                         onChange={(e) =>
@@ -818,28 +937,42 @@ const ItemTypeSelect = ({
                         options={substanceOptions}
                         placeholder="Выберите тип субстанции"
                       />
-                    </span>
+                    </div>
                     <span className="field">
                       <label>Количество:</label>
-                      <input
-                        type="number"
+                      <InputNumber
                         value={substance.amount}
                         onChange={(e) =>
-                          handleAmountSubstanceChange(index, parseInt(e.target.value))
+                          handleAmountSubstanceChange(
+                            index,
+                            e.value
+                          )
                         }
                       />
                     </span>
-                    <button type="button" onClick={() => handleRemoveSubstance(index)}>
-                      Убрать субстанцию
-                    </button>
+                    <Button
+                      className="max-w-max absolute top-0 right-0 h-2rem w-1"
+                      icon="pi pi-trash"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleRemoveSubstance(index);
+                      }}
+                    >
+                    </Button>
                   </div>
                 ))
               ) : (
                 <div></div>
               )}
-              <button type="button" onClick={handleAddSubstance}>
+              <Button
+                className="max-w-max"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddSubstance();
+                }}
+              >
                 Добавить субстанцию
-              </button>
+              </Button>
             </div>
           </span>
         </div>
@@ -848,12 +981,15 @@ const ItemTypeSelect = ({
   };
 
   useEffect(() => {
-    register("blueprintComponentList", { value: components });
+    setValue("blueprintComponentList", components);
   }, [components]);
 
   const handleAddComponent = () => {
     const initialComponents = components || [];
-    setComponents(components => [...initialComponents, { id: 0, component: null, amount: 0 }]);
+    setComponents((components) => [
+      ...initialComponents,
+      { id: 0, component: null, amount: 0 },
+    ]);
   };
 
   const handleRemoveComponent = (index: number) => {
@@ -885,7 +1021,7 @@ const ItemTypeSelect = ({
             max={999}
             placeholder="Число сложности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("complexity", { value: e.target.value });
+              setValue("complexity", e.target.value );
             }}
           />
         </span>
@@ -897,7 +1033,7 @@ const ItemTypeSelect = ({
             max={999999}
             placeholder="Время изготовления"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("timeSpend", { value: e.target.value });
+              setValue("timeSpend", e.target.value );
             }}
           />
         </span>
@@ -909,7 +1045,7 @@ const ItemTypeSelect = ({
             max={999999}
             placeholder="Число доплаты"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("additionalPayment", { value: e.target.value });
+              setValue("additionalPayment", e.target.value );
             }}
           />
         </span>
@@ -918,43 +1054,55 @@ const ItemTypeSelect = ({
           <div>
             {components ? (
               components.map((component, index) => (
-                <div key={index}>
-                  <span className="field">
-                    <label>Компонент:</label>
+                <div key={index} className="border-1 p-2 align-items-center border-1 mb-2 justify-content-center relative">
+                  <div className="field mt-3">
+                    <label>Компонент {index + 1}:</label>
                     <Dropdown
-                        value={component.component}
-                        onChange={(e) =>
-                          handleComponentTypeChange(
-                            index,
-                            e.value
-                          )
-                        }
-                        optionLabel="label"
-                        options={componentsOptions}
-                        placeholder="Выберите компонент"
-                      />
-                  </span>
+                      filter
+                      value={FindItemById(componentsOptions, component.component?.id)}
+                      onChange={(e) =>
+                        handleComponentTypeChange(index, e.value)
+                      }
+                      optionLabel="label"
+                      options={componentsOptions}
+                      placeholder="Выберите компонент"
+                    />
+                  </div>
                   <span className="field">
                     <label>Количество:</label>
-                    <input
-                      type="number"
+                    <InputNumber
                       value={component.amount}
                       onChange={(e) =>
-                        handleAmountComponentChange(index, parseInt(e.target.value))
+                        handleAmountComponentChange(
+                          index,
+                          e.value
+                        )
                       }
                     />
                   </span>
-                  <button type="button" onClick={() => handleRemoveComponent(index)}>
-                    Убрать компонент
-                  </button>
+                  <Button
+                      className="max-w-max absolute top-0 right-0 h-2rem w-1"
+                      icon="pi pi-trash"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleRemoveComponent(index);
+                      }}
+                    >
+                    </Button>
                 </div>
               ))
             ) : (
               <div></div>
             )}
-            <button type="button" onClick={handleAddComponent}>
-              Добавить компонент
-            </button>
+            <Button
+                className="max-w-max"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddComponent();
+                }}
+              >
+                Добавить компонент
+              </Button>
           </div>
         </span>
       </div>
@@ -966,40 +1114,40 @@ const ItemTypeSelect = ({
       <div>
         <span className="field">
           <label>Где найти?</label>
-          {/* <Controller
+          <Controller
             name="whereToFind"
             control={control}
             render={({ field }) => (
               <>
-                <Dropdown
+                <InputText
+                  placeholder="Где найти?"
                   id={field.name}
                   value={field.value}
-                  showClear
-                  onChange={(e: DropdownChangeEvent) => {
-                    field.onChange(e.value);
+                  onChange={(e) => {
+                    field.onChange(e.target.value);
                   }}
-                  options={whereToFindOptions}
-                  placeholder="Выберите тип субстанции"
                 />
               </>
             )}
-          /> */}
-          <InputText
-            value={data.whereToFind}
-            min={0}
-            max={999}
-            placeholder="Где найти?"
-            {...register("amount")}
           />
         </span>
         <span className="field">
           <label>Количество</label>
-          <InputText
-            value={data.amount}
-            min={0}
-            max={999}
-            placeholder="Число, сколько получит при сборе"
-            {...register("amount")}
+          <Controller
+            name="amount"
+            control={control}
+            render={({ field }) => (
+              <>
+                <InputText
+                  placeholder="Число, которое получит при сборе"
+                  id={field.name}
+                  value={field.value}
+                  onChange={(e) => {
+                    field.onChange(e.target.value);
+                  }}
+                />
+              </>
+            )}
           />
         </span>
         <span className="field">
@@ -1010,43 +1158,45 @@ const ItemTypeSelect = ({
             max={9999}
             placeholder="Число сложности"
             onValueChange={(e: InputNumberValueChangeEvent) => {
-              register("complexity", { value: e.target.value });
-              setValue("complexity",  e.target.value)
+              setValue("complexity", e.target.value);
             }}
           />
         </span>
-        <div className="my-2">
+        {/* <div className="my-2">
           <Checkbox
             onChange={(e) => {
               setIsAlchemicalChecked(e.checked);
-              //register("isAlchemical", { value: e.checked });
-              setValue("isAlchemical",  e.checked)
+              setValue("isAlchemical", e.checked);
             }}
             checked={isAlchemicalChecked}
           />
           <label className="ml-2">Алхимический компонент?</label>
-        </div>
-        <span className="field">
-          <label>Тип субстанции</label>
-          <Controller
-            name="substanceType"
-            control={control}
-            render={({ field }) => (
-              <>
-                <Dropdown
-                  id={field.name}
-                  value={field.value}
-                  showClear
-                  onChange={(e: DropdownChangeEvent) => {
-                    field.onChange(e.value);
-                  }}
-                  options={substanceOptions}
-                  placeholder="Выберите тип субстанции"
-                />
-              </>
-            )}
-          />
-        </span>
+        </div> */}
+        {isAlchemicalChecked ? (
+          <span className="field">
+            <label>Тип субстанции</label>
+            <Controller
+              name="substanceType"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Dropdown
+                    id={field.name}
+                    value={field.value}
+                    showClear
+                    onChange={(e: DropdownChangeEvent) => {
+                      field.onChange(e.value);
+                    }}
+                    options={substanceOptions}
+                    placeholder="Выберите тип субстанции"
+                  />
+                </>
+              )}
+            />
+          </span>
+        ) : (
+          ""
+        )}
       </div>
     );
   };

@@ -11,6 +11,7 @@ import {
   SubstanceTypeKeyToString,
   WeaponAttackTypeLoad,
   WeaponAttackTypeToString,
+  WeaponEquipmentTypeLoad,
   WhereToFindTypeLoad,
 } from "./components/OptionsLoad";
 import { AvailabilityTypeLoad } from "./components/OptionsLoad";
@@ -33,4 +34,5 @@ export {
   ArmorTypeToString,
   ArmorEquipmentTypeToString,
   WeaponAttackTypeToString,
+  WeaponEquipmentTypeLoad,
 };

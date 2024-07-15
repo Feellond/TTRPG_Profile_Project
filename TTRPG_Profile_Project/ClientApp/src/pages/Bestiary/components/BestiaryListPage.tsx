@@ -1,8 +1,6 @@
-import { RaceLoad } from "entities/BestiaryFunc";
 import { Card } from "primereact/card";
-import { SelectItem } from "primereact/selectitem";
 import { Toast } from "primereact/toast";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useLocation} from "react-router-dom";
 import {
   CreatureFilterDTO,

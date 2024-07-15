@@ -26,7 +26,7 @@ namespace TTRPG_Project.BL.DTO.Filters
             if (!string.IsNullOrEmpty(Name))
             {
                 Expression<Func<Spell, bool>> filter = entity =>
-                    entity.Name.ToLower().Contains(Name.ToLower());
+                    entity.Name.Trim().ToLower().Contains(Name.Trim().ToLower());
 
                 whereExpression.Add(filter);
             }

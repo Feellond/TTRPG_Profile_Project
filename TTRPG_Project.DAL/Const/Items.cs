@@ -17,11 +17,11 @@ namespace TTRPG_Project.DAL.Const
 
     public enum ItemAvailabilityType
     {
-        None = 0,
         Everywhere = 1,
         Common = 2,
         Poor = 3,
         Rare = 4,
+        None = 5,
     }
 
     public enum ItemOriginType
@@ -61,17 +61,16 @@ namespace TTRPG_Project.DAL.Const
 
     public enum ArmorEquipmentType
     {
-        None = 0,
         Head = 1,
         Body = 2,
         Legs = 3,
         Shields = 4,
         Witcher = 5,
+        None = 6,
     }
 
     public enum WeaponEquipmentType
     {
-        None = 0,
         Swords = 1,
         SmallBlades = 2,
         Axes = 3,
@@ -82,6 +81,7 @@ namespace TTRPG_Project.DAL.Const
         Bows = 8,
         Crossbows = 9,
         Ammunition = 10,
+        None = 11,
     }
 
     public enum ItemType

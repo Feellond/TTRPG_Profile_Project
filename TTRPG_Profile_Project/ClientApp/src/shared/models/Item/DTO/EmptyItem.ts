@@ -4,7 +4,7 @@ const emptyItem: ItemDTO = {
   id: 0,
   source: null,
   name: null,
-  description: null,
+  description: "",
   availabilityType: null,
   weight: null,
   price: null,
@@ -21,7 +21,7 @@ const emptyItem: ItemDTO = {
   amountOfEnhancements: null,
   isAmmunition: null,
   //skillId: null,
-  type: null,
+  type: 1,
   complexity: null,
   timeSpend: null,
   additionalPayment: null,
@@ -35,7 +35,7 @@ const emptyItem: ItemDTO = {
   skill: null,
   equipmentType: null,
   itemOriginType: null,
-  imageFileName: null,
+  imageFileName: "",
 };
 
 export { emptyItem };

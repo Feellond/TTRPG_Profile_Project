@@ -1,6 +1,7 @@
 import { Card } from "primereact/card";
 import { Toast } from "primereact/toast";
 import React, { useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   emptyRace,
   IClass,
@@ -11,10 +12,15 @@ import {
 import { ListShow } from "widgets/List";
 
 const RacesPage = () => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);  
+  const name = params.get('name') || null;
+  
   const [raceList, setRaceList] = useState<IClass[]>([]);
   const [race, setRace] = useState<IRace>(emptyRace);
   const [filter, setFilter] = useState<RaceFilterDTO>({
-    name: "",
+    name: name,
+    onlyPlayable: null,
   } as RaceFilterDTO);
 
   const toast = useRef<Toast>(null);
@@ -35,6 +41,9 @@ const RacesPage = () => {
     if (filter) {
       if (filter.name) {
         params["name"] = filter.name;
+      }
+      if (filter.onlyPlayable) {
+        params["onlyPlayable"] = filter.onlyPlayable;
       }
     }
 

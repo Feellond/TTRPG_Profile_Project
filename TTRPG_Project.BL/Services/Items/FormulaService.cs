@@ -149,12 +149,12 @@ namespace TTRPG_Project.BL.Services.Items
 
         public virtual async Task<bool> DeleteAsync(int id)
         {
-            var formula = await _dbContext.Formulas.FindAsync(id);
+            var formula = await _dbContext.Formulas.Include(x => x.FormulaSubstanceList).Include(x => x.ItemBaseEffectList).Where(x => x.Id == id).FirstOrDefaultAsync();
             if (formula is null)
                 throw new CustomException("Формула не найдена");
 
-            var fsList = await _dbContext.FormulaComponentList.Where(x => x.FormulaId == formula.Id).ToListAsync();
-            _dbContext.FormulaComponentList.RemoveRange(fsList);
+            formula.FormulaSubstanceList = new List<FormulaSubstanceList>();
+            formula.ItemBaseEffectList = new List<ItemBaseEffectList>();
 
             _dbContext.Remove(formula);
             return await SaveAsync();

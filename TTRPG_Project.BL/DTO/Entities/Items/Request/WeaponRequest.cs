@@ -15,6 +15,7 @@ namespace TTRPG_Project.BL.DTO.Items.Request
         public bool IsAmmunition { get; set; }
         public int Type { get; set; }
         public int EquipmentType { get; set; }
+        public int ItemOriginType { get; set; }
         public int? SkillId { get; set; }
         public Skill? Skill { get; set; }
     }

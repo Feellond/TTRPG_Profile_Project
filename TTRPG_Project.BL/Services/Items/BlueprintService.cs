@@ -148,9 +148,12 @@ namespace TTRPG_Project.BL.Services.Items
 
         public virtual async Task<bool> DeleteAsync(int id)
         {
-            var blueprint = await _dbContext.Blueprints.FindAsync(id);
+            var blueprint = await _dbContext.Blueprints.Include(x => x.ItemBaseEffectList).Include(x => x.BlueprintComponentList).Where(x => x.Id == id).FirstOrDefaultAsync();
             if (blueprint is null)
                 throw new CustomException("Чертеж не найден");
+
+            blueprint.ItemBaseEffectList = new List<ItemBaseEffectList>();
+            blueprint.BlueprintComponentList = new List<BlueprintComponentList>();
 
             _dbContext.Remove(blueprint);
             return await SaveAsync();

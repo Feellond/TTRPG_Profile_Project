@@ -155,9 +155,11 @@ namespace TTRPG_Project.BL.Services.Items
 
         public virtual async Task<bool> DeleteAsync(int id)
         {
-            var component = await _dbContext.Components.FindAsync(id);
+            var component = await _dbContext.Components.Include(x => x.ItemBaseEffectList).Where(x => x.Id == id).FirstOrDefaultAsync();
             if (component is null)
                 throw new CustomException("Алхимический предмет не найден");
+
+            component.ItemBaseEffectList = new List<ItemBaseEffectList>();
 
             _dbContext.Remove(component);
             return await SaveAsync();

@@ -64,6 +64,7 @@ namespace TTRPG_Project.BL.Services.Items
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     Stiffness = item.Stiffness,
                     ItemOriginType = item.ItemOriginType,
+                    EquipmentType = item.EquipmentType,
                     Type = item.Type,
                     ImageFileName = item.ImageFileName,
                 }).ToListAsync();
@@ -210,6 +211,9 @@ namespace TTRPG_Project.BL.Services.Items
                     AmountOfEnhancements = item.AmountOfEnhancements,
                     IsAmmunition = item.IsAmmunition,
                     Skill = item.Skill,
+                    Type = item.Type,
+                    ItemOriginType = item.ItemOriginType,
+                    EquipmentType = item.EquipmentType,
                     ImageFileName = item.ImageFileName,
                 }).ToListAsync();
 

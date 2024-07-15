@@ -1,7 +1,10 @@
+import { AbilityTypeOptionsLoad, AbilityTypeToString } from "entities/BestiaryFunc";
 import { Button } from "primereact/button";
+import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
+import { SelectItem } from "primereact/selectitem";
 import React, { useEffect, useState } from "react";
 import {
   Control,
@@ -46,6 +49,8 @@ export const ShowAbilities = ({
   const [editIndex, setEditIndex] = useState(null);
   const [editValues, setEditValues] = useState<IAbilitiy>(null);
 
+  const[abilityOptions, setAbilityOptions] = useState<SelectItem[]>([]);
+
   const fetchData = () => {
     let getCreatureAbilities: ICreatureAbilitys[] =
       getValues("creatureAbilitys");
@@ -72,6 +77,10 @@ export const ShowAbilities = ({
     setValue("creatureAbilitys", { value: creatureAbilities });
   }, [creatureAbilities]);
 
+  useEffect(() => {
+    AbilityTypeOptionsLoad({setItems: setAbilityOptions})
+  }, [])
+
   return creatureAbilities?.length > 0 || isEditMode ? (
     <div className="creatureSkills">
       <p>Способности:</p>
@@ -79,9 +88,7 @@ export const ShowAbilities = ({
         <thead>
           <th>Наименование</th>
           <th className="w-2">Тип</th>
-          <th  style={{ maxWidth: "60%" }}>
-            Описание
-          </th>
+          <th style={{ maxWidth: "60%" }}>Описание</th>
         </thead>
         <tbody>
           {creatureAbilities.map((ability, index) => (
@@ -100,18 +107,15 @@ export const ShowAbilities = ({
               </td>
               <td>
                 {editIndex === index ? (
-                  <InputNumber
-                    type="number"
+                  <Dropdown
                     value={editValues.type}
-                    onChange={(e) =>
-                      setEditValues({
-                        ...editValues,
-                        type: e.value,
-                      })
-                    }
+                    options={abilityOptions}
+                    onChange={(e) => {
+                      setEditValues({ ...editValues, type: e.value });
+                    }}
                   />
                 ) : (
-                  ability.ability.type
+                  AbilityTypeToString(ability.ability.type)
                 )}
               </td>
               <td>
@@ -127,7 +131,9 @@ export const ShowAbilities = ({
                     }
                   />
                 ) : (
-                  <div className="text-justify">{ability.ability.description}</div>
+                  <div className="text-justify">
+                    {ability.ability.description}
+                  </div>
                 )}
               </td>
               {isEditMode ? (

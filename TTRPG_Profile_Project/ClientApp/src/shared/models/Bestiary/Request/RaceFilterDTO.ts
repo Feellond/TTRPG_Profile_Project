@@ -1,3 +1,4 @@
 export interface RaceFilterDTO {
-    name: string,
+    name: string | null,
+    onlyPlayable: boolean | null,
 }

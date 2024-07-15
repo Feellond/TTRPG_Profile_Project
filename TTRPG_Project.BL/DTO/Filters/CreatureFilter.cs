@@ -27,7 +27,7 @@ namespace TTRPG_Project.BL.DTO.Filters
             if (!string.IsNullOrEmpty(Name))
             {
                 Expression<Func<CreatureDTO, bool>> filter = entity =>
-                    entity.Name.ToLower().Contains(Name.ToLower());
+                    entity.Name.Trim().ToLower().Contains(Name.Trim().ToLower());
 
                 whereExpression.Add(filter);
             }
@@ -43,7 +43,7 @@ namespace TTRPG_Project.BL.DTO.Filters
             if (Race != null)
             {
                 Expression<Func<CreatureDTO, bool>> filter = entity =>
-                    entity.Race.Name.Equals(Race);
+                    entity.Race.Name.ToLower().Equals(Race.Trim().ToLower());
 
                 whereExpression.Add(filter);
             }

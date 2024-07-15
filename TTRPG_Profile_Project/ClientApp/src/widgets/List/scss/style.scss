@@ -12,13 +12,13 @@
     align-items: center;
 
     margin-bottom: auto;
-    
+
     div:nth-child(even) {
         margin-bottom: auto;
     }
 }
 
-.stat div:first-of-type{
+.stat div:first-of-type {
     font-weight: 600;
 }
 
@@ -32,13 +32,11 @@
 }
 
 .stats {
-    @media (max-width: 425px) { 
+    @media (max-width: 425px) {
         display: flex !important;
         flex-direction: column !important;
 
-        .stat {
-            
-        }
+        .stat {}
     }
 }
 
@@ -52,8 +50,14 @@
 .copied-indicator {
     opacity: 1;
     transition: opacity 1.5s ease-in-out;
-  }
-  
-  .copied-indicator-fade {
+}
+
+.copied-indicator-fade {
     opacity: 0;
-  }
+}
+
+.rangeSlider {
+    input {
+        width: 70px;
+    }
+}

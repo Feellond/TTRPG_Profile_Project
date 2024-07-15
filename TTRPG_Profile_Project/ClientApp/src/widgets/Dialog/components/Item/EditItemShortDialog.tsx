@@ -13,7 +13,7 @@ import {
 import { ItemTypeSelect } from "./ItemTypeSelect";
 import { ItemDTO } from "shared/models";
 import { AvailabilityTypeLoad, ItemEntityTypeLoad } from "entities/ItemFunc";
-import { SourceOptionsLoad } from "entities/GeneralFunc";
+import { FindItemById, SourceOptionsLoad } from "entities/GeneralFunc";
 
 interface EditItemShortDialogProps {
   data: ItemDTO;
@@ -73,6 +73,9 @@ const EditItemShortDialog = ({
     data.isAlchemical = dialogData.isAlchemical;
     data.substanceType = dialogData.substanceType;
     data.stiffness = dialogData.stiffness;
+    data.itemOriginType = dialogData.itemOriginType;
+    data.equipmentType = dialogData.equipmentType;
+    data.imageFileName = dialogData.imageFileName;
     console.log(data);
     onSave();
   };
@@ -86,6 +89,8 @@ const EditItemShortDialog = ({
     setValue("itemBaseEffectList", data.itemBaseEffectList);
     //setValue("creatureRewardList", data.creatureRewardList);
     setValue("source", data.source);
+    setValue("itemOriginType", data.itemOriginType);
+    setValue("equipmentType", data.equipmentType);
     setValue("itemType", data.itemType);
     setValue("accuracy", data.accuracy);
     setValue("damage", data.damage);
@@ -107,6 +112,7 @@ const EditItemShortDialog = ({
     setValue("isAlchemical", data.isAlchemical);
     setValue("substanceType", data.substanceType);
     setValue("stiffness", data.stiffness);
+    setValue("imageFileName", data.imageFileName);
   };
 
   const {
@@ -181,7 +187,7 @@ const EditItemShortDialog = ({
               <label>Наименование</label>
             </span>
           </div>
-          <div className="field flex flex-column mr-2">
+          <div className="field flex flex-column mr-2" style={{width: "172px"}}>
             <span className="p-float-label">
               <Controller
                 name="availabilityType"
@@ -192,6 +198,7 @@ const EditItemShortDialog = ({
                       id={field.name}
                       value={field.value}
                       onChange={(e: DropdownChangeEvent) => {
+                        console.log(e.value)
                         field.onChange(e.value);
                       }}
                       optionLabel="label"
@@ -275,7 +282,7 @@ const EditItemShortDialog = ({
               <label>Описание</label>
             </span>
           </div>
-          <div className="field flex flex-column mr-2">
+          <div className="field flex flex-column mr-2" style={{width: "172px"}}>
             <span className="p-float-label">
               <Controller
                 name="source"
@@ -284,7 +291,7 @@ const EditItemShortDialog = ({
                   <>
                     <Dropdown
                       id={field.name}
-                      value={field.value}
+                      value={FindItemById(sourceOptions, field.value?.id)}
                       onChange={(e: DropdownChangeEvent) => {
                         field.onChange(e.value);
                       }}
@@ -297,7 +304,7 @@ const EditItemShortDialog = ({
               <label>Источник</label>
             </span>
           </div>
-          <div className="field flex flex-column mr-2">
+          <div className="field flex flex-column mr-2" style={{width: "172px"}}>
             <span className="p-float-label">
               <Controller
                 name="itemType"

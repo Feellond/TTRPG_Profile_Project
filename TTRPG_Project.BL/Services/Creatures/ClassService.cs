@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using AutoMapper.Features;
 using Azure;
 using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 using TTRPG_Project.BL.DTO.Creatures.Request;
 using TTRPG_Project.BL.DTO.Entities.Creatures.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
+using TTRPG_Project.BL.DTO.Filters;
 using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Additional;
@@ -19,7 +22,7 @@ namespace TTRPG_Project.BL.Services.Creatures
     {
         public ClassService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<ClassResponce> GetAllAsync()
+        public async Task<ClassResponce> GetAllAsync(ClassFilter filter)
         {
             var classes = await _dbContext.Classes.AsNoTracking()
                 .Include(s => s.Source)
@@ -103,6 +106,15 @@ namespace TTRPG_Project.BL.Services.Creatures
                 clazz.SkillsTree.SecondRightSkill = await _dbContext.Skills.Where(x => x.Id == clazz.SkillsTree.SecondRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
                 clazz.SkillsTree.ThirdRightSkill = await _dbContext.Skills.Where(x => x.Id == clazz.SkillsTree.ThirdRightSkillId).Include(x => x.Stat).FirstOrDefaultAsync();
             }
+
+            foreach (var expression in filter.whereExpression)
+            {
+                var compiledExpression = expression.Compile();
+                classes = classes.Where(compiledExpression).ToList();
+            }
+
+            var count = classes.Count();
+            var allCreatures = classes.OrderBy(x => x.Name).Skip(filter.First).Take(filter.PageSize).ToList();
 
             ClassResponce responce = new()
             {

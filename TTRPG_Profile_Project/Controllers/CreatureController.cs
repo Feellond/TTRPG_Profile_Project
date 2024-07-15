@@ -168,9 +168,10 @@ namespace TTRPG_Project.Web.Controllers
 
         #region *Class* Класс
         [HttpGet("class")]
-        public async Task<IActionResult> GetClasses()
+        public async Task<IActionResult> GetClasses([FromQuery] ClassFilter filter)
         {
-            var result = await _classService.GetAllAsync();
+            filter.InitFilter();
+            var result = await _classService.GetAllAsync(filter);
             return Ok(result);
         }
 
@@ -292,9 +293,10 @@ namespace TTRPG_Project.Web.Controllers
 
         #region *Race* Раса существа, монстра
         [HttpGet("race")]
-        public async Task<IActionResult> GetRaces()
+        public async Task<IActionResult> GetRaces([FromQuery] RaceFilter filter)
         {
-            var result = await _raceService.GetAllAsync();
+            filter.InitFilter();
+            var result = await _raceService.GetAllAsync(filter);
             return Ok(result);
         }
 

@@ -5,6 +5,7 @@ import {
   ArmorType,
   ItemAvailabilityType,
   ItemOriginType,
+  WeaponEquipmentType,
   WhereToFindEnum,
 } from "shared/enums/ItemEnums";
 import { ItemEntityType } from "shared/enums/ItemEnums";
@@ -129,7 +130,7 @@ const ItemOriginTypeToString = (enumKey: string) => {
     case "Human":
       return "Люди";
     case "ElderFolk":
-      return "Старшый народ";
+      return "Старший народ";
     case "WitcherGear":
       return "Ведьмаки";
     case "Relic":
@@ -174,6 +175,8 @@ const ArmorEquipmentTypeLoad = ({ setItems }: OptionsParamsLoad) => {
 
 const ArmorEquipmentTypeToString = (enumKey: string) => {
   switch (enumKey) {
+    case "None":
+      return "Нет типа";
     case "Head":
       return "Голова";
     case "Body":
@@ -232,9 +235,49 @@ const WeaponAttackTypeToString = (enumKey: string) => {
   }
 }
 
+const WeaponEquipmentTypeLoad = ({ setItems }: OptionsParamsLoad) => {
+  const itemTypeKeys = Object.keys(WeaponEquipmentType).filter((v) =>
+    isNaN(Number(v))
+  );
+  const ITOptions = itemTypeKeys.map((key) => ({
+    label: WeaponEquipmentTypeToString(WeaponEquipmentType[key]),
+    value: WeaponEquipmentType[key],
+  }));
+  setItems(ITOptions);
+};
+
+const WeaponEquipmentTypeToString = (key: number) => {
+  switch (key) {
+    case 1:
+      return "Мечи";
+    case 2:
+      return "Кинжалы";
+    case 3:
+      return "Топоры";
+    case 4:
+      return "Дробящее";
+    case 5:
+      return "Копья";
+    case 6:
+      return "Посохи";
+    case 7:
+      return "Метательное";
+    case 8:
+      return "Луки";
+    case 9:
+      return "Арбалеты";
+    case 10:
+      return "Боеприпас";
+    case 11:
+      return "Без типа";
+    default:
+      return "";
+  }
+};
+
 const ComponentsTypeLoad = async ({ setItems }: OptionsParamsLoad) => {
   try {
-    let responce = await itemService.getEntitys({itemType: 8})
+    let responce = await itemService.getEntitys({itemType: 9})
     if (responce && responce.data) {
 
       const options = responce.data.entitys.map((data, index) => ({
@@ -266,4 +309,5 @@ export {
   ArmorTypeToString,
   ArmorEquipmentTypeToString,
   WeaponAttackTypeToString,
+  WeaponEquipmentTypeLoad,
 };

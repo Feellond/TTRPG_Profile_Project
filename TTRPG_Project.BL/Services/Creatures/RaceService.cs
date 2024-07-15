@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using TTRPG_Project.BL.DTO.Creatures.Request;
 using TTRPG_Project.BL.DTO.Entities.Creatures.Responce;
 using TTRPG_Project.BL.DTO.Exceptions;
+using TTRPG_Project.BL.DTO.Filters;
 using TTRPG_Project.BL.Services.Base;
 using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Additional;
@@ -19,12 +20,21 @@ namespace TTRPG_Project.BL.Services.Creatures
     {
         public RaceService(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        public async Task<RaceResponce> GetAllAsync()
+        public async Task<RaceResponce> GetAllAsync(RaceFilter filter)
         {
             var races = await _dbContext.Races.AsNoTracking()
                 .Include(s => s.Source)
                 .OrderBy(x => x.Name)
                 .ToListAsync();
+
+            foreach (var expression in filter.whereExpression)
+            {
+                var compiledExpression = expression.Compile();
+                races = races.Where(compiledExpression).ToList();
+            }
+
+            var count = races.Count();
+            var allCreatures = races.OrderBy(x => x.Name).Skip(filter.First).Take(filter.PageSize).ToList();
 
             RaceResponce responce = new()
             {

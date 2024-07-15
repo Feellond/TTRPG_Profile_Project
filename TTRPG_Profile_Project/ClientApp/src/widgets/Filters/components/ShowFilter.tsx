@@ -8,11 +8,13 @@ import {
 } from "shared/models";
 import { ItemFilter } from "./ItemFilter";
 import { BestiaryFilter, SpellFilter } from "..";
+import { RaceFilter } from "./RaceFilter";
+import { ClassFilter } from "./ClassFilter";
 
 type Props = {
   filter: ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO | RaceFilterDTO | ClassFilterDTO;
   setFilter: React.Dispatch<
-    React.SetStateAction<ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO>
+    React.SetStateAction<ItemFilterDTO | CreatureFilterDTO | SpellFilterDTO | RaceFilterDTO | ClassFilterDTO>
   >;
 };
 
@@ -39,6 +41,24 @@ const ShowFilter: FC<Props> = ({ filter, setFilter }) => {
       <div>
         <BestiaryFilter
           filter={filter as CreatureFilterDTO}
+          setFilter={setFilter}
+        />
+      </div>
+    );
+  } else if ("onlyPlayable" in filter) {
+    content = (
+      <div>
+        <RaceFilter
+          filter={filter as RaceFilterDTO}
+          setFilter={setFilter}
+        />
+      </div>
+    );
+  } else if ("classSkill" in filter) {
+    content = (
+      <div>
+        <ClassFilter
+          filter={filter as ClassFilterDTO}
           setFilter={setFilter}
         />
       </div>

@@ -1,14 +1,20 @@
 import { Card } from "primereact/card";
 import { Toast } from "primereact/toast";
 import React, { useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ClassFilterDTO, emptyClass, IClass, LazyState } from "shared/models";
 import { ListShow } from "widgets/List";
 
 const ClassesPage = () => {
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);  
+  const name = params.get('name') || null;
+
   const [classesList, setClassesList] = useState<IClass[]>([]);
   const [singleClass, setSingleClass] = useState<IClass>(emptyClass);
   const [filter, setFilter] = useState<ClassFilterDTO>({
-    name: "",
+    name: name,
+    classSkill: "",
   } as ClassFilterDTO);
 
   const toast = useRef<Toast>(null);

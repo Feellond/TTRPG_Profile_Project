@@ -13,6 +13,7 @@ interface ItemFilterDTO {
     itemOriginType: number | null,
     stealthType: number | null,
     whereToFind: string | null,
+    priceRange: number[] | null,
 }
 
 export  {ItemFilterDTO}

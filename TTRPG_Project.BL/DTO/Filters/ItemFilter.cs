@@ -4,6 +4,7 @@ using LinqKit;
 using TTRPG_Project.DAL.Const;
 using TTRPG_Project.BL.DTO.Entities.Items;
 using System.Linq;
+using Microsoft.Identity.Client;
 
 namespace TTRPG_Project.BL.DTO.Filters
 {
@@ -18,6 +19,8 @@ namespace TTRPG_Project.BL.DTO.Filters
 
         public string? Name { get; set; }
         public List<int>? ItemType { get; set; }
+        public int? PriceMin { get; set; }
+        public int? PriceMax { get; set; }
         public int? SubstanceType { get; set; }
         public bool? ComponentIsAlchemical { get; set; }
         public int? ItemAvailabilityType { get; set; }
@@ -29,7 +32,7 @@ namespace TTRPG_Project.BL.DTO.Filters
             if (!string.IsNullOrEmpty(Name))
             {
                 Expression<Func<ItemBaseInfo, bool>> filter = entity =>
-                    entity.Name.ToLower().Contains(Name.ToLower());
+                    entity.Name.Trim().ToLower().Contains(Name.Trim().ToLower());
 
                 whereExpression.Add(filter);
             }
@@ -64,7 +67,7 @@ namespace TTRPG_Project.BL.DTO.Filters
                 }
             }
 
-            if (ItemAvailabilityType != null) 
+            if (ItemAvailabilityType != null)
             {
                 Expression<Func<ItemBaseInfo, bool>> filter = entity =>
                     entity.AvailabilityType.Equals(ItemAvailabilityType);
@@ -75,7 +78,15 @@ namespace TTRPG_Project.BL.DTO.Filters
             if (!string.IsNullOrEmpty(WhereToFind))
             {
                 Expression<Func<ItemBaseInfo, bool>> filter = entity =>
-                    entity.WhereToFind.ToLower().Contains(WhereToFind.ToLower());
+                    entity.WhereToFind.Trim().ToLower().Contains(WhereToFind.Trim().ToLower());
+
+                whereExpression.Add(filter);
+            }
+
+            if (PriceMin != null && PriceMax != null)
+            {
+                Expression<Func<ItemBaseInfo, bool>> filter = entity =>
+                    entity.Price >= PriceMin && entity.Price <= PriceMax;
 
                 whereExpression.Add(filter);
             }

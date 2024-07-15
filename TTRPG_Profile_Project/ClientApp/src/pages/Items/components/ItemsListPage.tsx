@@ -73,6 +73,10 @@ const ItemsListPage = () => {
       if (filter.whereToFind) {
         params["whereToFind"] = filter.whereToFind;
       }
+      if (filter.priceRange) {
+        params["priceMin"] = filter.priceRange[0]
+        params["priceMax"] = filter.priceRange[1]
+      }
     }
     
     console.log(params)

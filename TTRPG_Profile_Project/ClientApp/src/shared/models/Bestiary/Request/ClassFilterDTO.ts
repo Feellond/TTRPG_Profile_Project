@@ -1,3 +1,4 @@
 export interface ClassFilterDTO {
-    name: string,
+    name: string | null,
+    classSkill: string | null,
 }

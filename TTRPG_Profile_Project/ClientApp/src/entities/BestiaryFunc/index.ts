@@ -3,7 +3,7 @@ import {
   AttackTypeToShortString,
   AttackTypeToString,
 } from "./components/DrawCreature/DrawCreatureFunctions";
-import { ComplexityLoad, RaceLoad } from "./components/OptionsLoad";
+import { AbilityTypeOptionsLoad, AbilityTypeToString, ComplexityLoad, RaceLoad } from "./components/OptionsLoad";
 
 export {
   ComplexityLoad,
@@ -11,4 +11,6 @@ export {
   RaceLoad,
   AttackTypeToShortString,
   AttackTypeToString,
+  AbilityTypeOptionsLoad,
+  AbilityTypeToString,
 };

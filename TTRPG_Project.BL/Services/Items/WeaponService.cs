@@ -37,6 +37,7 @@ namespace TTRPG_Project.BL.Services.Items
                     ItemType = (int)ItemEntityType.Tool,
                     StealthType = item.StealthType,
                     Type = item.Type,
+                    ItemOriginType = item.ItemOriginType,
                     EquipmentType = item.EquipmentType,
                     Accuracy = item.Accuracy,
                     Damage = item.Damage,
@@ -78,6 +79,7 @@ namespace TTRPG_Project.BL.Services.Items
                     Price = item.Price,
                     ItemBaseEffectList = item.ItemBaseEffectList,
                     ItemType = (int)ItemEntityType.Tool,
+                    ItemOriginType = item.ItemOriginType,
                     StealthType = item.StealthType,
                     Type = item.Type,
                     EquipmentType = item.EquipmentType,
@@ -125,6 +127,7 @@ namespace TTRPG_Project.BL.Services.Items
                 Accuracy = request.Accuracy,
                 Damage = request.Damage,
                 Reliability = request.Reliability,
+                ItemOriginType = request.ItemOriginType,
                 Grip = request.Grip,
                 Distance = request.Distance,
                 AmountOfEnhancements = request.AmountOfEnhancements,
@@ -152,6 +155,7 @@ namespace TTRPG_Project.BL.Services.Items
             weapon.AvailabilityType = request.AvailabilityType;
             weapon.StealthType = request.StealthType;
             weapon.Type = request.Type;
+            weapon.ItemOriginType = request.ItemOriginType;
             weapon.EquipmentType = request.EquipmentType;
             weapon.Accuracy = request.Accuracy;
             weapon.Damage = request.Damage;
@@ -182,9 +186,11 @@ namespace TTRPG_Project.BL.Services.Items
 
         public virtual async Task<bool> DeleteAsync(int id)
         {
-            var weapon = await _dbContext.Weapons.FindAsync(id);
+            var weapon = await _dbContext.Weapons.Include(x => x.ItemBaseEffectList).Where(x => x.Id == id).FirstOrDefaultAsync();
             if (weapon is null)
                 throw new CustomException("Оружие не не найдено!");
+
+            weapon.ItemBaseEffectList = new List<ItemBaseEffectList>();
 
             _dbContext.Remove(weapon);
             return await SaveAsync();

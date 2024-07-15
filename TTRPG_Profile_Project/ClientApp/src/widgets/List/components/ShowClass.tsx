@@ -60,12 +60,12 @@ export const ShowClass = ({ data }: IShowClass) => {
             <span><strong>Дерево навыков:</strong></span>
             <div>
               <div
-                className="text-center mb-2 cursor-pointer"
+                className="text-center mb-2 cursor-pointer text-lg"
                 onClick={(e) => skillClick(data.skillsTree.mainSkill, e)}
               >
                 {data.skillsTree.mainSkill.name}
               </div>
-              <div className="flex text-center flex-wrap justify-content-center line-height-3">
+              <div className="flex text-center flex-wrap justify-content-center line-height-4 text-lg">
                 <div className="flex flex-column">
                   <span className="text-center font-semibold underline">
                     {data.skillsTree.leftBranchName}

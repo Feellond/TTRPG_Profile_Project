@@ -133,7 +133,7 @@ const EditBestiaryDialog = ({
               <label>Наименование</label>
             </span>
           </div>
-          <div className="field flex flex-column mr-3">
+          <div className="field flex flex-column mr-3" style={{width: "172px"}}>
             <span className="p-float-label">
               <Controller
                 name="complexity"
@@ -155,7 +155,7 @@ const EditBestiaryDialog = ({
               <label>Сложность</label>
             </span>
           </div>
-          <div className="field flex flex-column mr-3">
+          <div className="field flex flex-column mr-3" style={{width: "172px"}}>
             <span className="p-float-label">
               <Controller
                 name="race"
@@ -177,7 +177,7 @@ const EditBestiaryDialog = ({
               <label>Раса</label>
             </span>
           </div>
-          <div className="field flex flex-column">
+          <div className="field flex flex-column" style={{width: "172px"}}>
             <span className="p-float-label">
               <Controller
                 name="source"
