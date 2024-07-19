@@ -19,6 +19,7 @@ interface EditItemShortDialogProps {
   data: ItemDTO;
   visible: boolean;
   header: string;
+  isCreate: boolean;
   onHide: () => void;
   onSave: () => void;
 }
@@ -27,6 +28,7 @@ const EditItemShortDialog = ({
   data,
   visible,
   header,
+  isCreate,
   onHide,
   onSave,
 }: EditItemShortDialogProps) => {
@@ -312,6 +314,7 @@ const EditItemShortDialog = ({
                 render={({ field }) => (
                   <>
                     <Dropdown
+                      disabled={!isCreate}
                       id={field.name}
                       value={field.value}
                       onChange={(e: DropdownChangeEvent) => {

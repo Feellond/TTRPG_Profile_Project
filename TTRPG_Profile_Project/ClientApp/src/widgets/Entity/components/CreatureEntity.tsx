@@ -268,13 +268,14 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
   return (
     <div className="w-full" style={{ marginTop: "-20px" }}>
       <div className="flex">
-        {store.isAuth ? ("") : ("")}
-        <Button
-          label="Изменить"
-          onClick={() => setIsEditMode(!isEditMode)}
-          className="p-button-text p-button-site"
-          visible={!isEditMode}
-        />
+        {store.isAuth && (
+          <Button
+            label="Изменить"
+            onClick={() => setIsEditMode(!isEditMode)}
+            className="p-button-text p-button-site"
+            visible={!isEditMode}
+          />
+        )}
         {footerContent}
       </div>
       <div className="card block bg-bluegray-50 mb-4 text-0">
@@ -631,7 +632,7 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
                         id={field.name}
                         value={field.value}
                         onLoad={() => {
-                          console.log('start: ', field.value);
+                          console.log("start: ", field.value);
                         }}
                         onTextChange={(e: EditorTextChangeEvent) => {
                           field.onChange(e.htmlValue);

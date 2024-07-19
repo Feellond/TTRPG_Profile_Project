@@ -60,7 +60,7 @@ const SpellFilter = ({ filter, setFilter }: SpellFilterProps) => {
       <div className="flex flex-column justify-content-center mr-3">
         <ListInput
           id="spellType"
-          placeholder="Сложность"
+          placeholder="Тип заклинания"
           value={localFilter.spellType}
           data={spellTypeOptions}
           onChange={(e) =>

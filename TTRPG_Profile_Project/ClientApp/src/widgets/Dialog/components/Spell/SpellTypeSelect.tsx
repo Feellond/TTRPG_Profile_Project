@@ -1,5 +1,10 @@
 import { SkillOptionsLoad } from "entities/BestiaryOptions";
-import { SpellLevelOptionsLoad, SpellSourceTypeOptionsLoad } from "entities/SpellFunc";
+import { FindItemById } from "entities/GeneralFunc";
+import {
+  SpellLevelOptionsLoad,
+  SpellSourceTypeOptionsLoad,
+} from "entities/SpellFunc";
+import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import { Dropdown } from "primereact/dropdown";
 import { InputNumber } from "primereact/inputnumber";
@@ -46,11 +51,11 @@ export const SpellTypeSelect = ({
   const [spellLevelOptions, setSpellLevelOptions] = useState<SelectItem[]>([]);
 
   const [isConcentrationChecked, setIsConcentrationChecked] =
-    useState<boolean>(false);
+    useState<boolean>(data.isConcentration);
   const [isPriestSpellChecked, setIsPriestSpellChecked] =
-    useState<boolean>(false);
+    useState<boolean>(data.isPriestSpell);
   const [isDruidSpellChecked, setIsDruidSpellChecked] =
-    useState<boolean>(false);
+    useState<boolean>(data.isDruidSpell);
 
   const [skillOptions, setSkillOptions] = useState<SelectItem[]>([]);
   const [componentOptions, setComponentOptions] = useState<SelectItem[]>([]);
@@ -120,10 +125,14 @@ export const SpellTypeSelect = ({
     isConcentrationChecked,
     isPriestSpellChecked,
     isDruidSpellChecked,
+
+    skillOptions,
+    spellSourceOptions,
+    spellLevelOptions,
   ]);
 
   useEffect(() => {
-    register("spellSkillProtectionList", { value: spellSkills });
+    setValue("spellSkillProtectionList", spellSkills);
   }, [spellSkills]);
 
   const handleAddSkill = () => {
@@ -155,8 +164,8 @@ export const SpellTypeSelect = ({
   const SpellContent = (spellType: number) => {
     return (
       <div>
-        <span className="field">
-          <label>Элемент заклинания</label>
+        <div className="mb-1">
+          <label className="mb-1">Элемент заклинания</label>
           <Controller
             name="sourceType"
             control={control}
@@ -175,9 +184,9 @@ export const SpellTypeSelect = ({
               </>
             )}
           />
-        </span>
-        <span className="field">
-          <label>Уровень заклинания</label>
+        </div>
+        <div className="mb-1">
+          <label className="mb-1">Уровень заклинания</label>
           <Controller
             name="spellLevel"
             control={control}
@@ -196,25 +205,25 @@ export const SpellTypeSelect = ({
               </>
             )}
           />
-        </span>
-        <span className="field">
-          <label>Дистанция</label>
+        </div>
+        <div className="mb-1">
+          <label className="mb-1">Дистанция</label>
           <InputNumber
             value={data.distance}
             min={0}
             max={999}
             placeholder="Дист"
             onValueChange={(e) => {
-              register("distance", { value: e.target.value });
+              setValue("distance", e.target.value);
             }}
           />
-        </span>
+        </div>
         {spellType === SpellType.Invocation ? (
-          <div className="field flex align-items-center">
+          <div className="mb-1 flex align-items-center">
             <Checkbox
               onChange={(e) => {
-                setIsConcentrationChecked(e.checked);
-                register("isDruidSpell", { value: e.checked });
+                setIsDruidSpellChecked(e.checked);
+                setValue("isDruidSpell", e.checked);
                 //setValue("isAmmunition", e.checked);
               }}
               checked={isDruidSpellChecked}
@@ -224,11 +233,11 @@ export const SpellTypeSelect = ({
         ) : (
           ""
         )}
-        <div className="field flex align-items-center">
+        <div className="mb-1 flex align-items-center">
           <Checkbox
             onChange={(e) => {
               setIsConcentrationChecked(e.checked);
-              register("isConcentration", { value: e.checked });
+              setValue("isConcentration", e.checked);
               //setValue("isAmmunition", e.checked);
             }}
             checked={isConcentrationChecked}
@@ -236,27 +245,27 @@ export const SpellTypeSelect = ({
           <label className="ml-2">Активное?</label>
         </div>
         {isConcentrationChecked ? (
-          <span className="field">
-            <label>Трата ВЫН в раунд</label>
+          <span className="mb-1">
+            <label className="mb-1">Трата Выносливости в раунд</label>
             <InputNumber
               value={data.concentrationEnduranceCost}
               min={0}
               max={999}
               placeholder="ВЫН"
               onValueChange={(e) => {
-                register("concentrationEnduranceCost", {
-                  value: e.target.value,
-                });
+                setValue("concentrationEnduranceCost", e.target.value);
               }}
             />
           </span>
         ) : (
-          <span className="field">
-            <label>Длительность</label>
+          <span className="mb-1">
+            <label className="mb-1">Длительность</label>
             <InputText
               placeholder="прим. 1к10 раундов"
               value={data.duration}
-              {...register("duration")}
+              onChange={(e) => {
+                setValue("duration", e.target.value);
+              }}
             />
           </span>
         )}
@@ -265,18 +274,22 @@ export const SpellTypeSelect = ({
           <div>
             {spellSkills ? (
               spellSkills.map((spellSkill, index) => (
-                <div key={index}>
-                  <span className="field">
-                    <label>Навык:</label>
+                <div
+                  key={index}
+                  className="border-1 p-2 align-items-center border-1 mb-2 justify-content-center relative"
+                >
+                  <div className="field mt-3">
+                    <label>Навык {index + 1}:</label>
                     <Dropdown
-                      value={spellSkill.skill}
+                      value={FindItemById(skillOptions, spellSkill.skill?.id)}
                       onChange={(e) => handleSkillChange(index, e.target.value)}
                       optionLabel="label"
                       options={skillOptions}
                       placeholder="Выберите навык"
+                      filter
                     />
-                  </span>
-                  <span className="field">
+                  </div>
+                  <div className="field">
                     <label>Дополнительное описание:</label>
                     <InputTextarea
                       value={spellSkill.moreInfo}
@@ -285,21 +298,29 @@ export const SpellTypeSelect = ({
                       }
                       rows={1}
                     />
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveSkill(index)}
-                  >
-                    Убрать навык
-                  </button>
+                  </div>
+                  <Button
+                    className="max-w-max absolute top-0 right-0 h-2rem w-1"
+                    icon="pi pi-trash"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleRemoveSkill(index);
+                    }}
+                  ></Button>
                 </div>
               ))
             ) : (
               <div></div>
             )}
-            <button type="button" onClick={handleAddSkill}>
+            <Button
+              className="max-w-max"
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddSkill();
+              }}
+            >
               Добавить навык
-            </button>
+            </Button>
           </div>
         </span>
       </div>
@@ -307,7 +328,7 @@ export const SpellTypeSelect = ({
   };
 
   useEffect(() => {
-    register("spellComponentList", { value: spellComponents });
+    setValue("spellComponentList", spellComponents);
   }, [spellComponents]);
 
   const handleAddComponent = () => {
@@ -347,19 +368,19 @@ export const SpellTypeSelect = ({
             max={999}
             placeholder="Время"
             onValueChange={(e) => {
-              register("preparationTime", { value: e.target.value });
+              setValue("preparationTime", e.target.value);
             }}
           />
         </span>
         <span>
-          <label>СЛ проверки</label>
+          <label>Сложность проверки</label>
           <InputNumber
             value={data.checkDC}
             min={0}
             max={999}
             placeholder="СЛ"
             onValueChange={(e) => {
-              register("checkDC", { value: e.target.value });
+              setValue("checkDC", e.target.value);
             }}
           />
         </span>
@@ -368,7 +389,9 @@ export const SpellTypeSelect = ({
           <InputText
             placeholder="прим. 1к10 раундов"
             value={data.duration}
-            {...register("duration")}
+            onChange={(e) => {
+              setValue("duration", e.target.value);
+            }}
           />
         </span>
         <span>
@@ -376,46 +399,54 @@ export const SpellTypeSelect = ({
           <div>
             {spellComponents ? (
               spellComponents.map((component, index) => (
-                <div key={index}>
-                  <span>
+                <div
+                  key={index}
+                  className="border-1 p-2 align-items-center border-1 mb-2 justify-content-center relative"
+                >
+                  <div className="field mt-3">
                     <label>Компонент:</label>
                     <Dropdown
-                      value={component.component}
+                      value={FindItemById(componentOptions, component.component?.id)}
                       onChange={(e) =>
                         handleComponentChange(index, e.target.value)
                       }
                       optionLabel="label"
                       options={componentOptions}
-                      placeholder="Выберите тип субстанции"
+                      placeholder="Выберите компонент"
+                      filter
                     />
-                  </span>
-                  <span>
+                  </div>
+                  <div className="field">
                     <label>Количество:</label>
-                    <input
-                      type="number"
+                    <InputNumber
                       value={component.amount}
                       onChange={(e) =>
-                        handleAmountComponentChange(
-                          index,
-                          parseInt(e.target.value)
-                        )
+                        handleAmountComponentChange(index, e.value)
                       }
                     />
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveComponent(index)}
-                  >
-                    Убрать компонент
-                  </button>
+                  </div>
+                  <Button
+                    className="max-w-max absolute top-0 right-0 h-2rem w-1"
+                    icon="pi pi-trash"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleRemoveComponent(index);
+                    }}
+                  ></Button>
                 </div>
               ))
             ) : (
               <div></div>
             )}
-            <button type="button" onClick={handleAddComponent}>
+            <Button
+              className="max-w-max"
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddComponent();
+              }}
+            >
               Добавить компонент
-            </button>
+            </Button>
           </div>
         </span>
       </div>
@@ -429,7 +460,7 @@ export const SpellTypeSelect = ({
           <InputTextarea
             value={data.withdrawalCondition}
             onChange={(e) => {
-              register("withdrawalCondition", { value: e.target.value });
+              setValue("withdrawalCondition", e.target.value);
             }}
             rows={5}
             cols={60}

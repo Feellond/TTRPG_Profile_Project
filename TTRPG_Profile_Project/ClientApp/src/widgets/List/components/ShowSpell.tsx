@@ -59,7 +59,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
           )}
         </span>
       </div>
-      <ul className="p-2 params">
+      <ul className="p-2 params" style={{width: "fit-content"}}>
         <li>
           <i>{drawSpellType(data.spellType)}, </i>
           <i>{drawSpellLevel(data.spellLevel)}, </i>
@@ -126,7 +126,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
         {data.spellType === SpellType.Ritual ? (
           <li>
             <div>
-              <span><strong>СЛ проверки:</strong> {data.checkDC}</span>
+              <span><strong>Сложность проверки:</strong> {data.checkDC}</span>
             </div>
           </li>
         ) : (
@@ -134,17 +134,16 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
         )}
         {data.spellType === SpellType.Ritual ? (
           <li>
-            <div>
-              <span>
+              <div>
                 <strong>Ингредиенты:</strong>{" "}
+                <div className="flex flex-column line-height-3">
                 {data.spellComponentList.map((component, index) => (
-                  <span>
-                    {index !== 0 ? ", " : ""}
+                  <a key={index} href={"listitem?name=" + component.component.name} target="_blank" rel="noreferrer">
                     {component.component.name} (x{component.amount})
-                  </span>
+                  </a>
                 ))}
-              </span>
-            </div>
+                </div>
+              </div>
           </li>
         ) : (
           <div></div>
@@ -158,7 +157,7 @@ const ShowSpell = ({ data }: IShowSpellProps) => {
                 {data.spellSkillProtectionList.length > 0 ? (
                   <span>
                     {data.spellSkillProtectionList.map((skill, index) => (
-                      <span>
+                      <span key={index}>
                         {index !== 0 ? ", " : ""}
                         {skill.skill?.name}
                         {skill.moreInfo}

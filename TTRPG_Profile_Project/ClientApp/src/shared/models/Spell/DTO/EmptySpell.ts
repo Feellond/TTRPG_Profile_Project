@@ -3,7 +3,7 @@ import { ISpell } from "./SpellDTO";
 const emptySpell: ISpell = {
     id: 0,
     name: null,
-    description: null,
+    description: "",
     source: null,
     enduranceCost: 0,
     distance: 0,
@@ -23,7 +23,7 @@ const emptySpell: ISpell = {
     sourceTypeDescription: "",
     isPriestSpell: false,
     isDruidSpell: false,
-    imageFileName: null,
+    imageFileName: "",
 };
 
 export {emptySpell}

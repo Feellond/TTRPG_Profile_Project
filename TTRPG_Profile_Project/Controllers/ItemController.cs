@@ -14,8 +14,7 @@ using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.Web.Controllers
 {
-    //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
-    [AllowAnonymous]
+    [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
     [Route("api/items")]
     //[Produces("application/json")]

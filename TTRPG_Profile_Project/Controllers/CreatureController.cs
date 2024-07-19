@@ -12,8 +12,7 @@ using TTRPG_Project.BL.DTO.Filters;
 
 namespace TTRPG_Project.Web.Controllers
 {
-    //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
-    [AllowAnonymous]
+    [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
     [Route("api/creatures")]
     //[Produces("application/json")]
@@ -62,6 +61,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Ability* Способности
+        [AllowAnonymous]
         [HttpGet("ability")]
         public async Task<IActionResult> GetAbilities()
         {
@@ -69,6 +69,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("ability/{id}")]
         public async Task<IActionResult> GetAbility([FromRoute] int id)
         {
@@ -115,6 +116,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Attack* Атака
+        [AllowAnonymous]
         [HttpGet("attack")]
         public async Task<IActionResult> GetAttacks()
         {
@@ -122,6 +124,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("attack/{id}")]
         public async Task<IActionResult> GetAttack([FromRoute] int id)
         {
@@ -167,6 +170,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Class* Класс
+        [AllowAnonymous]
         [HttpGet("class")]
         public async Task<IActionResult> GetClasses([FromQuery] ClassFilter filter)
         {
@@ -175,6 +179,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("class/{id}")]
         public async Task<IActionResult> GetClass([FromRoute] int id)
         {
@@ -230,6 +235,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("creature/{id}")]
         public async Task<IActionResult> GetCreature([FromRoute] int id)
         {
@@ -292,6 +298,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Race* Раса существа, монстра
+        [AllowAnonymous]
         [HttpGet("race")]
         public async Task<IActionResult> GetRaces([FromQuery] RaceFilter filter)
         {
@@ -300,6 +307,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("race/{id}")]
         public async Task<IActionResult> GetRace([FromRoute] int id)
         {
@@ -345,6 +353,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Skill* Навыки
+        [AllowAnonymous]
         [HttpGet("skill")]
         public async Task<IActionResult> GetSkills()
         {
@@ -352,6 +361,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("skill/{id}")]
         public async Task<IActionResult> GetSkill([FromRoute] int id)
         {
@@ -397,6 +407,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *SkillList* Список навыков
+        [AllowAnonymous]
         [HttpGet("skillList")]
         public async Task<IActionResult> GetSkillsList()
         {
@@ -404,6 +415,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("skillList/{id}")]
         public async Task<IActionResult> GetSkillList([FromRoute] int id)
         {
@@ -449,6 +461,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *SkillTree* Дерево навыков
+        [AllowAnonymous]
         [HttpGet("skillTree")]
         public async Task<IActionResult> GetSkillsTree()
         {
@@ -456,6 +469,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("skillTree/{id}")]
         public async Task<IActionResult> GetSkillTree([FromRoute] int id)
         {
@@ -501,6 +515,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *Stat* Характеристика
+        [AllowAnonymous]
         [HttpGet("stat")]
         public async Task<IActionResult> GetStats()
         {
@@ -508,6 +523,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("stat/{id}")]
         public async Task<IActionResult> GetStat([FromRoute] int id)
         {
@@ -553,6 +569,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////
 
         #region *StatList* Список характеристик
+        [AllowAnonymous]
         [HttpGet("statList")]
         public async Task<IActionResult> GetStatsList()
         {
@@ -560,6 +577,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("statList/{id}")]
         public async Task<IActionResult> GetStatList([FromRoute] int id)
         {

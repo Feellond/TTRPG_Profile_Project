@@ -31,33 +31,38 @@
     height: 3px;
     background-color: var(--color-link-1);
     border-radius: 2px;
-    transition: transform .15s 0s,top .15s .3s,opacity 0s .15s,background-color .15s;
+    transition: transform .15s 0s, top .15s .3s, opacity 0s .15s, background-color .15s;
 }
 
 .layout-header__hamburger {
-    & span:nth-child(1){
+    & span:nth-child(1) {
         top: 7px;
     }
-    & span:nth-child(2){
+
+    & span:nth-child(2) {
         top: 15px;
     }
-    & span:nth-child(3){
+
+    & span:nth-child(3) {
         top: 23px;
     }
 
     &.active span {
-        transition: top .15s 0s,transform .15s .3s,opacity 0s .15s;
+        transition: top .15s 0s, transform .15s .3s, opacity 0s .15s;
     }
-    &.active span:nth-child(1){
+
+    &.active span:nth-child(1) {
         top: 15px;
         transform: rotate(45deg);
     }
-    &.active span:nth-child(2){
+
+    &.active span:nth-child(2) {
         opacity: 0;
     }
-    &.active span:nth-child(3){
+
+    &.active span:nth-child(3) {
         top: 15px;
-    transform: rotate(-45deg);
+        transform: rotate(-45deg);
     }
 }
 
@@ -122,11 +127,12 @@
             }
         }
     }
+
     @media (max-width: 1000px) {
         &-menu {
             max-width: 320px;
             margin: 0 auto;
-        }       
+        }
     }
 
     @media (max-width: 1000px) {
@@ -144,10 +150,36 @@
             transition: transform .3s;
         }
     }
-    
+
     @media (max-width: 1000px) {
         &.active {
             transform: translateX(0);
         }
     }
+}
+
+.scrollToTopButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--gray-800);
+    color: #fff;
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    margin-right: 10px;
+    border: 1px solid var(--gray-700);
+}
+
+.scrollToTopButton:hover {
+    //background-color: #0056b3;
+    background-color: var(--gray-700);
+    color: var(--blue-50);
 }

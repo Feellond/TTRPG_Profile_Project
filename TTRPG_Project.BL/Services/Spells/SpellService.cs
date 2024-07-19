@@ -151,13 +151,13 @@ namespace TTRPG_Project.BL.Services.Spells
             Spell spell = new()
             {
                 CheckDC = request.CheckDC,
-                ConcentrationEnduranceCost = request.ConcetrationEnduranceCost,
+                ConcentrationEnduranceCost = request.ConcentrationEnduranceCost,
                 DangerInfo = request.DangerInfo,
                 Description = request.Description,
                 Distance = request.Distance,
                 Duration = request.Duration,
                 EnduranceCost = request.EnduranceCost,
-                IsConcentration = request.IsConcetration,
+                IsConcentration = request.isConcentration,
                 IsDruidSpell = request.IsDruidSpell,
                 IsPriestSpell = request.IsPriestSpell,
                 PreparationTime = request.PreparationTime,
@@ -173,7 +173,7 @@ namespace TTRPG_Project.BL.Services.Spells
                 SpellLevel = request.SpellLevel,
                 SpellSkillProtectionList = request.SpellSkillProtectionList.Select(dto => new SpellSkillProtectionList
                 {
-                    SpellId = dto.SpellId ?? dto.Spell.Id,
+                    SkillId = dto.SkillId ?? dto.Skill?.Id,
                 }).ToList(),
                 SpellType = request.SpellType,
                 SpellTypeDescription = request.SpellTypeDescription,
@@ -192,13 +192,13 @@ namespace TTRPG_Project.BL.Services.Spells
                 throw new CustomException("Существо не найдено!");
 
             spell.CheckDC = request.CheckDC;
-            spell.ConcentrationEnduranceCost = request.ConcetrationEnduranceCost;
+            spell.ConcentrationEnduranceCost = request.ConcentrationEnduranceCost;
             spell.DangerInfo = request.DangerInfo;
             spell.Description = request.Description;
             spell.Distance = request.Distance;
             spell.Duration = request.Duration;
             spell.EnduranceCost = request.EnduranceCost;
-            spell.IsConcentration = request.IsConcetration;
+            spell.IsConcentration = request.isConcentration;
             spell.IsDruidSpell = request.IsDruidSpell;
             spell.IsPriestSpell = request.IsPriestSpell;
             spell.PreparationTime = request.PreparationTime;
@@ -225,7 +225,7 @@ namespace TTRPG_Project.BL.Services.Spells
             _dbContext.RemoveRange(sspList);
             spell.SpellSkillProtectionList = request.SpellSkillProtectionList.Select(dto => new SpellSkillProtectionList
             {
-                SpellId = dto.SpellId ?? dto.Spell.Id,
+                SkillId = dto.SkillId ?? dto.Skill?.Id,
             }).ToList();
             _dbContext.Entry(spell).State = EntityState.Modified;
             return await SaveAsync();
@@ -233,9 +233,17 @@ namespace TTRPG_Project.BL.Services.Spells
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var spell = await _dbContext.Spells.FindAsync(id);
+            var spell = await _dbContext.Spells
+                .Include(x => x.SpellComponentList)
+                .Include(x => x.SpellSkillProtectionList)
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
             if (spell is null)
                 throw new CustomException("Существо не найдено!");
+
+            spell.SpellComponentList = new List<SpellComponentList>();
+            spell.SpellSkillProtectionList = new List<SpellSkillProtectionList>();
 
             _dbContext.Remove(spell);
             return await SaveAsync();

@@ -381,6 +381,7 @@ const ItemTypeSelect = ({
                   optionLabel="label"
                   options={skillOptions}
                   placeholder="Выберите навык"
+                  filter
                 />
               </>
             )}
@@ -425,6 +426,7 @@ const ItemTypeSelect = ({
                           optionLabel="label"
                           options={effectOptions}
                           placeholder="Выберите тип субстанции"
+                          filter
                         />
                       </span>
                     </div>
@@ -618,6 +620,7 @@ const ItemTypeSelect = ({
                           optionLabel="label"
                           options={effectOptions}
                           placeholder="Выберите тип субстанции"
+                          filter
                         />
                       </span>
                     </div>
@@ -740,6 +743,7 @@ const ItemTypeSelect = ({
                           optionLabel="label"
                           options={effectOptions}
                           placeholder="Выберите тип субстанции"
+                          filter
                         />
                       </span>
                     </div>
@@ -936,6 +940,7 @@ const ItemTypeSelect = ({
                         optionLabel="label"
                         options={substanceOptions}
                         placeholder="Выберите тип субстанции"
+                        filter
                       />
                     </div>
                     <span className="field">
@@ -1058,7 +1063,6 @@ const ItemTypeSelect = ({
                   <div className="field mt-3">
                     <label>Компонент {index + 1}:</label>
                     <Dropdown
-                      filter
                       value={FindItemById(componentsOptions, component.component?.id)}
                       onChange={(e) =>
                         handleComponentTypeChange(index, e.value)
@@ -1066,6 +1070,7 @@ const ItemTypeSelect = ({
                       optionLabel="label"
                       options={componentsOptions}
                       placeholder="Выберите компонент"
+                      filter
                     />
                   </div>
                   <span className="field">
@@ -1189,6 +1194,7 @@ const ItemTypeSelect = ({
                     }}
                     options={substanceOptions}
                     placeholder="Выберите тип субстанции"
+                    filter
                   />
                 </>
               )}

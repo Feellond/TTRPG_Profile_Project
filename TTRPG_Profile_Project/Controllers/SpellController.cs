@@ -15,8 +15,7 @@ using TTRPG_Project.BL.DTO.Filters;
 
 namespace TTRPG_Project.Web.Controllers
 {
-    //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
-    [AllowAnonymous]
+    [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
     [Route("api/spells")]
     [Produces("application/json")]

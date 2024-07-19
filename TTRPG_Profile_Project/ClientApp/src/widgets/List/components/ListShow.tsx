@@ -83,6 +83,7 @@ const ListShow = ({
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
   const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
   const [editDialogHeader, setEditDialogHeader] = useState<string>("");
+  const [isCreateDialog, setIsCreateDialog] = useState<boolean>(false);
 
   const { store } = useContext(Context);
 
@@ -96,12 +97,10 @@ const ListShow = ({
     } else if ("blockBase" in data) {
       // Переменная data имеет тип BestiaryDTO
       return <ShowBestiary data={data} />;
-    }
-    else if ("energy" in entity) {
-      return <ShowClass data={data} />
-    }
-    else {
-      return <ShowRace data={data} />
+    } else if ("energy" in entity) {
+      return <ShowClass data={data} />;
+    } else {
+      return <ShowRace data={data} />;
     }
   };
 
@@ -120,6 +119,7 @@ const ListShow = ({
             data={entity}
             header={editDialogHeader}
             visible={editDialogVisible}
+            isCreate={isCreateDialog}
             onHide={hideDialog}
             onSave={saveEntity}
           />
@@ -174,6 +174,7 @@ const ListShow = ({
 
   const showEditDialog = (id: number) => {
     setEditDialogHeader("Изменение предмета");
+    setIsCreateDialog(false);
     const index = FindIndexById(id, entityList);
     if (index !== -1) {
       const selectedItem = { ...entityList[index] }; // Создание копии объекта
@@ -184,6 +185,7 @@ const ListShow = ({
 
   const showCreateDialog = () => {
     setEditDialogHeader("Создание нового предмета");
+    setIsCreateDialog(true);
     setEntity(emptyEntity);
     setEditDialogVisible(true);
   };
@@ -267,13 +269,11 @@ const ListShow = ({
         result = await spellService.getEntitys({
           params: getParams(),
         });
-      }
-      else if ("energy" in entity) {
+      } else if ("energy" in entity) {
         result = await bestiaryService.getClasses({
           params: getParams(),
         });
-      }
-      else {
+      } else {
         result = await bestiaryService.getRaces({
           params: getParams(),
         });
@@ -308,20 +308,21 @@ const ListShow = ({
     <div className="w-full" style={{ marginTop: "-20px" }}>
       <Toast ref={toast} />
       {showDialogs()}
-      {"itemType" in entity ||
-      "spellLevel" in entity ||
-      "blockBase" in entity ? (
-        <div>
-          <Button
-            icon="pi pi-plus"
-            label="Создать предмет"
-            className="p-button-site"
-            onClick={(e) => showCreateDialog()}
-          />
-        </div>
-      ) : (
-        ""
-      )}
+      {store.isAuth &&
+        ("itemType" in entity ||
+        "spellLevel" in entity ||
+        "blockBase" in entity ? (
+          <div>
+            <Button
+              icon="pi pi-plus"
+              label="Создать предмет"
+              className="p-button-site"
+              onClick={(e) => showCreateDialog()}
+            />
+          </div>
+        ) : (
+          ""
+        ))}
       <ShowFilter filter={filter} setFilter={setFilter} />
       {entityList !== null && entityList !== undefined ? (
         entityList.map((it, index) => (
@@ -330,29 +331,29 @@ const ListShow = ({
               <div className="flex flex-column text-0">
                 <div>
                   {showContentFunc({ data: it })}
-                  {store.isAuth ? "" : ""}
-                  {"itemType" in entity || "spellType" in entity ? (
-                    <div className="edit-buttons">
-                      <Button
-                        icon="pi pi-pencil"
-                        onClick={(e) => showEditDialog(it.id)}
-                        className="p-button-site"
-                      />
-                      <Button
-                        icon="pi pi-trash"
-                        onClick={(e) => showDeleteDialog(it.id)}
-                        className="ml-3 p-button-site"
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      <Button
-                        icon="pi pi-trash"
-                        onClick={(e) => showDeleteDialog(it.id)}
-                        className="p-button-site"
-                      />
-                    </div>
-                  )}
+                  {store.isAuth &&
+                    ("itemType" in entity || "spellType" in entity ? (
+                      <div className="edit-buttons">
+                        <Button
+                          icon="pi pi-pencil"
+                          onClick={(e) => showEditDialog(it.id)}
+                          className="p-button-site"
+                        />
+                        <Button
+                          icon="pi pi-trash"
+                          onClick={(e) => showDeleteDialog(it.id)}
+                          className="ml-3 p-button-site"
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <Button
+                          icon="pi pi-trash"
+                          onClick={(e) => showDeleteDialog(it.id)}
+                          className="p-button-site"
+                        />
+                      </div>
+                    ))}
                 </div>
               </div>
             </div>

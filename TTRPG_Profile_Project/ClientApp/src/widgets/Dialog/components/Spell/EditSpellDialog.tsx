@@ -71,7 +71,7 @@ const EditSpellDialog = ({
     data.isDruidSpell = dialogData.isDruidSpell;
 
     console.log(data);
-    //onSave();
+    onSave();
   };
 
   const SetValues = () => {
@@ -139,8 +139,8 @@ const EditSpellDialog = ({
       className="p-fluid w-auto w-8"
     >
       <form>
-        <div className="align-items-center mt-4">
-          <div className="field flex flex-column">
+        <div className="align-items-center mt-4 flex flex-wrap">
+          <div className="field flex mr-2">
             <span className="p-float-label">
               <Controller
                 name="name"
@@ -160,8 +160,8 @@ const EditSpellDialog = ({
               <label>Наименование</label>
             </span>
           </div>
-          <div className="field flex flex-column">
-            <span className="p-float-label">
+          <div className="field flex mr-2">
+            <span className="p-float-label" style={{ width: "172px" }}>
               <Controller
                 name="spellType"
                 control={control}
@@ -186,8 +186,8 @@ const EditSpellDialog = ({
               <label>Тип заклинания</label>
             </span>
           </div>
-          <div className="field flex flex-column">
-            <span className="p-float-label">
+          <div className="field flex mr-2">
+            <span className="p-float-label" style={{ width: "172px" }}>
               <Controller
                 name="source"
                 control={control}
@@ -208,21 +208,24 @@ const EditSpellDialog = ({
               <label>Источник</label>
             </span>
           </div>
-          <div className="field flex flex-column">
-          <span className="p-float-label">
-            <InputNumber
-              value={data.enduranceCost}
-              min={0}
-              max={999}
-              placeholder="ВЫН"
-              onValueChange={(e) => {
-                register("enduranceCost", { value: e.target.value });
-              }}
-            />
-            <label>Затраты ВЫН</label>
-          </span>
+          <div className="field flex mr-2">
+            <span className="p-float-label">
+              <InputNumber
+                value={data.enduranceCost}
+                min={0}
+                max={999}
+                placeholder="ВЫН"
+                onValueChange={(e) => {
+                  setValue("enduranceCost", e.target.value);
+                }}
+              />
+              <label>Затраты ВЫН</label>
+            </span>
           </div>
-          <div className="field flex flex-column">
+          <div
+            className="flex flex-column field flex mr-2"
+            style={{ width: "-webkit-fill-available" }}
+          >
             <span className="p-float-label">
               <Controller
                 name="description"
@@ -244,7 +247,10 @@ const EditSpellDialog = ({
               <label>Эффект</label>
             </span>
           </div>
-          <div className="field flex flex-column">
+          <div
+            className="field flex flex-column mr-2"
+            style={{ width: "-webkit-fill-available" }}
+          >
             <SpellTypeSelect
               data={data}
               visible={spellTypeSelectVisible}

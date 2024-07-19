@@ -12,8 +12,7 @@ using TTRPG_Project.DAL.Entities.Database.Items;
 
 namespace TTRPG_Project.Web.Controllers
 {
-    //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
-    [AllowAnonymous]
+    [Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
     [ApiController]
     [Route("api/additionals")]
     //[Produces("application/json")]
@@ -35,6 +34,7 @@ namespace TTRPG_Project.Web.Controllers
         #endregion
 
         #region *Effect* Эффекты, состояния
+        [AllowAnonymous]
         [HttpGet("effect")]
         public async Task<IActionResult> GetEffects()
         {
@@ -42,6 +42,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("effect/{id}")]
         public async Task<IActionResult> GetEffect([FromRoute] int id)
         {
@@ -93,6 +94,7 @@ namespace TTRPG_Project.Web.Controllers
         //////////////////////////////////////////////////////////////////////////////////        
 
         #region *Source* Источники
+        [AllowAnonymous]
         [HttpGet("source")]
         public async Task<IActionResult> GetSources()
         {
@@ -100,6 +102,7 @@ namespace TTRPG_Project.Web.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("source/{id}")]
         public async Task<IActionResult> GetSource([FromRoute] int id)
         {
@@ -174,6 +177,7 @@ namespace TTRPG_Project.Web.Controllers
         }
 
         //[Authorize(Roles = nameof(Roles.MODERATOR) + "," + nameof(Roles.ADMINISTRATOR))]
+        [AllowAnonymous]
         [HttpPost("imageGet")]
         public async Task<IActionResult> GetImage([FromBody] string filename)
         {
