@@ -225,11 +225,11 @@ const CreatureEntity = ({ data, setData, fetchData }: ICreatureEntity) => {
       dataOnSave.imageFileName = file.name;
     }
 
-    console.log(dataOnSave);
+    console.log("dataOnSave", dataOnSave);
     bestiaryService.updateEntity({ entity: dataOnSave });
     fetchData();
     setFile(null);
-    window.location.reload();
+    //window.location.reload();
   };
 
   const onCancel = () => {

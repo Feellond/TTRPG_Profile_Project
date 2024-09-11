@@ -263,18 +263,6 @@ namespace TTRPG_Project.Web.Controllers
             else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
         }
 
-        //[HttpPut("creature")]
-        //public async Task<IActionResult> EditCreature([FromForm] CreatureRequest request)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //var result = await _creatureService.UpdateAsync(request);
-
-        //        return Ok(true);
-        //    }
-        //    else return BadRequest(new ErrorResponse { Message = "Не правильно заполнены данные!" });
-        //}
-
         [HttpPut("creature")]
         public async Task<IActionResult> EditCreature([FromBody] CreatureRequest request)
         {

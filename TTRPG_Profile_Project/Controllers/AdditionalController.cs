@@ -36,6 +36,7 @@ namespace TTRPG_Project.Web.Controllers
         #region *Effect* Эффекты, состояния
         [AllowAnonymous]
         [HttpGet("effect")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 120)]
         public async Task<IActionResult> GetEffects()
         {
             var result = await _effectService.GetAllAsync();
@@ -96,6 +97,7 @@ namespace TTRPG_Project.Web.Controllers
         #region *Source* Источники
         [AllowAnonymous]
         [HttpGet("source")]
+        [ResponseCache(Location = ResponseCacheLocation.Any, Duration = 120)]
         public async Task<IActionResult> GetSources()
         {
             var result = await _sourceService.GetAllAsync();
