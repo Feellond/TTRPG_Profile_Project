@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Immutable;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using TTRPG_Project.BL.DTO.Creatures;
 using TTRPG_Project.BL.DTO.Creatures.Request;
 using TTRPG_Project.BL.DTO.Entities.Creatures;
@@ -473,92 +474,8 @@ namespace TTRPG_Project.BL.Services.Creatures
                 _dbContext.Entry(creature).State = EntityState.Modified;
                 var result = await SaveAsync();
 
-                if (result)
-                {
-                    CreatureDTO savedCreature = new()
-                    {
-                        Id = creature.Id,
-                        Name = creature.Name,
-                        Description = creature.Description,
-                        Source = creature.Source,
-                        CreatureAbilitys = creature.CreatureAbilitys,
-                        AdditionalInformation = creature.AdditionalInformation,
-                        Armor = creature.Armor,
-                        AthleticsBase = creature.AthleticsBase,
-                        BlockBase = creature.BlockBase,
-                        Complexity = creature.Complexity,
-                        CreatureAttacks = creature.CreatureAttacks.Select(e => new CreatureAttack
-                        {
-                            Id = e.Id,
-                            AttackId = e.AttackId,
-                            Attack = e.Attack == null ? null : new Attack
-                            {
-                                Id = e.Attack.Id,
-                                AttackSpeed = e.Attack.AttackSpeed,
-                                AttackType = e.Attack.AttackType,
-                                BaseAttack = e.Attack.BaseAttack,
-                                Damage = e.Attack.Damage,
-                                Description = e.Attack.Description,
-                                Distance = e.Attack.Distance,
-                                Name = e.Attack.Name,
-                                Reliability = e.Attack.Reliability,
-                                SourceId = e.Attack.SourceId,
-                                Source = e.Attack.Source,
-                                CreateDate = e.Attack.CreateDate,
-                                UpdateDate = e.Attack.UpdateDate,
-                                Enabled = e.Attack.Enabled,
-                                AttackEffectList = e.Attack.AttackEffectList.Select(e => new AttackEffectList
-                                {
-                                    Id = e.Id,
-                                    ChancePercent = e.ChancePercent,
-                                    Damage = e.Damage,
-                                    EffectId = e.EffectId,
-                                    Effect = e.Effect,
-                                    IsDealDamage = e.IsDealDamage,
-                                }).ToList(),
-                            }
-                        }).ToList(),
-                        CreatureReward = creature.CreatureReward,
-                        EducationSkill = creature.EducationSkill,
-                        EvasionBase = creature.EvasionBase,
-                        GroupSize = creature.GroupSize,
-                        HabitatPlace = creature.HabitatPlace,
-                        //Immunities = creature.Immunities,
-                        Height = creature.Height,
-                        Intellect = creature.Intellect,
-                        MoneyReward = creature.MoneyReward,
-                        //Resistances = creature.Resistances,
-                        //Vulnerabilities = creature.Vulnerabilities,
-                        CreatureEffects = creature.CreatureEffects,
-                        MonsterLoreInformation = creature.MonsterLoreInformation,
-                        MonsterLoreSkill = creature.MonsterLoreSkill,
-                        Race = creature.Race,
-                        RaceId = creature.RaceId,
-                        Regeneration = creature.Regeneration,
-                        SkillsList = creature.SkillsList,
-                        SkillsListId = creature.SkillsListId,
-                        SpellResistBase = creature.SpellResistBase,
-                        Spells = creature.Spells,
-                        StatsList = creature.StatsList,
-                        StatsListId = creature.StatsListId,
-                        SuperstitionsInformation = creature.SuperstitionsInformation,
-                        Weight = creature.Weight,
-                        ImageFileName = creature.ImageFileName,
-                        Mutagen = creature.Mutagen,
-                        Trophy = creature.Trophy,
-                    };
-
-
-                    var responce = new CreatureResponce()
-                    {
-                        Count = 1,
-                        Entitys = new List<CreatureDTO>() { savedCreature }
-                    };
-
-                    cache.Set("creature" + creature.Id, responce,
-                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1)));
-                }
-
+                if (result) cache.Remove("creature" + creature.Id);
+                
                 return result;
             }
             catch (Exception ex)
