@@ -12,6 +12,7 @@ using TTRPG_Project.DAL.Data;
 using TTRPG_Project.DAL.Entities.Database.Users;
 using AspNetCoreRateLimit;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Environment.EnvironmentName = Environments.Development;
@@ -127,15 +128,26 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 builder.Services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
 
+builder.WebHost.UseUrls("http://*:80");
+
 var app = builder.Build();
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //app.Environment.EnvironmentName = "Production"; // меняем имя окружения
 
 app.UseHttpsRedirection();
+
+// Путь к папке Images
+var imagesPath = Path.Combine(builder.Environment.ContentRootPath, "Images");
+
+// Проверка, существует ли папка, и создание её, если она отсутствует
+if (!Directory.Exists(imagesPath))
+{
+    Directory.CreateDirectory(imagesPath);
+}
+
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(builder.Environment.ContentRootPath, "Images")),
+    FileProvider = new PhysicalFileProvider(imagesPath),
     RequestPath = "/Images"
 });
 app.UseRouting();
@@ -144,6 +156,23 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<ExceptionHandling>();
 app.UseMiddleware<MyIpRateLimitMiddleware>();
+
+// Автоматическое применение миграций при запуске приложения
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    // Получаем список ожидающих миграций
+    var pendingMigrations = dbContext.Database.GetPendingMigrations();
+    if (pendingMigrations.Any()) // Если есть ожидающие миграции
+    {
+        dbContext.Database.Migrate(); // Применяем их
+    }
+    else
+    {
+        Console.WriteLine("Все миграции уже применены."); // Выводим сообщение (можно убрать или заменить логированием)
+    }
+}
 
 await InitSettings.IdentityInicializer(app);
 // Configure the HTTP request pipeline.

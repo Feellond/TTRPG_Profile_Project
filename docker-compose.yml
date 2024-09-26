@@ -1,0 +1,35 @@
+networks:
+  deploy-guide-dev:
+    driver: bridge
+
+services:
+  app:
+    container_name: deploy-guide
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
+    networks:
+      - deploy-guide-dev
+    depends_on:
+      - mysql_db
+  
+  mysql_db:
+    #user: "1000:50"
+    container_name: mysql
+    image: mysql:8.0.34
+    environment:
+      MYSQL_ROOT_PASSWORD: w570qi
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: w570qi
+      MYSQL_DATABASE: TTRP
+    ports:
+      - '3307:3306'
+    networks:
+      - deploy-guide-dev
+    volumes:
+      - ./mysql-data:/var/lib/mysql_data
+  
+volumes:
+  mysql-data:

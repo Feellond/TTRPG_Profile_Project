@@ -1,23 +1,23 @@
 {
   "compilerOptions": {
     "baseUrl": "./src", // This must be specified if "paths" is.
-    "noImplicitAny": false,
+    "noImplicitAny": false, // рекомендуется включить
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
     "target": "es6",
-    "jsx": "react",
+    "jsx": "react", // Используйте "react-jsx" для React 17+
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
     "paths": {
-      "shared/*": ["shared/*"],
-      "widgets/*": ["widgets/*"],
-      "app/*": ["app/*"],
-      "pages/*": ["pages/*"],
-      "features/*": ["features/*"],
-      "entities/*": ["entities/*"],
-    },
+      "shared/*": [ "shared/*" ],
+      "widgets/*": [ "widgets/*" ],
+      "app/*": [ "app/*" ],
+      "pages/*": [ "pages/*" ],
+      "features/*": [ "features/*" ],
+      "entities/*": [ "entities/*" ]
+    }
   },
   "exclude": [
     "node_modules",
